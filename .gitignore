@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+
+dataAccess/src/main/resources/application.properties
