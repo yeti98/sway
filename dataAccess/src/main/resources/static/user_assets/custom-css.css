@@ -1,0 +1,249 @@
+:root {
+    --primary-color: #cd1f28;
+}
+
+.full-width .ubermenu-nav, .container, .row {
+    max-width: 1110px
+}
+
+.row.row-collapse {
+    max-width: 1080px
+}
+
+.row.row-small {
+    max-width: 1102.5px
+}
+
+.row.row-large {
+    max-width: 1140px
+}
+
+.header-main {
+    height: 100px
+}
+
+#logo img {
+    max-height: 100px
+}
+
+#logo {
+    width: 133px;
+}
+
+#logo img {
+    padding: 10px 0;
+}
+
+.header-bottom {
+    min-height: 50px
+}
+
+.header-top {
+    min-height: 30px
+}
+
+.transparent .header-main {
+    height: 30px
+}
+
+.transparent #logo img {
+    max-height: 30px
+}
+
+.has-transparent + .page-title:first-of-type, .has-transparent + #main > .page-title, .has-transparent + #main > div > .page-title, .has-transparent + #main .page-header-wrapper:first-of-type .page-title {
+    padding-top: 110px;
+}
+
+.header.show-on-scroll, .stuck .header-main {
+    height: 50px !important
+}
+
+.stuck #logo img {
+    max-height: 50px !important
+}
+
+.header-bg-color, .header-wrapper {
+    background-color: rgba(255, 255, 255, 0.9)
+}
+
+.header-bottom {
+    background-color: #cd1f28
+}
+
+.header-main .nav > li > a {
+    line-height: 16px
+}
+
+.stuck .header-main .nav > li > a {
+    line-height: 50px
+}
+
+.header-bottom-nav > li > a {
+    line-height: 50px
+}
+
+@media (max-width: 549px) {
+    .header-main {
+        height: 67px
+    }
+
+    #logo img {
+        max-height: 67px
+    }
+}
+
+.main-menu-overlay {
+    background-color: #dd3333
+}
+
+.nav-dropdown-has-arrow li.has-dropdown:before {
+    border-bottom-color: rgba(255, 255, 255, 0.95);
+}
+
+.nav .nav-dropdown {
+    border-color: rgba(255, 255, 255, 0.95)
+}
+
+.nav-dropdown {
+    font-size: 100%
+}
+
+.nav-dropdown-has-arrow li.has-dropdown:after {
+    border-bottom-color: rgba(255, 255, 255, 0.95);
+}
+
+.nav .nav-dropdown {
+    background-color: rgba(255, 255, 255, 0.95)
+}
+
+.header-top {
+    background-color: #e2e2e2 !important;
+}
+
+/* Color */
+.accordion-title.active, .has-icon-bg .icon .icon-inner, .logo a, .primary.is-underline, .primary.is-link, .badge-outline .badge-inner, .nav-outline > li.active > a, .nav-outline > li.active > a, .cart-icon strong, [data-color='primary'], .is-outline.primary {
+    color: #cd1f28;
+}
+
+/* Color !important */
+[data-text-color="primary"] {
+    color: #cd1f28 !important;
+}
+
+/* Background Color */
+[data-text-bg="primary"] {
+    background-color: #cd1f28;
+}
+
+/* Background */
+.scroll-to-bullets a, .featured-title, .label-new.menu-item > a:after, .nav-pagination > li > .current, .nav-pagination > li > span:hover, .nav-pagination > li > a:hover, .has-hover:hover .badge-outline .badge-inner, button[type="submit"], .button.wc-forward:not(.checkout):not(.checkout-button), .button.submit-button, .button.primary:not(.is-outline), .featured-table .title, .is-outline:hover, .has-icon:hover .icon-label, .nav-dropdown-bold .nav-column li > a:hover, .nav-dropdown.nav-dropdown-bold > li > a:hover, .nav-dropdown-bold.dark .nav-column li > a:hover, .nav-dropdown.nav-dropdown-bold.dark > li > a:hover, .is-outline:hover, .tagcloud a:hover, .grid-tools a, input[type='submit']:not(.is-form), .box-badge:hover .box-text, input.button.alt, .nav-box > li > a:hover, .nav-box > li.active > a, .nav-pills > li.active > a, .current-dropdown .cart-icon strong, .cart-icon:hover strong, .nav-line-bottom > li > a:before, .nav-line-grow > li > a:before, .nav-line > li > a:before, .banner, .header-top, .slider-nav-circle .flickity-prev-next-button:hover svg, .slider-nav-circle .flickity-prev-next-button:hover .arrow, .primary.is-outline:hover, .button.primary:not(.is-outline), input[type='submit'].primary, input[type='submit'].primary, input[type='reset'].button, input[type='button'].primary, .badge-inner {
+    background-color: #cd1f28;
+}
+
+/* Border */
+.nav-vertical.nav-tabs > li.active > a, .scroll-to-bullets a.active, .nav-pagination > li > .current, .nav-pagination > li > span:hover, .nav-pagination > li > a:hover, .has-hover:hover .badge-outline .badge-inner, .accordion-title.active, .featured-table, .is-outline:hover, .tagcloud a:hover, blockquote, .has-border, .cart-icon strong:after, .cart-icon strong, .blockUI:before, .processing:before, .loading-spin, .slider-nav-circle .flickity-prev-next-button:hover svg, .slider-nav-circle .flickity-prev-next-button:hover .arrow, .primary.is-outline:hover {
+    border-color: #cd1f28
+}
+
+.nav-tabs > li.active > a {
+    border-top-color: #cd1f28
+}
+
+.widget_shopping_cart_content .blockUI.blockOverlay:before {
+    border-left-color: #cd1f28
+}
+
+.woocommerce-checkout-review-order .blockUI.blockOverlay:before {
+    border-left-color: #cd1f28
+}
+
+/* Fill */
+.slider .flickity-prev-next-button:hover svg, .slider .flickity-prev-next-button:hover .arrow {
+    fill: #cd1f28;
+}
+
+body {
+    font-family: "-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen-Sans, Ubuntu, Cantarell, &quot;Helvetica Neue&quot;, sans-serif", sans-serif
+}
+
+body {
+    font-weight: 0
+}
+
+body {
+    color: #333333
+}
+
+.nav > li > a {
+    font-family: "-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen-Sans, Ubuntu, Cantarell, &quot;Helvetica Neue&quot;, sans-serif", sans-serif;
+}
+
+.nav > li > a {
+    font-weight: 700;
+}
+
+h1, h2, h3, h4, h5, h6, .heading-font, .off-canvas-center .nav-sidebar.nav-vertical > li > a {
+    font-family: "-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen-Sans, Ubuntu, Cantarell, &quot;Helvetica Neue&quot;, sans-serif", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .heading-font, .banner h1, .banner h2 {
+    font-weight: 0;
+}
+
+h1, h2, h3, h4, h5, h6, .heading-font {
+    color: #333333;
+}
+
+.alt-font {
+    font-family: "Dancing Script", sans-serif;
+}
+
+.alt-font {
+    font-weight: 400 !important;
+}
+
+.header:not(.transparent) .header-bottom-nav.nav > li > a {
+    color: #ffffff;
+}
+
+.header:not(.transparent) .header-bottom-nav.nav > li > a:hover, .header:not(.transparent) .header-bottom-nav.nav > li.active > a, .header:not(.transparent) .header-bottom-nav.nav > li.current > a, .header:not(.transparent) .header-bottom-nav.nav > li > a.active, .header:not(.transparent) .header-bottom-nav.nav > li > a.current {
+    color: #ed001e;
+}
+
+.header-bottom-nav.nav-line-bottom > li > a:before, .header-bottom-nav.nav-line-grow > li > a:before, .header-bottom-nav.nav-line > li > a:before, .header-bottom-nav.nav-box > li > a:hover, .header-bottom-nav.nav-box > li.active > a, .header-bottom-nav.nav-pills > li > a:hover, .header-bottom-nav.nav-pills > li.active > a {
+    color: #FFF !important;
+    background-color: #ed001e;
+}
+
+a {
+    color: #333333;
+}
+
+a:hover {
+    color: #d12026;
+}
+
+.tagcloud a:hover {
+    border-color: #d12026;
+    background-color: #d12026;
+}
+
+.absolute-footer, html {
+    background-color: #212029
+}
+
+.label-new.menu-item > a:after {
+    content: "New";
+}
+
+.label-hot.menu-item > a:after {
+    content: "Hot";
+}
+
+.label-sale.menu-item > a:after {
+    content: "Sale";
+}
+
+.label-popular.menu-item > a:after {
+    content: "Popular";
+}

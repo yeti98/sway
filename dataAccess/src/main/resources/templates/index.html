@@ -1,13 +1,15 @@
-<!DOCTYPE HTML>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta content="ie=edge" http-equiv="X-UA-Compatible">
-  <title>Trung tâm ngoại ngữ Sway</title>
-  <base href="/"/>
-</head>
-<body>
-<p>Trang chủ</p>
-</body>
+<!DOCTYPE html>
+<html class="js" lang="vi-VN"
+      layout:decorate="~{layouts/page}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
+<th:block layout:fragment="content">
+  <div id="wrapper" style="min-height: 300vh">
+    <th:block th:replace="fragments/bodyFrg :: body-header"></th:block>
+    <p>Trang chủ</p>
+    <p th:text="${webTitle}"></p>
+    <p th:text="${pageTitle}"></p>
+  </div>
+</th:block>
 </html>
