@@ -12,4 +12,8 @@ public class Lesson {
 
     private String name;
     private String description;
+
+    @ManyToOne
+    @JoinColumn(name="id_Course", nullable = false)
+    private Course course;
 }
