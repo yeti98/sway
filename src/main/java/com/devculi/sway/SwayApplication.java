@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EnableJpaRepositories("com.devculi.sway.dataaccess.repository")
 @EntityScan("com.devculi.sway.dataaccess.entity")
-@PropertySource("classpath:application.properties")
 public class SwayApplication {
 
   public static void main(String[] args) {

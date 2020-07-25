@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/headFrg :: pagehead"></head>
+<body
+    class="home page-template page-template-page-blank page-template-page-blank-php page page-id-15 header-shadow lightbox">
+<th:block layout:fragment="content">
+  <p>Page content goes here</p>
+</th:block>
+<div th:replace="fragments/bodyFrg :: endBodyCommonScripts"></div>
+<th:block layout:fragment="endBodyScripts"></th:block>
+</body>
+</html>
