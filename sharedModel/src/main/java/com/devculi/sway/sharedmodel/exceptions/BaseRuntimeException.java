@@ -11,6 +11,10 @@ public class BaseRuntimeException extends RuntimeException {
     private List<String> messageDescCollection;
     private ResourceBundle resourceBundle = null;
 
+    public BaseRuntimeException(String message) {
+        super(message);
+    }
+
     public ResourceBundle getResourceBundle(Locale locale) {
         if (this.resourceBundle == null) {
             Locale.setDefault(new Locale(locale.getLanguage(), locale.getCountry()));

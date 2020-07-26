@@ -20,7 +20,7 @@ public class AuthService implements IAuthService {
   @Autowired SwayUserRepository userRepository;
 
   public AuthenticationModel login(String username, String password, String loginType) {
-    Optional<SwayUser> userByUsername = userRepository.getUserByUsername(username);
+    Optional<SwayUser> userByUsername = userRepository.getByUsername(username);
     if (userByUsername.isPresent()) {
       SwayUser user = userByUsername.get();
       if (Protector.isMatch(password, user.getPassword(), user.getSaltValue())) {

@@ -17,8 +17,9 @@ public class SwayUser {
 
   private String avatar;
   private String description;
-  private String status;
+  private boolean status;
   private String type;
+  private String role;
 
   @OneToMany
   @JoinTable(
@@ -34,6 +35,14 @@ public class SwayUser {
   private String saltValue;
 
   public SwayUser() {}
+
+  public String getRole() {
+    return role;
+  }
+
+  public void setRole(String role) {
+    this.role = role;
+  }
 
   public String getPassword() {
     return password;
@@ -91,11 +100,11 @@ public class SwayUser {
     this.description = description;
   }
 
-  public String getStatus() {
+  public boolean getStatus() {
     return status;
   }
 
-  public void setStatus(String status) {
+  public void setStatus(boolean status) {
     this.status = status;
   }
 

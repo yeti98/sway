@@ -1,12 +1,14 @@
 package com.devculi.sway.utils.security;
 
 import com.devculi.sway.sharedmodel.constants.StandardConstant;
+import org.apache.log4j.Logger;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.http.HttpServletRequest;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -17,6 +19,8 @@ public class Protector {
 
   private static final String ALGORITHM = "AES";
   private static final int ITERATIONS = 3;
+
+  private static Logger logger = Logger.getLogger(Protector.class.getName());
 
   public static String encrypt(String value, String salt) {
     Key key = generateKey();
@@ -94,9 +98,25 @@ public class Protector {
     return result;
   }
 
+  public static String getSourceIp(HttpServletRequest request) {
+
+    String currentIP = "";
+
+    try {
+      currentIP = request.getHeader("X-FORWARDED-FOR");
+      if (currentIP == null) {
+        currentIP = request.getRemoteAddr();
+      }
+    } catch (Exception ex) {
+      logger.error("getSourceIp.ex: " + ex.toString());
+    }
+
+    return currentIP;
+  }
+
   public static void main(String[] args) throws Exception {
 
-    String plainPassword = "!@#$%^&* để";
+    String plainPassword = "trangnh";
     String salt = generateSalt();
     String valueEnc = encrypt(plainPassword, salt);
     String passwordDec = decrypt(valueEnc, salt);
@@ -107,16 +127,9 @@ public class Protector {
     System.out.println("Decrypted value : " + passwordDec);
 
     System.out.println(
-        isMatch(
-            "123456",
-            "j9CLi9dDFRcED+afNZrZ+2FjK199LjnJGOhfYuQ63rfzkIbwOjScZZHdQKtQcgfUm2JB0L6WdqJa1mPWYCqsxA==",
-            "hbMFuUEoDkY="));
-
-    // System.out.println( decrypt("j9CLi9dDFRcED afNZrZ
-    // 2FjK199LjnJGOhfYuQ63rfzkIbwOjScZZHdQKtQcgfUm2JB0L6WdqJa1mPWYCqsxA==", "hbMFuUEoDkY=") );
-    System.out.println(
-        decrypt(
-            "j9CLi9dDFRcED+afNZrZ+2FjK199LjnJGOhfYuQ63rfzkIbwOjScZZHdQKtQcgfUm2JB0L6WdqJa1mPWYCqsxA==",
-            "hbMFuUEoDkY="));
+        Protector.isMatch(
+            "trangnh",
+            "g1DpeSINzvffUaKfHsE6v6hTTCxcsUt58Ye6W8iB+3z7KH5wgFPh0mPj4PJ6v+3gcrYc5qbgERAVJqs2TXnmak8hI4ppo80KSeRoFpNSNguRWj0+1JOhu6cWzEmj9b4ZOVrz/1tLuWRPlj3ynnoF7g==",
+            "5FBpV3ewtpY="));
   }
 }

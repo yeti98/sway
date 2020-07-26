@@ -1,16 +1,21 @@
 package com.devculi.sway.controller;
 
 import com.devculi.sway.interceptor.attr.annotations.HomePage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/")
 @HomePage
-public class MainController {
+public class MainController extends BaseController {
+  @Autowired
+  HttpServletRequest request;
 
   @GetMapping
   public String index() {
@@ -26,5 +31,10 @@ public class MainController {
   @GetMapping("/test")
   public String test() {
     return "bigedu";
+  }
+
+  @GetMapping("/login")
+  public String renderLoginView(Model model) {
+    return "login";
   }
 }

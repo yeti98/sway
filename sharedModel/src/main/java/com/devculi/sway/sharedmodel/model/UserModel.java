@@ -9,10 +9,10 @@ public class UserModel {
     private String username;
     private String avatar;
     private String description;
-    private String status;
+    private boolean status;
     private String type;
 
-    public UserModel(Long id, String name, String username, String avatar, String description, String status, String type) {
+    public UserModel(Long id, String name, String username, String avatar, String description, boolean status, String type) {
         this.id = id;
         this.name = name;
         this.username = username;

@@ -3,7 +3,6 @@ package com.devculi.sway.manager.service.services_impl;
 import com.devculi.sway.dataaccess.entity.SwayUser;
 import com.devculi.sway.dataaccess.repository.SwayUserRepository;
 import com.devculi.sway.manager.service.interfaces.IUserService;
-import com.devculi.sway.sharedmodel.model.AuthenticationModel;
 import com.devculi.sway.sharedmodel.request.UpsertUserRequest;
 import com.devculi.sway.utils.security.Protector;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ public class UserService implements IUserService {
     SwayUserRepository userRepository;
     @Override
     public SwayUser findUserByUsername(String username) {
-        Optional<SwayUser> userByUsername = userRepository.getUserByUsername(username);
+        Optional<SwayUser> userByUsername = userRepository.getByUsername(username);
         return userByUsername.orElse(null);
     }
 

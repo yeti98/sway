@@ -9,10 +9,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
+
 @RestController
 @RequestMapping("/lecturers")
 public class LecturerController extends BaseController {
   @Autowired ILecturerService lecturerService;
+
 
   @GetMapping("/classes/{id}")
   ResponseEntity getClassInfo(@PathVariable(name = "id") Long classId) {

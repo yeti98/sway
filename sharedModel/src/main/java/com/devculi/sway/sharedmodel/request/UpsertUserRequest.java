@@ -8,9 +8,17 @@ public class UpsertUserRequest {
   private String username;
   private String avatar;
   private String description;
-  private String status;
+  private boolean status;
   private String type;
   private String password;
+
+  public boolean isStatus() {
+    return status;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
   public UpsertUserRequest() {}
 
@@ -50,11 +58,11 @@ public class UpsertUserRequest {
     this.description = description;
   }
 
-  public String getStatus() {
+  public boolean getStatus() {
     return status;
   }
 
-  public void setStatus(String status) {
+  public void setStatus(boolean status) {
     this.status = status;
   }
 
