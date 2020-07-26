@@ -12,4 +12,7 @@ public class Lesson {
 
     private String name;
     private String description;
+
+    @ManyToOne
+    private Course course;
 }

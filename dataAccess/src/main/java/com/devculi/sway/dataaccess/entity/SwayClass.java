@@ -35,6 +35,9 @@ public class SwayClass {
           inverseJoinColumns = {@JoinColumn(name = "sclass_id")})
   private List<SwayUser> lessons;
 
+  @OneToOne
+  private Course course;
+
   private byte status;
 
   public SwayClass() {}

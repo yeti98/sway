@@ -20,7 +20,12 @@ public class SwayUser {
   private String status;
   private String type;
 
-  @OneToMany private List<SwayClass> joinedClasses;
+  @OneToMany
+  @JoinTable(
+      name = "susers_sclasses",
+      joinColumns = @JoinColumn(name = "suser_id"),
+      inverseJoinColumns = @JoinColumn(name = "sclass_id"))
+  private List<SwayClass> joinedClasses;
 
   @Column(nullable = false)
   private String password;
