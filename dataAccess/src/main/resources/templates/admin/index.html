@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html
+    lang="en"
+    layout:decorate="~{layouts/admin}"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>CMS New: Trang chủ</title>
+  <base href="/"/>
+</head>
+<body>
+<div layout:fragment="content">
+  <div sec:authorize="isAuthenticated()">
+    <p>Xin chào, </p>
+    <span th:text="${#authentication.getPrincipal().getUsername()}"></span>
+    <br>
+    <a href="#" th:href="@{/logout}">Đăng xuất</a>
+  </div>
+  <p sec:authorize="!isAuthenticated()">Xin chào khách, <a href="/login">Đăng nhập tại đây</a></p>
+</div>
+</body>
+</html>

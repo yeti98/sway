@@ -1,9 +1,12 @@
 package com.devculi.sway.dataaccess.entity;
 
 import com.devculi.sway.dataaccess.entity.enums.TestType;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Entity
@@ -19,6 +22,14 @@ public class SwayTest {
     private LocalDate deadline;
     private String status;
     private TestType testType;
+
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
 
     @OneToMany
     @JoinTable(name = "stest_submits")
