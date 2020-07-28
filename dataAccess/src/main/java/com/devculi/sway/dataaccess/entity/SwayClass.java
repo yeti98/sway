@@ -28,13 +28,6 @@ public class SwayClass {
       inverseJoinColumns = {@JoinColumn(name = "sclass_id")})
   private List<SwayUser> students;
 
-  @OneToMany
-  @JoinTable(
-          name = "sclass_students",
-          joinColumns = {@JoinColumn(name = "suser_id")},
-          inverseJoinColumns = {@JoinColumn(name = "sclass_id")})
-  private List<SwayUser> lessons;
-
   @OneToOne
   private Course course;
 
