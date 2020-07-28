@@ -1,4 +1,4 @@
-package com.devculi.sway.controller.admin;
+package com.devculi.sway.controller.api.admin;
 
 import com.devculi.sway.business.shared.factory.SwayFactory;
 import com.devculi.sway.dataaccess.entity.SwayUser;

@@ -1,4 +1,4 @@
-package com.devculi.sway.controller;
+package com.devculi.sway.controller.mvc;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

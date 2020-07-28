@@ -1,7 +1,7 @@
-package com.devculi.sway.controller.auth;
+package com.devculi.sway.controller.api.auth;
 
 import com.devculi.sway.business.shared.factory.SwayFactory;
-import com.devculi.sway.controller.BaseController;
+import com.devculi.sway.controller.mvc.BaseController;
 import com.devculi.sway.manager.service.interfaces.IAuthService;
 import com.devculi.sway.sharedmodel.request.AuthenticateRequest;
 import org.springframework.beans.factory.annotation.Autowired;

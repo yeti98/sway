@@ -1,6 +1,6 @@
-package com.devculi.sway.controller.student;
+package com.devculi.sway.controller.api.student;
 
-import com.devculi.sway.controller.BaseController;
+import com.devculi.sway.controller.mvc.BaseController;
 import com.devculi.sway.manager.service.interfaces.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

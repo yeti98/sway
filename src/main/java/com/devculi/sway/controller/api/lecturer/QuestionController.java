@@ -1,7 +1,7 @@
-package com.devculi.sway.controller.lecturer;
+package com.devculi.sway.controller.api.lecturer;
 
 import com.devculi.sway.business.shared.factory.SwayFactory;
-import com.devculi.sway.controller.BaseController;
+import com.devculi.sway.controller.mvc.BaseController;
 import com.devculi.sway.manager.service.interfaces.IQuestionService;
 import com.devculi.sway.sharedmodel.request.UpsertQuestionRequest;
 import org.springframework.beans.factory.annotation.Autowired;

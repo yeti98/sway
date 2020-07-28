@@ -1,9 +1,6 @@
-package com.devculi.sway.controller.guest;
+package com.devculi.sway.controller.api.guest;
 
-import com.devculi.sway.controller.BaseController;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.devculi.sway.controller.mvc.BaseController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
