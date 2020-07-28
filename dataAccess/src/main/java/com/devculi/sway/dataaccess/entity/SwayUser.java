@@ -1,6 +1,10 @@
 package com.devculi.sway.dataaccess.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -26,6 +30,14 @@ public class SwayUser {
       joinColumns = @JoinColumn(name = "suser_id"),
       inverseJoinColumns = @JoinColumn(name = "sclass_id"))
   private List<SwayClass> joinedClasses;
+
+  @CreationTimestamp
+  @Column(nullable = false, updatable = false)
+  private LocalDateTime createdAt;
+
+  @UpdateTimestamp
+  @Column(nullable = false)
+  private LocalDateTime updatedAt;
 
   @Column(nullable = false)
   private String password;

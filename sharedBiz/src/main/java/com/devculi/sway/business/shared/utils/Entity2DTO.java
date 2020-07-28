@@ -7,7 +7,7 @@ import org.modelmapper.ModelMapper;
 public final class Entity2DTO {
     private static ModelMapper modelMapper = new ModelMapper();
 
-    public UserModel user2DTO(SwayUser user) {
+    public static UserModel user2DTO(SwayUser user) {
         return modelMapper.map(user, UserModel.class);
     }
 }
