@@ -19,7 +19,7 @@ public class UserService implements IUserService {
 
   @Override
   public SwayUser findUserByUsername(String username) {
-    Optional<SwayUser> userByUsername = userRepository.getUserByUsername(username);
+    Optional<SwayUser> userByUsername = userRepository.getByUsername(username);
     return userByUsername.orElse(null);
   }
 

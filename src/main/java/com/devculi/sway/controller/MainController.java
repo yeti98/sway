@@ -33,8 +33,4 @@ public class MainController extends BaseController {
     return "bigedu";
   }
 
-  @GetMapping("/login")
-  public String renderLoginView(Model model) {
-    return "login";
-  }
 }

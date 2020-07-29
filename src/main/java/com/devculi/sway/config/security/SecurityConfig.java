@@ -17,8 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-  @Autowired
-  UserDetailServiceImpl userDetailServiceImpl;
+  @Autowired UserDetailServiceImpl userDetailServiceImpl;
+
   @Bean
   public JwtAuthenticationFilter jwtAuthenticationFilter() {
     return new JwtAuthenticationFilter();
@@ -34,7 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
-
 
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -56,12 +55,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(
             "/",
             "/auth/**",
+            "/admin/login",
+            "/admin/logout",
             "/login",
+            "/logout",
             "/signup",
             "/user_assets/**",
             "/webfonts/**",
             "/fonts/**",
-            "/user_assets/**")
+            "/user_assets/**",
+            "/AdminLTE/**")
         .permitAll()
         .antMatchers("/admin/**")
         .access("hasRole('ADMIN')")
