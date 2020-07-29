@@ -1,17 +1,20 @@
 package com.devculi.sway.controller.admin;
 
 import com.devculi.sway.business.shared.factory.SwayFactory;
+import com.devculi.sway.business.shared.utils.Entity2DTO;
 import com.devculi.sway.dataaccess.entity.SwayUser;
 import com.devculi.sway.manager.service.interfaces.IAdminService;
 import com.devculi.sway.manager.service.interfaces.IAuthService;
 import com.devculi.sway.sharedmodel.model.AuthenticationModel;
 import com.devculi.sway.sharedmodel.model.UserModel;
 import com.devculi.sway.sharedmodel.request.UpsertUserRequest;
+import com.devculi.sway.sharedmodel.response.common.PagingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/admin")
@@ -20,10 +23,12 @@ public class AdminController {
   @Autowired IAuthService authService;
 
   @GetMapping("/users")
-  public List<UserModel> getUsersByPage(
-      @RequestParam(name = "page", defaultValue = "0") Long page) {
-    List<SwayUser> users = adminService.getUsers(page);
-    return null;
+  public PagingResponse<UserModel> getUsersByPage(
+      @RequestParam(name = "page", defaultValue = "0") Integer page) {
+    Page<SwayUser> userByPage = adminService.getUsers(page);
+    return new PagingResponse<>(
+        userByPage.getTotalPages(),
+        userByPage.getContent().stream().map(Entity2DTO::user2DTO).collect(Collectors.toList()));
   }
 
   @PostMapping("/users")
@@ -38,7 +43,7 @@ public class AdminController {
   public UserModel deleteUser(@PathVariable(name = "id") Long userID) {
     try {
       SwayUser user = adminService.deleteUserByID(userID);
-      return SwayFactory.getModelMapper().user2DTO(user);
+      return Entity2DTO.user2DTO(user);
     } catch (Exception e) {
       e.printStackTrace();
     }

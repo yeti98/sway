@@ -1,6 +1,10 @@
 package com.devculi.sway.dataaccess.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -28,15 +32,16 @@ public class SwayClass {
       inverseJoinColumns = {@JoinColumn(name = "sclass_id")})
   private List<SwayUser> students;
 
-  @OneToMany
-  @JoinTable(
-          name = "sclass_students",
-          joinColumns = {@JoinColumn(name = "suser_id")},
-          inverseJoinColumns = {@JoinColumn(name = "sclass_id")})
-  private List<SwayUser> lessons;
-
   @OneToOne
   private Course course;
+
+  @CreationTimestamp
+  @Column(nullable = false, updatable = false)
+  private LocalDateTime createdAt;
+
+  @UpdateTimestamp
+  @Column(nullable = false)
+  private LocalDateTime updatedAt;
 
   private byte status;
 

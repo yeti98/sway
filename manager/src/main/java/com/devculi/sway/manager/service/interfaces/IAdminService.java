@@ -2,14 +2,13 @@ package com.devculi.sway.manager.service.interfaces;
 
 import com.devculi.sway.dataaccess.entity.SwayUser;
 import com.devculi.sway.sharedmodel.request.UpsertUserRequest;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public interface IAdminService {
 
-  List<SwayUser> getUsers(Long page);
+  Page<SwayUser> getUsers(Integer page);
 
   SwayUser insertNewUser(UpsertUserRequest insertUserRequest);
 
