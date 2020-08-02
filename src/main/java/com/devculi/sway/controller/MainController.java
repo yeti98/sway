@@ -46,8 +46,4 @@ public class MainController {
     return "User-agent: *\n" + "Disallow: /admin\n";
   }
 
-  @GetMapping("/test")
-  public String test() {
-    return "bigedu";
-  }
 }
