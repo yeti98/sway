@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<nav th:fragment="nav-bar" class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
+    <div class="container">
+        <a class="navbar-brand logo" href="#">Sway logo</a
+        ><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
+        <span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" href="index.html">Trang Chủ</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" href="features.html">Giới thiệu</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" href="pricing.html">Đội Ngũ</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" href="about-us.html">About Us</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a
+                            class="dropdown-toggle nav-link"
+                            data-toggle="dropdown"
+                            aria-expanded="false"
+                            href="#"
+                    >Khóa học&nbsp;</a
+                    >
+                    <div class="dropdown-menu" role="menu">
+                        <a class="dropdown-item" role="presentation" href="#">Tiếng Anh</a>
+                        <a class="dropdown-item" role="presentation" href="#">Tiếng Nhật</a
+                        ><a class="dropdown-item" role="presentation" href="#">Tiếng Trung</a
+                    ><a class="dropdown-item" role="presentation" href="#">Tiếng Hàn</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</html>
