@@ -1,84 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:fragment="pagehead">
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-  <link crossorigin="anonymous" href="/user_assets/all.css"
-        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" rel="stylesheet">
-  <script async="" crossorigin="anonymous" src="/user_assets/sdk.js"></script>
-  <script>
-    (function (html) {
-      html.className = html.className.replace(/\bno-js\b/, 'js')
-    })(document.documentElement);</script>
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
-  <style type="text/css">
-    img.wp-smiley,
-    img.emoji {
-      display: inline !important;
-      border: none !important;
-      box-shadow: none !important;
-      height: 1em !important;
-      width: 1em !important;
-      margin: 0 .07em !important;
-      vertical-align: -0.1em !important;
-      background: none !important;
-      padding: 0 !important;
-    }
-  </style>
-  <link href="/user_assets/style.min.css" id="wp-block-library-css" media="all" rel="stylesheet" type="text/css">
-  <link href="/user_assets/fl-icons.css" id="flatsome-icons-css" media="all" rel="stylesheet" type="text/css">
-  <link href="/user_assets/pum-site-styles.css" id="popup-maker-site-css" media="all" rel="stylesheet"
-        type="text/css">
-  <link href="/user_assets/flatsome.css" id="flatsome-main-css" media="all" rel="stylesheet" type="text/css">
-  <link href="/user_assets/style.css" id="flatsome-style-css" media="all" rel="stylesheet" type="text/css">
-  <!--  <link rel="stylesheet" id="flatsome-googlefonts-css" href="/user_assets/css" type="text/css" media="all">-->
-  <script src="/user_assets/jquery.js" type="text/javascript"></script>
-  <script src="/user_assets/jquery-migrate.min.js" type="text/javascript"></script>
-  <link href="https://bigedu.vn/wp-json/" rel="https://api.w.org/">
-  <!--  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://bigedu.vn/xmlrpc.php?rsd">-->
-  <!--  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://bigedu.vn/wp-includes/wlwmanifest.xml">-->
-  <!--  <meta content="WordPress 5.2.4" name="generator">-->
-  <link href="https://bigedu.vn/" rel="canonical">
-  <link href="https://bigedu.vn/" rel="shortlink">
-  <!--  <link href="https://bigedu.vn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fbigedu.vn%2F" rel="alternate"-->
-  <!--        type="application/json+oembed">-->
-  <!--  <link href="https://bigedu.vn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fbigedu.vn%2F&amp;format=xml" rel="alternate"-->
-  <!--        type="text/xml+oembed">-->
-  <style>
-    .bg {
-      opacity: 0;
-      transition: opacity 1s;
-      -webkit-transition: opacity 1s;
-    }
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=9c90dd1458dcb0db149212e1ef53d9c8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.min.css?h=60f40d3b2f277931a76e4d525b80ad68">
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css?h=60f40d3b2f277931a76e4d525b80ad68">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
+    <script async="" crossorigin="anonymous" src="/user_assets/sdk.js"></script>
+    <script>
+        (function (html) {
+            html.className = html.className.replace(/\bno-js\b/, 'js')
+        })(document.documentElement);</script>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
 
-    .bg-loaded {
-      opacity: 1;
-    }
-  </style>
-  <!--[if IE]><link rel="stylesheet" type="text/css" href="/user_assets/ie-fallback.css"><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"></script><script>var head = document.getElementsByTagName('head')[0],style = document.createElement('style');style.type = 'text/css';style.styleSheet.cssText = ':before,:after{content:none !important';head.appendChild(style);setTimeout(function(){head.removeChild(style);}, 0);</script><script src="https://bigedu.vn/wp-content/themes/flatsome/assets/libs/ie-flexibility.js"></script><![endif]-->
-  <link
-      href="https://bigedu.vn/wp-content/uploads/2019/11/cropped-68845645_118300622863365_2571525227968200704_n-20190920064807-1-1-32x32.png"
-      rel="icon"
-      sizes="32x32">
-  <link
-      href="https://bigedu.vn/wp-content/uploads/2019/11/cropped-68845645_118300622863365_2571525227968200704_n-20190920064807-1-1-192x192.png"
-      rel="icon"
-      sizes="192x192">
-  <link
-      href="https://bigedu.vn/wp-content/uploads/2019/11/cropped-68845645_118300622863365_2571525227968200704_n-20190920064807-1-1-180x180.png"
-      rel="apple-touch-icon-precomposed">
-  <meta
-      content="https://bigedu.vn/wp-content/uploads/2019/11/cropped-68845645_118300622863365_2571525227968200704_n-20190920064807-1-1-270x270.png"
-      name="msapplication-TileImage">
-  <link href="/user_assets/custom-css.css" id="custom-css" rel="stylesheet" type="text/css">
-  <link href="/user_assets/wp-custom-css.css" id="wp-custom-css" rel="stylesheet" type="text/css">
-  <link href="/user_assets/fb-custom-css.css" rel="stylesheet" type="text/css">
-  <!--  <meta content="393358754664779" property="fb:app_id">-->
-  <!--  <meta content="100003709603473" property="fb:admins">-->
-<!--  <title>Trung Tâm Ngoại Ngữ Sway</title>-->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <title th:text="${pageTitle} + ' - ' + ${webTitle}"></title>
+    <!--[if IE]><link rel="stylesheet" type="text/css" href="/user_assets/ie-fallback.css"><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"></script><script>var head = document.getElementsByTagName('head')[0],style = document.createElement('style');style.type = 'text/css';style.styleSheet.cssText = ':before,:after{content:none !important';head.appendChild(style);setTimeout(function(){head.removeChild(style);}, 0);</script><script src="https://bigedu.vn/wp-content/themes/flatsome/assets/libs/ie-flexibility.js"></script><![endif]-->
+
+    <title th:text="${pageTitle} + ' - ' + ${webTitle}"></title>
+    <script src="assets/js/script.min.js?h=928141e6850dfa92c6f6e760775eb95d"></script>
 </head>
 
 </html>

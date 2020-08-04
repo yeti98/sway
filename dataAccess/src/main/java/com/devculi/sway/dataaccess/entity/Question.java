@@ -5,19 +5,21 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "questions")
 public class Question {
+  @Transient
+  private static final String DETERMINER = "###DEVCULI###";
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @OneToMany(mappedBy = "question")
-  private List<Choice> choices;
+  @Column(nullable = false)
+  private String choices;
 
-  @OneToOne private Choice answer;
+  @Column(nullable = false)
+  private String answer;
   private String hint;
   private String explanation;
   private byte status;
