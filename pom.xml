@@ -2,7 +2,7 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -14,7 +14,6 @@
     <version>0.0.1</version>
     <name>sway</name>
     <description>Website for SWAY english center</description>
-
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -66,12 +65,6 @@
         <dependency>
             <groupId>com.devculi.sway.manager</groupId>
             <artifactId>manager</artifactId>
-            <version>0.0.1</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.devculi</groupId>
-            <artifactId>sharedBiz</artifactId>
             <version>0.0.1</version>
             <scope>compile</scope>
         </dependency>
