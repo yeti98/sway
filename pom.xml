@@ -70,12 +70,6 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.devculi</groupId>
-            <artifactId>sharedBiz</artifactId>
-            <version>0.0.1</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>com.devculi.sway.sharedBiz</groupId>
             <artifactId>sharedBiz</artifactId>
             <version>0.0.1</version>
