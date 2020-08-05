@@ -24,12 +24,9 @@ public class AuthService implements IAuthService {
 //  ISecurityService securityService;
 
   public SwayUser login(String username, String password, String loginType) {
-    System.out.println("FIND:\t"+username);
     Optional<SwayUser> userByUsername = userRepository.getByUsername(username);
     if (userByUsername.isPresent()) {
       SwayUser user = userByUsername.get();
-      System.out.println("FOUND:\t"+ user.getUsername());
-      System.out.println(Protector.isMatch(password, user.getPassword(), user.getSaltValue()));
       if (Protector.isMatch(password, user.getPassword(), user.getSaltValue())) {
         if (loginType.equalsIgnoreCase(NORMAL.getType())) {
 //          UserDetails userDetails = userDetailServiceImpl.loadUserByUsername(username);
@@ -39,7 +36,6 @@ public class AuthService implements IAuthService {
           // TODO: continue check
         }
       }
-      System.out.println("PWD NOT MATCH");
     }
     throw new RecordNotFoundException(SwayUser.class, username);
   }
