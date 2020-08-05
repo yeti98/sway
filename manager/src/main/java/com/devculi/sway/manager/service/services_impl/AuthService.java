@@ -3,12 +3,14 @@ package com.devculi.sway.manager.service.services_impl;
 import com.devculi.sway.dataaccess.entity.SwayUser;
 import com.devculi.sway.dataaccess.repository.SwayUserRepository;
 import com.devculi.sway.manager.service.interfaces.IAuthService;
+import com.devculi.sway.manager.service.interfaces.ISecurityService;
 import com.devculi.sway.sharedmodel.exceptions.RecordNotFoundException;
 import com.devculi.sway.sharedmodel.model.AuthenticationModel;
 import com.devculi.sway.sharedmodel.model.UserModel;
 import com.devculi.sway.utils.security.JWTUtils;
 import com.devculi.sway.utils.security.Protector;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -18,18 +20,26 @@ import static com.devculi.sway.sharedmodel.enums.LoginType.NORMAL;
 @Service
 public class AuthService implements IAuthService {
   @Autowired SwayUserRepository userRepository;
+//  @Autowired
+//  ISecurityService securityService;
 
-  public AuthenticationModel login(String username, String password, String loginType) {
-    Optional<SwayUser> userByUsername = userRepository.getUserByUsername(username);
+  public SwayUser login(String username, String password, String loginType) {
+    System.out.println("FIND:\t"+username);
+    Optional<SwayUser> userByUsername = userRepository.getByUsername(username);
     if (userByUsername.isPresent()) {
       SwayUser user = userByUsername.get();
+      System.out.println("FOUND:\t"+ user.getUsername());
+      System.out.println(Protector.isMatch(password, user.getPassword(), user.getSaltValue()));
       if (Protector.isMatch(password, user.getPassword(), user.getSaltValue())) {
-        if (loginType.equals(NORMAL.getType())) {
-          return createIdentity(user);
+        if (loginType.equalsIgnoreCase(NORMAL.getType())) {
+//          UserDetails userDetails = userDetailServiceImpl.loadUserByUsername(username);
+//          securityService.setSecurityContext(userDetails);
+          return user;
         } else {
           // TODO: continue check
         }
       }
+      System.out.println("PWD NOT MATCH");
     }
     throw new RecordNotFoundException(SwayUser.class, username);
   }

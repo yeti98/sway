@@ -1,8 +1,12 @@
 package com.devculi.sway.dataaccess.entity;
 
 import com.devculi.sway.dataaccess.entity.enums.TestType;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "ssubmits")
@@ -23,6 +27,14 @@ public class SwaySubmit {
   private String isChecked;
   private Double score;
   private String lecturerNote;
+
+  @CreationTimestamp
+  @Column(nullable = false, updatable = false)
+  private LocalDateTime createdAt;
+
+  @UpdateTimestamp
+  @Column(nullable = false)
+  private LocalDateTime updatedAt;
 
   public SwaySubmit() {}
 

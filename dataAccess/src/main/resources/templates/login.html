@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html class="js" lang="vi-VN"
+      layout:decorate="~{layouts/page}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/user_assets/css/login.css}" type="text/css"/>
+</head>
+<th:block layout:fragment="content">
+  <div id="wrapper" style="min-height: 100vh">
+    <th:block th:replace="fragments/user/navBarFragment :: nav-bar"></th:block>
+    <div id="logreg-forms" style="margin-top: 10%">
+      <form action="/login" class="form-signin" method="post">
+        <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Đăng nhập</h1>
+        <div class="alert alert-danger col-xs-offset-1 col-xs-10" th:if="${param.error}">
+          Sai tên đăng nhập hoặc mật khẩu
+        </div>
+        <div class="alert alert-success col-xs-offset-1 col-xs-10" th:if="${param.logout}">
+          Đăng xuất thành công
+        </div>
+        <input autofocus="" class="form-control" id="inputEmail" name="username" placeholder="Tên đăng nhập" required=""
+               type="email">
+        <div style="height: 10px"></div>
+        <input class="form-control" id="inputPassword" name="password" placeholder="Mật khẩu" required=""
+               type="password">
+
+        <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Đăng nhập</button>
+        <!--      <a href="#" id="forgot_pswd">Forgot password?</a>-->
+        <hr>
+        <!-- <p>Don't have an account!</p>  -->
+        <button class="btn btn-primary btn-block" id="btn-signup" type="button">
+          <i class="fas fa-user-plus"></i> Đăng ký
+        </button>
+      </form>
+      <!--    <form action="/reset/password/" class="form-reset">-->
+      <!--        <input type="email" id="resetEmail" class="form-control" placeholder="Email address" required="" autofocus="">-->
+      <!--        <button class="btn btn-primary btn-block" type="submit">Reset Password</button>-->
+      <!--        <a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a>-->
+      <!--    </form>-->
+      <!--    <br>-->
+    </div>
+    <th:block th:replace="fragments/user/footerFragment :: footer"></th:block>
+  </div>
+</th:block>
+</html>

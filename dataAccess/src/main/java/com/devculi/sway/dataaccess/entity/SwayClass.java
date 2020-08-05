@@ -1,6 +1,11 @@
 package com.devculi.sway.dataaccess.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -31,7 +36,31 @@ public class SwayClass {
 
   @OneToOne private Course course;
 
-  private byte status;
+  @CreationTimestamp
+  @Column(nullable = false, updatable = false)
+  private LocalDateTime createdAt;
+
+  @UpdateTimestamp
+  @Column(nullable = false)
+  private LocalDateTime updatedAt;
+
+  private boolean status;
+
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public LocalDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(LocalDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+  }
 
   public SwayClass() {}
 
@@ -67,11 +96,11 @@ public class SwayClass {
     this.course = course;
   }
 
-  public byte getStatus() {
+  public boolean getStatus() {
     return status;
   }
 
-  public void setStatus(byte status) {
+  public void setStatus(boolean status) {
     this.status = status;
   }
 
