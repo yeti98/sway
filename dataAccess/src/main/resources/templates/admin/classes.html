@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layouts/admin}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/admin/css/common/crudtable.css}"/>
+</head>
+<body>
+<div layout:fragment="content">
+  <p th:text="${classes}"></p>
+  <div class="container">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h2>Quản lý lớp học</h2>
+          </div>
+          <div class="col-sm-6">
+            <a class="btn btn-success" data-toggle="modal" href="#addUserModal"><i
+                class="material-icons">&#xE147;</i> <span>Thêm</span></a>
+            <a class="btn btn-danger" data-toggle="modal" href="#deleteUserModal"><i
+                class="material-icons">&#xE15C;</i> <span>Xóa</span></a>
+          </div>
+        </div>
+      </div>
+      <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+          <th>
+           <span class="custom-checkbox">
+            <input id="selectAll" type="checkbox">
+            <label for="selectAll"></label>
+           </span>
+          </th>
+          <th>Mã lớp</th>
+          <th>Tên lớp</th>
+          <th>Trạng thái</th>
+          <th>Khóa học</th>
+          <th>Cập nhật</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="class: ${classes}">
+          <tr>
+            <td>
+                <span class="custom-checkbox">
+                <input id="checkbox1" name="options[]" type="checkbox" value="1">
+                <label for="checkbox1"></label>
+                </span>
+            </td>
+            <td>
+              <p th:text="${class.name}"></p>
+            </td>
+            <td>
+              <p th:text="${class.name}"></p>
+            </td>
+            <td>
+              <p th:text="${class.status}"></p>
+            </td>
+            <td>
+              <p th:text="${class.course}"></p>
+            </td>
+            <td>
+              <div id="editAnUser">
+                <a class="edit" data-toggle="modal" href="#editUserModal">
+                  <i class="material-icons"
+                     data-toggle="tooltip"
+                     title="Chỉnh sửa">&#xE254;
+                  </i>
+                </a>
+              </div>
+              <div id="removeAnUser">
+                <a class="delete" data-toggle="modal" href="#deleteUserModal">
+                  <i class="material-icons"
+                     data-toggle="tooltip"
+                     title="Xóa">&#xE872;
+                  </i>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </th:block>
+        </tbody>
+      </table>
+      <!--      <div class="clearfix">-->
+      <!--        <ul th:if="${totalPage > 0}" class="pagination" th:each="idx: ${#numbers.sequence(0, totalPage - 1)}">-->
+      <!--          <li th:class="${idx==currentPage} ? 'page-item active' : 'page-item'" >-->
+      <!--            <a class="page-link" th:href="@{/users(page=${idx})}" th:text="${idx+1}">-->
+      <!--            </a>-->
+      <!--          </li>-->
+      <!--        </ul>-->
+      <!--      </div>-->
+    </div>
+  </div>
+  <!-- Add Modal HTML -->
+  <div class="modal fade" id="addUserModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="formAddUserModal">
+          <div class="modal-header">
+            <h4 class="modal-title">Thêm lớp học</h4>
+            <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="addName">Mã lớp</label>
+              <input class="form-control" id="addName" required type="text">
+            </div>
+            <div class="form-group">
+              <label for="addEmail">Tên lớp</label>
+              <input class="form-control" id="addEmail" required type="email">
+            </div>
+            <div class="form-group">
+              <label for="addIsLocked">Trạng thát</label>
+              <br>
+              <select id="addIsLocked">
+                <option value="true">Đã mở</option>
+                <option value="false">Chưa mở</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="addRole">Khóa học</label>
+              <br>
+              <select id="addRole">
+                <option value="USER">Người dùng</option>
+                <option value="EDITOR">Biên tập viên</option>
+                <option value="ADMIN">Admin</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="addPassword">Mật khẩu</label>
+              <input class="form-control" id="addPassword" required type="password">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input class="btn btn-default" data-dismiss="modal" type="button" value="Hủy">
+            <input class="btn btn-success" type="submit" value="Lưu">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Edit Modal HTML -->
+  <!--  <div class="modal fade" id="editUserModal">-->
+  <!--    <div class="modal-dialog">-->
+  <!--      <div class="modal-content">-->
+  <!--        <form id="formEditUserModal">-->
+  <!--          <div class="modal-header">-->
+  <!--            <h4 class="modal-title">Sửa thông tin</h4>-->
+  <!--            <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>-->
+  <!--          </div>-->
+  <!--          <div class="modal-body">-->
+  <!--            <div class="form-group">-->
+  <!--              <label for="editName">Họ tên</label>-->
+  <!--              <input class="form-control" id="editName" required type="text">-->
+  <!--            </div>-->
+  <!--            <div class="form-group">-->
+  <!--              <label for="editEmail">Email</label>-->
+  <!--              <input class="form-control" disabled id="editEmail" required type="email">-->
+  <!--            </div>-->
+  <!--            <div class="form-group">-->
+  <!--              <label for="editIsLocked">Trạng thái khóa</label>-->
+  <!--              <br>-->
+  <!--              <select id="editIsLocked">-->
+  <!--                <option value="true">Khóa</option>-->
+  <!--                <option value="false">Không khóa</option>-->
+  <!--              </select>-->
+  <!--            </div>-->
+  <!--            <div class="form-group">-->
+  <!--              <label for="editRole">Vai trò</label>-->
+  <!--              <br>-->
+  <!--              <select id="editRole">-->
+  <!--                <option value="USER">Người dùng</option>-->
+  <!--                <option value="EDITOR">Biên tập viên</option>-->
+  <!--                <option value="ADMIN">Admin</option>-->
+  <!--              </select>-->
+  <!--            </div>-->
+  <!--          </div>-->
+  <!--          <div class="modal-footer">-->
+  <!--            <input class="btn btn-default" data-dismiss="modal" type="button" value="Hủy">-->
+  <!--            <input id="btnUserUpdate" class="btn btn-info" type="submit" value="Lưu">-->
+  <!--          </div>-->
+  <!--        </form>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!-- Delete Modal HTML -->
+  <!--  <div class="modal fade" id="deleteUserModal">-->
+  <!--    <div class="modal-dialog">-->
+  <!--      <div class="modal-content">-->
+  <!--        <form id="formDeleteUserModal">-->
+  <!--          <div class="modal-header">-->
+  <!--            <h4 class="modal-title">Xóa bản ghi</h4>-->
+  <!--            <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>-->
+  <!--          </div>-->
+  <!--          <div class="modal-body">-->
+  <!--            <p>Bạn có muốn xóa bản ghi không?</p>-->
+  <!--            <p id="mainContent" style="height: fit-content"></p>-->
+  <!--            <p class="text-warning"><small>Hành động này không thể khôi phục</small></p>-->
+  <!--          </div>-->
+  <!--          <div class="modal-footer">-->
+  <!--            <input class="btn btn-default" data-dismiss="modal" type="button" value="Cancel">-->
+  <!--            <input class="btn btn-danger" type="submit" value="Delete">-->
+  <!--          </div>-->
+  <!--        </form>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </div>-->
+</div>
+<th:block layout:fragment="scriptFragment">
+  <script th:src="@{/js/class.js}"></script>
+</th:block>
+</body>
+</html>

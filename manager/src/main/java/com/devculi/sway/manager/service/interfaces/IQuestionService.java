@@ -12,5 +12,5 @@ public interface IQuestionService {
 
     Question updateQuestion(Long questionId, UpsertQuestionRequest updateQuestionRequest);
 
-    Question deleteQuestion(Long questionID);
+    Long deleteQuestion(Long questionID);
 }

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class LecturerController extends BaseController {
   @Autowired ILecturerService lecturerService;
 
-
   @GetMapping("/classes/{id}")
   ResponseEntity getClassInfo(@PathVariable(name = "id") Long classId) {
     return ok(lecturerService.getClassById(classId));

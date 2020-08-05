@@ -224,7 +224,6 @@ table.table .avatar {
 
 /* Modal styles */
 .modal .modal-dialog {
-    max-width: 400px;
 }
 
 .modal .modal-header, .modal .modal-body, .modal .modal-footer {
@@ -261,4 +260,10 @@ table.table .avatar {
 
 .modal form label {
     font-weight: normal;
+}
+
+.truncatable{
+    text-overflow: ellipsis;
+    max-width: 20px;
+    overflow: hidden;
 }

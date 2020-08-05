@@ -1,9 +1,6 @@
-package com.devculi.sway.controller.mvc;
+package com.devculi.sway.controller.mvc.auth;
 
 import com.devculi.sway.config.security.CustomAuthenticationProvider;
-import com.devculi.sway.controller.api.auth.AuthenticationController;
-import com.devculi.sway.dataaccess.entity.SwayUser;
-import com.devculi.sway.manager.service.security.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/")
 public class AuthMVCController {
-  @Autowired AuthenticationController authenticationController;
   @Autowired CustomAuthenticationProvider authManager;
 
   @GetMapping("/login")
@@ -77,9 +73,10 @@ public class AuthMVCController {
 
     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     if (principal instanceof UserDetails) {
-//      SwayUser user =
-//              ((CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
-//                      .getUser();
+      //      SwayUser user =
+      //              ((CustomUserDetails)
+      // SecurityContextHolder.getContext().getAuthentication().getPrincipal())
+      //                      .getUser();
       String username = ((UserDetails) principal).getUsername();
       model.addAttribute("user", username);
 

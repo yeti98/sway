@@ -26,14 +26,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     Optional<SwayUser> userByUsername = userRepository.getByUsername(username);
     if (userByUsername.isPresent()) {
       SwayUser user = userByUsername.get();
-      System.out.println("FOUND:\t" + user.getUsername());
-      System.out.println(Protector.isMatch(password, user.getPassword(), user.getSaltValue()));
       if (Protector.isMatch(password, user.getPassword(), user.getSaltValue())) {
         CustomUserDetails userDetails = new CustomUserDetails(user);
         return new UsernamePasswordAuthenticationToken(
             userDetails, null, userDetails.getAuthorities());
       }
-      System.out.println("PWD NOT MATCH");
     }
     return null;
   }

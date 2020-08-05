@@ -1,7 +1,9 @@
 package com.devculi.sway.controller.api.admin;
 
 import com.devculi.sway.business.shared.factory.SwayFactory;
+import com.devculi.sway.business.shared.model.SwayClassModel;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
+import com.devculi.sway.dataaccess.entity.SwayClass;
 import com.devculi.sway.dataaccess.entity.SwayUser;
 import com.devculi.sway.manager.service.interfaces.IAdminService;
 import com.devculi.sway.manager.service.interfaces.IAuthService;
@@ -56,5 +58,12 @@ public class AdminController {
     SwayFactory.getUserValidation().validateUpdateUser(updateUserRequest);
     SwayUser user = adminService.updateUser(userID, updateUserRequest);
     return null;
+  }
+
+  public PagingResponse<SwayClassModel> getClassByPage(@RequestParam(name = "page", defaultValue = "0") Integer page) {
+    Page<SwayClass> classByPage = adminService.getClasses(page);
+    return new PagingResponse<>(
+            classByPage.getTotalPages(),
+            classByPage.getContent().stream().map(Entity2DTO::class2DTO).collect(Collectors.toList()));
   }
 }

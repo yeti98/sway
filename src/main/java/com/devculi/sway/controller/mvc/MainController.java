@@ -1,4 +1,4 @@
-package com.devculi.sway.controller;
+package com.devculi.sway.controller.mvc;
 
 import com.devculi.sway.interceptor.attr.annotations.HomePage;
 import com.devculi.sway.manager.service.security.CustomUserDetails;
