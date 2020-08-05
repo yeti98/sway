@@ -1,43 +1,18 @@
-package com.devculi.sway.dataaccess.entity;
+package com.devculi.sway.business.shared.model;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
-@Entity
-@Table(name = "slessons")
-public class Lesson {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class LessonModel {
   private Long id;
-
   private String name;
   private String description;
-
-  @ManyToOne private Course course;
-
-  @OneToMany private List<SwayTest> tests;
-
-  @CreationTimestamp
-  @Column(nullable = false, updatable = false)
   private LocalDateTime createdAt;
-
-  @UpdateTimestamp
-  @Column(nullable = false)
   private LocalDateTime updatedAt;
 
-  public Lesson() {}
-
-  public List<SwayTest> getTests() {
-    return tests;
-  }
-
-  public void setTests(List<SwayTest> tests) {
-    this.tests = tests;
-  }
+  public LessonModel() {}
 
   public Long getId() {
     return id;
@@ -61,14 +36,6 @@ public class Lesson {
 
   public void setDescription(String description) {
     this.description = description;
-  }
-
-  public Course getCourse() {
-    return course;
-  }
-
-  public void setCourse(Course course) {
-    this.course = course;
   }
 
   public LocalDateTime getCreatedAt() {

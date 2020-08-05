@@ -1,45 +1,22 @@
-package com.devculi.sway.sharedmodel.request;
+package com.devculi.sway.business.shared.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.devculi.sway.dataaccess.entity.Question;
+import com.devculi.sway.utils.GsonUtils;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class UpsertQuestionRequest {
+public class QuestionModel {
   private Long id;
-  private List<String> choices;
+  private String choices;
   private String answer;
   private String content;
   private String explanation;
   private boolean active;
   private String questionId;
+  private LocalDateTime createdAt;
+  private LocalDateTime updatedAt;
 
-  public UpsertQuestionRequest() {}
-
-  @Override
-  public String toString() {
-    return "UpsertQuestionRequest{"
-        + "id="
-        + id
-        + ", choices='"
-        + choices
-        + '\''
-        + ", answer='"
-        + answer
-        + '\''
-        + ", content='"
-        + content
-        + '\''
-        + ", explanation='"
-        + explanation
-        + '\''
-        + ", active="
-        + active
-        + ", questionId='"
-        + questionId
-        + '\''
-        + '}';
-  }
+  public QuestionModel() {}
 
   public Long getId() {
     return id;
@@ -49,11 +26,11 @@ public class UpsertQuestionRequest {
     this.id = id;
   }
 
-  public List<String> getChoices() {
+  public String getChoices() {
     return choices;
   }
 
-  public void setChoices(List<String> choices) {
+  public void setChoices(String choices) {
     this.choices = choices;
   }
 
@@ -95,5 +72,30 @@ public class UpsertQuestionRequest {
 
   public void setQuestionId(String questionId) {
     this.questionId = questionId;
+  }
+
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public LocalDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(LocalDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+  }
+
+  @Override
+  public String toString() {
+    String choices = this.getChoices();
+    if (!choices.contains(Question.DETERMINER)) {
+      this.setChoices(String.join(Question.DETERMINER, choices));
+    }
+    return GsonUtils.toJson(this);
   }
 }
