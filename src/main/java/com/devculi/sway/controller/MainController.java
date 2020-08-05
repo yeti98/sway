@@ -17,9 +17,6 @@ public class MainController {
   @GetMapping
   public String index(Model model) {
     model.addAttribute("activeLink", "index");
-    System.out.println(
-        ((CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
-            .getUsername());
     return "index";
   }
 

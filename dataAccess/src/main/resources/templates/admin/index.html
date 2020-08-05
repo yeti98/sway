@@ -7,13 +7,13 @@
     xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Trang quản lý - Hệ thống đào tạo ngoại ngữ Sway</title>
-  <base href="/admin"/>
 </head>
 <body>
 <div layout:fragment="content">
   <div sec:authorize="isAuthenticated()">
     <p>Xin chào, </p>
     <span th:text="${#authentication.getPrincipal().getUsername()}"></span>
+    <span th:text="${#authentication.getPrincipal().authorities}"></span>
     <br>
     <a href="#" th:href="@{/logout}">Đăng xuất</a>
   </div>

@@ -1,15 +1,11 @@
 package com.devculi.sway.config.security;
 
-import com.devculi.sway.manager.service.security.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -19,23 +15,27 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Order(1)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-  @Autowired
-  private CustomAuthenticationProvider authProvider;
+  @Autowired private CustomAuthenticationProvider authProvider;
+
+  @Bean
+  public JwtAuthenticationFilter jwtAuthenticationFilter() {
+    return new JwtAuthenticationFilter();
+  }
 
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth.authenticationProvider(authProvider).eraseCredentials(false);
   }
 
-
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.headers().frameOptions().sameOrigin();
-    http.csrf().disable();
+    //    http.headers().frameOptions().sameOrigin();
+    //    http.csrf().disable();
     http.authorizeRequests()
         .antMatchers(
             "/",
             "/auth/**",
+            "/admin",
             "/admin/login",
             "/admin/logout",
             "/login",
@@ -47,27 +47,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/assets/**",
             "/user_assets/**",
             "/AdminLTE/**")
-        .permitAll()
-        .antMatchers("/info/**", "/homework/**")
-        .access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
+        .permitAll();
 
-    http.antMatcher("/admin/**")
-        .authorizeRequests()
-        .anyRequest()
-        .hasAnyRole("ROLE_ADMIN")
+    http.authorizeRequests()
+        .antMatchers("/admin/**")
+        .access("hasAnyRole('ROLE_ADMIN')");
+
+    http.authorizeRequests()
+        .antMatchers("/info**", "/homework**")
+        .authenticated()
         .and()
         .formLogin()
-        .loginPage("/admin/login")
+        .loginPage("/login")
         .usernameParameter("username")
-        .failureUrl("/admin/login?error=true")
-        .defaultSuccessUrl("/admin")
+        .loginProcessingUrl("/login")
+        .failureUrl("/login?error=true")
+        .defaultSuccessUrl("/", true)
         .and()
         .logout()
-        .logoutUrl("/admin/login?logout=true")
+        .permitAll()
+        .logoutSuccessUrl("/login?logout")
+        .and()
+        .logout()
+        .logoutUrl("/logout")
+        .logoutSuccessUrl("/login?logout=true")
         .deleteCookies("JSESSIONID")
         .and()
-        .exceptionHandling()
-        .accessDeniedPage("/error");
-//    http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        .csrf()
+        .disable();
+
+    http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
   }
 }

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "ssubmits")
-public class SwaySubmit implements Serializable {
+public class SwaySubmit {
   @OneToOne SwayTest swayTest;
   @OneToOne SwayUser swayUser;
   @OneToOne SwayUser checkUser;

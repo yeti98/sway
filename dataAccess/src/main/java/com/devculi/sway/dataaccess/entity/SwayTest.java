@@ -12,7 +12,7 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "stests")
-public class SwayTest implements Serializable {
+public class SwayTest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

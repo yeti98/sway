@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "susers")
-public class SwayUser implements Serializable {
+public class SwayUser {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;

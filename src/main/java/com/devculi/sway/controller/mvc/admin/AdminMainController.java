@@ -13,14 +13,4 @@ public class AdminMainController {
   public String adminIndex(Model model) {
     return "admin/index";
   }
-
-  @GetMapping("/login")
-  public String adminLogin(Model model) {
-    return "admin/login";
-  }
-
-    @GetMapping("/logout")
-    public String adminLogout(Model model) {
-        return "redirect:/admin/login?logout";
-    }
 }

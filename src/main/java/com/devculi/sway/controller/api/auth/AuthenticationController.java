@@ -22,10 +22,10 @@ import javax.servlet.http.HttpServletRequest;
 public class AuthenticationController extends BaseController {
   @Autowired IAuthService authService;
 
-  @PostMapping("/login")
-  @Transactional(readOnly = true)
-  public Authentication login(AuthenticateRequest authenticateRequest) {
-    SwayFactory.getAuthValidator().validateLogin(authenticateRequest);
+//  @PostMapping("/login")
+//  @Transactional(readOnly = true)
+//  public Authentication login(AuthenticateRequest authenticateRequest) {
+//    SwayFactory.getAuthValidator().validateLogin(authenticateRequest);
 //
 //    SwayUser swayUser =
 //        authService.login(
@@ -35,6 +35,6 @@ public class AuthenticationController extends BaseController {
 //    UsernamePasswordAuthenticationToken authentication =
 //        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 //    return authentication;
-    return null;
-  }
+//    return null;
+//  }
 }
