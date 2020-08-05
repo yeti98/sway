@@ -12,7 +12,7 @@ import java.util.function.Function;
 public class JWTUtils {
 
   public static final long JWT_TOKEN_VALIDITY = 7 * 86400; // a week
-  private static final String SECRET_KEY = "devculi_wq3Dr8O5wrkCSybDkQ==1_2020@)@)";
+  public static final String SECRET_KEY = "devculi_wq3Dr8O5wrkCSybDkQ==1_2020@)@)";
   private static final long serialVersionUID = -2550185165626007488L;
 
   // generate token for user

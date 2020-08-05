@@ -1,6 +1,6 @@
-package com.devculi.sway.controller.lecturer;
+package com.devculi.sway.controller.api.lecturer;
 
-import com.devculi.sway.controller.BaseController;
+import com.devculi.sway.controller.api.BaseController;
 import com.devculi.sway.manager.service.interfaces.ISwayTestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

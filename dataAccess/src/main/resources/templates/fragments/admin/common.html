@@ -8,31 +8,31 @@
     <li class="nav-item">
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
-    <li class="nav-item d-none d-sm-inline-block">
-      <a class="nav-link" href="/">Trang chủ</a>
-    </li>
-    <li class="nav-item d-none d-sm-inline-block">
-      <a class="nav-link" href="/users">Users</a>
-    </li>
-    <li class="nav-item d-none d-sm-inline-block">
-      <a class="nav-link" href="/categories">Chuyên mục</a>
-    </li>
-    <li class="nav-item d-none d-sm-inline-block">
-      <a class="nav-link" href="/posts">Bài viết</a>
-    </li>
+<!--    <li class="nav-item d-none d-sm-inline-block">-->
+<!--      <a class="nav-link" href="/">Trang chủ</a>-->
+<!--    </li>-->
+<!--    <li class="nav-item d-none d-sm-inline-block">-->
+<!--      <a class="nav-link" href="/users">Users</a>-->
+<!--    </li>-->
+<!--    <li class="nav-item d-none d-sm-inline-block">-->
+<!--      <a class="nav-link" href="/categories">Chuyên mục</a>-->
+<!--    </li>-->
+<!--    <li class="nav-item d-none d-sm-inline-block">-->
+<!--      <a class="nav-link" href="/posts">Bài viết</a>-->
+<!--    </li>-->
   </ul>
 
   <!-- SEARCH FORM -->
-  <form class="form-inline ml-3">
-    <div class="input-group input-group-sm">
-      <input aria-label="Search" class="form-control form-control-navbar" placeholder="Search" type="search">
-      <div class="input-group-append">
-        <button class="btn btn-navbar" type="submit">
-          <i class="fas fa-search"></i>
-        </button>
-      </div>
-    </div>
-  </form>
+<!--  <form class="form-inline ml-3">-->
+<!--    <div class="input-group input-group-sm">-->
+<!--      <input aria-label="Search" class="form-control form-control-navbar" placeholder="Search" type="search">-->
+<!--      <div class="input-group-append">-->
+<!--        <button class="btn btn-navbar" type="submit">-->
+<!--          <i class="fas fa-search"></i>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </form>-->
 
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
@@ -60,8 +60,7 @@
       <div class="os-resize-observer observed"></div>
     </div>
     <div class="os-content-glue" style="margin: 0px -8px; width: 249px; height: 636px;"></div>
-<!--    <div class="os-padding" sec:authorize="isAuthenticated()">-->
-    <div class="os-padding" >
+    <div class="os-padding" sec:authorize="isAuthenticated()">
       <div class="os-viewport os-viewport-native-scrollbars-invisible"
            style="overflow-y: scroll; right: 0px; bottom: 0px;">
         <div class="os-content" style="padding: 0px 8px; height: 100%; width: 100%;">
@@ -72,9 +71,8 @@
                    src="/AdminLTE/user2-160x160.jpg">
             </div>
             <div class="info">
-<!--              <a class="d-block" href="#"><span th:text="${#authentication.getPrincipal().getUsername()}"></span></p></a>-->
-              <a class="d-block" href="#"><span th:text="Admin"></span></p></a>
-<!--              <a class="d-block" href="#"><span th:text="${#authentication.getPrincipal().authorities}"></span></p></a>-->
+              <a class="d-block" href="#"><span th:text="${#authentication.getPrincipal().getUsername()}"></span></p></a>
+              <a class="d-block" href="#"><span th:text="${#authentication.getPrincipal().authorities}"></span></p></a>
             </div>
           </div>
 
@@ -91,41 +89,38 @@
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
-<!--                  <li class="nav-item" sec:authorize="hasRole('ADMIN')">-->
-                  <li class="nav-item">
-                    <a class="nav-link active" href="/admin/users">
+                  <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-link active" href="manage/users">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Quản lý user</p>
                     </a>
                   </li>
-<!--                  <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'EDITOR')">-->
-                  <li class="nav-item">
-                    <a class="nav-link" href="/admin/pages">
+                  <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">
+                    <a class="nav-link" href="manage/menus">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Quản lý menu</p>
                     </a>
                   </li>
-<!--                  <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'EDITOR')">-->
-                  <li class="nav-item">
-                    <a class="nav-link" href="/admin/classes">
+                  <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">
+                    <a class="nav-link" href="manage/classes">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Quản lý lớp học</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/admin/courses">
+                    <a class="nav-link" href="manage/courses">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Quản lý khóa học</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/admin/questions">
+                    <a class="nav-link" href="manage/questions">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Quản lý câu hỏi</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/admin/posts">
+                    <a class="nav-link" href="manage/posts">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Quản lý bài viết</p>
                     </a>

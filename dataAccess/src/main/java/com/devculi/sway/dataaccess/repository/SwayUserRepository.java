@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface SwayUserRepository extends JpaRepository<SwayUser, Long> {
-    Optional<SwayUser> getUserByUsername(String username);
+    Optional<SwayUser> getByUsername(String username);
 }

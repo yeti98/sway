@@ -1,6 +1,6 @@
 package com.devculi.sway.controller.mvc.admin;
 
-import com.devculi.sway.controller.admin.AdminController;
+import com.devculi.sway.controller.api.admin.AdminController;
 import com.devculi.sway.sharedmodel.model.UserModel;
 import com.devculi.sway.sharedmodel.response.common.PagingResponse;
 import org.springframework.beans.factory.annotation.Autowired;

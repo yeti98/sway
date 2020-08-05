@@ -1,10 +1,13 @@
-package com.devculi.sway.controller;
+package com.devculi.sway.controller.api;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.logging.Logger;
+
 @SuppressWarnings("ALL")
 public class BaseController<T> {
+  private static final Logger logger = Logger.getLogger(BaseController.class.getName());
 
   public ResponseEntity ok(T body) {
     return ResponseEntity.ok(body);
