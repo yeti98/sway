@@ -109,4 +109,19 @@ public class Question {
   public void setUpdatedAt(LocalDateTime updatedAt) {
     this.updatedAt = updatedAt;
   }
+
+  @Override
+  public String toString() {
+    return "Question{" +
+            "id=" + id +
+            ", choices='" + choices + '\'' +
+            ", answer='" + answer + '\'' +
+            ", content='" + content + '\'' +
+            ", explanation='" + explanation + '\'' +
+            ", active=" + active +
+            ", questionId='" + questionId + '\'' +
+            ", createdAt=" + createdAt +
+            ", updatedAt=" + updatedAt +
+            '}';
+  }
 }
