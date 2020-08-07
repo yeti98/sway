@@ -38,13 +38,11 @@ $(document).ready(function () {
     }
   });
 
-  // $(document).on("click", "#removeAnUser", function () {
-  //   const content = $(this).data('content');
-  //   $(".modal-body #mainContent").text(content);
-  // });
+  $(document).on("click", "#removeAnUser", function () {
+    $(".modal-body #mainContent").text(selectedQuestion.content);
+  });
 
   $(document).on("click", "#editAnUser", function () {
-    console.log(selectedQuestion);
     const id = selectedQuestion.id;
     const questionId = selectedQuestion.questionId;
     const content = selectedQuestion.content;
@@ -129,7 +127,7 @@ $(document).ready(function () {
 
       const payload = JSON.stringify(
         {
-          choices, answer, explanation, active: true, questionId, content
+          id, choices, answer, explanation, active: true, questionId, content
         }
       );
       console.log("PUT", payload);
@@ -215,28 +213,28 @@ $(document).ready(function () {
     }
   });
 
-  // $("#formDeleteUserModal").submit(function (event) {
-  //   event.preventDefault();
-  //
-  //   const $form = $(this);
-  //   const $inputs = $form.find("input, select, button, textarea");
-  //
-  //   const mainContent = $(".modal-body #mainContent").text();
-  //   const email = mainContent.split("- ")[1].trim();
-  //
-  //   request = $.ajax({
-  //     url: "/users/" + email,
-  //     type: "delete",
-  //     contentType: "application/json; charset=utf-8",
-  //     success: function (msg) {
-  //       $inputs.prop("disabled", false);
-  //       window.location.reload();
-  //     },
-  //     error: function (msg) {
-  //       $inputs.prop("disabled", false);
-  //       alert("Xóa thất bại: \n", msg);
-  //       window.location.reload();
-  //     }
-  //   });
-  // })
+  $("#formDeleteUserModal").submit(function (event) {
+    event.preventDefault();
+
+    const $form = $(this);
+    const $inputs = $form.find("input, select, button, textarea");
+
+    const id = selectedQuestion.id;
+
+    console.log(id)
+    request = $.ajax({
+      url: "/admin/manage/questions/" + id,
+      type: "delete",
+      contentType: "application/json; charset=utf-8",
+      success: function (msg) {
+        $inputs.prop("disabled", false);
+        window.location.reload();
+      },
+      error: function (msg) {
+        $inputs.prop("disabled", false);
+        alert("Xóa thất bại: \n", msg);
+        window.location.reload();
+      }
+    });
+  })
 });
