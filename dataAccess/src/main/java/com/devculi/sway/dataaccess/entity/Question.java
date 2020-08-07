@@ -5,6 +5,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "questions")
@@ -37,6 +38,19 @@ public class Question {
   @UpdateTimestamp
   @Column(nullable = false)
   private LocalDateTime updatedAt;
+
+  public Question(Long id, String choices, String answer, String content, String explanation, boolean active, String questionId) {
+    this.id = id;
+    this.choices = choices;
+    this.answer = answer;
+    this.content = content;
+    this.explanation = explanation;
+    this.active = active;
+    this.questionId = questionId;
+  }
+
+  public Question() {
+  }
 
   public String getContent() {
     return content;

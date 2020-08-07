@@ -22,6 +22,10 @@
                        th:href="@{~/doi-ngu}">Đội Ngũ</a>
                 </li>
                 <li class="nav-item" role="presentation">
+                    <a th:class="${#strings.equals(activeLink, 'test-online')} ? 'nav-link active' : 'nav-link'"
+                       th:href="@{~/test-online}">Test online</a>
+                </li>
+                <li class="nav-item" role="presentation">
                     <a th:class="${#strings.equals(activeLink, 'about-us')} ? 'nav-link active' : 'nav-link'"
                        th:href="@{~/about-us}">About Us</a>
                 </li>
