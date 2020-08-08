@@ -14,37 +14,39 @@
             </div>
         </section>
     </main>
-    <form th:action="@{~/submit-test}" th:object="${wrapper}" method="post" style="margin-bottom: 70px">
-        <div class="container">
-            <div class="row" th:each="question, stat : ${wrapper.questions}" style="margin-bottom: 30px">
-                <div class="col-12" style="font-size: 20px" th:text="${'Câu '+(stat.index+1)+': '+question.content}">
-                </div>
-                <div style="display: none">
-                    <input type="text" th:field="*{questions[__${stat.index}__].content}" th:value="${question.getContent()}"/>
-                    <input type="text" th:field="*{questions[__${stat.index}__].answer}" th:value="${question.answer}"/>
-                    <input type="text" th:field="*{questions[__${stat.index}__].id}" th:value="${question.id}"/>
-                    <input type="text" th:field="*{questions[__${stat.index}__].explanation}" th:value="${question.explanation}"/>
-                    <input type="text" th:field="*{questions[__${stat.index}__].questionId}" th:value="${question.questionId}"/>
-                    <input type="text" th:field="*{questions[__${stat.index}__].choices}" th:value="${question.choices}"/>
-                </div>
-                <div class="col-12" th:each="choice,stat2 : ${question.choices}"
-                     style="border-radius: 10px; border: 1px solid black; width: 100%; cursor: pointer; margin:5px 0; padding: 5px">
-                    <div class="form-check" style="padding:5px">
-                        <input class="form-check-input" type="radio"
-                               th:name="|questions[${stat.index}]|"
-                               th:id="${question.questionId+stat2}"
-                               th:value="${choice}"
-                               th:field="*{questions[__${stat.index}__].selected}"/>
-                        <label class="form-check-label" th:for="${question.questionId+stat2}"
-                               th:text="${choice}"
-                               style="width: 100%; cursor: pointer"/>
+    <div style="margin-left: 2%; margin-right: 2%">
+        <form th:action="@{~/submit-test}" th:object="${wrapper}" method="post" style="margin-bottom: 70px">
+            <div class="container">
+                <div class="row" th:each="question, stat : ${wrapper.questions}" style="margin-bottom: 30px">
+                    <div class="col-12" style="font-size: 20px" th:text="${'Câu '+(stat.index+1)+': '+question.content}">
+                    </div>
+                    <div style="display: none">
+                        <input type="text" th:field="*{questions[__${stat.index}__].content}" th:value="${question.getContent()}"/>
+                        <input type="text" th:field="*{questions[__${stat.index}__].answer}" th:value="${question.answer}"/>
+                        <input type="text" th:field="*{questions[__${stat.index}__].id}" th:value="${question.id}"/>
+                        <input type="text" th:field="*{questions[__${stat.index}__].explanation}" th:value="${question.explanation}"/>
+                        <input type="text" th:field="*{questions[__${stat.index}__].questionId}" th:value="${question.questionId}"/>
+                        <input type="text" th:field="*{questions[__${stat.index}__].choices}" th:value="${question.choices}"/>
+                    </div>
+                    <div class="col-12" th:each="choice,stat2 : ${question.choices}"
+                         style="border-radius: 10px; border: 1px solid black; width: 100%; cursor: pointer; margin:5px 0; padding: 5px">
+                        <div class="form-check" style="padding:5px">
+                            <input class="form-check-input" type="radio"
+                                   th:name="|questions[${stat.index}]|"
+                                   th:id="${question.questionId+stat2}"
+                                   th:value="${choice}"
+                                   th:field="*{questions[__${stat.index}__].selected}"/>
+                            <label class="form-check-label" th:for="${question.questionId+stat2}"
+                                   th:text="${choice}"
+                                   style="width: 100%; cursor: pointer"></label>
+                        </div>
                     </div>
                 </div>
+                <div class="row justify-content-center">
+                    <button type="submit" class="btn btn-primary">Nộp bài</button>
+                </div>
             </div>
-            <div class="row justify-content-center">
-                <button type="submit" class="btn btn-primary">Nộp bài</button>
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 </html>
