@@ -42,6 +42,7 @@ public class QuestionService implements IQuestionService {
     Question question = getQuestionById(questionId);
     String[] nullPropertiesString = PropertyUtils.getNullPropertiesString(updateQuestionRequest);
     BeanUtils.copyProperties(updateQuestionRequest, question, nullPropertiesString);
+    question.setChoices(String.join(Question.DETERMINER, updateQuestionRequest.getChoices()));
     questionRepository.save(question);
     return question;
   }

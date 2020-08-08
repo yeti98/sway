@@ -90,6 +90,10 @@ public class QuestionModel {
     this.updatedAt = updatedAt;
   }
 
+  public String getReadableChoices(){
+    return String.join(" ", choices.split(Question.DETERMINER));
+  }
+
   @Override
   public String toString() {
     String choices = this.getChoices();
