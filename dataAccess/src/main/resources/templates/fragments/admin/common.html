@@ -107,19 +107,31 @@
                       <p>Quản lý lớp học</p>
                     </a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">
                     <a class="nav-link" href="manage/courses">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Quản lý khóa học</p>
                     </a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">
+                    <a class="nav-link" href="manage/homeworks">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Quản lý bài tập lớp</p>
+                    </a>
+                  </li>
+                  <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">
+                    <a class="nav-link" href="manage/testonline">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Quản lý test online</p>
+                    </a>
+                  </li>
+                  <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">
                     <a class="nav-link" href="manage/questions">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Quản lý câu hỏi</p>
                     </a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">
                     <a class="nav-link" href="manage/posts">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Quản lý bài viết</p>

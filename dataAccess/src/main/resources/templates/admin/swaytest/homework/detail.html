@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layouts/admin}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/admin/css/common/crudtable.css}"/>
+</head>
+<body>
+<div layout:fragment="content">
+  <p>
+    <a aria-controls="multiCollapseExample1" aria-expanded="false" class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1"
+       role="button">Chỉnh sửa</a>
+    <button aria-controls="multiCollapseExample2" aria-expanded="false" class="btn btn-primary" data-target="#multiCollapseExample2"
+            data-toggle="collapse" type="button">Xem trước
+    </button>
+    <button aria-controls="multiCollapseExample1 multiCollapseExample2" aria-expanded="false" class="btn btn-primary" data-target=".multi-collapse"
+            data-toggle="collapse" type="button">Xem cả 2
+    </button>
+  </p>
+  <div class="row">
+    <div class="col">
+      <div class="collapse multi-collapse" id="multiCollapseExample2">
+        <div class="card card-body">
+          Card 2
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row collapse multi-collapse" id="multiCollapseExample1">
+    <div class="col">
+      <div class="">
+        <div class="card">
+          <div class="card-header text-center">
+            Thông tin bài test
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <label for="testId">Mã bài test</label>
+                <input class="form-control" id="testId" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="testName">Tên bài test</label>
+                <input class="form-control" id="testName" placeholder="" type="email">
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Example select</label>
+                <select class="form-control" id="exampleFormControlSelect1">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Danh sách câu hỏi</label>
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Mã</th>
+                    <th scope="col">Nội dung</th>
+                    <th scope="col">Cập nhật</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <th:block th:each="question, index : ${swayTest.questions}">
+                    <tr>
+                      <th scope="row"><p th:text="${index}"></p></th>
+                      <td><p th:text="${question.questionId}"></p></td>
+                      <td><p th:text="${question.content}"></p></td>
+                      <td>
+                        <div id="editAnUser" th:attr="" th:onclick="">
+                          <a class="edit" data-toggle="modal" href="#editUserModal">
+                            <i class="material-icons"
+                               data-toggle="tooltip"
+                               title="Chỉnh sửa câu hỏi">&#xE254;
+                            </i>
+                          </a>
+                        </div>
+                        <div id="removeAnUser" th:attr="" th:onclick="">
+                          <a class="delete" data-toggle="modal" href="#deleteUserModal">
+                            <i class="material-icons"
+                               data-toggle="tooltip"
+                               title="Xóa khỏi bài tập này">&#xE872;
+                            </i>
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                  </th:block>
+                  </tbody>
+                </table>
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Example textarea</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="" id="">
+        <div class="card card-body">
+          Câu hỏi
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<th:block layout:fragment="scriptFragment">
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    var swayTest = /*[[${swayTest}]]*/ 'default';
+    console.log(swayTest);
+    /*]]>*/
+  </script>
+  <!--  <script th:inline="javascript">-->
+  <!--    var selectedQuestion = undefined;-->
+
+  <!--    function setSelectedObject(json_str) {-->
+  <!--      console.log(json_str);-->
+  <!--      selectedQuestion = JSON.parse(json_str);-->
+  <!--    }-->
+  <!--  </script>-->
+  <!--  <script th:src="@{/admin/js/homework.js}"></script>-->
+</th:block>
+</body>
+</html>

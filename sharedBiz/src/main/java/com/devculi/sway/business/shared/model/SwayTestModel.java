@@ -1,42 +1,33 @@
-package com.devculi.sway.dataaccess.entity;
+package com.devculi.sway.business.shared.model;
 
 import com.devculi.sway.dataaccess.entity.enums.TestType;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import com.devculi.sway.utils.GsonUtils;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
-@Entity
-@Table(name = "stests")
-public class SwayTest {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class SwayTestModel {
   private Long id;
 
   private String testId;
 
   private String testName;
 
-  @ManyToMany private Collection<Question> questions;
+  private Collection<QuestionModel> questions;
 
   private LocalDate deadline;
   private boolean active;
   private TestType testType;
 
-  @CreationTimestamp
-  @Column(nullable = false, updatable = false)
   private LocalDateTime createdAt;
-
-  @UpdateTimestamp
-  @Column(nullable = false)
   private LocalDateTime updatedAt;
 
-  @OneToMany
-  @JoinTable(name = "stest_submits")
-  private Collection<SwaySubmit> submits;
+  private Collection<SwaySubmitModel> submits;
+
+  public SwayTestModel() {}
 
   public Long getId() {
     return id;
@@ -62,11 +53,11 @@ public class SwayTest {
     this.testName = testName;
   }
 
-  public Collection<Question> getQuestions() {
+  public Collection<QuestionModel> getQuestions() {
     return questions;
   }
 
-  public void setQuestions(Collection<Question> questions) {
+  public void setQuestions(Collection<QuestionModel> questions) {
     this.questions = questions;
   }
 
@@ -110,11 +101,19 @@ public class SwayTest {
     this.updatedAt = updatedAt;
   }
 
-  public Collection<SwaySubmit> getSubmits() {
+  public Collection<SwaySubmitModel> getSubmits() {
     return submits;
   }
 
-  public void setSubmits(Collection<SwaySubmit> submits) {
+  public void setSubmits(Collection<SwaySubmitModel> submits) {
     this.submits = submits;
+  }
+
+  public int getNumberOfQuestion(){
+    return submits.size();
+  }
+
+  public String getJsonString(){
+    return GsonUtils.toJson(this);
   }
 }
