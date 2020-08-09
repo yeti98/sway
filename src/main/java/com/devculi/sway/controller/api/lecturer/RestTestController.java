@@ -1,9 +1,9 @@
 package com.devculi.sway.controller.api.lecturer;
 
 import com.devculi.sway.business.shared.model.SwayTestModel;
+import com.devculi.sway.business.shared.request.UpsertTestRequest;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
 import com.devculi.sway.controller.api.BaseController;
-import com.devculi.sway.dataaccess.entity.Question;
 import com.devculi.sway.dataaccess.entity.SwayTest;
 import com.devculi.sway.dataaccess.entity.enums.TestType;
 import com.devculi.sway.manager.service.interfaces.ISwayTestService;
@@ -12,9 +12,9 @@ import com.devculi.sway.sharedmodel.response.common.PagingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 @RestController
@@ -46,5 +46,14 @@ public class RestTestController extends BaseController {
   @GetMapping("/create")
   public SwayTest createTest(@RequestParam(name = "testType", defaultValue = "HOMEWORK") TestType testType) {
     return swayTestService.createTestByType(testType);
+  }
+
+  @PutMapping("/{id}")
+  public SwayTestModel update(@RequestBody UpsertTestRequest updateHomeworkRequest, @PathVariable(name = "id") Long id) throws Exception {
+    if (!id.equals(updateHomeworkRequest.getId())) {
+      throw new Exception("Id must be exactly");
+    }
+    SwayTest swayTest = swayTestService.updateHomeWork(id, updateHomeworkRequest);
+    return Entity2DTO.swayTest2DTO(swayTest);
   }
 }

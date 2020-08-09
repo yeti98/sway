@@ -102,6 +102,7 @@ $(document).ready(function () {
     const E = $("#editChoiceE").val().trim();
     let answer;
     // TODO: Sửa lại các lấy input checked jquery
+    // TODO: Check đáp án trùng nhau
     if (document.getElementById("editRadioBtnA").checked && !isBlank(A)) {
       answer = A;
     } else if (document.getElementById("editRadioBtnB").checked && !isBlank(B)) {
@@ -114,7 +115,7 @@ $(document).ready(function () {
       answer = E;
     }
     const choices = [];
-    if (isAllBlank(A, B, C, D) || isBlank(answer)) {
+    if (isAllBlank(A, B, C, D, E) || isBlank(answer)) {
       alert("Vui lòng điền thông tin đáp án");
     } else {
       if (!isBlank(A)) choices.push(A);
@@ -167,6 +168,7 @@ $(document).ready(function () {
     const E = $("#addChoiceE").val().trim();
     let answer;
     // TODO: Sửa lại các lấy input checked jquery
+    // TODO: Check đáp án trùng nhau
     if (document.getElementById("radioBtnA").checked && !isBlank(A)) {
       answer = A;
     } else if (document.getElementById("radioBtnB").checked && !isBlank(B)) {
@@ -179,7 +181,7 @@ $(document).ready(function () {
       answer = E;
     }
     const choices = [];
-    if (isAllBlank(A, B, C, D) || isBlank(answer)) {
+    if (isAllBlank(A, B, C, D, E) || isBlank(answer)) {
       alert("Vui lòng điền thông tin đáp án");
     } else {
       if (!isBlank(A)) choices.push(A);

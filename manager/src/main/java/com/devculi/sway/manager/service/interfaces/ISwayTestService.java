@@ -1,5 +1,6 @@
 package com.devculi.sway.manager.service.interfaces;
 
+import com.devculi.sway.business.shared.request.UpsertTestRequest;
 import com.devculi.sway.dataaccess.entity.SwayTest;
 import com.devculi.sway.dataaccess.entity.enums.TestType;
 import org.springframework.data.domain.Page;
@@ -14,4 +15,6 @@ public interface ISwayTestService {
   Page<SwayTest> getHomeworkByPage(Integer page);
 
   SwayTest createTestByType(TestType testType);
+
+  SwayTest updateHomeWork(Long id, UpsertTestRequest updateHomeworkRequest);
 }

@@ -6,6 +6,7 @@ import com.devculi.sway.controller.api.lecturer.RestQuestionController;
 import com.devculi.sway.dataaccess.entity.Question;
 import com.devculi.sway.sharedmodel.request.UpsertQuestionRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -29,8 +30,8 @@ public class LecturerQuestionController {
   @Transactional(rollbackFor = Exception.class)
   public String insertQuestion(
       Model model, @RequestBody UpsertQuestionRequest insertQuestionRequest) {
-    Question question = questionController.insertQuestion(insertQuestionRequest);
-    recentAddedQuestion.addFirst(Entity2DTO.question2DTO(question));
+    QuestionModel questionModel = questionController.insertQuestion(insertQuestionRequest);
+    recentAddedQuestion.addFirst(questionModel);
     model.addAttribute("questions", recentAddedQuestion);
     return "admin/question/index :: questionTableBody";
   }

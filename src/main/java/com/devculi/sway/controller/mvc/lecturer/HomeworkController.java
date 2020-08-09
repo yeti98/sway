@@ -9,10 +9,7 @@ import com.devculi.sway.sharedmodel.response.common.PagingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin/manage/homeworks")
@@ -22,10 +19,11 @@ public class HomeworkController {
   //    private LinkedList<QuestionModel> recentAddedQuestion = new LinkedList<>();
 
   @GetMapping
-  public String renderQuestionsView(
+  public String renderHomeworkView(
       Model model, @RequestParam(name = "page", defaultValue = "0") Integer page) {
     PagingResponse<SwayTestModel> testByPage = testController.getTestByPage(page);
-    model.addAttribute("totalPages", testByPage.getContent());
+    System.out.println(testByPage.getContent());
+    model.addAttribute("totalPages", testByPage.getTotalPage());
     model.addAttribute("homeworks", testByPage.getContent());
     return "admin/swaytest/homework";
   }

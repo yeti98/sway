@@ -9,6 +9,9 @@
   <title>Trang quản lý - Hệ thống đào tạo ngoại ngữ Sway</title>
 </head>
 <body>
+<th:block layout:fragment="customNavBar">
+  <div th:replace="fragments/admin/common :: navBarFragment"></div>
+</th:block>
 <div layout:fragment="content">
   <div sec:authorize="isAuthenticated()">
     <p>Xin chào, </p>
