@@ -64,6 +64,10 @@ $(document).ready(function () {
   // Activate tooltip
   $('[data-toggle="tooltip"]').tooltip();
 
+  $(document).on("click", "#btnAddQuestion", function () {
+    $("#formAddUserModal").trigger('reset');
+  });
+
   $("#swayTestForm").submit(function (event) {
     console.log("SUBMIT");
     event.preventDefault();

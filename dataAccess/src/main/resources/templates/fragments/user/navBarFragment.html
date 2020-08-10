@@ -3,22 +3,31 @@
 <nav th:fragment="nav-bar" class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
     <div class="container">
         <a class="navbar-brand logo" href="#">Sway logo</a
-        ><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
-        <span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span>
-    </button>
+        >
+        <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
+            <span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item" role="presentation">
-                    <a th:class="${#strings.equals(activeLink, 'index')} ? 'nav-link active' : 'nav-link'" th:href="@{~/}">Trang Chủ</a>
+                    <a th:class="${#strings.equals(activeLink, 'index')} ? 'nav-link active' : 'nav-link'"
+                       th:href="@{~/}">Trang Chủ</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a th:class="${#strings.equals(activeLink, 'gt')} ? 'nav-link active' : 'nav-link'" th:href="@{~/gioi-thieu}">Giới thiệu</a>
+                    <a th:class="${#strings.equals(activeLink, 'gt')} ? 'nav-link active' : 'nav-link'"
+                       th:href="@{~/gioi-thieu}">Giới thiệu</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a th:class="${#strings.equals(activeLink, 'doi-ngu')} ? 'nav-link active' : 'nav-link'" th:href="@{~/doi-ngu}">Đội Ngũ</a>
+                    <a th:class="${#strings.equals(activeLink, 'doi-ngu')} ? 'nav-link active' : 'nav-link'"
+                       th:href="@{~/doi-ngu}">Đội Ngũ</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a th:class="${#strings.equals(activeLink, 'about-us')} ? 'nav-link active' : 'nav-link'" th:href="@{~/about-us}">About Us</a>
+                    <a th:class="${#strings.equals(activeLink, 'test-online')} ? 'nav-link active' : 'nav-link'"
+                       th:href="@{~/test-online}">Test online</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a th:class="${#strings.equals(activeLink, 'about-us')} ? 'nav-link active' : 'nav-link'"
+                       th:href="@{~/about-us}">About Us</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a
@@ -26,13 +35,27 @@
                             data-toggle="dropdown"
                             aria-expanded="false"
                             href="#"
-                    >Khóa học&nbsp;</a
-                    >
+                    >Khóa học&nbsp;</a>
                     <div class="dropdown-menu" role="menu">
                         <a class="dropdown-item" role="presentation" href="#">Tiếng Anh</a>
                         <a class="dropdown-item" role="presentation" href="#">Tiếng Nhật</a
                         ><a class="dropdown-item" role="presentation" href="#">Tiếng Trung</a
                     ><a class="dropdown-item" role="presentation" href="#">Tiếng Hàn</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a
+                            class="dropdown-toggle nav-link"
+                            data-toggle="dropdown"
+                            aria-expanded="false"
+                            href="#"
+                    ><img class="rounded-circle"
+                          style="width: 20px; object-fit: cover"
+                          src="https://cdn.iconscout.com/icon/free/png-512/avatar-372-456324.png"/></a>
+                    <div class="dropdown-menu" role="menu">
+                        <a class="dropdown-item disabled" role="presentation">Signed in as ...</a>
+                        <a class="dropdown-item" role="presentation" href="#">Thông tin tài khoản</a>
+                        <a class="dropdown-item" role="presentation" href="#">Đăng xuất</a>
                     </div>
                 </li>
             </ul>
