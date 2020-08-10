@@ -11,11 +11,14 @@ import com.devculi.sway.sharedmodel.model.AuthenticationModel;
 import com.devculi.sway.sharedmodel.model.UserModel;
 import com.devculi.sway.sharedmodel.request.UpsertUserRequest;
 import com.devculi.sway.sharedmodel.response.common.PagingResponse;
+import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import com.devculi.sway.utils.GsonUtils;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.stream.Collectors;
 
 @RestController
@@ -35,10 +38,14 @@ public class AdminController {
 
   @PostMapping("/users")
   @Transactional(rollbackFor = Exception.class)
-  public AuthenticationModel insertUser(@RequestBody UpsertUserRequest insertUserRequest) {
+  public UserModel insertUser(@RequestBody UpsertUserRequest insertUserRequest) {
     SwayFactory.getUserValidation().validateInsertUser(insertUserRequest);
     SwayUser user = adminService.insertNewUser(insertUserRequest);
-    return authService.createAuthenticationModelForUser(user);
+    if (user != null) {
+      authService.createAuthenticationModelForUser(user);
+    }
+
+    return Entity2DTO.user2DTO(user);
   }
 
   @DeleteMapping("/users/{id}")
@@ -56,9 +63,23 @@ public class AdminController {
   public SwayUser updateUser(
       @PathVariable(name = "id") Long userID, @RequestBody UpsertUserRequest updateUserRequest) {
     SwayFactory.getUserValidation().validateUpdateUser(updateUserRequest);
-    SwayUser user = adminService.updateUser(userID, updateUserRequest);
-    return null;
+
+    return adminService.updateUser(userID, updateUserRequest);
+
   }
+
+
+  @GetMapping("/randomPass")
+  public String genPass(){
+    String password = adminService.randomPassword();
+    System.out.println(password);
+    JsonObject res = new JsonObject();
+    res.addProperty("password",password);
+
+    return GsonUtils.toJson(res);
+  }
+
+
 
   public PagingResponse<SwayClassModel> getClassByPage(@RequestParam(name = "page", defaultValue = "0") Integer page) {
     Page<SwayClass> classByPage = adminService.getClasses(page);
