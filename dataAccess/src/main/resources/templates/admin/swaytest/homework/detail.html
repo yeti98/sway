@@ -36,7 +36,9 @@
               </div>
               <div class="form-group">
                 <label for="testName">Tên bài tập</label>
-                <input class="form-control" id="testName" placeholder="" type="text" th:field="*{testName}">
+                <input class="form-control" id="testName" placeholder="" type="text" th:field="*{testName}"
+                       onchange="this.setCustomValidity('')"
+                       oninvalid="this.setCustomValidity('Vui lòng điền tên')" required>
               </div>
               <div class="form-group">
                 <label for="tblQuestionList">Danh sách câu hỏi</label>
@@ -117,7 +119,7 @@
               </div>
             </form>
             <div>
-              <a class="btn btn-success" data-toggle="modal" href="#addUserModal">
+              <a class="btn btn-success" data-toggle="modal" href="#addQuestionModal" id="btnAddQuestion">
                 <i class="material-icons">&#xE147;</i>
                 <span>Thêm mới</span></a>
             </div>
@@ -127,10 +129,10 @@
     </div>
   </div>
 
-  <div class="modal fade" id="addUserModal">
+  <div class="modal fade" id="addQuestionModal">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form id="formAddUserModal">
+        <form id="formAddQuestionModal">
           <div class="modal-header">
             <h4 class="modal-title">Thêm câu hỏi</h4>
             <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
@@ -190,7 +192,7 @@
     console.log(swayTest);
     /*]]>*/
   </script>
-  <script th:src="@{/admin/js/homework.js}"></script>
+  <script th:src="@{/admin/js/homework/detail.js}"></script>
 </th:block>
 </body>
 </html>

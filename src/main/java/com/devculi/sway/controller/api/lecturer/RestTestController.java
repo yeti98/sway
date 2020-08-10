@@ -12,7 +12,6 @@ import com.devculi.sway.sharedmodel.response.common.PagingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.stream.Collectors;
@@ -30,26 +29,30 @@ public class RestTestController extends BaseController {
 
   @DeleteMapping("/{id}")
   public ResponseEntity deleteTestByID(@PathVariable(name = "id") Long id) {
-    return ok(swayTestService.deleteTestByID(id));
+    SwayTest swayTest = swayTestService.deleteTestByID(id);
+    return ok(swayTest.getId());
   }
 
-  @GetMapping("/")
+  @GetMapping
   public PagingResponse<SwayTestModel> getTestByPage(
       @RequestParam(name = "page", defaultValue = "0") Integer page) {
     Page<SwayTest> homeworks = lecturerService.getHomeworkByPage(page);
     int totalPages = homeworks.getTotalPages();
     return new PagingResponse<>(
-            totalPages,
-            homeworks.getContent().stream().map(Entity2DTO::swayTest2DTO).collect(Collectors.toList()));
+        totalPages,
+        homeworks.getContent().stream().map(Entity2DTO::swayTest2DTO).collect(Collectors.toList()));
   }
 
   @GetMapping("/create")
-  public SwayTest createTest(@RequestParam(name = "testType", defaultValue = "HOMEWORK") TestType testType) {
+  public SwayTest createTest(
+      @RequestParam(name = "testType", defaultValue = "HOMEWORK") TestType testType) {
     return swayTestService.createTestByType(testType);
   }
 
   @PutMapping("/{id}")
-  public SwayTestModel update(@RequestBody UpsertTestRequest updateHomeworkRequest, @PathVariable(name = "id") Long id) throws Exception {
+  public SwayTestModel update(
+      @RequestBody UpsertTestRequest updateHomeworkRequest, @PathVariable(name = "id") Long id)
+      throws Exception {
     if (!id.equals(updateHomeworkRequest.getId())) {
       throw new Exception("Id must be exactly");
     }

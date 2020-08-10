@@ -10,7 +10,6 @@
   <div th:replace="fragments/admin/common :: navBarFragment"></div>
 </th:block>
 <div layout:fragment="content">
-  <p th:text="${classes}"></p>
   <div class="container">
     <div class="table-wrapper">
       <div class="table-title">
@@ -21,7 +20,7 @@
           <div class="col-sm-6">
             <a class="btn btn-success" id="createHomework" target="_blank" href="manage/homeworks/create"><i
                 class="material-icons">&#xE147;</i> <span>Thêm</span></a>
-            <a class="btn btn-danger" href="#deleteUserModal"><i
+            <a class="btn btn-danger" href="#deleteTestModal"><i
                 class="material-icons">&#xE15C;</i> <span>Xóa</span></a>
           </div>
         </div>
@@ -46,8 +45,8 @@
           <tr>
             <td>
                   <span class="custom-checkbox">
-                  <input id="checkbox1" name="options[]" type="checkbox" value="1">
-                  <label for="checkbox1"></label>
+                    <input id="checkbox1" name="options[]" type="checkbox" value="1">
+                    <label for="checkbox1"></label>
                   </span>
             </td>
             <td class="truncatable">
@@ -59,7 +58,7 @@
             <td class="truncatable">
               <p th:text="${homework.getNumberOfQuestion()}"></p>
             </td>
-            <td>
+            <td style="display: flex">
               <div id="editAnUser" th:attr="data-homework=${homework.getJsonString()}"
                    th:onclick="javascript:setSelectedObject(this.getAttribute('data-homework'));">
                 <a class="edit" th:href="'manage/homeworks/'+${homework.id}">
@@ -69,9 +68,9 @@
                   </i>
                 </a>
               </div>
-              <div id="removeAnUser" th:attr="data-homework=${homework.getJsonString()}"
+              <div id="removeTest" th:attr="data-homework=${homework.getJsonString()}"
                    th:onclick="javascript:setSelectedObject(this.getAttribute('data-homework'));">
-                <a class="delete" data-toggle="modal" href="#deleteUserModal">
+                <a class="delete" data-toggle="modal" href="#deleteTestModal">
                   <i class="material-icons"
                      data-toggle="tooltip"
                      title="Xóa">&#xE872;
@@ -94,10 +93,10 @@
     </div>
   </div>
   <!-- Delete Modal HTML -->
-  <div class="modal fade" id="deleteUserModal">
+  <div class="modal fade" id="deleteTestModal">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form id="formDeleteUserModal">
+        <form id="formDeleteTestModal">
           <div class="modal-header">
             <h4 class="modal-title">Xóa bản ghi</h4>
             <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
@@ -118,11 +117,11 @@
 </div>
 <th:block layout:fragment="scriptFragment">
   <script th:inline="javascript">
-    var selectedQuestion = undefined;
+    var selectedHomework = undefined;
 
     function setSelectedObject(json_str) {
-      console.log(json_str);
-      selectedQuestion = JSON.parse(json_str);
+      selectedHomework = JSON.parse(json_str);
+      console.log(selectedHomework)
     }
   </script>
   <script th:src="@{/admin/js/homework.js}"></script>
