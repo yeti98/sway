@@ -60,7 +60,7 @@ public class AdminService implements IAdminService {
 
   @Override
   public SwayUser updateUser(Long userID, UpsertUserRequest updateUserRequest) {
-    return null;
+     return userService.updateUser(userID,updateUserRequest);
   }
 
   @Override

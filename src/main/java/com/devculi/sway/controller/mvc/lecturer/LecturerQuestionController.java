@@ -22,6 +22,7 @@ public class LecturerQuestionController {
 
   @GetMapping
   public String renderQuestionsView(Model model) {
+
     model.addAttribute("questions", recentAddedQuestion);
     return "admin/question/index";
   }

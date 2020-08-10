@@ -2,6 +2,7 @@ package com.devculi.sway.sharedmodel.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserModel {
   private Long id;
@@ -32,21 +33,21 @@ public class UserModel {
     this.type = type;
   }
 
-    @Override
-    public String toString() {
-        return "UserModel{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", username='" + username + '\'' +
-                ", avatar='" + avatar + '\'' +
-                ", description='" + description + '\'' +
-                ", status=" + status +
-                ", type='" + type + '\'' +
-                ", role='" + role + '\'' +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "{" +
+            "\"id\":" + id +
+            ", \"name\":\"" + name + '\"' +
+            ", \"username\":\"" + username + '\"' +
+            ", \"avatar\":\"" + avatar + '\"' +
+            ", \"description\":\"" + description + '\"' +
+            ", \"status\":\"" + status + '\"' +
+            ", \"type\":\"" + type + '\"' +
+            ", \"role\":\"" + role + '\"' +
+            '}';
+  }
 
-    public Long getId() {
+  public Long getId() {
     return id;
   }
 

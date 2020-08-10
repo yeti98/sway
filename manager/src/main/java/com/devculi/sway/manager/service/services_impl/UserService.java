@@ -1,10 +1,13 @@
 package com.devculi.sway.manager.service.services_impl;
 
+import com.devculi.sway.dataaccess.entity.Question;
 import com.devculi.sway.dataaccess.entity.SwayUser;
 import com.devculi.sway.dataaccess.repository.SwayUserRepository;
 import com.devculi.sway.manager.service.interfaces.IUserService;
 import com.devculi.sway.sharedmodel.request.UpsertUserRequest;
+import com.devculi.sway.utils.PropertyUtils;
 import com.devculi.sway.utils.security.Protector;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -56,8 +59,19 @@ public class UserService implements IUserService {
     return user;
   }
 
+
+
   @Override
   public Page<SwayUser> getUserByPage(Pageable pageable) {
     return userRepository.findAll(pageable);
+  }
+
+  @Override
+  public SwayUser updateUser(Long id, UpsertUserRequest upsertUserRequest) {
+    SwayUser user = userRepository.findById(id).orElse(null);
+    String[] nullPropertiesString = PropertyUtils.getNullPropertiesString(upsertUserRequest);
+    BeanUtils.copyProperties(upsertUserRequest, user, nullPropertiesString);
+    userRepository.save(user);
+    return user;
   }
 }
