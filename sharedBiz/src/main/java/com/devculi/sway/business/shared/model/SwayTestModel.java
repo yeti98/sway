@@ -109,11 +109,15 @@ public class SwayTestModel {
     this.submits = submits;
   }
 
-  public int getNumberOfQuestion(){
+  public int getNumberOfQuestion() {
+    return questions.size();
+  }
+
+  public int getTotalSubmition() {
     return submits.size();
   }
 
-  public String getJsonString(){
+  public String getJsonString() {
     return GsonUtils.toJson(this);
   }
 }

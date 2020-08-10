@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+
 @Controller
 @RequestMapping("/admin/manage/homeworks")
 public class HomeworkController {
@@ -22,7 +24,6 @@ public class HomeworkController {
   public String renderHomeworkView(
       Model model, @RequestParam(name = "page", defaultValue = "0") Integer page) {
     PagingResponse<SwayTestModel> testByPage = testController.getTestByPage(page);
-    System.out.println(testByPage.getContent());
     model.addAttribute("totalPages", testByPage.getTotalPage());
     model.addAttribute("homeworks", testByPage.getContent());
     return "admin/swaytest/homework";

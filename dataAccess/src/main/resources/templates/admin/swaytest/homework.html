@@ -6,6 +6,9 @@
   <link rel="stylesheet" th:href="@{/admin/css/common/crudtable.css}"/>
 </head>
 <body>
+<th:block layout:fragment="customNavBar">
+  <div th:replace="fragments/admin/common :: navBarFragment"></div>
+</th:block>
 <div layout:fragment="content">
   <p th:text="${classes}"></p>
   <div class="container">
@@ -32,8 +35,8 @@
             <label for="selectAll"></label>
            </span>
           </th>
-          <th>Mã bài test</th>
-          <th>Tên bài test</th>
+          <th>Mã bài tập</th>
+          <th>Tên bài tập</th>
           <th>Số câu hỏi</th>
           <th>Cập nhật</th>
         </tr>
