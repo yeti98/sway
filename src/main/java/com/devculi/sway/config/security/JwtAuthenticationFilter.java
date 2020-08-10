@@ -4,7 +4,6 @@ import com.devculi.sway.dataaccess.entity.SwayUser;
 import com.devculi.sway.dataaccess.repository.SwayUserRepository;
 import com.devculi.sway.manager.service.security.CustomUserDetails;
 import com.devculi.sway.manager.service.security.JwtService;
-import com.devculi.sway.manager.service.security.UserDetailServiceImpl;
 import com.devculi.sway.sharedmodel.exceptions.RecordNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

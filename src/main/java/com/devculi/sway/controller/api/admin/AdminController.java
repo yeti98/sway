@@ -56,8 +56,9 @@ public class AdminController {
   public SwayUser updateUser(
       @PathVariable(name = "id") Long userID, @RequestBody UpsertUserRequest updateUserRequest) {
     SwayFactory.getUserValidation().validateUpdateUser(updateUserRequest);
-    SwayUser user = adminService.updateUser(userID, updateUserRequest);
-    return null;
+
+    return adminService.updateUser(userID, updateUserRequest);
+
   }
 
   public PagingResponse<SwayClassModel> getClassByPage(@RequestParam(name = "page", defaultValue = "0") Integer page) {

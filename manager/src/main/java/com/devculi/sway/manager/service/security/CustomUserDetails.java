@@ -50,6 +50,7 @@ public class CustomUserDetails implements UserDetails {
 
   @Override
   public boolean isAccountNonLocked() {
+    System.out.println(String.format("\n\n\n\n\nUSER STATUS:%s\n\n\n\n\n", user.getStatus()));
     return !user.getStatus();
   }
 

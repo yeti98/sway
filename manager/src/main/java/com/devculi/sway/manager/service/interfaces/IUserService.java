@@ -15,4 +15,6 @@ public interface IUserService {
   SwayUser deleteUserByID(Long userID) throws Exception;
 
   Page<SwayUser> getUserByPage(Pageable pageable);
+
+  SwayUser updateUser(Long id, UpsertUserRequest upsertUserRequest);
 }
