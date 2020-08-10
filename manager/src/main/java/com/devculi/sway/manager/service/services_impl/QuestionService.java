@@ -19,7 +19,10 @@ public class QuestionService implements IQuestionService {
 
   @Override
   public Question getQuestionByID(Long questionID) {
-    return null;
+    Optional<Question> byId = questionRepository.findById(questionID);
+    return byId.orElseThrow(() -> {
+      return new RecordNotFoundException(Question.class, "id", questionID.toString());
+    });
   }
 
   @Override

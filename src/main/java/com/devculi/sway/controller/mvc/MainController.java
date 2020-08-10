@@ -53,4 +53,11 @@ public class MainController {
     model.addAttribute("pageTitle", "Bài tập về nhà");
     return "homework";
   }
+
+  @GetMapping("/loading")
+  public String loading(Model model) {
+    model.addAttribute("activeLink", "homework");
+    model.addAttribute("pageTitle", "Đang tải");
+    return "loading";
+  }
 }

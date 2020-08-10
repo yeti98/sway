@@ -1,0 +1,5 @@
+.truncatable{
+    text-overflow: ellipsis;
+    max-width: 20px;
+    overflow: hidden;
+}
