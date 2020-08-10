@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "questions")
@@ -126,16 +127,43 @@ public class Question {
 
   @Override
   public String toString() {
-    return "Question{" +
-            "id=" + id +
-            ", choices='" + choices + '\'' +
-            ", answer='" + answer + '\'' +
-            ", content='" + content + '\'' +
-            ", explanation='" + explanation + '\'' +
-            ", active=" + active +
-            ", questionId='" + questionId + '\'' +
-            ", createdAt=" + createdAt +
-            ", updatedAt=" + updatedAt +
-            '}';
+    return "Question{"
+        + "id="
+        + id
+        + ", choices='"
+        + choices
+        + '\''
+        + ", answer='"
+        + answer
+        + '\''
+        + ", content='"
+        + content
+        + '\''
+        + ", explanation='"
+        + explanation
+        + '\''
+        + ", active="
+        + active
+        + ", questionId='"
+        + questionId
+        + '\''
+        + ", createdAt="
+        + createdAt
+        + ", updatedAt="
+        + updatedAt
+        + '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Question)) return false;
+    Question question = (Question) o;
+    return id.equals(question.id) && createdAt.equals(question.createdAt);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, createdAt);
   }
 }

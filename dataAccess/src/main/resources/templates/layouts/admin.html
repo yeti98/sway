@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" style="overflow-x: hidden" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="headFragment">
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -29,15 +30,17 @@
   <title th:text="${pageTitle}">Template Title</title>
   <base href="/admin/">
 </head>
-<body class="sidebar-mini layout-fixed sidebar-collapse" style="height: auto;">
+<body class="sidebar-mini layout-fixed sidebar-collapse" style="height: 100%; background-color: #f4f6f9">
 <div class="wrapper">
-  <div th:replace="fragments/admin/common :: navBarFragment"></div>
+  <div layout:fragment="customNavBar">
+    <p>Nav bar goes here</p>
+  </div>
   <div th:replace="fragments/admin/common :: mainSideBarFragment"></div>
   <div class="content-wrapper" layout:fragment="content" style="min-height: 563px;">
     <p>Page content goes here</p>
   </div>
   <footer class="main-footer">
-    <strong>Copyright © 2020 - All rights reserved.</strong>
+    <strong th:text="'Copyright ©' + ${#dates.year(#dates.createNow())} + ' - All rights reserved.'"></strong>
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 1.0
     </div>

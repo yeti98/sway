@@ -4,10 +4,10 @@
 <head>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" th:href="@{/admin/css/common/crudtable.css}"/>
+  <link rel="stylesheet" th:href="@{/admin/css/common/all.css}"/>
 </head>
 <body>
 <div layout:fragment="content">
-  <p th:text="${classes}"></p>
   <div class="container">
     <div class="table-wrapper">
       <div class="table-title">
@@ -32,11 +32,11 @@
             <label for="selectAll"></label>
            </span>
           </th>
-          <th>Mã câu hỏi</th>
-          <th>Nội dung</th>
-          <th>Lựa chọn</th>
-          <th>Đáp án</th>
-          <th>Gợi ý</th>
+          <th class="truncatable">Mã câu hỏi</th>
+          <th class="truncatable">Nội dung</th>
+          <th class="truncatable">Lựa chọn</th>
+          <th class="truncatable">Đáp án</th>
+          <th class="truncatable">Gợi ý</th>
           <th>Cập nhật</th>
         </tr>
         </thead>
@@ -116,7 +116,7 @@
               <label for="addQuestionContent">Nội dung</label>
               <input class="form-control" id="addQuestionContent"
                      onchange="this.setCustomValidity('')"
-                     oninvalid="this.setCustomValidity('Trường này không được để trống')" required type="text">
+                     oninvalid="this.setCustomValidity('Vui lòng điền nội dung câu hỏi')" required type="text">
             </div>
             <div class="form-group">
               <label>Lựa chọn</label>
