@@ -6,6 +6,9 @@
   <link rel="stylesheet" th:href="@{/admin/css/common/crudtable.css}"/>
 </head>
 <body>
+<th:block layout:fragment="customNavBar">
+  <div th:replace="fragments/admin/common :: navBarFragment"></div>
+</th:block>
 <div layout:fragment="content">
   <p th:text="${classes}"></p>
   <div class="container">

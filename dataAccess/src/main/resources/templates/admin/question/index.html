@@ -7,6 +7,9 @@
   <link rel="stylesheet" th:href="@{/admin/css/common/all.css}"/>
 </head>
 <body>
+<th:block layout:fragment="customNavBar">
+  <div th:replace="fragments/admin/common :: navBarFragment"></div>
+</th:block>
 <div layout:fragment="content">
   <div class="container">
     <div class="table-wrapper">
