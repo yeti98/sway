@@ -4,6 +4,7 @@
 <head>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" th:href="@{/admin/css/common/crudtable.css}"/>
+  <link rel="stylesheet" th:href="@{/admin/css/common/all.css}"/>
 </head>
 <body>
 <th:block layout:fragment="customNavBar">
@@ -34,9 +35,9 @@
             <label for="selectAll"></label>
            </span>
           </th>
-          <th>Mã bài tập</th>
-          <th>Tên bài tập</th>
-          <th>Số câu hỏi</th>
+          <th class="truncatable">Mã bài tập</th>
+          <th class="truncatable">Tên bài tập</th>
+          <th class="truncatable">Số câu hỏi</th>
           <th>Cập nhật</th>
         </tr>
         </thead>

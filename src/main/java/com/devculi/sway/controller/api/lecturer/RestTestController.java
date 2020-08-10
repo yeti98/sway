@@ -1,5 +1,6 @@
 package com.devculi.sway.controller.api.lecturer;
 
+import com.devculi.sway.annotations.RequireRoleAdmin;
 import com.devculi.sway.business.shared.model.SwayTestModel;
 import com.devculi.sway.business.shared.request.UpsertTestRequest;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/tests")
+@RequireRoleAdmin
 public class RestTestController extends BaseController {
   @Autowired ISwayTestService swayTestService;
   @Autowired LecturerService lecturerService;
