@@ -6,30 +6,22 @@ function isBlank(str) {
     return (!str || /^\s*$/.test(str));
 }
 
-function isAllBlank(...strs) {
-    for (let idx in strs) {
-        if (!isBlank(String(strs[idx]))) {
-            return false;
-        }
-    }
-    return true;
-}
-
 function onCopy() {
-    const copyUsername = (document.getElementById('addUsername'));
-    const copyPassword = (document.getElementById('addPassword'));
-    var username = $("#addUsername").val();
-    var password = $("#addPassword").val();
-
-    $("#addUsername").val(username + " - " + password);
-    console.log($("#addUsername").val());
-    copyUsername.select();
+    const txtInfo = (document.getElementById('txtUserInfo'));
+    $("#txtUserInfo").attr("disabled", false);
+    txtInfo.select();
     document.execCommand('Copy');
-    $("#addUsername").val(username);
+    $("#txtUserInfo").attr("disabled", true);
+    $('#copyTooltip').tooltip('show');
+    setTimeout(function () {
+        $('#copyTooltip').tooltip('hide')
+    }, 2000)
+
 }
 
 $(document).ready(function () {
 
+    $('#copyTooltip').tooltip({trigger: 'click'})
     // Activate tooltip
     $('[data-toggle="tooltip"]').tooltip();
 
@@ -67,7 +59,13 @@ $(document).ready(function () {
 
     })
 
-    $(document).on("click","#addUser", function () {
+    $('#addUsername').on('input', function () {
+        const username = $("#addUsername").val();
+        const password = $("#addPassword").val();
+        $('#txtUserInfo').val(username + '\n' + password);
+    });
+
+    $(document).on("click", "#addUser", function () {
 
 
         $.ajax({
@@ -76,7 +74,7 @@ $(document).ready(function () {
             contentType: "application/json; charset=utf-8",
             success: function (res) {
                 const obj = JSON.parse(res);
-                console.log("random password",obj.password);
+                console.log("random password", obj.password);
                 $("#addPassword").val(obj.password);
             },
             error: function (msg) {
@@ -99,7 +97,7 @@ $(document).ready(function () {
 
         $inputs.prop("disabled", true);
         const addUser = JSON.stringify({
-            username,password,role,status
+            username, password, role, status
         })
 
         console.log(addUser);
@@ -136,9 +134,9 @@ $(document).ready(function () {
 
         $inputs.prop("disabled", true);
         const editUser = JSON.stringify(
-            {
-                id, name, username,avatar,description,type,status,role
-            }
+          {
+              id, name, username, avatar, description, type, status, role
+          }
         )
 
         console.log(editUser)

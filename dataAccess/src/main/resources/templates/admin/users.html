@@ -65,7 +65,7 @@
             <td>
               <p th:text="${user.role}"></p>
             </td>
-            <td>
+            <td style="display: flex">
               <div id="editAnUser"
                 th:attr="data-user=${user.toString()}"
                 th:onclick="javascript:setSelectedObject(this.getAttribute('data-user'));">
@@ -117,11 +117,15 @@
             </div>
 
             <div class="form-group">
-              <label for="addPassword">Mật khẩu</label>
-              <input class="form-control" id="addPassword" required disabled type="text">
-              <span class="material-icons" onclick="onCopy()">COPY</span>
+              <label for="addPassword" style="display: none">Mật khẩu</label>
+              <input class="form-control" id="addPassword" required disabled type="text" style="display: none">
+              <label for="txtUserInfo">Thông tin tài khoản</label>
+              <br>
+              <div style="position: relative" onclick="onCopy()">
+                <textarea id="txtUserInfo" style="display: block; resize: none; width: 100%" disabled></textarea>
+                <span style="cursor: pointer; position: absolute; bottom: 4px; right: 6px;" id="copyTooltip" class="material-icons" title="Đã coppy">content_copy</span>
+              </div>
             </div>
-
             <div class="form-group">
               <label for="addRole">Vai trò</label>
               <br>
