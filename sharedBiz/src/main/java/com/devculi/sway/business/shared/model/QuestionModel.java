@@ -96,10 +96,6 @@ public class QuestionModel {
 
   @Override
   public String toString() {
-    String choices = this.getChoices();
-    if (!choices.contains(Question.DETERMINER)) {
-      this.setChoices(String.join(Question.DETERMINER, choices));
-    }
-    return GsonUtils.toJson(this);
+    return "";
   }
 }

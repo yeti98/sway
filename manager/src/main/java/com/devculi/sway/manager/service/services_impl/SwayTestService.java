@@ -88,4 +88,14 @@ public class SwayTestService implements ISwayTestService {
     testRepository.save(swayTest);
     return swayTest;
   }
+
+  @Override
+  public SwayTest insertQuestions(Long targetID, List<Question> questions) {
+    SwayTest testByID = getTestByID(targetID);
+    questions.forEach(question -> {
+      testByID.getQuestions().add(question);
+    });
+    testRepository.save(testByID);
+    return testByID;
+  }
 }
