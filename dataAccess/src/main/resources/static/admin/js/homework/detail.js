@@ -41,7 +41,7 @@ function rerenderTable() {
     noidung.innerHTML = question.content;
     capnhat.innerHTML = "<div style='display: flex'>" +
       "             <div id=\"editAnUser\" " + `onclick="deleteRow(${index}, ${question.id})" >` +
-      "                <a class=\"edit\" data-toggle=\"modal\" href=\"#editUserModal\">\n" +
+      "                <a class=\"edit\" " + `href="manage/questions/${question.id}"` + ">\n" +
       "                  <i class=\"material-icons\"\n" +
       "                     data-toggle=\"tooltip\"\n" +
       "                     title=\"Chỉnh sửa câu hỏi\">&#xE254;\n" +
@@ -117,8 +117,33 @@ $(document).ready(function () {
     }
   });
 
-  $(document).on("click", "#removeAnUser", function () {
-    // TODO: có show modal confirm không?
+  $("#importData").submit((event) => {
+    event.preventDefault();
+
+    const $form = $(this);
+    const $inputs = $form.find("input, select, button, textarea");
+    $inputs.prop("disabled", true);
+
+    var form_data = new FormData();
+    const attachment_data= $("#importData").find("input")[0].files[0];
+    form_data.append("file", attachment_data);
+
+    $.ajax({
+      type: "POST",
+      data: form_data,
+      url: "/files/upload?operation=1&target="+swayTest.id,
+      contentType: false,
+      processData: false,
+      success: function (data) {
+        $inputs.prop("disabled", false);
+        $('#importData').trigger('reset');
+        swayTest.questions.push(...data)
+        rerenderTable()
+      },
+      error: function (data) {
+        alert("Lỗi xử lý")
+      }
+    });
   });
 
   $("#formAddQuestionModal").submit(function (event) {

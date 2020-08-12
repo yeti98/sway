@@ -1,6 +1,7 @@
 package com.devculi.sway.controller.mvc.lecturer;
 
 import com.devculi.sway.business.shared.model.SwayTestModel;
+import com.devculi.sway.business.shared.utils.Entity2DTO;
 import com.devculi.sway.controller.api.lecturer.RestTestController;
 import com.devculi.sway.dataaccess.entity.SwayTest;
 import com.devculi.sway.dataaccess.entity.enums.TestType;
@@ -89,7 +90,7 @@ public class HomeworkController {
   @GetMapping("/{id}")
   public String create(Model model, @PathVariable(name = "id") Long id) {
     SwayTest newSwayTest = testService.getTestByID(id);
-    model.addAttribute("swayTest", newSwayTest);
+    model.addAttribute("swayTest", Entity2DTO.swayTest2DTO(newSwayTest));
     return "admin/swaytest/homework/detail";
   }
 }

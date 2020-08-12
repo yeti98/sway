@@ -54,19 +54,20 @@
                   <tbody>
                   <th:block th:each="question, stats : *{questions}">
                     <tr>
-                      <th scope="row"><p th:text="${stats.index + 1}"></p></th>
+                      <th scope="row"><a th:href="@{'manage/questions/'+${question.id}}"><span th:text="${stats.index + 1}"></span></a></th>
                       <td><p th:text="${question.questionId}"></p></td>
                       <td><p th:text="${question.content}"></p></td>
                       <td style="display: flex">
                         <div id="editAnUser">
-                          <a class="edit" data-toggle="modal" href="#editUserModal">
+                          <a class="edit" th:href="@{'manage/questions/'+${question.id}}">
                             <i class="material-icons"
                                data-toggle="tooltip"
                                title="Chỉnh sửa câu hỏi">&#xE254;
                             </i>
                           </a>
                         </div>
-                        <div id="removeAnUser">
+                        <div id="removeAnUser" th:attr="data-index=${stats.index}, data-question=${question}"
+                             th:onclick="javascript:deleteRow(this.getAttribute('data-index'), this.getAttribute('data-question'));" >
                           <a class="delete" data-toggle="modal" href="#deleteUserModal">
                             <i class="material-icons"
                                data-toggle="tooltip"
@@ -79,10 +80,6 @@
                   </th:block>
                   </tbody>
                 </table>
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlTextarea1">Example textarea</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
               </div>
               <div class="modal-footer">
                 <input class="btn btn-default" type="button" value="Hủy" onclick="window.history.back();">
@@ -118,10 +115,23 @@
                 </div>
               </div>
             </form>
+            <hr>
             <div>
-              <a class="btn btn-success" data-toggle="modal" href="#addQuestionModal" id="btnAddQuestion">
+              <a class="btn btn-info" data-toggle="modal" href="#addQuestionModal" id="btnAddQuestion">
                 <i class="material-icons">&#xE147;</i>
                 <span>Thêm mới</span></a>
+            </div>
+            <hr>
+            <div>
+              <form method="POST" action="#" enctype="multipart/form-data" id="importData">
+                <div class="form-group">
+                  <label for="customFile">Chọn file (*.xls, *.xlsx. Dung lượng < 5MB)</label>
+                  <input type="file" class="form-control-file" id="customFile" name="file">
+                </div>
+                <div class="modal-footer">
+                  <input class="btn btn-success" type="submit" value="Tải lên">
+                </div>
+              </form>
             </div>
           </div>
         </div>
