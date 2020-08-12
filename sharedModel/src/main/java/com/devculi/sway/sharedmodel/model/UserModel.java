@@ -16,14 +16,7 @@ public class UserModel {
 
   public UserModel() {}
 
-  public UserModel(
-      Long id,
-      String name,
-      String username,
-      String avatar,
-      String description,
-      boolean status,
-      String type) {
+  public UserModel(Long id, String name, String username, String avatar, String description, boolean status, String type, String role) {
     this.id = id;
     this.name = name;
     this.username = username;
@@ -31,6 +24,7 @@ public class UserModel {
     this.description = description;
     this.status = status;
     this.type = type;
+    this.role = role;
   }
 
   @Override

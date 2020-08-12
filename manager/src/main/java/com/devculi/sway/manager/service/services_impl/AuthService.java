@@ -56,7 +56,8 @@ public class AuthService implements IAuthService {
             user.getAvatar(),
             user.getDescription(),
             user.getStatus(),
-            user.getType()));
+            user.getType(),
+            user.getRole()));
     authenticationModel.setToken(JWTUtils.generateToken(user.getUsername()));
     authenticationModel.setRefreshToken(JWTUtils.generateToken(user.getUsername()));
     return authenticationModel;

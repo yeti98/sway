@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.devculi.sway.utils.security.Protector;
 
 @Service
 public class AdminService implements IAdminService {
@@ -42,15 +43,17 @@ public class AdminService implements IAdminService {
     try {
       String username = insertUserRequest.getUsername();
       SwayUser swayUser = userService.findUserByUsername(username);
-      if (swayUser == null) {
+      if (swayUser != null) {
         System.out.println("Throw exception");
         throw new ExistedRecordException(SwayUser.class, "username", username);
       }
+
       return userService.register(insertUserRequest);
     } catch (Exception e) {
       e.printStackTrace();
+      return null;
     }
-    return null;
+
   }
 
   @Override
@@ -67,5 +70,10 @@ public class AdminService implements IAdminService {
   public Page<SwayClass> getClasses(Integer page) {
     Pageable pageable = PageRequest.of(page, ClassPerPage, Sort.by("createdAt").descending());
     return classService.getClassByPage(pageable);
+  }
+
+  @Override
+  public String randomPassword() {
+    return userService.randomPassword();
   }
 }

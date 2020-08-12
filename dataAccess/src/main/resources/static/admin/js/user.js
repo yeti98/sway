@@ -15,6 +15,19 @@ function isAllBlank(...strs) {
     return true;
 }
 
+function onCopy() {
+    const copyUsername = (document.getElementById('addUsername'));
+    const copyPassword = (document.getElementById('addPassword'));
+    var username = $("#addUsername").val();
+    var password = $("#addPassword").val();
+
+    $("#addUsername").val(username + " - " + password);
+    console.log($("#addUsername").val());
+    copyUsername.select();
+    document.execCommand('Copy');
+    $("#addUsername").val(username);
+}
+
 $(document).ready(function () {
 
     // Activate tooltip
@@ -52,6 +65,58 @@ $(document).ready(function () {
         $("#editIsLocked").val(status);
         $("#editRole").val(role);
 
+    })
+
+    $(document).on("click","#addUser", function () {
+
+
+        $.ajax({
+            url: "/admin/randomPass",
+            type: "get",
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                const obj = JSON.parse(res);
+                console.log("random password",obj.password);
+                $("#addPassword").val(obj.password);
+            },
+            error: function (msg) {
+                alert("Có lỗi xảy ra!");
+            }
+        });
+
+
+    })
+    $("#formAddUserModal").submit(function (event) {
+        event.preventDefault();
+
+        const $form = $(this);
+        const $inputs = $form.find("input, select, button, textarea");
+
+        const username = $("#addUsername").val();
+        const password = $("#addPassword").val();
+        const role = $("#addRole").val();
+        const status = true;
+
+        $inputs.prop("disabled", true);
+        const addUser = JSON.stringify({
+            username,password,role,status
+        })
+
+        console.log(addUser);
+        $.ajax({
+            url: "/admin/users/",
+            type: "post",
+            data: addUser,
+            contentType: "application/json; charset=utf-8",
+            success: function (msg) {
+                $inputs.prop("disabled", false);
+                window.location.reload();
+            },
+            error: function (msg) {
+                $inputs.prop("disabled", false);
+                alert("Thêm thất bại: \n", msg);
+            }
+        });
     })
 
     $("#formEditUserModal").submit(function (event) {

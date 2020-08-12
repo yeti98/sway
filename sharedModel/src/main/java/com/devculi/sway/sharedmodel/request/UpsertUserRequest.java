@@ -10,6 +10,7 @@ public class UpsertUserRequest {
   private String avatar;
   private String description;
   private boolean status;
+  private String role;
   private String type;
   private String password;
 
@@ -22,6 +23,7 @@ public class UpsertUserRequest {
             ", avatar='" + avatar + '\'' +
             ", description='" + description + '\'' +
             ", status=" + status +
+            ", role='" + role + '\'' +
             ", type='" + type + '\'' +
             ", password='" + password + '\'' +
             '}';
@@ -33,6 +35,14 @@ public class UpsertUserRequest {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public String getRole() {
+    return role;
+  }
+
+  public void setRole(String role) {
+    this.role = role;
   }
 
   public boolean isStatus() {
