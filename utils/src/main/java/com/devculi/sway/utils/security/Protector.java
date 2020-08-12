@@ -2,6 +2,7 @@ package com.devculi.sway.utils.security;
 
 import com.devculi.sway.sharedmodel.constants.StandardConstant;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -14,6 +15,7 @@ import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
+
 
 public class Protector {
 
@@ -76,6 +78,23 @@ public class Protector {
     return byteToBase64(bSalt);
   }
 
+  public static String generatePassword(int length) {
+    // ASCII range - alphanumeric (0-9, a-z, A-Z)
+    final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    SecureRandom random = new SecureRandom();
+    StringBuilder sb = new StringBuilder();
+
+    // each iteration of loop choose a character randomly from the given ASCII range
+    // and append it to StringBuilder instance
+
+    for (int i = 0; i < length; i++) {
+      int randomIndex = random.nextInt(chars.length());
+      sb.append(chars.charAt(randomIndex));
+    }
+
+    return sb.toString();
+  }
   /**
    * From a byte[] returns a base 64 representation
    *
@@ -83,6 +102,7 @@ public class Protector {
    * @return String
    */
   public static String byteToBase64(byte[] data) {
+
     return Base64.getEncoder().encodeToString(data);
   }
 
@@ -116,7 +136,8 @@ public class Protector {
 
   public static void main(String[] args) throws Exception {
 
-    String plainPassword = "trangnh";
+
+    String plainPassword = generatePassword(8);
     String salt = generateSalt();
     String valueEnc = encrypt(plainPassword, salt);
     String passwordDec = decrypt(valueEnc, salt);

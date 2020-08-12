@@ -9,6 +9,7 @@ import com.devculi.sway.utils.PropertyUtils;
 import com.devculi.sway.utils.security.Protector;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,9 @@ import java.util.Optional;
 @Service
 public class UserService implements IUserService {
   @Autowired SwayUserRepository userRepository;
+
+  @Value("${randomPasswordLength}")
+  String len;
 
   @Override
   public SwayUser findUserByUsername(String username) {
@@ -35,8 +39,8 @@ public class UserService implements IUserService {
     user.setAvatar(insertUserRequest.getAvatar());
     user.setDescription(insertUserRequest.getDescription());
     user.setStatus(insertUserRequest.getStatus());
+    user.setRole(insertUserRequest.getRole());
     user.setType(insertUserRequest.getType());
-
     String saltValue = Protector.generateSalt();
     String password = Protector.encrypt(insertUserRequest.getPassword(), saltValue);
     if (password == null) {
@@ -73,5 +77,10 @@ public class UserService implements IUserService {
     BeanUtils.copyProperties(upsertUserRequest, user, nullPropertiesString);
     userRepository.save(user);
     return user;
+  }
+
+  @Override
+  public String randomPassword() {
+    return Protector.generatePassword(Integer.parseInt(len));
   }
 }

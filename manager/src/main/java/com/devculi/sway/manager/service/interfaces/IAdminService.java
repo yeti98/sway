@@ -18,4 +18,6 @@ public interface IAdminService {
   SwayUser updateUser(Long userID, UpsertUserRequest updateUserRequest);
 
   Page<SwayClass> getClasses(Integer page);
+
+  String randomPassword();
 }

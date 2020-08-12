@@ -17,4 +17,6 @@ public interface IUserService {
   Page<SwayUser> getUserByPage(Pageable pageable);
 
   SwayUser updateUser(Long id, UpsertUserRequest upsertUserRequest);
+
+  String randomPassword();
 }

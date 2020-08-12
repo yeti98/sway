@@ -18,9 +18,9 @@
             <h2>Quản lý thông tin người dùng</h2>
           </div>
           <div class="col-sm-6">
-            <a class="btn btn-success" data-toggle="modal" href="#addUserModal"><i
+            <a class="btn btn-success" id="addUser" data-toggle="modal" href="#addUserModal"><i
                 class="material-icons">&#xE147;</i> <span>Thêm user</span></a>
-            <a class="btn btn-danger" data-toggle="modal" href="#deleteUserModal"><i
+            <a class="btn btn-danger"  data-toggle="modal" href="#deleteUserModal"><i
                 class="material-icons">&#xE15C;</i> <span>Xóa</span></a>
           </div>
         </div>
@@ -57,15 +57,15 @@
               <p th:text="${user.username}"></p>
             </td>
             <td th:if="${user.status}" >
-              <p>Khoá</p>
+              <p>Hoạt động</p>
             </td>
             <td th:unless="${user.status}" >
-              <p>Không khoá</p>
+              <p>Khoá</p>
             </td>
             <td>
               <p th:text="${user.role}"></p>
             </td>
-            <td>
+            <td style="display: flex">
               <div id="editAnUser"
                 th:attr="data-user=${user.toString()}"
                 th:onclick="javascript:setSelectedObject(this.getAttribute('data-user'));">
@@ -101,53 +101,50 @@
     </div>
   </div>
   <!-- Add Modal HTML -->
-<!--  <div class="modal fade" id="addUserModal">-->
-<!--    <div class="modal-dialog">-->
-<!--      <div class="modal-content">-->
-<!--        <form id="formAddUserModal">-->
-<!--          <div class="modal-header">-->
-<!--            <h4 class="modal-title">Thêm người dùng</h4>-->
-<!--            <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>-->
-<!--          </div>-->
-<!--          <div class="modal-body">-->
-<!--            <div class="form-group">-->
-<!--              <label for="addName">Họ tên</label>-->
-<!--              <input class="form-control" id="addName" required type="text">-->
-<!--            </div>-->
-<!--            <div class="form-group">-->
-<!--              <label for="addEmail">Email</label>-->
-<!--              <input class="form-control" id="addEmail" required type="email">-->
-<!--            </div>-->
-<!--            <div class="form-group">-->
-<!--              <label for="addIsLocked">Trạng thái khóa</label>-->
-<!--              <br>-->
-<!--              <select id="addIsLocked">-->
-<!--                <option value="true">Khóa</option>-->
-<!--                <option value="false">Không khóa</option>-->
-<!--              </select>-->
-<!--            </div>-->
-<!--            <div class="form-group">-->
-<!--              <label for="addRole">Vai trò</label>-->
-<!--              <br>-->
-<!--              <select id="addRole">-->
-<!--                <option value="USER">Người dùng</option>-->
-<!--                <option value="EDITOR">Biên tập viên</option>-->
-<!--                <option value="ADMIN">Admin</option>-->
-<!--              </select>-->
-<!--            </div>-->
-<!--            <div class="form-group">-->
-<!--              <label for="addPassword">Mật khẩu</label>-->
-<!--              <input class="form-control" id="addPassword" required type="password">-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="modal-footer">-->
-<!--            <input class="btn btn-default" data-dismiss="modal" type="button" value="Hủy">-->
-<!--            <input class="btn btn-success" type="submit" value="Lưu">-->
-<!--          </div>-->
-<!--        </form>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
+  <div class="modal fade" id="addUserModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="formAddUserModal">
+          <div class="modal-header">
+            <h4 class="modal-title">Thêm người dùng</h4>
+            <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
+          </div>
+          <div class="modal-body">
+
+            <div class="form-group">
+              <label for="addUsername">Username</label>
+              <input class="form-control" id="addUsername" required type="email">
+            </div>
+
+            <div class="form-group">
+              <label for="addPassword" style="display: none">Mật khẩu</label>
+              <input class="form-control" id="addPassword" required disabled type="text" style="display: none">
+              <label for="txtUserInfo">Thông tin tài khoản</label>
+              <br>
+              <div style="position: relative" onclick="onCopy()">
+                <textarea id="txtUserInfo" style="display: block; resize: none; width: 100%" disabled></textarea>
+                <span style="cursor: pointer; position: absolute; bottom: 4px; right: 6px;" id="copyTooltip" class="material-icons" title="Đã coppy">content_copy</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="addRole">Vai trò</label>
+              <br>
+              <select id="addRole">
+                <option value="STUDENT">Học sinh</option>
+                <option value="LECTURER">Giáo viên</option>
+                <option value="ADMIN">Admin</option>
+              </select>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <input class="btn btn-default" data-dismiss="modal" type="button" value="Hủy">
+            <input class="btn btn-success" type="submit" value="Lưu">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
   <!--   Edit Modal HTML-->
   <div class="modal fade" id="editUserModal">
     <div class="modal-dialog">
@@ -170,16 +167,16 @@
               <label for="editIsLocked">Trạng thái khóa</label>
               <br>
               <select id="editIsLocked">
-                <option value="true">Khóa</option>
-                <option value="false">Không khóa</option>
+                <option value="true">Hoạt động</option>
+                <option value="false">Khoá</option>
               </select>
             </div>
             <div class="form-group">
               <label for="editRole">Vai trò</label>
               <br>
               <select id="editRole">
-                <option value="USER">Người dùng</option>
-                <option value="EDITOR">Biên tập viên</option>
+                <option value="STUDENT">Học sinh</option>
+                <option value="LECTURER">Giáo viên</option>
                 <option value="ADMIN">Admin</option>
               </select>
             </div>
@@ -216,6 +213,7 @@
   </div>
 </div>
 </div>
+
 <th:block layout:fragment="scriptFragment">
   <script th:inline="javascript">
       var selectedUser = undefined;
@@ -227,9 +225,9 @@
       }
   </script>
   <script th:src="@{/admin/js/user.js}"></script>
-<!--  <script th:src="@{/js/users.js}"></script>-->
-</th:block>
 
+  <!--  <script th:src="@{/js/users.js}"></script>-->
+</th:block>
 
 </body>
 </html>

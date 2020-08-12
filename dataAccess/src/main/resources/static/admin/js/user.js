@@ -6,17 +6,22 @@ function isBlank(str) {
     return (!str || /^\s*$/.test(str));
 }
 
-function isAllBlank(...strs) {
-    for (let idx in strs) {
-        if (!isBlank(String(strs[idx]))) {
-            return false;
-        }
-    }
-    return true;
+function onCopy() {
+    const txtInfo = (document.getElementById('txtUserInfo'));
+    $("#txtUserInfo").attr("disabled", false);
+    txtInfo.select();
+    document.execCommand('Copy');
+    $("#txtUserInfo").attr("disabled", true);
+    $('#copyTooltip').tooltip('show');
+    setTimeout(function () {
+        $('#copyTooltip').tooltip('hide')
+    }, 2000)
+
 }
 
 $(document).ready(function () {
 
+    $('#copyTooltip').tooltip({trigger: 'click'})
     // Activate tooltip
     $('[data-toggle="tooltip"]').tooltip();
 
@@ -54,6 +59,64 @@ $(document).ready(function () {
 
     })
 
+    $('#addUsername').on('input', function () {
+        const username = $("#addUsername").val();
+        const password = $("#addPassword").val();
+        $('#txtUserInfo').val(username + '\n' + password);
+    });
+
+    $(document).on("click", "#addUser", function () {
+
+
+        $.ajax({
+            url: "/admin/randomPass",
+            type: "get",
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                const obj = JSON.parse(res);
+                console.log("random password", obj.password);
+                $("#addPassword").val(obj.password);
+            },
+            error: function (msg) {
+                alert("Có lỗi xảy ra!");
+            }
+        });
+
+
+    })
+    $("#formAddUserModal").submit(function (event) {
+        event.preventDefault();
+
+        const $form = $(this);
+        const $inputs = $form.find("input, select, button, textarea");
+
+        const username = $("#addUsername").val();
+        const password = $("#addPassword").val();
+        const role = $("#addRole").val();
+        const status = true;
+
+        $inputs.prop("disabled", true);
+        const addUser = JSON.stringify({
+            username, password, role, status
+        })
+
+        console.log(addUser);
+        $.ajax({
+            url: "/admin/users/",
+            type: "post",
+            data: addUser,
+            contentType: "application/json; charset=utf-8",
+            success: function (msg) {
+                $inputs.prop("disabled", false);
+                window.location.reload();
+            },
+            error: function (msg) {
+                $inputs.prop("disabled", false);
+                alert("Thêm thất bại: \n", msg);
+            }
+        });
+    })
+
     $("#formEditUserModal").submit(function (event) {
         event.preventDefault();
 
@@ -71,9 +134,9 @@ $(document).ready(function () {
 
         $inputs.prop("disabled", true);
         const editUser = JSON.stringify(
-            {
-                id, name, username,avatar,description,type,status,role
-            }
+          {
+              id, name, username, avatar, description, type, status, role
+          }
         )
 
         console.log(editUser)
