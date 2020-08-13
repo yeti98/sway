@@ -4,8 +4,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "sclasses")
@@ -21,7 +23,7 @@ public class SwayClass {
       name = "sclass_lecturers",
       joinColumns = {@JoinColumn(name = "suser_id")},
       inverseJoinColumns = {@JoinColumn(name = "sclass_id")})
-  private List<SwayUser> lecturers;
+  private Set<SwayUser> lecturers;
 
   private String description;
 
@@ -32,8 +34,7 @@ public class SwayClass {
       inverseJoinColumns = {@JoinColumn(name = "sclass_id")})
   private List<SwayUser> students;
 
-  @OneToOne
-  private Course course;
+  @OneToOne private Course course;
 
   @CreationTimestamp
   @Column(nullable = false, updatable = false)
@@ -43,7 +44,23 @@ public class SwayClass {
   @Column(nullable = false)
   private LocalDateTime updatedAt;
 
-  private byte status;
+  private boolean status;
+
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public LocalDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(LocalDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+  }
 
   public SwayClass() {}
 
@@ -63,12 +80,28 @@ public class SwayClass {
     this.name = name;
   }
 
-  public List<SwayUser> getLecturers() {
+  public Set<SwayUser> getLecturers() {
     return lecturers;
   }
 
-  public void setLecturers(List<SwayUser> lecturers) {
+  public void setLecturers(Set<SwayUser> lecturers) {
     this.lecturers = lecturers;
+  }
+
+  public Course getCourse() {
+    return course;
+  }
+
+  public void setCourse(Course course) {
+    this.course = course;
+  }
+
+  public boolean getStatus() {
+    return status;
+  }
+
+  public void setStatus(boolean status) {
+    this.status = status;
   }
 
   public String getDescription() {

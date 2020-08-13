@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layouts/admin}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/admin/css/common/crudtable.css}"/>
+</head>
+<body>
+<th:block layout:fragment="customNavBar">
+  <div th:replace="fragments/admin/navbar/homeworkDetail :: hwDetailNavBar"></div>
+</th:block>
+<div layout:fragment="content">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="collapse multi-collapse" id="collapsePreview">
+          <div class="card-body">
+            Card 2
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="">
+        <div class="card">
+          <div class="card-header text-center">
+            <b>Thông tin bài tập</b>
+          </div>
+          <div class="card-body">
+            <form id="swayTestForm" th:object="${swayTest}">
+              <div class="form-group">
+                <label for="testId">Mã bài tập</label>
+                <input class="form-control" id="testId" placeholder="" th:field="*{testId}">
+              </div>
+              <div class="form-group">
+                <label for="testName">Tên bài tập</label>
+                <input class="form-control" id="testName" placeholder="" type="text" th:field="*{testName}"
+                       onchange="this.setCustomValidity('')"
+                       oninvalid="this.setCustomValidity('Vui lòng điền tên')" required>
+              </div>
+              <div class="form-group">
+                <label for="tblQuestionList">Danh sách câu hỏi</label>
+                <table class="table table-striped" id="tblQuestionList">
+                  <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Mã</th>
+                    <th scope="col">Nội dung</th>
+                    <th scope="col">Cập nhật</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <th:block th:each="question, stats : *{questions}">
+                    <tr>
+                      <th scope="row"><a th:href="@{'manage/questions/'+${question.id}}"><span th:text="${stats.index + 1}"></span></a></th>
+                      <td><p th:text="${question.questionId}"></p></td>
+                      <td><p th:text="${question.content}"></p></td>
+                      <td style="display: flex">
+                        <div id="editAnUser">
+                          <a class="edit" th:href="@{'manage/questions/'+${question.id}}">
+                            <i class="material-icons"
+                               data-toggle="tooltip"
+                               title="Chỉnh sửa câu hỏi">&#xE254;
+                            </i>
+                          </a>
+                        </div>
+                        <div id="removeAnUser" th:attr="data-index=${stats.index}, data-question=${question}"
+                             th:onclick="javascript:deleteRow(this.getAttribute('data-index'), this.getAttribute('data-question'));" >
+                          <a class="delete" data-toggle="modal" href="#deleteUserModal">
+                            <i class="material-icons"
+                               data-toggle="tooltip"
+                               title="Xóa khỏi bài tập này">&#xE872;
+                            </i>
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                  </th:block>
+                  </tbody>
+                </table>
+              </div>
+              <div class="modal-footer">
+                <input class="btn btn-default" type="button" value="Hủy" onclick="window.history.back();">
+                <input class="btn btn-success" type="submit" value="Lưu">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="" id="">
+        <div class="card">
+          <div class="card-header text-center">
+            <b>Câu hỏi</b>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <label for="exampleFormControlSelect2">Example select</label>
+                <select class="form-control" id="exampleFormControlSelect2">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <div style="display: inline">
+                  <input placeholder="Mã câu hỏi/Nội dung" type="text"/>
+                  <input class="btn btn-info" type="submit" value="Tìm kiếm">
+                </div>
+              </div>
+            </form>
+            <hr>
+            <div>
+              <a class="btn btn-info" data-toggle="modal" href="#addQuestionModal" id="btnAddQuestion">
+                <i class="material-icons">&#xE147;</i>
+                <span>Thêm mới</span></a>
+            </div>
+            <hr>
+            <div>
+              <form method="POST" action="#" enctype="multipart/form-data" id="importData">
+                <div class="form-group">
+                  <label for="customFile">Chọn file (*.xls, *.xlsx. Dung lượng < 5MB)</label>
+                  <input type="file" class="form-control-file" id="customFile" name="file">
+                </div>
+                <div class="modal-footer">
+                  <input class="btn btn-success" type="submit" value="Tải lên">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addQuestionModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="formAddQuestionModal">
+          <div class="modal-header">
+            <h4 class="modal-title">Thêm câu hỏi</h4>
+            <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="addQuestionID">Mã câu hỏi</label>
+              <input class="form-control" id="addQuestionID" type="text">
+            </div>
+            <div class="form-group">
+              <label for="addQuestionContent">Nội dung</label>
+              <input class="form-control" id="addQuestionContent"
+                     onchange="this.setCustomValidity('')"
+                     oninvalid="this.setCustomValidity('Trường này không được để trống')" required type="text">
+            </div>
+            <div class="form-group">
+              <label>Lựa chọn</label>
+              <div style="display: grid">
+                <input class="form-control" id="addChoiceA" type="text">
+                <input checked class="form-check-input" id="radioBtnA" name="choices" type="radio" value="option1">
+              </div>
+              <div style="display: grid">
+                <input class="form-control" id="addChoiceB" type="text">
+                <input class="form-check-input" id="radioBtnB" name="choices" type="radio" value="option1">
+              </div>
+              <div style="display: grid">
+                <input class="form-control" id="addChoiceC" type="text">
+                <input class="form-check-input" id="radioBtnC" name="choices" type="radio" value="option1">
+              </div>
+              <div style="display: grid">
+                <input class="form-control" id="addChoiceD" type="text">
+                <input class="form-check-input" id="radioBtnD" name="choices" type="radio" value="option1">
+              </div>
+              <div style="display: grid">
+                <input class="form-control" id="addChoiceE" type="text">
+                <input class="form-check-input" id="radioBtnE" name="choices" type="radio" value="option1">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="addQuestionContent">Giải thích</label>
+              <input class="form-control" id="addQuestionExpl" type="text">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input class="btn btn-default" data-dismiss="modal" type="button" value="Hủy">
+            <input class="btn btn-success" type="submit" value="Lưu">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<th:block layout:fragment="scriptFragment">
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    var swayTest = /*[[${swayTest}]]*/ 'default';
+    console.log(swayTest);
+    /*]]>*/
+  </script>
+  <script th:src="@{/admin/js/homework/detail.js}"></script>
+</th:block>
+</body>
+</html>

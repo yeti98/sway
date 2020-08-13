@@ -1,5 +1,6 @@
 package com.devculi.sway.manager.service.interfaces;
 
+import com.devculi.sway.dataaccess.entity.SwayClass;
 import com.devculi.sway.dataaccess.entity.SwayUser;
 import com.devculi.sway.sharedmodel.request.UpsertUserRequest;
 import org.springframework.data.domain.Page;
@@ -15,4 +16,8 @@ public interface IAdminService {
   SwayUser deleteUserByID(Long userID) throws Exception;
 
   SwayUser updateUser(Long userID, UpsertUserRequest updateUserRequest);
+
+  Page<SwayClass> getClasses(Integer page);
+
+  String randomPassword();
 }

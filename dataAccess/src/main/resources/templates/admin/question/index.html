@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layouts/admin}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/admin/css/common/crudtable.css}"/>
+  <link rel="stylesheet" th:href="@{/admin/css/common/all.css}"/>
+</head>
+<body>
+<th:block layout:fragment="customNavBar">
+  <div th:replace="fragments/admin/common :: navBarFragment"></div>
+</th:block>
+<div layout:fragment="content">
+  <div class="container">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h2>Quản lý câu hỏi</h2>
+          </div>
+          <div class="col-sm-6">
+            <a class="btn btn-success" data-toggle="modal" href="#addUserModal"><i
+                class="material-icons">&#xE147;</i> <span>Thêm</span></a>
+            <a class="btn btn-danger" data-toggle="modal" href="#deleteUserModal"><i
+                class="material-icons">&#xE15C;</i> <span>Xóa</span></a>
+          </div>
+        </div>
+      </div>
+      <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+          <th>
+           <span class="custom-checkbox">
+            <input id="selectAll" type="checkbox">
+            <label for="selectAll"></label>
+           </span>
+          </th>
+          <th class="truncatable">Mã câu hỏi</th>
+          <th class="truncatable">Nội dung</th>
+          <th class="truncatable">Lựa chọn</th>
+          <th class="truncatable">Đáp án</th>
+          <th class="truncatable">Gợi ý</th>
+          <th>Cập nhật</th>
+        </tr>
+        </thead>
+        <tbody id="mainTableBody" th:fragment="questionTableBody">
+        <th:block th:each="question: ${questions}">
+          <tr>
+            <td>
+                  <span class="custom-checkbox">
+                  <input id="checkbox1" name="options[]" type="checkbox" value="1">
+                  <label for="checkbox1"></label>
+                  </span>
+            </td>
+            <td>
+              <p th:text="${question.questionId}"></p>
+            </td>
+            <td class="truncatable">
+              <p th:text="${question.content}"></p>
+            </td>
+            <td class="truncatable">
+              <p th:text="${question.getReadableChoices()}"></p>
+            </td>
+            <td class="truncatable">
+              <p th:text="${question.answer}"></p>
+            </td>
+            <td>
+              <p th:text="${question.explanation}"></p>
+            </td>
+            <td>
+              <div id="editAnUser" th:attr="data-question=${question}"
+                   th:onclick="javascript:setSelectedObject(this.getAttribute('data-question'));">
+                <a class="edit" data-toggle="modal" href="#editUserModal">
+                  <i class="material-icons"
+                     data-toggle="tooltip"
+                     title="Chỉnh sửa">&#xE254;
+                  </i>
+                </a>
+              </div>
+              <div id="removeAnUser" th:attr="data-question=${question}"
+                   th:onclick="javascript:setSelectedObject(this.getAttribute('data-question'));">
+                <a class="delete" data-toggle="modal" href="#deleteUserModal">
+                  <i class="material-icons"
+                     data-toggle="tooltip"
+                     title="Xóa">&#xE872;
+                  </i>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </th:block>
+        </tbody>
+      </table>
+      <!--      <div class="clearfix">-->
+      <!--        <ul th:if="${totalPage > 0}" class="pagination" th:each="idx: ${#numbers.sequence(0, totalPage - 1)}">-->
+      <!--          <li th:class="${idx==currentPage} ? 'page-item active' : 'page-item'" >-->
+      <!--            <a class="page-link" th:href="@{/users(page=${idx})}" th:text="${idx+1}">-->
+      <!--            </a>-->
+      <!--          </li>-->
+      <!--        </ul>-->
+      <!--      </div>-->
+    </div>
+  </div>
+  <!-- Add Modal HTML -->
+  <div class="modal fade" id="addUserModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="formAddUserModal">
+          <div class="modal-header">
+            <h4 class="modal-title">Thêm câu hỏi</h4>
+            <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="addQuestionID">Mã câu hỏi</label>
+              <input class="form-control" id="addQuestionID" type="text">
+            </div>
+            <div class="form-group">
+              <label for="addQuestionContent">Nội dung</label>
+              <input class="form-control" id="addQuestionContent"
+                     onchange="this.setCustomValidity('')"
+                     oninvalid="this.setCustomValidity('Vui lòng điền nội dung câu hỏi')" required type="text">
+            </div>
+            <div class="form-group">
+              <label>Lựa chọn</label>
+              <div style="display: grid">
+                <input class="form-control" id="addChoiceA" type="text">
+                <input checked class="form-check-input" id="radioBtnA" name="choices" type="radio" value="option1">
+              </div>
+              <div style="display: grid">
+                <input class="form-control" id="addChoiceB" type="text">
+                <input class="form-check-input" id="radioBtnB" name="choices" type="radio" value="option1">
+              </div>
+              <div style="display: grid">
+                <input class="form-control" id="addChoiceC" type="text">
+                <input class="form-check-input" id="radioBtnC" name="choices" type="radio" value="option1">
+              </div>
+              <div style="display: grid">
+                <input class="form-control" id="addChoiceD" type="text">
+                <input class="form-check-input" id="radioBtnD" name="choices" type="radio" value="option1">
+              </div>
+              <div style="display: grid">
+                <input class="form-control" id="addChoiceE" type="text">
+                <input class="form-check-input" id="radioBtnE" name="choices" type="radio" value="option1">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="addQuestionContent">Giải thích</label>
+              <input class="form-control" id="addQuestionExpl" type="text">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input class="btn btn-default" data-dismiss="modal" type="button" value="Hủy">
+            <input class="btn btn-success" type="submit" value="Lưu">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Edit Modal HTML -->
+  <div class="modal fade" id="editUserModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="formEditUserModal">
+          <div class="modal-header">
+            <h4 class="modal-title">Sửa thông tin</h4>
+            <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="editQuestionID">Mã câu hỏi</label>
+              <input class="form-control" id="editQuestionID" type="text">
+            </div>
+            <div class="form-group">
+              <label for="editQuestionContent">Nội dung</label>
+              <input class="form-control" id="editQuestionContent"
+                     onchange="this.setCustomValidity('')"
+                     oninvalid="this.setCustomValidity('Trường này không được để trống')" required type="text">
+            </div>
+            <div class="form-group">
+              <label>Lựa chọn</label>
+              <div style="display: grid">
+                <input class="form-control" id="editChoiceA" type="text">
+                <input checked class="form-check-input" id="editRadioBtnA" name="choices" type="radio" value="option1">
+              </div>
+              <div style="display: grid">
+                <input class="form-control" id="editChoiceB" type="text">
+                <input class="form-check-input" id="editRadioBtnB" name="choices" type="radio" value="option1">
+              </div>
+              <div style="display: grid">
+                <input class="form-control" id="editChoiceC" type="text">
+                <input class="form-check-input" id="editRadioBtnC" name="choices" type="radio" value="option1">
+              </div>
+              <div style="display: grid">
+                <input class="form-control" id="editChoiceD" type="text">
+                <input class="form-check-input" id="editRadioBtnD" name="choices" type="radio" value="option1">
+              </div>
+              <div style="display: grid">
+                <input class="form-control" id="editChoiceE" type="text">
+                <input class="form-check-input" id="editRadioBtnE" name="choices" type="radio" value="option1">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="addQuestionContent">Giải thích</label>
+              <input class="form-control" id="editQuestionExpl" type="text">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input class="btn btn-default" data-dismiss="modal" type="button" value="Hủy">
+            <input class="btn btn-info" id="btnUserUpdate" type="submit" value="Lưu">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Delete Modal HTML -->
+  <div class="modal fade" id="deleteUserModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="formDeleteUserModal">
+          <div class="modal-header">
+            <h4 class="modal-title">Xóa bản ghi</h4>
+            <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p>Bạn có muốn xóa bản ghi không?</p>
+            <p id="mainContent" style="height: fit-content"></p>
+            <p class="text-warning"><small>Hành động này không thể khôi phục</small></p>
+          </div>
+          <div class="modal-footer">
+            <input class="btn btn-default" data-dismiss="modal" type="button" value="Cancel">
+            <input class="btn btn-danger" type="submit" value="Delete">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<th:block layout:fragment="scriptFragment">
+  <script th:inline="javascript">
+    var selectedQuestion = undefined;
+
+    function setSelectedObject(json_str) {
+        console.log(json_str);
+      selectedQuestion = JSON.parse(json_str);
+    }
+  </script>
+  <script th:src="@{/admin/js/question.js}"></script>
+</th:block>
+</body>
+</html>
