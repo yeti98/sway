@@ -47,9 +47,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(
             "/",
             "/auth/**",
-            "/admin",
-            "/admin/login",
-            "/admin/logout",
             "/login",
             "/logout",
             "/signup",
@@ -57,8 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/webfonts/**",
             "/fonts/**",
             "/assets/**",
-            "/user_assets/**",
-            "/AdminLTE/**")
+            "/user_assets/**")
         .permitAll();
 
     http.authorizeRequests()
