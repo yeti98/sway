@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -61,10 +63,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         .formLogin()
         .loginPage("/login")
+        .successHandler(refererSuccessHandler())
         .usernameParameter("username")
         .loginProcessingUrl("/login")
         .failureUrl("/login?error=true")
-        .defaultSuccessUrl("/", true)
+//        .defaultSuccessUrl("/", true)
         .and()
         .logout()
         .permitAll()
@@ -78,6 +81,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .csrf()
         .disable();
 
-    http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+    http.addFilterBefore(jwtAuthenticationFilter() , UsernamePasswordAuthenticationFilter.class);
+  }
+
+  @Bean
+  public AuthenticationSuccessHandler refererSuccessHandler() {
+    SavedRequestAwareAuthenticationSuccessHandler handler = new SavedRequestAwareAuthenticationSuccessHandler();
+    handler.setUseReferer(true);
+    return handler;
   }
 }
