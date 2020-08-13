@@ -7,18 +7,16 @@ import com.devculi.sway.dataaccess.entity.SwayClass;
 import com.devculi.sway.dataaccess.entity.SwayUser;
 import com.devculi.sway.manager.service.interfaces.IAdminService;
 import com.devculi.sway.manager.service.interfaces.IAuthService;
-import com.devculi.sway.sharedmodel.model.AuthenticationModel;
 import com.devculi.sway.sharedmodel.model.UserModel;
 import com.devculi.sway.sharedmodel.request.UpsertUserRequest;
 import com.devculi.sway.sharedmodel.response.common.PagingResponse;
+import com.devculi.sway.utils.GsonUtils;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import com.devculi.sway.utils.GsonUtils;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.stream.Collectors;
 
 @RestController
@@ -65,26 +63,23 @@ public class AdminController {
     SwayFactory.getUserValidation().validateUpdateUser(updateUserRequest);
 
     return adminService.updateUser(userID, updateUserRequest);
-
   }
 
-
   @GetMapping("/randomPass")
-  public String genPass(){
+  public String genPass() {
     String password = adminService.randomPassword();
     System.out.println(password);
     JsonObject res = new JsonObject();
-    res.addProperty("password",password);
+    res.addProperty("password", password);
 
     return GsonUtils.toJson(res);
   }
 
-
-
-  public PagingResponse<SwayClassModel> getClassByPage(@RequestParam(name = "page", defaultValue = "0") Integer page) {
+  public PagingResponse<SwayClassModel> getClassByPage(
+      @RequestParam(name = "page", defaultValue = "0") Integer page) {
     Page<SwayClass> classByPage = adminService.getClasses(page);
     return new PagingResponse<>(
-            classByPage.getTotalPages(),
-            classByPage.getContent().stream().map(Entity2DTO::class2DTO).collect(Collectors.toList()));
+        classByPage.getTotalPages(),
+        classByPage.getContent().stream().map(Entity2DTO::class2DTO).collect(Collectors.toList()));
   }
 }
