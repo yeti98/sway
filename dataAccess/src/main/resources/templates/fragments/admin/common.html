@@ -114,6 +114,12 @@
                     </a>
                   </li>
                   <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">
+                    <a class="nav-link" href="manage/lessons">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Quản lý bài học</p>
+                    </a>
+                  </li>
+                  <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">
                     <a class="nav-link" href="manage/homeworks">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Quản lý bài tập lớp</p>
