@@ -1,8 +1,13 @@
 package com.devculi.sway.business.shared.model;
 
+import com.devculi.sway.dataaccess.entity.Course;
+import com.devculi.sway.dataaccess.entity.SwayTest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class LessonModel {
@@ -11,6 +16,26 @@ public class LessonModel {
   private String description;
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
+
+  private CourseModel course;
+
+  private List<SwayTestModel> tests;
+
+  public CourseModel getCourse() {
+    return course;
+  }
+
+  public void setCourse(CourseModel course) {
+    this.course = course;
+  }
+
+  public List<SwayTestModel> getTests() {
+    return tests;
+  }
+
+  public void setTests(List<SwayTestModel> tests) {
+    this.tests = tests;
+  }
 
   public LessonModel() {}
 
