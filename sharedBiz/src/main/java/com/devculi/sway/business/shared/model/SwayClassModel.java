@@ -1,6 +1,7 @@
 package com.devculi.sway.business.shared.model;
 
 import com.devculi.sway.sharedmodel.model.UserModel;
+import com.devculi.sway.utils.GsonUtils;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.LocalDateTime;
@@ -16,16 +17,32 @@ public class SwayClassModel {
 
   private Set<UserModel> lecturers;
 
+  private String classId;
   private String description;
   private List<UserModel> students;
   private CourseModel course;
   private LocalDateTime createdAt;
-
   private LocalDateTime updatedAt;
-
-  private boolean status;
+  private boolean active;
+  private Double minScore;
 
   public SwayClassModel() {}
+
+  public Double getMinScore() {
+    return minScore;
+  }
+
+  public void setMinScore(Double minScore) {
+    this.minScore = minScore;
+  }
+
+  public String getClassId() {
+    return classId;
+  }
+
+  public void setClassId(String classId) {
+    this.classId = classId;
+  }
 
   public Long getId() {
     return id;
@@ -91,11 +108,26 @@ public class SwayClassModel {
     this.updatedAt = updatedAt;
   }
 
-  public boolean isStatus() {
-    return status;
+  public boolean isActive() {
+    return active;
   }
 
-  public void setStatus(boolean status) {
-    this.status = status;
+  public void setActive(boolean active) {
+    this.active = active;
+  }
+
+  public String getJsonString() {
+    return GsonUtils.toJson(this);
+  }
+
+  public int getNumberOfStudent() {
+    return this.students.size();
+  }
+
+  public String getCourseName() {
+    if (this.course != null) {
+      return this.course.getName();
+    }
+    return "";
   }
 }

@@ -46,7 +46,7 @@ public class LessonService implements ILessonService {
     Page<Lesson> all = lessonRepository.findAll(pageable);
     return new PagingResponse<>(
         all.getTotalPages(),
-        all.getContent().stream().map(Entity2DTO::lesson2Model).collect(Collectors.toList()));
+        all.getContent().stream().map(Entity2DTO::lesson2DTO).collect(Collectors.toList()));
   }
 
   @Override
@@ -93,5 +93,15 @@ public class LessonService implements ILessonService {
     Long deletedId = lessonByID.getId();
     lessonRepository.delete(lessonByID);
     return deletedId;
+  }
+
+  @Override
+  public List<Lesson> searchBy(String keyword, boolean isIgnoreCase) {
+    if (isIgnoreCase) {
+      keyword = "%" + keyword.toLowerCase() + "%";
+    } else {
+      keyword = "%" + keyword + "%";
+    }
+    return lessonRepository.findByLessonIdLike(keyword);
   }
 }

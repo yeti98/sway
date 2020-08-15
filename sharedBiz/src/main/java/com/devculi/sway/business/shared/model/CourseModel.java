@@ -1,6 +1,8 @@
 package com.devculi.sway.business.shared.model;
 
+import com.devculi.sway.utils.GsonUtils;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -12,9 +14,18 @@ public class CourseModel {
 
   private List<LessonModel> lessons;
 
-  private boolean status;
+  private String courseId;
+  private boolean active;
 
   public CourseModel() {}
+
+  public String getCourseId() {
+    return courseId;
+  }
+
+  public void setCourseId(String courseId) {
+    this.courseId = courseId;
+  }
 
   public long getId() {
     return id;
@@ -40,11 +51,19 @@ public class CourseModel {
     this.lessons = lessons;
   }
 
-  public boolean isStatus() {
-    return status;
+  public boolean isActive() {
+    return active;
   }
 
-  public void setStatus(boolean status) {
-    this.status = status;
+  public void setActive(boolean active) {
+    this.active = active;
+  }
+
+  public int getNumberOfLesson() {
+    return lessons.size();
+  }
+
+  public String getJsonString() {
+    return GsonUtils.toJson(this);
   }
 }

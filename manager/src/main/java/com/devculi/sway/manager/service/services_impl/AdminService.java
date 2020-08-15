@@ -1,6 +1,5 @@
 package com.devculi.sway.manager.service.services_impl;
 
-import com.devculi.sway.dataaccess.entity.SwayClass;
 import com.devculi.sway.dataaccess.entity.SwayUser;
 import com.devculi.sway.manager.service.interfaces.IAdminService;
 import com.devculi.sway.manager.service.interfaces.IAuthService;
@@ -16,20 +15,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.devculi.sway.utils.security.Protector;
 
 @Service
 public class AdminService implements IAdminService {
 
   @Autowired IUserService userService;
   @Autowired IAuthService authService;
-  @Autowired
-  IClassService classService;
+  @Autowired IClassService classService;
+
   @Value("${site.admin.pagination.limit.user}")
   private Integer UserPerPage;
-
-  @Value("${site.admin.pagination.limit.class}")
-  private Integer ClassPerPage;
 
   @Override
   public Page<SwayUser> getUsers(Integer page) {
@@ -53,7 +48,6 @@ public class AdminService implements IAdminService {
       e.printStackTrace();
       return null;
     }
-
   }
 
   @Override
@@ -63,14 +57,14 @@ public class AdminService implements IAdminService {
 
   @Override
   public SwayUser updateUser(Long userID, UpsertUserRequest updateUserRequest) {
-     return userService.updateUser(userID,updateUserRequest);
+    return userService.updateUser(userID, updateUserRequest);
   }
 
-  @Override
-  public Page<SwayClass> getClasses(Integer page) {
-    Pageable pageable = PageRequest.of(page, ClassPerPage, Sort.by("createdAt").descending());
-    return classService.getClassByPage(pageable);
-  }
+  //  @Override
+  //  public Page<SwayClass> getClasses(Integer page) {
+  //    Pageable pageable = PageRequest.of(page, ClassPerPage, Sort.by("createdAt").descending());
+  //    return classService.getClassByPage(pageable);
+  //  }
 
   @Override
   public String randomPassword() {

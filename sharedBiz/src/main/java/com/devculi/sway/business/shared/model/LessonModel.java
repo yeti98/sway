@@ -14,9 +14,7 @@ public class LessonModel {
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
   private String lessonId;
-  private CourseModel course;
   private List<SwayTestModel> tests;
-
 
   public LessonModel() {}
 
@@ -26,14 +24,6 @@ public class LessonModel {
 
   public void setLessonId(String lessonId) {
     this.lessonId = lessonId;
-  }
-
-  public CourseModel getCourse() {
-    return course;
-  }
-
-  public void setCourse(CourseModel course) {
-    this.course = course;
   }
 
   public List<SwayTestModel> getTests() {
@@ -88,14 +78,7 @@ public class LessonModel {
     return this.getTests().size();
   }
 
-  public String getJsonString(){
+  public String getJsonString() {
     return GsonUtils.toJson(this);
-  }
-
-  public String getCourseName() {
-    if (this.course != null) {
-      return this.course.getName();
-    }
-    return "";
   }
 }

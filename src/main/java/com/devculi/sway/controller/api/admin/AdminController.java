@@ -74,12 +74,4 @@ public class AdminController {
 
     return GsonUtils.toJson(res);
   }
-
-  public PagingResponse<SwayClassModel> getClassByPage(
-      @RequestParam(name = "page", defaultValue = "0") Integer page) {
-    Page<SwayClass> classByPage = adminService.getClasses(page);
-    return new PagingResponse<>(
-        classByPage.getTotalPages(),
-        classByPage.getContent().stream().map(Entity2DTO::class2DTO).collect(Collectors.toList()));
-  }
 }

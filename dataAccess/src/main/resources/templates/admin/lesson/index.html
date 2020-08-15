@@ -40,10 +40,6 @@
                     aria-sort="descending" class="sorting_desc" colspan="1"
                     rowspan="1" tabindex="0">Tên
                 </th>
-                <th aria-controls="example2" aria-label="Platform(s): activate to sort column ascending" class="sorting"
-                    colspan="1" rowspan="1"
-                    tabindex="0">Khóa học
-                </th>
                 <th aria-controls="example2" aria-label="Engine version: activate to sort column ascending"
                     class="sorting" colspan="1" rowspan="1"
                     tabindex="0">Số bài tập
@@ -62,9 +58,6 @@
                   </td>
                   <td>
                     <p th:text="${lesson.name}"></p>
-                  </td>
-                  <td>
-                    <p th:text="${lesson.getCourseName()}"></p>
                   </td>
                   <td>
                     <p th:text="${lesson.getNumberOfTest()}"></p>
