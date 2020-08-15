@@ -1,4 +1,4 @@
-package com.devculi.sway.controller.mvc.auth;
+package com.devculi.sway.controller.mvc.manage.auth;
 
 import com.devculi.sway.config.security.CustomAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;

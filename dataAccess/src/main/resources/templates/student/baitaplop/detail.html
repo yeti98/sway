@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html class="js" lang="vi-VN"
+      layout:decorate="~{layouts/page}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
+<th:block layout:fragment="content">
+  <div id="wrapper">
+    <th:block th:replace="fragments/user/navBarFragment :: nav-bar"></th:block>
+    <p style="margin-top: 100px" th:text="${courseName}"></p>
+    <ul>
+      <li th:each="lesson, stat : ${lessons}">
+        <a><span th:text="${stat.index +1}+'. '+${lesson.name}"></span></a>
+        <ul>
+          <li th:each="test, tStat : ${lesson.tests}">
+            <a><span th:text="${tStat.index +1}+'. '+${test.testName}"></span></a>
+            <ul>
+              <li th:each="question, qStat : ${test.questions}">
+                <a><span th:text="${qStat.index +1}+'. '+${question.content}"></span></a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <th:block th:replace="fragments/user/footerFragment :: footer"></th:block>
+  </div>
+</th:block>
+</html>

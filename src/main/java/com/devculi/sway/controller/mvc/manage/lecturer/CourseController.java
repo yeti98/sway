@@ -1,4 +1,4 @@
-package com.devculi.sway.controller.mvc.lecturer;
+package com.devculi.sway.controller.mvc.manage.lecturer;
 
 import com.devculi.sway.business.shared.model.CourseModel;
 import com.devculi.sway.business.shared.utils.Entity2DTO;

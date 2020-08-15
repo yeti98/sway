@@ -5,16 +5,20 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Không tìm thấy nội dung - Trung tâm ngoại ngữ Sway</title>
 </head>
 <th:block layout:fragment="content">
   <div id="wrapper">
     <th:block th:replace="fragments/user/navBarFragment :: nav-bar"></th:block>
-    <p style="margin-top: 100px">
-      Đã có lỗi xảy ra. Vui lòng thử lại
-    </p>
+    <p style="margin-top: 100px">HOMEWORK</p>
+    <ul>
+      <li th:each="class, stat : ${classes}">
+        <a th:href="'bai-tap-lop/'+ ${class.id}"><span th:text="${stat.index +1}+'. '+${class.name}"></span></a>
+      </li>
+    </ul>
     <th:block th:replace="fragments/user/footerFragment :: footer"></th:block>
   </div>
+</th:block>
+<th:block layout:fragment="endBodyScripts">
+  <script th:src="@{/admin/js/class/index.js}"></script>
 </th:block>
 </html>

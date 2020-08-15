@@ -1,11 +1,9 @@
 package com.devculi.sway.manager.service.services_impl;
 
-import com.devculi.sway.dataaccess.entity.Course;
-import com.devculi.sway.dataaccess.entity.Lesson;
-import com.devculi.sway.dataaccess.entity.Question;
-import com.devculi.sway.dataaccess.entity.SwayUser;
+import com.devculi.sway.dataaccess.entity.*;
 import com.devculi.sway.dataaccess.repository.SwayUserRepository;
 import com.devculi.sway.manager.service.interfaces.IUserService;
+import com.devculi.sway.manager.service.security.CustomUserDetails;
 import com.devculi.sway.sharedmodel.exceptions.RecordNotFoundException;
 import com.devculi.sway.sharedmodel.request.UpsertUserRequest;
 import com.devculi.sway.utils.PropertyUtils;
@@ -15,9 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -96,4 +99,44 @@ public class UserService implements IUserService {
     return userRepository.findByUsername(username);
   }
 
+  @Override
+  public SwayUser getCurrentUser() throws Exception {
+    SwayUser user = getCustomUserDetailsFromContext().getUser();
+    if (user == null) throw new Exception("User is null");
+    return user;
+  }
+
+  @Override
+  public List<SwayClass> getJoinedClasses() {
+    SwayUser currentUser = null;
+    try {
+      currentUser = getCurrentUser();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    assert currentUser != null;
+
+    Optional<SwayUser> userOptional = userRepository.getByUsername(currentUser.getUsername());
+    if (userOptional.isPresent()) {
+      SwayUser user = userOptional.get();
+      return user.getJoinedClasses();
+    }
+    return new ArrayList<>();
+  }
+
+  private boolean isAnonymousAuthenticationToken(Authentication authentication) {
+    return authentication instanceof AnonymousAuthenticationToken;
+  }
+
+  private CustomUserDetails getCustomUserDetailsFromContext() throws Exception {
+    Authentication authentication = getAuthentication();
+    if (isAnonymousAuthenticationToken(authentication)) {
+      throw new Exception("Anonymous User");
+    }
+    return (CustomUserDetails) authentication.getPrincipal();
+  }
+
+  private Authentication getAuthentication() {
+    return SecurityContextHolder.getContext().getAuthentication();
+  }
 }
