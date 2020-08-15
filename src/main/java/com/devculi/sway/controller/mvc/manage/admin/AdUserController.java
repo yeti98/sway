@@ -1,4 +1,4 @@
-package com.devculi.sway.controller.mvc.admin;
+package com.devculi.sway.controller.mvc.manage.admin;
 
 import com.devculi.sway.business.shared.utils.Entity2DTO;
 import com.devculi.sway.controller.api.admin.AdminController;

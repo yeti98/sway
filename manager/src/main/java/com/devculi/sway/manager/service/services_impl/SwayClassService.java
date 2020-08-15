@@ -111,4 +111,15 @@ public class SwayClassService implements IClassService {
     classRepository.delete(classById);
     return deletedId;
   }
+
+  @Override
+  public List<SwayClass> getJoinedClasses() {
+    try {
+      List<SwayClass> classes = userService.getJoinedClasses();
+      return classes;
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return new ArrayList<>();
+  }
 }

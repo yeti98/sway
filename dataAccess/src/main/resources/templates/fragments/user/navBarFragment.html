@@ -1,65 +1,60 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<nav th:fragment="nav-bar" class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
-    <div class="container">
-        <a class="navbar-brand logo" href="#">Sway logo</a
-        >
-        <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
-            <span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navcol-1">
-            <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item" role="presentation">
-                    <a th:class="${#strings.equals(activeLink, 'index')} ? 'nav-link active' : 'nav-link'"
-                       th:href="@{~/}">Trang Chủ</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a th:class="${#strings.equals(activeLink, 'gt')} ? 'nav-link active' : 'nav-link'"
-                       th:href="@{~/gioi-thieu}">Giới thiệu</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a th:class="${#strings.equals(activeLink, 'doi-ngu')} ? 'nav-link active' : 'nav-link'"
-                       th:href="@{~/doi-ngu}">Đội Ngũ</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a th:class="${#strings.equals(activeLink, 'test-online')} ? 'nav-link active' : 'nav-link'"
-                       th:href="@{~/test-online}">Test online</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a th:class="${#strings.equals(activeLink, 'about-us')} ? 'nav-link active' : 'nav-link'"
-                       th:href="@{~/about-us}">About Us</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a
-                            class="dropdown-toggle nav-link"
-                            data-toggle="dropdown"
-                            aria-expanded="false"
-                            href="#"
-                    >Khóa học&nbsp;</a>
-                    <div class="dropdown-menu" role="menu">
-                        <a class="dropdown-item" role="presentation" href="#">Tiếng Anh</a>
-                        <a class="dropdown-item" role="presentation" href="#">Tiếng Nhật</a
-                        ><a class="dropdown-item" role="presentation" href="#">Tiếng Trung</a
-                    ><a class="dropdown-item" role="presentation" href="#">Tiếng Hàn</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a
-                            class="dropdown-toggle nav-link"
-                            data-toggle="dropdown"
-                            aria-expanded="false"
-                            href="#"
-                    ><img class="rounded-circle"
-                          style="width: 20px; object-fit: cover"
-                          src="https://cdn.iconscout.com/icon/free/png-512/avatar-372-456324.png"/></a>
-                    <div class="dropdown-menu" role="menu">
-                        <a class="dropdown-item disabled" role="presentation">Signed in as ...</a>
-                        <a class="dropdown-item" role="presentation" href="#">Thông tin tài khoản</a>
-                        <a class="dropdown-item" role="presentation" href="#">Đăng xuất</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar" th:fragment="nav-bar">
+  <div class="container">
+    <a class="navbar-brand logo" href="#">Sway logo</a>
+    <button class="navbar-toggler" data-target="#navcol-1" data-toggle="collapse">
+      <span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navcol-1">
+      <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item" role="presentation">
+          <a th:class="${#strings.equals(activeLink, 'index')} ? 'nav-link active' : 'nav-link'"
+             th:href="@{~/}">Trang Chủ</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a th:class="${#strings.equals(activeLink, 'gt')} ? 'nav-link active' : 'nav-link'"
+             th:href="@{~/gioi-thieu}">Giới thiệu</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a th:class="${#strings.equals(activeLink, 'doi-ngu')} ? 'nav-link active' : 'nav-link'"
+             th:href="@{~/doi-ngu}">Đội Ngũ</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a th:class="${#strings.equals(activeLink, 'test-online')} ? 'nav-link active' : 'nav-link'"
+             th:href="@{~/test-online}">Test online</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a th:class="${#strings.equals(activeLink, 'about-us')} ? 'nav-link active' : 'nav-link'"
+             th:href="@{~/about-us}">About Us</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a aria-expanded="false" class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">Khóa học&nbsp;</a>
+          <div class="dropdown-menu" role="menu">
+            <a class="dropdown-item" href="#" role="presentation">Tiếng Anh</a>
+            <a class="dropdown-item" href="#" role="presentation">Tiếng Nhật</a>
+            <a class="dropdown-item" href="#" role="presentation">Tiếng Trung</a>
+            <a class="dropdown-item" href="#" role="presentation">Tiếng Hàn</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a aria-expanded="false" class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">
+            <i class="fa fa-user"></i>
+          </a>
+          <div class="dropdown-menu" role="menu">
+            <th:block sec:authorize="isAuthenticated()">
+              <a class="dropdown-item" href="/tai-khoan" role="presentation"><p th:text="${#authentication.getPrincipal().getUsername()}"></p></a>
+              <a class="dropdown-item" href="/bai-tap-lop" role="presentation" sec:authorize="hasAnyRole('ADMIN', 'STUDENT')">Bài tập lớp</a>
+              <a class="dropdown-item" href="/quan-ly-lop" role="presentation" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">Quản lý lớp</a>
+              <a class="dropdown-item" href="/logout" role="presentation">Đăng xuất</a>
+            </th:block>
+            <th:block sec:authorize="!isAuthenticated()">
+              <a class="dropdown-item" href="/login" role="presentation">Đăng nhập</a>
+            </th:block>
+          </div>
+        </li>
+      </ul>
     </div>
+  </div>
 </nav>
 </html>

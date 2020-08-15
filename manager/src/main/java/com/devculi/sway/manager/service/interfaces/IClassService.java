@@ -6,6 +6,8 @@ import com.devculi.sway.dataaccess.entity.SwayClass;
 import com.devculi.sway.sharedmodel.response.common.PagingResponse;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface IClassService {
   PagingResponse<SwayClassModel> getClassByPage(Integer page);
@@ -17,4 +19,6 @@ public interface IClassService {
   SwayClass updateClass(Long id, UpsertClassRequest upsertClassRequest);
 
   Long deleteClassById(Long id);
+
+  List<SwayClass> getJoinedClasses();
 }

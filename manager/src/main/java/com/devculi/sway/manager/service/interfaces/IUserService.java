@@ -1,10 +1,13 @@
 package com.devculi.sway.manager.service.interfaces;
 
+import com.devculi.sway.dataaccess.entity.SwayClass;
 import com.devculi.sway.dataaccess.entity.SwayUser;
 import com.devculi.sway.sharedmodel.request.UpsertUserRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public interface IUserService {
@@ -23,4 +26,8 @@ public interface IUserService {
   SwayUser getUserById(Long tID);
 
   SwayUser searchByUsername(String keyword, boolean b);
+
+  SwayUser getCurrentUser() throws Exception;
+
+  List<SwayClass> getJoinedClasses();
 }

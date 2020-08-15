@@ -1,4 +1,4 @@
-package com.devculi.sway.controller.mvc.admin;
+package com.devculi.sway.controller.mvc.manage.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
