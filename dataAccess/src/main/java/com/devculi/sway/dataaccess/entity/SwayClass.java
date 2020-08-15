@@ -4,7 +4,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -17,6 +16,10 @@ public class SwayClass {
   private Long id;
 
   private String name;
+
+  private String classId;
+
+  private Double minScore;
 
   @ManyToMany
   @JoinTable(
@@ -44,7 +47,25 @@ public class SwayClass {
   @Column(nullable = false)
   private LocalDateTime updatedAt;
 
-  private boolean status;
+  private boolean active;
+
+  public SwayClass() {}
+
+  public String getClassId() {
+    return classId;
+  }
+
+  public void setClassId(String classId) {
+    this.classId = classId;
+  }
+
+  public boolean isActive() {
+    return active;
+  }
+
+  public void setActive(boolean active) {
+    this.active = active;
+  }
 
   public LocalDateTime getCreatedAt() {
     return createdAt;
@@ -61,8 +82,6 @@ public class SwayClass {
   public void setUpdatedAt(LocalDateTime updatedAt) {
     this.updatedAt = updatedAt;
   }
-
-  public SwayClass() {}
 
   public Long getId() {
     return id;
@@ -97,11 +116,7 @@ public class SwayClass {
   }
 
   public boolean getStatus() {
-    return status;
-  }
-
-  public void setStatus(boolean status) {
-    this.status = status;
+    return active;
   }
 
   public String getDescription() {
@@ -118,5 +133,13 @@ public class SwayClass {
 
   public void setStudents(List<SwayUser> students) {
     this.students = students;
+  }
+
+  public Double getMinScore() {
+    return minScore;
+  }
+
+  public void setMinScore(Double minScore) {
+    this.minScore = minScore;
   }
 }

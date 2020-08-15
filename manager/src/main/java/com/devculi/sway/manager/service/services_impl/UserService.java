@@ -1,9 +1,12 @@
 package com.devculi.sway.manager.service.services_impl;
 
+import com.devculi.sway.dataaccess.entity.Course;
+import com.devculi.sway.dataaccess.entity.Lesson;
 import com.devculi.sway.dataaccess.entity.Question;
 import com.devculi.sway.dataaccess.entity.SwayUser;
 import com.devculi.sway.dataaccess.repository.SwayUserRepository;
 import com.devculi.sway.manager.service.interfaces.IUserService;
+import com.devculi.sway.sharedmodel.exceptions.RecordNotFoundException;
 import com.devculi.sway.sharedmodel.request.UpsertUserRequest;
 import com.devculi.sway.utils.PropertyUtils;
 import com.devculi.sway.utils.security.Protector;
@@ -63,8 +66,6 @@ public class UserService implements IUserService {
     return user;
   }
 
-
-
   @Override
   public Page<SwayUser> getUserByPage(Pageable pageable) {
     return userRepository.findAll(pageable);
@@ -83,4 +84,16 @@ public class UserService implements IUserService {
   public String randomPassword() {
     return Protector.generatePassword(Integer.parseInt(len));
   }
+
+  @Override
+  public SwayUser getUserById(Long id) {
+    Optional<SwayUser> byId = userRepository.findById(id);
+    return byId.orElseThrow(() -> new RecordNotFoundException(SwayUser.class, "id", id.toString()));
+  }
+
+  @Override
+  public SwayUser searchByUsername(String username, boolean b) {
+    return userRepository.findByUsername(username);
+  }
+
 }

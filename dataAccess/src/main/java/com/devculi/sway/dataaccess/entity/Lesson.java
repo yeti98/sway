@@ -17,7 +17,6 @@ public class Lesson {
   private String name;
   private String description;
   private String lessonId;
-  @ManyToOne private Course course;
   @ManyToMany private List<SwayTest> tests;
   @CreationTimestamp
   @Column(nullable = false, updatable = false)
@@ -66,14 +65,6 @@ public class Lesson {
 
   public void setDescription(String description) {
     this.description = description;
-  }
-
-  public Course getCourse() {
-    return course;
-  }
-
-  public void setCourse(Course course) {
-    this.course = course;
   }
 
   public LocalDateTime getCreatedAt() {

@@ -19,4 +19,8 @@ public interface IUserService {
   SwayUser updateUser(Long id, UpsertUserRequest upsertUserRequest);
 
   String randomPassword();
+
+  SwayUser getUserById(Long tID);
+
+  SwayUser searchByUsername(String keyword, boolean b);
 }
