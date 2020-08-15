@@ -39,7 +39,7 @@ public final class Entity2DTO {
         return modelMapper.map(swayTest, SwayTestModel.class);
     }
 
-    public static LessonModel toLessonModel(Lesson lesson) {
+    public static LessonModel lesson2Model(Lesson lesson) {
         return modelMapper.map(lesson, LessonModel.class);
     }
 }

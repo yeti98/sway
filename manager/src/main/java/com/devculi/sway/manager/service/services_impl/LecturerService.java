@@ -28,4 +28,8 @@ public class LecturerService implements ILecturerService {
     public Page<SwayTest> getHomeworkByPage(Integer page){
         return testService.getHomeworkByPage(page);
     }
+
+    public List<SwayTest> searchByTestId(String keyword) {
+        return null;
+    }
 }

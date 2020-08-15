@@ -4,6 +4,7 @@ import com.devculi.sway.business.shared.model.LessonModel;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
 import com.devculi.sway.dataaccess.entity.Lesson;
 import com.devculi.sway.dataaccess.entity.SwayTest;
+import com.devculi.sway.dataaccess.entity.enums.TestType;
 import com.devculi.sway.manager.service.interfaces.ILessonService;
 import com.devculi.sway.sharedmodel.response.common.PagingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,24 +26,26 @@ public class LessonController {
   @GetMapping
   public String renderLessonView(
       Model model, @RequestParam(name = "page", defaultValue = "0") Integer page) {
-    Page<Lesson> testByPage = lessonService.getLessonByPage(page);
-    PagingResponse<LessonModel> lessonPagingResponse =
-        new PagingResponse<>(
-            testByPage.getTotalPages(),
-            testByPage.getContent().stream()
-                .map(Entity2DTO::toLessonModel)
-                .collect(Collectors.toList()));
-    model.addAttribute("totalPages", lessonPagingResponse.getTotalPage());
-    model.addAttribute("lessons", lessonPagingResponse);
+    PagingResponse<LessonModel> lessonByPage = lessonService.getLessonByPage(page);
+    model.addAttribute("totalPages", lessonByPage.getTotalPage());
+    model.addAttribute("lessons", lessonByPage.getContent());
+    model.addAttribute("current", page);
     return "admin/lesson/index";
   }
+
+  @GetMapping("/create")
+  public String createNewLesson(Model model) {
+    Lesson newLesson = lessonService.createLesson();
+    return "redirect:/admin/manage/lessons/" + newLesson.getId();
+  }
+
 
 
   // HOMEWORK DETAIL
   @GetMapping("/{id}")
-  public String create(Model model, @PathVariable(name = "id") Long id) {
-//    SwayTest newSwayTest = testService.getTestByID(id);
-//    model.addAttribute("swayTest", Entity2DTO.swayTest2DTO(newSwayTest));
+  public String getLessonDetail(Model model, @PathVariable(name = "id") Long id) {
+    Lesson lesson = lessonService.getLessonByID(id);
+    model.addAttribute("lesson", Entity2DTO.lesson2Model(lesson));
     return "/admin/lesson/detail";
   }
 }

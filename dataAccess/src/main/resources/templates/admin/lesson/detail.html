@@ -6,124 +6,122 @@
     xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Quản lý bài viết - Hệ thống đào tạo ngoại ngữ Sway</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 <th:block layout:fragment="customNavBar">
   <div th:replace="fragments/admin/common :: navBarFragment"></div>
 </th:block>
 <div layout:fragment="content">
-  <section class="content">
-    <div class="row">
-      <div class="col">
-        <div class="">
-          <div class="card">
-            <div class="card-header">
-              <h5 class="float-left">Thông tin bài tập</h5>
-              <div class="card-tools">
-                <button class="btn btn-block btn-primary" data-toggle="modal"
-                        href="#findTestModal" type="button">Thêm
-                  test
-                </button>
+  <div class="container" style="padding-top: 1%">
+    <section class="content">
+      <div class="row">
+        <div class="col">
+          <div class="">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="float-left">Thông tin bài tập</h5>
+                <div class="card-tools">
+                  <button class="btn btn-block btn-primary" data-toggle="modal"
+                          href="#findTestModal" type="button" id="btnAddTest">Thêm
+                    test
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <form id="lessonForm" th:object="${lesson}">
+                  <div class="form-group">
+                    <label for="lessonId">Mã bài học</label>
+                    <input class="form-control" id="lessonId" placeholder="" th:field="*{lessonId}">
+                  </div>
+                  <div class="form-group">
+                    <label for="lessonName">Tên bài học</label>
+                    <input class="form-control" id="lessonName" onchange="this.setCustomValidity('')"
+                           oninvalid="this.setCustomValidity('Vui lòng điền tên')" placeholder=""
+                           required
+                           th:field="*{name}" type="text">
+                  </div>
+                  <div class="form-group">
+                    <label for="tblTestList">Danh sách bài tập</label>
+                    <table class="table table-striped" id="tblTestList">
+                      <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Mã</th>
+                        <th scope="col">Tên bài test</th>
+                        <th scope="col">Số câu hỏi</th>
+                        <th scope="col">Cập nhật</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <th:block th:each="test, stats : *{tests}">
+                        <tr>
+                          <th scope="row"><a th:href="@{'manage/tests/'+${test.id}}"><span
+                              th:text="${stats.index + 1}"></span></a></th>
+                          <td><p th:text="${test.testId}"></p></td>
+                          <td><p th:text="${test.testName}"></p></td>
+                          <td><p th:text="${test.getNumberOfQuestion()}"></p></td>
+                          <td style="display: flex">
+                            <div id="editAnUser">
+                              <a class="edit" th:href="@{'manage/tests/'+${test.id}}">
+                                <i class="material-icons"
+                                   data-toggle="tooltip"
+                                   style="color: orange" title="Chỉnh sửa bài tập">&#xE254;
+                                </i>
+                              </a>
+                            </div>
+                            <div id="removeAnUser" th:attr="data-index=${stats.index}, data-test=${test}"
+                                 th:onclick="javascript:deleteRow(this.getAttribute('data-index'), this.getAttribute('data-test'));">
+                              <a class="delete" data-toggle="modal" href="#deleteUserModal">
+                                <i class="material-icons"
+                                   data-toggle="tooltip" style="color: red"
+                                   title="Xóa khỏi bài học này">&#xE872;
+                                </i>
+                              </a>
+                            </div>
+                          </td>
+                        </tr>
+                      </th:block>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="modal-footer">
+                    <input class="btn btn-success" type="submit" value="Lưu">
+                  </div>
+                </form>
               </div>
             </div>
-
-<!--            <div class="card-body">-->
-<!--              <form id="swayTestForm" th:object="${lesson}">-->
-<!--                <div class="form-group">-->
-<!--                  <label for="testId">Mã bài tập</label>-->
-<!--                  <input class="form-control" id="testId" placeholder="" th:field="*{lessonId}">-->
-<!--                </div>-->
-<!--                <div class="form-group">-->
-<!--                  <label for="testName">Tên bài tập</label>-->
-<!--                  <input class="form-control" id="testName" onchange="this.setCustomValidity('')"-->
-<!--                         oninvalid="this.setCustomValidity('Vui lòng điền tên')" placeholder=""-->
-<!--                         required-->
-<!--                         th:field="*{name}" type="text">-->
-<!--                </div>-->
-<!--                <div class="form-group">-->
-<!--                  <label for="tblQuestionList">Danh sách bài tập</label>-->
-<!--                  <table class="table table-striped" id="tblQuestionList">-->
-<!--                    <thead>-->
-<!--                    <tr>-->
-<!--                      <th scope="col">#</th>-->
-<!--                      <th scope="col">Mã</th>-->
-<!--                      <th scope="col">Số câu hỏi</th>-->
-<!--                      <th scope="col">Cập nhật</th>-->
-<!--                    </tr>-->
-<!--                    </thead>-->
-<!--                    <tbody>-->
-<!--                    <th:block th:each="test, stats : *{tests}">-->
-<!--                      <tr>-->
-<!--                        <th scope="row"><a th:href="@{'manage/questions/'+${test.id}}"><span-->
-<!--                            th:text="${stats.index + 1}"></span></a></th>-->
-<!--                        <td><p th:text="${test.testId}"></p></td>-->
-<!--                        <td><p th:text="${test.name}"></p></td>-->
-<!--                        <td style="display: flex">-->
-<!--                          <div id="editAnUser">-->
-<!--                            <a class="edit" th:href="@{'manage/questions/'+${test.id}}">-->
-<!--                              <i class="material-icons"-->
-<!--                                 data-toggle="tooltip"-->
-<!--                                 title="Chỉnh sửa bài tập">&#xE254;-->
-<!--                              </i>-->
-<!--                            </a>-->
-<!--                          </div>-->
-<!--                          <div id="removeAnUser" th:attr="data-index=${stats.index}, data-test=${test}"-->
-<!--                               th:onclick="javascript:deleteRow(this.getAttribute('data-index'), this.getAttribute('data-test'));">-->
-<!--                            <a class="delete" data-toggle="modal" href="#deleteUserModal">-->
-<!--                              <i class="material-icons"-->
-<!--                                 data-toggle="tooltip"-->
-<!--                                 title="Xóa khỏi bài học này">&#xE872;-->
-<!--                              </i>-->
-<!--                            </a>-->
-<!--                          </div>-->
-<!--                        </td>-->
-<!--                      </tr>-->
-<!--                    </th:block>-->
-<!--                    </tbody>-->
-<!--                  </table>-->
-<!--                </div>-->
-<!--                <div class="modal-footer">-->
-<!--                  <input class="btn btn-default" onclick="window.history.back();" type="button" value="Hủy">-->
-<!--                  <input class="btn btn-success" type="submit" value="Lưu">-->
-<!--                </div>-->
-<!--              </form>-->
-<!--            </div>-->
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <div class="modal fade" id="findTestModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <form id="formAddUserModal">
-          <div class="modal-header">
-            <h4>Bài tập</h4>
-            <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
-          </div>
-          <div class="modal-body">
-            <form>
+    </section>
+    <div class="modal fade" id="findTestModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form id="formAddTest">
+            <div class="modal-header">
+              <h4>Tìm kiếm</h4>
+              <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
+            </div>
+            <div class="modal-body">
               <div class="input-group input-group-sm" style="width: 100%;">
-                <input class="form-control float-right" name="table_search" placeholder="Mã bài tập" type="text">
+                <input id="txtKeyword" class="form-control float-right" name="table_search" placeholder="Mã bài tập lớp" type="text">
                 <div class="input-group-append">
-                  <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  <button class="btn btn-default" type="submit" id="btnFindTest"><i class="fas fa-search"></i></button>
                 </div>
               </div>
 
               <div class="form-group">
-                <label for="exampleFormControlSelect2">Example select</label>
-                <select class="form-control" id="exampleFormControlSelect2">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
+                <label for="slTestResult"></label>
+                <select class="form-control" id="slTestResult">
                 </select>
               </div>
-            </form>
-          </div>
-        </form>
+            </div>
+            <div class="modal-footer">
+              <input class="btn btn-success" value="Thêm" id="addTestResult"/>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -131,8 +129,11 @@
 
 <th:block layout:fragment="scriptFragment">
   <script th:inline="javascript">
-
+    /*<![CDATA[*/
+    var lesson = /*[[${lesson}]]*/ 'default';
+    /*]]>*/
   </script>
+  <script th:src="@{/admin/js/lesson/detail.js}"></script>
 </th:block>
 </body>
 </html>

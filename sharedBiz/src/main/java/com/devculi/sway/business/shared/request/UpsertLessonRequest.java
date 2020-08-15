@@ -1,13 +1,14 @@
-package com.devculi.sway.business.shared.model;
+package com.devculi.sway.business.shared.request;
 
-import com.devculi.sway.utils.GsonUtils;
+import com.devculi.sway.business.shared.model.CourseModel;
+import com.devculi.sway.business.shared.model.SwayTestModel;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class LessonModel {
+public class UpsertLessonRequest {
   private Long id;
   private String name;
   private String description;
@@ -16,33 +17,6 @@ public class LessonModel {
   private String lessonId;
   private CourseModel course;
   private List<SwayTestModel> tests;
-
-
-  public LessonModel() {}
-
-  public String getLessonId() {
-    return lessonId;
-  }
-
-  public void setLessonId(String lessonId) {
-    this.lessonId = lessonId;
-  }
-
-  public CourseModel getCourse() {
-    return course;
-  }
-
-  public void setCourse(CourseModel course) {
-    this.course = course;
-  }
-
-  public List<SwayTestModel> getTests() {
-    return tests;
-  }
-
-  public void setTests(List<SwayTestModel> tests) {
-    this.tests = tests;
-  }
 
   public Long getId() {
     return id;
@@ -84,18 +58,27 @@ public class LessonModel {
     this.updatedAt = updatedAt;
   }
 
-  public int getNumberOfTest() {
-    return this.getTests().size();
+  public String getLessonId() {
+    return lessonId;
   }
 
-  public String getJsonString(){
-    return GsonUtils.toJson(this);
+  public void setLessonId(String lessonId) {
+    this.lessonId = lessonId;
   }
 
-  public String getCourseName() {
-    if (this.course != null) {
-      return this.course.getName();
-    }
-    return "";
+  public CourseModel getCourse() {
+    return course;
+  }
+
+  public void setCourse(CourseModel course) {
+    this.course = course;
+  }
+
+  public List<SwayTestModel> getTests() {
+    return tests;
+  }
+
+  public void setTests(List<SwayTestModel> tests) {
+    this.tests = tests;
   }
 }

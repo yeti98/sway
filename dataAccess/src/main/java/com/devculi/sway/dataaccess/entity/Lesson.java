@@ -16,20 +16,25 @@ public class Lesson {
 
   private String name;
   private String description;
-
+  private String lessonId;
   @ManyToOne private Course course;
-
-  @OneToMany private List<SwayTest> tests;
-
+  @ManyToMany private List<SwayTest> tests;
   @CreationTimestamp
   @Column(nullable = false, updatable = false)
   private LocalDateTime createdAt;
-
   @UpdateTimestamp
   @Column(nullable = false)
   private LocalDateTime updatedAt;
 
   public Lesson() {}
+
+  public String getLessonId() {
+    return lessonId;
+  }
+
+  public void setLessonId(String lessonId) {
+    this.lessonId = lessonId;
+  }
 
   public List<SwayTest> getTests() {
     return tests;
