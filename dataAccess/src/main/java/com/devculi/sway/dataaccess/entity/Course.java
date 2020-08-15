@@ -17,7 +17,7 @@ public class Course {
 
   private String name;
 
-  @OneToMany(mappedBy = "course")
+  @OneToMany
   private List<Lesson> lessons;
 
   private boolean status;

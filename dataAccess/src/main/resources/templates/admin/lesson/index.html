@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layouts/admin}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<th:block layout:fragment="customNavBar">
+  <div th:replace="fragments/admin/navbar/lesson :: lessonDetailNavBar"></div>
+</th:block>
+<div layout:fragment="content">
+  <div class="container" style="padding-top: 1%">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Danh sách bài học</h3>
+            <div class="card-tools">
+              <div class="input-group input-group-sm" style="width: 150px;">
+                <select>
+                  <option value="true">N5</option>
+                  <option value="false">N4</option>
+                </select>
+                <div class="input-group-append">
+                  <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+              <thead>
+              <tr role="row">
+                <th aria-controls="example2" aria-label="Rendering engine: activate to sort column ascending"
+                    class="sorting" colspan="1" rowspan="1"
+                    tabindex="0">Mã
+                </th>
+                <th aria-controls="example2" aria-label="Browser: activate to sort column ascending"
+                    aria-sort="descending" class="sorting_desc" colspan="1"
+                    rowspan="1" tabindex="0">Tên
+                </th>
+                <th aria-controls="example2" aria-label="Platform(s): activate to sort column ascending" class="sorting"
+                    colspan="1" rowspan="1"
+                    tabindex="0">Khóa học
+                </th>
+                <th aria-controls="example2" aria-label="Engine version: activate to sort column ascending"
+                    class="sorting" colspan="1" rowspan="1"
+                    tabindex="0">Số bài tập
+                </th>
+                <th aria-controls="example2" aria-label="CSS grade: activate to sort column ascending" class="sorting"
+                    colspan="1" rowspan="1"
+                    tabindex="0">Cập nhật
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <th:block th:each="lesson: ${lessons}" th:if="${lessonStat.size > 0}">
+                <tr>
+                  <td>
+                    <p th:text="${lesson.lessonId}"></p>
+                  </td>
+                  <td>
+                    <p th:text="${lesson.name}"></p>
+                  </td>
+                  <td>
+                    <p th:text="${lesson.getCourseName()}"></p>
+                  </td>
+                  <td>
+                    <p th:text="${lesson.getNumberOfTest()}"></p>
+                  </td>
+                  <td>
+                    <div style="display: ruby">
+                      <div id="editLesson" th:attr="data-homework=${lesson.getJsonString()}"
+                           th:onclick="javascript:setSelectedObject(this.getAttribute('data-homework'));">
+                        <a class="edit" th:href="'manage/lessons/'+${lesson.id}">
+                          <i class="material-icons"
+                             data-toggle="tooltip"
+                             style="color: orange" title="Chỉnh sửa">&#xE254;
+                          </i>
+                        </a>
+                      </div>
+                      <div id="removeLesson" th:attr="data-lesson=${lesson.getJsonString()}"
+                           th:onclick="javascript:setSelectedObject(this.getAttribute('data-lesson'));">
+                        <a class="delete" data-toggle="modal" href="#deleteLessonModal">
+                          <i class="material-icons"
+                             data-toggle="tooltip" style="color: red"
+                             title="Xóa">&#xE872;
+                          </i>
+                        </a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </th:block>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+          <div class="card-footer clearfix">
+            <p class="float-left" th:text="'Tổng số: '+ ${totalPages} + ' trang'"></p>
+            <ul class="pagination pagination-sm m-0 float-right" th:if="${totalPages} > 1">
+              <li class="page-item" th:if="${current} > 0">
+                <a class="page-link" th:href="'manage/lessons?page=' + (${current} - 1) ">«</a>
+              </li>
+              <li class="page-item active">
+                <a class="page-link" th:href="'manage/lessons?page=' + ${current}" th:text="${current} + 1"></a>
+              </li>
+              <li class="page-item" th:if="${current} +1 < ${totalPages} ">
+                <a class="page-link" th:href="'manage/lessons?page=' + (${current} - 1) ">»</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+
+    <!-- Delete Modal HTML -->
+    <div class="modal fade" id="deleteLessonModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form id="formDeleteLessonModal">
+            <div class="modal-header">
+              <h4 class="modal-title">Xóa bản ghi</h4>
+              <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p>Bạn có muốn xóa bản ghi không?</p>
+              <p id="mainContent" style="height: fit-content"></p>
+              <p class="text-warning"><small>Hành động này không thể khôi phục</small></p>
+            </div>
+            <div class="modal-footer">
+              <input class="btn btn-default" data-dismiss="modal" type="button" value="Cancel">
+              <input class="btn btn-danger" type="submit" value="Delete">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<th:block layout:fragment="scriptFragment">
+  <script th:inline="javascript">
+    var selectedLesson = undefined;
+
+    function setSelectedObject(json_str) {
+      selectedLesson = JSON.parse(json_str);
+      console.log(selectedLesson)
+    }
+  </script>
+  <script th:src="@{/admin/js/lesson/index.js}"></script>
+</th:block>
+</body>
+</html>

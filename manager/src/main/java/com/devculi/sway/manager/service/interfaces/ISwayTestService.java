@@ -21,5 +21,7 @@ public interface ISwayTestService {
 
   SwayTest updateHomeWork(Long id, UpsertTestRequest updateHomeworkRequest);
 
-    SwayTest insertQuestions(Long targetID, List<Question> questions);
+  SwayTest insertQuestions(Long targetID, List<Question> questions);
+
+  List<SwayTest> searchBy(String keyword, String testType, boolean isIgnoreCase);
 }

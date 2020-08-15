@@ -1,13 +1,7 @@
 package com.devculi.sway.business.shared.utils;
 
-import com.devculi.sway.business.shared.model.QuestionModel;
-import com.devculi.sway.business.shared.model.QuestionModel2;
-import com.devculi.sway.business.shared.model.SwayClassModel;
-import com.devculi.sway.business.shared.model.SwayTestModel;
-import com.devculi.sway.dataaccess.entity.Question;
-import com.devculi.sway.dataaccess.entity.SwayClass;
-import com.devculi.sway.dataaccess.entity.SwayTest;
-import com.devculi.sway.dataaccess.entity.SwayUser;
+import com.devculi.sway.business.shared.model.*;
+import com.devculi.sway.dataaccess.entity.*;
 import com.devculi.sway.sharedmodel.model.UserModel;
 import org.modelmapper.ModelMapper;
 
@@ -43,5 +37,9 @@ public final class Entity2DTO {
 
     public static SwayTestModel swayTest2DTO(SwayTest swayTest) {
         return modelMapper.map(swayTest, SwayTestModel.class);
+    }
+
+    public static LessonModel lesson2Model(Lesson lesson) {
+        return modelMapper.map(lesson, LessonModel.class);
     }
 }
