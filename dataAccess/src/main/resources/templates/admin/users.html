@@ -7,97 +7,98 @@
 </head>
 <body>
 <th:block layout:fragment="customNavBar">
-  <div th:replace="fragments/admin/common :: navBarFragment"></div>
+  <div th:replace="fragments/admin/navbar/user :: userDetailNavBar"></div>
 </th:block>
-<div layout:fragment="content">
+<div layout:fragment="content" style="padding-top: 1%">
   <div class="container">
-    <div class="table-wrapper">
-      <div class="table-title">
-        <div class="row">
-          <div class="col-sm-6">
-            <h2>Quản lý thông tin người dùng</h2>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Danh sách tài khoản</h3>
+            <div class="card-tools">
+              <div class="input-group input-group-sm" style="width: 150px;">
+                <input class="form-control float-right" name="table_search" placeholder="email/tên" type="text">
+                <div class="input-group-append">
+                  <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="col-sm-6">
-            <a class="btn btn-success" id="addUser" data-toggle="modal" href="#addUserModal"><i
-                class="material-icons">&#xE147;</i> <span>Thêm user</span></a>
-            <a class="btn btn-danger"  data-toggle="modal" href="#deleteUserModal"><i
-                class="material-icons">&#xE15C;</i> <span>Xóa</span></a>
+          <!-- /.card-header -->
+          <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+              <thead>
+              <tr>
+                <th>Họ Tên</th>
+                <th>Email</th>
+                <th>Khóa</th>
+                <th>Vai trò</th>
+                <th>Cập nhật</th>
+              </tr>
+              </thead>
+              <tbody>
+              <th:block th:each="user: ${users}">
+                <tr>
+                  <td>
+                    <p th:text="${user.name}"></p>
+                  </td>
+                  <td>
+                    <p th:text="${user.username}"></p>
+                  </td>
+                  <td th:if="${user.status}">
+                    <p>Hoạt động</p>
+                  </td>
+                  <td th:unless="${user.status}">
+                    <p>Khoá</p>
+                  </td>
+                  <td>
+                    <p th:text="${user.role}"></p>
+                  </td>
+                  <td style="display: flex">
+                    <div id="editAnUser"
+                         th:attr="data-user=${user.toString()}"
+                         th:onclick="javascript:setSelectedObject(this.getAttribute('data-user'));">
+                      <a class="edit" data-toggle="modal" href="#editUserModal">
+                        <i class="material-icons"
+                           data-toggle="tooltip"
+                           title="Chỉnh sửa">&#xE254;
+                        </i>
+                      </a>
+                    </div>
+                    <div id="removeAnUser" th:attr="data-user=${user.toString()}"
+                         th:onclick="javascript:setSelectedObject(this.getAttribute('data-user'));">
+                      <a class="delete" data-toggle="modal" href="#deleteUserModal">
+                        <i class="material-icons"
+                           data-toggle="tooltip"
+                           title="Xóa">&#xE872;
+                        </i>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              </th:block>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+          <div class="card-footer clearfix">
+            <p class="float-left" th:text="'Tổng số: '+ ${totalPages} + ' trang'"></p>
+            <ul class="pagination pagination-sm m-0 float-right" th:if="${totalPages} > 1">
+              <li class="page-item" th:if="${current} > 0">
+                <a class="page-link" th:href="'manage/courses?page=' + (${current} - 1) ">«</a>
+              </li>
+              <li class="page-item active">
+                <a class="page-link" th:href="'manage/courses?page=' + ${current}" th:text="${current} + 1"></a>
+              </li>
+              <li class="page-item" th:if="${current} +1 < ${totalPages} ">
+                <a class="page-link" th:href="'manage/courses?page=' + (${current} - 1) ">»</a>
+              </li>
+            </ul>
           </div>
         </div>
+        <!-- /.card -->
       </div>
-      <table class="table table-striped table-hover">
-        <thead>
-        <tr>
-          <th>
-           <span class="custom-checkbox">
-            <input id="selectAll" type="checkbox">
-            <label for="selectAll"></label>
-           </span>
-          </th>
-          <th>Họ Tên</th>
-          <th>Email</th>
-          <th>Khóa</th>
-          <th>Vai trò</th>
-          <th>Cập nhật</th>
-        </tr>
-        </thead>
-        <tbody>
-        <th:block th:each="user: ${users}">
-          <tr>
-            <td>
-                <span class="custom-checkbox">
-                <input id="checkbox1" name="options[]" type="checkbox" value="1">
-                <label for="checkbox1"></label>
-                </span>
-            </td>
-            <td>
-              <p th:text="${user.name}"></p>
-            </td>
-            <td>
-              <p th:text="${user.username}"></p>
-            </td>
-            <td th:if="${user.status}" >
-              <p>Hoạt động</p>
-            </td>
-            <td th:unless="${user.status}" >
-              <p>Khoá</p>
-            </td>
-            <td>
-              <p th:text="${user.role}"></p>
-            </td>
-            <td style="display: flex">
-              <div id="editAnUser"
-                th:attr="data-user=${user.toString()}"
-                th:onclick="javascript:setSelectedObject(this.getAttribute('data-user'));">
-                <a class="edit" data-toggle="modal" href="#editUserModal">
-                  <i class="material-icons"
-                     data-toggle="tooltip"
-                     title="Chỉnh sửa">&#xE254;
-                  </i>
-                </a>
-              </div>
-              <div id="removeAnUser" th:attr="data-user=${user.toString()}"
-                   th:onclick="javascript:setSelectedObject(this.getAttribute('data-user'));">
-                <a class="delete" data-toggle="modal" href="#deleteUserModal">
-                  <i class="material-icons"
-                     data-toggle="tooltip"
-                     title="Xóa">&#xE872;
-                  </i>
-                </a>
-              </div>
-            </td>
-          </tr>
-        </th:block>
-        </tbody>
-      </table>
-<!--      <div class="clearfix">-->
-<!--        <ul th:if="${totalPage > 0}" class="pagination" th:each="idx: ${#numbers.sequence(0, totalPage - 1)}">-->
-<!--          <li th:class="${idx==currentPage} ? 'page-item active' : 'page-item'" >-->
-<!--            <a class="page-link" th:href="@{/users(page=${idx})}" th:text="${idx+1}">-->
-<!--            </a>-->
-<!--          </li>-->
-<!--        </ul>-->
-<!--      </div>-->
     </div>
   </div>
   <!-- Add Modal HTML -->
@@ -118,12 +119,13 @@
 
             <div class="form-group">
               <label for="addPassword" style="display: none">Mật khẩu</label>
-              <input class="form-control" id="addPassword" required disabled type="text" style="display: none">
+              <input class="form-control" disabled id="addPassword" required style="display: none" type="text">
               <label for="txtUserInfo">Thông tin tài khoản</label>
               <br>
-              <div style="position: relative" onclick="onCopy()">
-                <textarea id="txtUserInfo" style="display: block; resize: none; width: 100%" disabled></textarea>
-                <span style="cursor: pointer; position: absolute; bottom: 4px; right: 6px;" id="copyTooltip" class="material-icons" title="Đã coppy">content_copy</span>
+              <div onclick="onCopy()" style="position: relative">
+                <textarea disabled id="txtUserInfo" style="display: block; resize: none; width: 100%"></textarea>
+                <span class="material-icons" id="copyTooltip"
+                      style="cursor: pointer; position: absolute; bottom: 4px; right: 6px;" title="Đã coppy">content_copy</span>
               </div>
             </div>
             <div class="form-group">
@@ -183,7 +185,7 @@
           </div>
           <div class="modal-footer">
             <input class="btn btn-default" data-dismiss="modal" type="button" value="Hủy">
-            <input id="btnUserUpdate" class="btn btn-info" type="submit" value="Lưu">
+            <input class="btn btn-info" id="btnUserUpdate" type="submit" value="Lưu">
           </div>
         </form>
       </div>
@@ -215,13 +217,13 @@
 
 <th:block layout:fragment="scriptFragment">
   <script th:inline="javascript">
-      var selectedUser = undefined;
+    var selectedUser = undefined;
 
-      function setSelectedObject(json_str) {
-          //var str = json_str.replace('UserModel', '');
-          console.log(json_str);
-          selectedUser = JSON.parse(json_str);
-      }
+    function setSelectedObject(json_str) {
+      //var str = json_str.replace('UserModel', '');
+      console.log(json_str);
+      selectedUser = JSON.parse(json_str);
+    }
   </script>
   <script th:src="@{/admin/js/user.js}"></script>
 

@@ -54,7 +54,7 @@
                            max="10" min="0" required th:field="*{minScore}"
                            type="number">
                   </div>
-                  <div class="form-group" th:if="${swayClass.course}">
+                  <div class="form-group">
                     <label for="tblCourseInfo">Thông tin khóa học</label>
                     <table class="table table-hover text-nowrap" id="tblCourseInfo">
                       <thead>
@@ -80,7 +80,7 @@
                       </tr>
                       </thead>
                       <tbody>
-                      <tr>
+                      <tr th:if="${swayClass.course}">
                         <td>
                           <p th:text="${swayClass.course.courseId}"></p>
                         </td>
@@ -93,7 +93,7 @@
                         <td>
                           <div style="display: ruby">
                             <div id="editLesson">
-                              <a class="edit" th:href="'manage/courses/'+${swayClass.course.id}">
+                              <a class="edit" th:href="@{'manage/courses/'+${swayClass.course.id}}">
                                 <i class="material-icons"
                                    data-toggle="tooltip"
                                    style="color: orange" title="Chỉnh sửa">&#xE254;
