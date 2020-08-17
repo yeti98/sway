@@ -43,6 +43,6 @@ public class ClassController {
   public String getCourseDetail(Model model, @PathVariable(name = "id") Long id) {
     SwayClass swayClass = classService.getClassById(id);
     model.addAttribute("swayClass", Entity2DTO.class2DTO(swayClass));
-    return "/admin/class/detail";
+    return "admin/class/detail";
   }
 }
