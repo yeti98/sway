@@ -24,4 +24,6 @@ public interface ISwayTestService {
   SwayTest insertQuestions(Long targetID, List<Question> questions);
 
   List<SwayTest> searchBy(String keyword, String testType, boolean isIgnoreCase);
+
+  Page<SwayTest> getTestonlineByPage(Integer page);
 }

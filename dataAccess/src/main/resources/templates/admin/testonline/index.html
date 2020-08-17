@@ -8,7 +8,7 @@
 </head>
 <body>
 <th:block layout:fragment="customNavBar">
-  <div th:replace="fragments/admin/navbar/homeworkDetail :: hwDetailNavBar"></div>
+  <div th:replace="fragments/admin/navbar/testonline :: testNavBar"></div>
 </th:block>
 <div layout:fragment="content" style="padding-top: 1%">
   <div class="container">
@@ -16,7 +16,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Quản lý bài tập lớp</h3>
+            <h3 class="card-title">Quản lý bài test</h3>
             <div class="card-tools">
               <div class="input-group input-group-sm" style="width: 150px;">
                 <input class="form-control float-right" name="table_search" placeholder="mã/tên" type="text">
@@ -39,29 +39,29 @@
               </tr>
               </thead>
               <tbody id="mainTableBody" th:fragment="homeworkTableBody">
-              <th:block th:each="homework: ${homeworks}">
+              <th:block th:each="test: ${tests}">
                 <tr>
 
                   <td class="truncatable">
-                    <p th:text="${homework.testId}"></p>
+                    <p th:text="${test.testId}"></p>
                   </td>
                   <td class="truncatable">
-                    <p th:text="${homework.testName}"></p>
+                    <p th:text="${test.testName}"></p>
                   </td>
                   <td class="truncatable">
-                    <p th:text="${homework.getNumberOfQuestion()}"></p>
+                    <p th:text="${test.getNumberOfQuestion()}"></p>
                   </td>
                   <td style="display: flex">
-                    <div id="editAnUser" th:attr="data-homework=${homework.getJsonString()}"
+                    <div id="editAnUser" th:attr="data-homework=${test.getJsonString()}"
                          th:onclick="javascript:setSelectedObject(this.getAttribute('data-homework'));">
-                      <a class="edit" th:href="'manage/homeworks/'+${homework.id}">
+                      <a class="edit" th:href="'manage/testonline/'+${test.id}">
                         <i class="material-icons"
                            data-toggle="tooltip"
                            title="Chỉnh sửa">&#xE254;
                         </i>
                       </a>
                     </div>
-                    <div id="removeTest" th:attr="data-homework=${homework.getJsonString()}"
+                    <div id="removeTest" th:attr="data-homework=${test.getJsonString()}"
                          th:onclick="javascript:setSelectedObject(this.getAttribute('data-homework'));">
                       <a class="delete" data-toggle="modal" href="#deleteTestModal">
                         <i class="material-icons"
@@ -81,13 +81,13 @@
             <p class="float-left" th:text="'Tổng số: '+ ${totalPages} + ' trang'"></p>
             <ul class="pagination pagination-sm m-0 float-right" th:if="${totalPages} > 1">
               <li class="page-item" th:if="${current} > 0">
-                <a class="page-link" th:href="'manage/homeworks?page=' + (${current} - 1) ">«</a>
+                <a class="page-link" th:href="'manage/testonline?page=' + (${current} - 1) ">«</a>
               </li>
               <li class="page-item active">
-                <a class="page-link" th:href="'manage/homeworks?page=' + ${current}" th:text="${current} + 1"></a>
+                <a class="page-link" th:href="'manage/testonline?page=' + ${current}" th:text="${current} + 1"></a>
               </li>
               <li class="page-item" th:if="${current} +1 < ${totalPages} ">
-                <a class="page-link" th:href="'manage/homeworks?page=' + (${current} + 1) ">»</a>
+                <a class="page-link" th:href="'manage/testonline?page=' + (${current} + 1) ">»</a>
               </li>
             </ul>
           </div>
@@ -95,38 +95,38 @@
       </div>
     </div>
   </div>
-  <!-- Delete Modal HTML -->
-  <div class="modal fade" id="deleteTestModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <form id="formDeleteTestModal">
-          <div class="modal-header">
-            <h4 class="modal-title">Xóa bản ghi</h4>
-            <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
-          </div>
-          <div class="modal-body">
-            <p>Bạn có muốn xóa bản ghi không?</p>
-            <p id="mainContent" style="height: fit-content"></p>
-            <p class="text-warning"><small>Hành động này không thể khôi phục</small></p>
-          </div>
-          <div class="modal-footer">
-            <input class="btn btn-default" data-dismiss="modal" type="button" value="Cancel">
-            <input class="btn btn-danger" type="submit" value="Delete">
-          </div>
-        </form>
-      </div>
+
+<!-- Delete Modal HTML -->
+<div class="modal fade" id="deleteTestModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="formDeleteTestModal">
+        <div class="modal-header">
+          <h4 class="modal-title">Xóa bản ghi</h4>
+          <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>Bạn có muốn xóa bản ghi không?</p>
+          <p id="mainContent" style="height: fit-content"></p>
+          <p class="text-warning"><small>Hành động này không thể khôi phục</small></p>
+        </div>
+        <div class="modal-footer">
+          <input class="btn btn-default" data-dismiss="modal" type="button" value="Cancel">
+          <input class="btn btn-danger" type="submit" value="Delete">
+        </div>
+      </form>
     </div>
   </div>
 </div>
-
+</div>
 <th:block layout:fragment="scriptFragment">
   <script th:inline="javascript">
-    var selectedHomework = undefined;
+      var selectedHomework = undefined;
 
-    function setSelectedObject(json_str) {
-      selectedHomework = JSON.parse(json_str);
-      console.log(selectedHomework)
-    }
+      function setSelectedObject(json_str) {
+          selectedHomework = JSON.parse(json_str);
+          console.log(selectedHomework)
+      }
   </script>
   <script th:src="@{/admin/js/homework.js}"></script>
 </th:block>
