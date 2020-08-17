@@ -2,7 +2,9 @@ package com.devculi.sway.controller.mvc.student;
 
 import com.devculi.sway.annotations.RequireRoleStudent;
 import com.devculi.sway.business.shared.model.CourseModel;
+import com.devculi.sway.business.shared.model.LessonModel;
 import com.devculi.sway.business.shared.model.SwayClassModel;
+import com.devculi.sway.business.shared.model.SwayTestModel;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
 import com.devculi.sway.dataaccess.entity.SwayClass;
 import com.devculi.sway.manager.service.interfaces.IClassService;
@@ -44,15 +46,60 @@ public class StuHomeworkController {
     if (classModel != null) {
       CourseModel course = classModel.getCourse();
       if (course != null) {
+        model.addAttribute("courseId", course.getId());
         model.addAttribute("courseName", course.getName());
         model.addAttribute("lessons", course.getLessons());
       } else {
         model.addAttribute("lessons", new ArrayList<>());
       }
     } else {
-      model.addAttribute("lessons", new ArrayList<>());
+      return "redirect:/bai-tap-lop";
     }
-
     return "student/baitaplop/detail";
   }
+
+  @GetMapping("/{id}/{lId}/{tId}")
+  public String viewTestDetail(Model model, @PathVariable(name = "id") Long classID, @PathVariable(name = "lId") Long lessonId, @PathVariable(name = "tId") Long testId){
+    SwayClassModel classModel = classesMap.getOrDefault(classID, null);
+    if (classModel != null) {
+      CourseModel course = classModel.getCourse();
+      if (course != null) {
+        LessonModel lesson = getLessonById(course, lessonId);
+        if (lesson == null) {
+          return "redirect:/error";
+        }
+        SwayTestModel testModel = getTestById(lesson, testId);
+        if (testModel == null) {
+          return "redirect:/error";
+        }
+        model.addAttribute("courseName", course.getName());
+        model.addAttribute("lessonName", lesson.getName());
+        model.addAttribute("questions", testModel.getQuestions());
+      } else {
+        model.addAttribute("lessons", new ArrayList<>());
+      }
+    } else {
+      return "redirect:/bai-tap-lop";
+    }
+    return "student/baitaplop/lesson/test/index";
+  }
+
+  private SwayTestModel getTestById(LessonModel lesson, Long testId) {
+    for (SwayTestModel testModel : lesson.getTests()) {
+      if (testModel.getId().equals(lesson.getId())){
+        return testModel;
+      }
+    }
+    return null;
+  }
+
+  private LessonModel getLessonById(CourseModel course, Long lessonId) {
+    for (LessonModel lessonModel : course.getLessons()) {
+      if (lessonModel.getId().equals(lessonId)){
+        return lessonModel;
+      }
+    }
+    return null;
+  }
+
 }

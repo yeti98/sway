@@ -1,7 +1,6 @@
 package com.devculi.sway.manager.service.services_impl;
 
 import com.devculi.sway.dataaccess.entity.Question;
-import com.devculi.sway.dataaccess.entity.SwayTest;
 import com.devculi.sway.dataaccess.repository.QuestionRepository;
 import com.devculi.sway.manager.service.interfaces.IQuestionService;
 import com.devculi.sway.manager.service.threadpool.MainExecutor;
@@ -11,7 +10,6 @@ import com.devculi.sway.utils.PropertyUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,9 +27,10 @@ public class QuestionService implements IQuestionService {
   @Override
   public Question getQuestionByID(Long questionID) {
     Optional<Question> byId = questionRepository.findById(questionID);
-    return byId.orElseThrow(() -> {
-      return new RecordNotFoundException(Question.class, "id", questionID.toString());
-    });
+    return byId.orElseThrow(
+        () -> {
+          return new RecordNotFoundException(Question.class, "id", questionID.toString());
+        });
   }
 
   @Override
@@ -108,8 +107,8 @@ public class QuestionService implements IQuestionService {
     question.setContent(String.valueOf(data.get(1)));
     question.setAnswer(String.valueOf(data.get(2)));
     List<String> choices = new ArrayList<>();
-    for (int idx = 1;idx <= 5;idx++) { // Upto 5 choices
-      if (2 + idx >=size) break;
+    for (int idx = 1; idx < 5; idx++) { // Upto 5 choices
+      if (2 + idx >= size) break;
       String text = String.valueOf(data.get(2 + idx));
       if (StringUtils.hasText(text)) {
         choices.add(text);

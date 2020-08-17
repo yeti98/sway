@@ -2,6 +2,7 @@
 <html class="js" lang="vi-VN"
       layout:decorate="~{layouts/page}"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       xmlns:th="http://www.thymeleaf.org">
 <th:block layout:fragment="content">
   <div id="wrapper">
@@ -15,8 +16,12 @@
               <a><span th:text="${stat.index +1}+'. '+${lesson.name}"></span></a>
               <ul>
                 <li th:each="test, tStat : ${lesson.tests}">
-                  <a th:href="'/bai-tap-lop/'+${courseId}+'/'+${lesson.id}+'/'+${test.id}"><span
-                      th:text="${tStat.index +1}+'. '+${test.testName}"></span></a>
+                  <a><span th:text="${tStat.index +1}+'. '+${test.testName}"></span></a>
+                  <ul>
+                    <li th:each="question, qStat : ${test.questions}">
+                      <a><span th:text="${qStat.index +1}+'. '+${question.content}"></span></a>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </li>

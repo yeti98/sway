@@ -20,6 +20,7 @@ public class FileService {
       FileInputStream excel = (FileInputStream) file.getInputStream();
 
       XSSFWorkbook workbook = new XSSFWorkbook(excel);
+      workbook.setMissingCellPolicy(Row.RETURN_BLANK_AS_NULL);
 
       Map<Integer, Object> map = new HashMap<>();
       for (int index = 0; index < workbook.getNumberOfSheets(); index++) {

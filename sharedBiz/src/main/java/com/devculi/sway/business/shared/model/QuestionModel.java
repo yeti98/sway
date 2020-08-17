@@ -102,4 +102,9 @@ public class QuestionModel {
   public String getJsonString(){
     return GsonUtils.toJson(this);
   }
+
+  public String[] getChoicesList(){
+    System.out.println();
+    return choices.split(Question.DETERMINER);
+  }
 }
