@@ -1,7 +1,6 @@
 package com.devculi.sway.business.shared.model;
 
 import com.devculi.sway.dataaccess.entity.Question;
-import com.devculi.sway.utils.GsonUtils;
 
 import java.time.LocalDateTime;
 
@@ -97,5 +96,10 @@ public class QuestionModel {
   @Override
   public String toString() {
     return "";
+  }
+
+  public String[] getChoicesList(){
+    System.out.println();
+    return choices.split(Question.DETERMINER);
   }
 }
