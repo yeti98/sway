@@ -1,8 +1,10 @@
 package com.devculi.sway.business.shared.model;
 
+import com.devculi.sway.utils.GsonUtils;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class LessonModel {
@@ -11,8 +13,26 @@ public class LessonModel {
   private String description;
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
+  private String lessonId;
+  private List<SwayTestModel> tests;
 
   public LessonModel() {}
+
+  public String getLessonId() {
+    return lessonId;
+  }
+
+  public void setLessonId(String lessonId) {
+    this.lessonId = lessonId;
+  }
+
+  public List<SwayTestModel> getTests() {
+    return tests;
+  }
+
+  public void setTests(List<SwayTestModel> tests) {
+    this.tests = tests;
+  }
 
   public Long getId() {
     return id;
@@ -52,5 +72,13 @@ public class LessonModel {
 
   public void setUpdatedAt(LocalDateTime updatedAt) {
     this.updatedAt = updatedAt;
+  }
+
+  public int getNumberOfTest() {
+    return this.getTests().size();
+  }
+
+  public String getJsonString() {
+    return GsonUtils.toJson(this);
   }
 }

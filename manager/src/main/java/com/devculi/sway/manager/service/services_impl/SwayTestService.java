@@ -32,8 +32,7 @@ public class SwayTestService implements ISwayTestService {
   @Override
   public SwayTest getTestByID(Long id) {
     Optional<SwayTest> byId = testRepository.findById(id);
-    return byId.orElseThrow(
-        () -> new RecordNotFoundException(SwayTest.class, "id", id.toString()));
+    return byId.orElseThrow(() -> new RecordNotFoundException(SwayTest.class, "id", id.toString()));
   }
 
   @Override
@@ -67,9 +66,11 @@ public class SwayTestService implements ISwayTestService {
     Set<String> nullProperties = PropertyUtils.getNullProperties(updateHomeworkRequest);
     String testName = updateHomeworkRequest.getTestName();
     String testId = updateHomeworkRequest.getTestId();
-    swayTest.setTestId(testId);
-    if (!nullProperties.contains(testName)) {
+    if (!nullProperties.contains("testName")) {
       swayTest.setTestName(testName);
+    }
+    if (!nullProperties.contains("testId")) {
+      swayTest.setTestId(testId);
     }
     swayTest.setTestType(TestType.HOMEWORK);
     Collection<Question> questions = new ArrayList<>();
@@ -92,10 +93,25 @@ public class SwayTestService implements ISwayTestService {
   @Override
   public SwayTest insertQuestions(Long targetID, List<Question> questions) {
     SwayTest testByID = getTestByID(targetID);
-    questions.forEach(question -> {
-      testByID.getQuestions().add(question);
-    });
+    questions.forEach(
+        question -> {
+          testByID.getQuestions().add(question);
+        });
     testRepository.save(testByID);
     return testByID;
+  }
+
+  @Override
+  public List<SwayTest> searchBy(String keyword, String testType, boolean isIgnoreCase) {
+    if (isIgnoreCase) {
+      keyword = "%" + keyword.toLowerCase() + "%";
+    } else {
+      keyword = "%" + keyword + "%";
+    }
+    TestType type = TestType.TEST_ONLINE;
+    if (testType.equalsIgnoreCase(TestType.HOMEWORK.toString())) {
+      type = TestType.HOMEWORK;
+    }
+    return testRepository.findByTestIdLikeAndTypeEqual(keyword, type);
   }
 }

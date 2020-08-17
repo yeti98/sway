@@ -1,5 +1,6 @@
 package com.devculi.sway.sharedmodel.response.common;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class PagingResponse<T> {
@@ -11,19 +12,23 @@ public class PagingResponse<T> {
     this.content = content;
   }
 
-    public int getTotalPage() {
-        return totalPage;
-    }
+  public static PagingResponse<Object> empty() {
+    return new PagingResponse<>(0, new ArrayList<>());
+  }
 
-    public void setTotalPage(int totalPage) {
-        this.totalPage = totalPage;
-    }
+  public int getTotalPage() {
+    return totalPage;
+  }
 
-    public Collection<T> getContent() {
-        return content;
-    }
+  public void setTotalPage(int totalPage) {
+    this.totalPage = totalPage;
+  }
 
-    public void setContent(Collection<T> content) {
-        this.content = content;
-    }
+  public Collection<T> getContent() {
+    return content;
+  }
+
+  public void setContent(Collection<T> content) {
+    this.content = content;
+  }
 }

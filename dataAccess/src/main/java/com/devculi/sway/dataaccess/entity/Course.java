@@ -17,18 +17,24 @@ public class Course {
 
   private String name;
 
-  @OneToMany(mappedBy = "course")
-  private List<Lesson> lessons;
+  @ManyToMany private List<Lesson> lessons;
 
-  private boolean status;
-
+  private String courseId;
+  private boolean active;
   @CreationTimestamp
   @Column(nullable = false, updatable = false)
   private LocalDateTime createdAt;
-
   @UpdateTimestamp
   @Column(nullable = false)
   private LocalDateTime updatedAt;
+
+  public String getCourseId() {
+    return courseId;
+  }
+
+  public void setCourseId(String courseId) {
+    this.courseId = courseId;
+  }
 
   public long getId() {
     return id;
@@ -54,12 +60,12 @@ public class Course {
     this.lessons = lessons;
   }
 
-  public boolean isStatus() {
-    return status;
+  public boolean isActive() {
+    return active;
   }
 
-  public void setStatus(boolean status) {
-    this.status = status;
+  public void setActive(boolean status) {
+    this.active = status;
   }
 
   public LocalDateTime getCreatedAt() {

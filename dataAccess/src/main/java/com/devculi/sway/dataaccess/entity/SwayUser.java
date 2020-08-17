@@ -26,11 +26,7 @@ public class SwayUser {
   private String type;
   private String role;
 
-  @OneToMany
-  @JoinTable(
-      name = "susers_sclasses",
-      joinColumns = @JoinColumn(name = "suser_id"),
-      inverseJoinColumns = @JoinColumn(name = "sclass_id"))
+  @ManyToMany(mappedBy = "students")
   private List<SwayClass> joinedClasses;
 
   @CreationTimestamp

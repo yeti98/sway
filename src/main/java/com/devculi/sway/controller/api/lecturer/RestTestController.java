@@ -15,6 +15,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
@@ -49,6 +51,16 @@ public class RestTestController extends BaseController {
   public SwayTest createTest(
       @RequestParam(name = "testType", defaultValue = "HOMEWORK") TestType testType) {
     return swayTestService.createTestByType(testType);
+  }
+
+  @GetMapping("/search")
+  public ResponseEntity searchByKeyword(
+          @RequestParam(name = "query", defaultValue = "") String keyword, @RequestParam(name = "type") String testType) {
+    if (keyword.length() == 0) {
+      return ok(new ArrayList<>());
+    }
+    List<SwayTest> results = swayTestService.searchBy(keyword, testType, true);
+    return ok(results.stream().map(Entity2DTO::swayTest2DTO).collect(Collectors.toList()));
   }
 
   @PutMapping("/{id}")

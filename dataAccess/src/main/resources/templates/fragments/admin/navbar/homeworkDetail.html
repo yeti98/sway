@@ -9,10 +9,7 @@
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
     <li class="nav-item d-sm-inline-block">
-      <button aria-controls="collapsePreview" aria-expanded="false" class="btn btn-link"
-              data-target="#collapsePreview"
-              data-toggle="collapse" type="button">Xem trước
-      </button>
+      <a th:type="button" class="btn btn-block btn-outline-success" type="button"  th:href="@{manage/homeworks/create}">Tạo mới</a>
     </li>
 <!--    <li class="nav-item d-sm-inline-block">-->
 <!--      <button class="btn btn-link" type="submit" id="btnSubmitForm">Lưu-->
@@ -44,7 +41,7 @@
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
     <li class="nav-item">
-      <a href="#" th:href="@{/logout}">Đăng xuất</a>
+      <a type="button" class="btn btn-block btn-outline-primary" th:href="@{/logout}">Đăng xuất</a>
     </li>
   </ul>
 </nav>

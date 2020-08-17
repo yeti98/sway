@@ -1,0 +1,220 @@
+<!DOCTYPE HTML>
+<html
+    lang="en"
+    layout:decorate="~{layouts/admin}"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Quản lý bài viết - Hệ thống đào tạo ngoại ngữ Sway</title>
+  <link href="/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet">
+</head>
+<body>
+<th:block layout:fragment="customNavBar">
+  <div th:replace="fragments/admin/common :: navBarFragment"></div>
+</th:block>
+<div layout:fragment="content" style="padding-top: 1%">
+  <section class="content">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Danh sách bài viết</h3>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <div class="dataTables_wrapper dt-bootstrap4" id="example2_wrapper">
+          <div class="row">
+            <div class="col-sm-12 col-md-6"></div>
+            <div class="col-sm-12 col-md-6"></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <table aria-describedby="example2_info" class="table table-bordered table-hover dataTable dtr-inline"
+                     id="example2"
+                     role="grid">
+                <thead>
+                <tr role="row">
+                  <th aria-controls="example2" aria-label="Rendering engine: activate to sort column ascending"
+                      aria-sort="descending" class="sorting_desc" colspan="1"
+                      rowspan="1" tabindex="0">Tiêu đề
+                  </th>
+                  <th aria-controls="example2" aria-label="Browser: activate to sort column ascending" class="sorting"
+                      colspan="1" rowspan="1"
+                      tabindex="0">Menu
+                  </th>
+                  <th aria-controls="example2" aria-label="Platform(s): activate to sort column ascending"
+                      class="sorting" colspan="1" rowspan="1"
+                      tabindex="0">Ngày tạo
+                  </th>
+                  <th>Cập nhật</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="odd" role="row">
+                  <td class="sorting_1" tabindex="0">Học tiếng anh thế nào?</td>
+                  <td>Trang chủ</td>
+                  <td>2020/08/10</td>
+                  <td style="display: flex">
+                    <div id="editAnUser">
+                      <a class="edit" data-toggle="modal" href="#editUserModal">
+                        <i class="material-icons"
+                           data-toggle="tooltip"
+                           title="Chỉnh sửa">&#xE254;
+                        </i>
+                      </a>
+                    </div>
+                    <div id="removeAnUser">
+                      <a class="delete" data-toggle="modal" href="#deleteUserModal">
+                        <i class="material-icons"
+                           data-toggle="tooltip"
+                           title="Xóa">&#xE872;
+                        </i>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="even" role="row">
+                  <td class="sorting_1" tabindex="0">Học tiếng anh thế nào?</td>
+                  <td>Trang chủ</td>
+                  <td>2020/08/10</td>
+                  <td style="display: flex">
+                    <div id="editAnUser">
+                      <a class="edit" data-toggle="modal" href="#editUserModal">
+                        <i class="material-icons"
+                           data-toggle="tooltip"
+                           title="Chỉnh sửa">&#xE254;
+                        </i>
+                      </a>
+                    </div>
+                    <div id="removeAnUser">
+                      <a class="delete" data-toggle="modal" href="#deleteUserModal">
+                        <i class="material-icons"
+                           data-toggle="tooltip"
+                           title="Xóa">&#xE872;
+                        </i>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="odd" role="row">
+                  <td class="sorting_1" tabindex="0">Học tiếng anh thế nào?</td>
+                  <td>Trang chủ</td>
+                  <td>2020/08/10</td>
+                  <td style="display: flex">
+                    <div id="editAnUser">
+                      <a class="edit" data-toggle="modal" href="#editUserModal">
+                        <i class="material-icons"
+                           data-toggle="tooltip"
+                           title="Chỉnh sửa">&#xE254;
+                        </i>
+                      </a>
+                    </div>
+                    <div id="removeAnUser">
+                      <a class="delete" data-toggle="modal" href="#deleteUserModal">
+                        <i class="material-icons"
+                           data-toggle="tooltip"
+                           title="Xóa">&#xE872;
+                        </i>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="even" role="row">
+                  <td class="sorting_1" tabindex="0">Học tiếng anh thế nào?</td>
+                  <td>Trang chủ</td>
+                  <td>2020/08/10</td>
+                  <td style="display: flex">
+                    <div id="editAnUser">
+                      <a class="edit" data-toggle="modal" href="#editUserModal">
+                        <i class="material-icons"
+                           data-toggle="tooltip"
+                           title="Chỉnh sửa">&#xE254;
+                        </i>
+                      </a>
+                    </div>
+                    <div id="removeAnUser">
+                      <a class="delete" data-toggle="modal" href="#deleteUserModal">
+                        <i class="material-icons"
+                           data-toggle="tooltip"
+                           title="Xóa">&#xE872;
+                        </i>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+                <!--                <tfoot>-->
+                <!--                <tr>-->
+                <!--                  <th colspan="1" rowspan="1">Rendering engine</th>-->
+                <!--                  <th colspan="1" rowspan="1">Browser</th>-->
+                <!--                  <th colspan="1" rowspan="1">Platform(s)</th>-->
+                <!--                  <th colspan="1" rowspan="1">Engine version</th>-->
+                <!--                  <th colspan="1" rowspan="1">CSS grade</th>-->
+                <!--                </tr>-->
+                <!--                </tfoot>-->
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-5">
+              <div aria-live="polite" class="dataTables_info" id="example2_info" role="status">
+                Tổng số: 4 trang
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-7">
+              <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                <ul class="pagination">
+                  <li class="paginate_button page-item previous disabled" id="example2_previous"><a
+                      aria-controls="example2"
+                      class="page-link"
+                      data-dt-idx="0"
+                      href="#"
+                      tabindex="0">Previous</a>
+                  </li>
+                  <li class="paginate_button page-item active"><a aria-controls="example2" class="page-link"
+                                                                  data-dt-idx="1"
+                                                                  href="#" tabindex="0">1</a></li>
+                  <li class="paginate_button page-item "><a aria-controls="example2" class="page-link" data-dt-idx="2"
+                                                            href="#" tabindex="0">2</a></li>
+                  <li class="paginate_button page-item "><a aria-controls="example2" class="page-link" data-dt-idx="3"
+                                                            href="#" tabindex="0">3</a></li>
+                  <li class="paginate_button page-item "><a aria-controls="example2" class="page-link" data-dt-idx="4"
+                                                            href="#" tabindex="0">4</a></li>
+                  <li class="paginate_button page-item "><a aria-controls="example2" class="page-link" data-dt-idx="5"
+                                                            href="#" tabindex="0">5</a></li>
+                  <li class="paginate_button page-item "><a aria-controls="example2" class="page-link" data-dt-idx="6"
+                                                            href="#" tabindex="0">6</a></li>
+                  <li class="paginate_button page-item next" id="example2_next"><a aria-controls="example2"
+                                                                                   class="page-link"
+                                                                                   data-dt-idx="7" href="#"
+                                                                                   tabindex="0">Next</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- ./row -->
+  </section>
+</div>
+
+<th:block layout:fragment="scriptFragment">
+  <script src="/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <script th:inline="javascript">
+    $(function () {
+      $("#example1").DataTable({
+        "responsive": true,
+        "autoWidth": false,
+        "paging": true,
+        "ordering": true,
+        "searching": true,
+      });
+    });
+  </script>
+</th:block>
+</body>
+</html>

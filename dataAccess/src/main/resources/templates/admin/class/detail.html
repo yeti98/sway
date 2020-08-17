@@ -1,0 +1,234 @@
+<!DOCTYPE HTML>
+<html
+    lang="en"
+    layout:decorate="~{layouts/admin}"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Quản lý bài viết - Hệ thống đào tạo ngoại ngữ Sway</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<th:block layout:fragment="customNavBar">
+  <div th:replace="fragments/admin/common :: navBarFragment"></div>
+</th:block>
+<div layout:fragment="content">
+  <div class="container" style="padding-top: 1%">
+    <section class="content">
+      <div class="row">
+        <div class="col">
+          <div class="">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="float-left">Thông tin lớp học</h5>
+                <div class="card-tools">
+                  <button class="btn btn-block btn-primary"
+                          data-toggle="modal"
+                          href="#findCourseModal"
+                          id="btnAddCourse" th:style="${swayClass.course == null ? 'display:inherit' : 'display:none'}"
+                          type="button">Thêm khóa học
+                  </button>
+                </div>
+                <div class="card-tools">
+                  <button class="btn btn-block btn-primary" data-toggle="modal"
+                          href="#findUserModal" id="btnUser" type="button">Thêm học viên
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <form id="swayClassForm" th:object="${swayClass}">
+                  <div class="form-group">
+                    <label for="swayClassId">Mã lớp</label>
+                    <input class="form-control" id="swayClassId" placeholder="" th:field="*{classId}">
+                  </div>
+                  <div class="form-group">
+                    <label for="swayClassName">Tên lớp</label>
+                    <input class="form-control" id="swayClassName" onchange="this.setCustomValidity('')"
+                           oninvalid="this.setCustomValidity('Vui lòng điền tên lớp học')" placeholder=""
+                           required
+                           th:field="*{name}" type="text">
+                  </div>
+                  <div class="form-group">
+                    <label for="swayClassName">Điểm tối thiểu</label>
+                    <input class="form-control" id="swayClassMinScore" step="0.1"
+                           max="10" min="0" required th:field="*{minScore}"
+                           type="number">
+                  </div>
+                  <div class="form-group">
+                    <label for="tblCourseInfo">Thông tin khóa học</label>
+                    <table class="table table-hover text-nowrap" id="tblCourseInfo">
+                      <thead>
+                      <tr role="row">
+                        <th aria-controls="example2" aria-label="Rendering engine: activate to sort column ascending"
+                            class="sorting" colspan="1" rowspan="1"
+                            tabindex="0">Mã
+                        </th>
+                        <th aria-controls="example2" aria-label="Browser: activate to sort column ascending"
+                            aria-sort="descending" class="sorting_desc" colspan="1"
+                            rowspan="1" tabindex="0">Tên
+                        </th>
+                        <th aria-controls="example2" aria-label="Platform(s): activate to sort column ascending"
+                            class="sorting"
+                            colspan="1" rowspan="1"
+                            tabindex="0">Số bài học
+                        </th>
+                        <th aria-controls="example2" aria-label="CSS grade: activate to sort column ascending"
+                            class="sorting"
+                            colspan="1" rowspan="1"
+                            tabindex="0">Cập nhật
+                        </th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:if="${swayClass.course}">
+                        <td>
+                          <p th:text="${swayClass.course.courseId}"></p>
+                        </td>
+                        <td>
+                          <p th:text="${swayClass.course.name}"></p>
+                        </td>
+                        <td>
+                          <p th:text="${swayClass.course.getNumberOfLesson()}"></p>
+                        </td>
+                        <td>
+                          <div style="display: ruby">
+                            <div id="editLesson">
+                              <a class="edit" th:href="@{'manage/courses/'+${swayClass.course.id}}">
+                                <i class="material-icons"
+                                   data-toggle="tooltip"
+                                   style="color: orange" title="Chỉnh sửa">&#xE254;
+                                </i>
+                              </a>
+                            </div>
+                            <div id="removeLesson" th:onclick="javascript:removeCourse();">
+                              <a class="delete" data-toggle="modal" href="#deleteLessonModal">
+                                <i class="material-icons"
+                                   data-toggle="tooltip" style="color: red"
+                                   title="Xóa">&#xE872;
+                                </i>
+                              </a>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="form-group">
+                    <label for="tblUserList">Danh sách học viên</label>
+                    <table class="table table-striped" id="tblUserList">
+                      <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tên học viên</th>
+                        <th scope="col">Username</th>
+                        <!--                        <th scope="col">Số bài tập</th>-->
+                        <th scope="col">Cập nhật</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <th:block th:each="student, stats : *{students}">
+                        <tr>
+                          <th scope="row"><span th:text="${stats.index + 1}"></span></th>
+                          <td><p th:text="${student.name}"></p></td>
+                          <td><p th:text="${student.username}"></p></td>
+                          <td>
+                            <div style="display: ruby">
+                              <div id="removeAnUser" th:attr="data-index=${stats.index}, data-student=${student}"
+                                   th:onclick="javascript:deleteRow(this.getAttribute('data-index'), this.getAttribute('data-student'));">
+                                <a class="delete" data-toggle="modal" href="#deleteUserModal">
+                                  <i class="material-icons"
+                                     data-toggle="tooltip" style="color: red"
+                                     title="Xóa khỏi lớp học này">&#xE872;
+                                  </i>
+                                </a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </th:block>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="modal-footer">
+                    <input class="btn btn-success" type="submit" value="Lưu">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="modal fade" id="findCourseModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form id="formAddCourse">
+            <div class="modal-header">
+              <h4>Tìm kiếm</h4>
+              <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="input-group input-group-sm" style="width: 100%;">
+                <input class="form-control float-right" id="txtKeyword" name="table_search" placeholder="Mã khóa học"
+                       type="text">
+                <div class="input-group-append">
+                  <button class="btn btn-default" id="btnFindTest" type="submit"><i class="fas fa-search"></i></button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="slCourseResult"></label>
+                <select class="form-control" id="slCourseResult">
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <input class="btn btn-success" id="addCourseResult" value="Thêm"/>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="findUserModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form id="formAddUser">
+            <div class="modal-header">
+              <h4>Thêm học viên</h4>
+              <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <div class="input-group-append">
+                  <input class="form-control" id="txtAddStudent" name="table_search" placeholder="username học viên"
+                         type="text">
+                  <button class="btn btn-default" formaction="" id="btnAddUser" name="addUser"><i
+                      class="fas fa-plus-circle"></i></button>
+                </div>
+              </div>
+              <p id="searchNotify" style="color: red; display: none">Không tìm thấy user</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<th:block layout:fragment="scriptFragment">
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    var swayClass = /*[[${swayClass}]]*/ 'default';
+
+    /*]]>*/
+
+    function removeCourse() {
+      swayClass.course = null;
+      $("#btnAddCourse").show();
+      $("#tblCourseInfo tbody").empty();
+    }
+  </script>
+  <script th:src="@{/admin/js/class/detail.js}"></script>
+</th:block>
+</body>
+</html>
