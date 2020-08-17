@@ -43,6 +43,6 @@ public class LessonController {
   public String getLessonDetail(Model model, @PathVariable(name = "id") Long id) {
     Lesson lesson = lessonService.getLessonByID(id);
     model.addAttribute("lesson", Entity2DTO.lesson2DTO(lesson));
-    return "/admin/lesson/detail";
+    return "admin/lesson/detail";
   }
 }

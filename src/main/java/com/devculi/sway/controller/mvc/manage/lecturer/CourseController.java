@@ -41,6 +41,6 @@ public class CourseController {
   public String getCourseDetail(Model model, @PathVariable(name = "id") Long id) {
     Course course = courseService.getCourseById(id);
     model.addAttribute("course", Entity2DTO.course2DTO(course));
-    return "/admin/course/detail";
+    return "admin/course/detail";
   }
 }
