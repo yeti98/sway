@@ -46,6 +46,7 @@ public class StuHomeworkController {
     if (classModel != null) {
       CourseModel course = classModel.getCourse();
       if (course != null) {
+        model.addAttribute("courseId", course.getId());
         model.addAttribute("courseName", course.getName());
         model.addAttribute("lessons", course.getLessons());
       } else {
@@ -57,7 +58,7 @@ public class StuHomeworkController {
     return "student/baitaplop/detail";
   }
 
-  @GetMapping("/{id}/bai-hoc/{lId}/bai-tap/{tId}")
+  @GetMapping("/{id}/{lId}/{tId}")
   public String viewTestDetail(Model model, @PathVariable(name = "id") Long classID, @PathVariable(name = "lId") Long lessonId, @PathVariable(name = "tId") Long testId){
     SwayClassModel classModel = classesMap.getOrDefault(classID, null);
     if (classModel != null) {
