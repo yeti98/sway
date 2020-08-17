@@ -9,23 +9,6 @@
     <p style="margin-top: 100px" th:text="${courseName}"></p>
     <div class="container">
       <div class="row">
-        <!--        <div class="col-sm">-->
-        <!--          <ul>-->
-        <!--            <li th:each="lesson, stat : ${lessons}">-->
-        <!--              <a><span th:text="${stat.index +1}+'. '+${lesson.name}"></span></a>-->
-        <!--              <ul>-->
-        <!--                <li th:each="test, tStat : ${lesson.tests}">-->
-        <!--                  <a><span th:text="${tStat.index +1}+'. '+${test.testName}"></span></a>-->
-        <!--                  <ul>-->
-        <!--                    <li th:each="question, qStat : ${test.questions}">-->
-        <!--                      <a><span th:text="${qStat.index +1}+'. '+${question.content}"></span></a>-->
-        <!--                    </li>-->
-        <!--                  </ul>-->
-        <!--                </li>-->
-        <!--              </ul>-->
-        <!--            </li>-->
-        <!--          </ul>-->
-        <!--        </div>-->
         <div class="col-sm">
           <form method="post" style="margin-bottom: 70px" th:action="@{~/submit-test}">
             <div class="container">
