@@ -74,6 +74,8 @@ public class SwayClassService implements IClassService {
     if (!nullPropertiesString.contains("course")) {
       Long courseId = upsertClassRequest.getCourse().getId();
       classById.setCourse(courseService.getCourseById(courseId));
+    } else {
+      classById.setCourse(null);
     }
     ArrayList<SwayUser> students = new ArrayList<>();
     List<Long> studentIdList =
