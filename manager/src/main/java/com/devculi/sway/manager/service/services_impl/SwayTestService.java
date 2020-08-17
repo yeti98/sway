@@ -49,6 +49,12 @@ public class SwayTestService implements ISwayTestService {
   }
 
   @Override
+  public Page<SwayTest> getTestonlineByPage(Integer page) {
+    Pageable pageable = PageRequest.of(page, TestPerPage, Sort.by("createdAt").descending());
+    return testRepository.findByTestTypeAndActive(TestType.TEST_ONLINE, true, pageable);
+  }
+
+  @Override
   public SwayTest createTestByType(TestType testType) {
     SwayTest swayTest = new SwayTest();
     swayTest.setTestType(testType);
@@ -72,7 +78,6 @@ public class SwayTestService implements ISwayTestService {
     if (!nullProperties.contains("testId")) {
       swayTest.setTestId(testId);
     }
-    swayTest.setTestType(TestType.HOMEWORK);
     Collection<Question> questions = new ArrayList<>();
     List<Long> questionIdList =
         updateHomeworkRequest.getQuestions().stream()
@@ -114,4 +119,5 @@ public class SwayTestService implements ISwayTestService {
     }
     return testRepository.findByTestIdLikeAndTypeEqual(keyword, type);
   }
+
 }

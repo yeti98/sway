@@ -12,4 +12,6 @@ public interface ILecturerService {
   Page<SwayClass> getClassesByPage(Long page);
 
   Page<SwayTest> getHomeworkByPage(Integer page);
+
+  Page<SwayTest> getTestonlineByPage(Integer page);
 }

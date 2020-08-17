@@ -17,7 +17,7 @@ public class SwayUser {
 
   private String name;
 
-  @Column( nullable = false, updatable = false)
+  @Column( nullable = false, updatable = false, unique = true)
   private String username;
 
   private String avatar;

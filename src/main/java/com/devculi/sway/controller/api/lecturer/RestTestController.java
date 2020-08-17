@@ -38,13 +38,25 @@ public class RestTestController extends BaseController {
   }
 
   @GetMapping
-  public PagingResponse<SwayTestModel> getTestByPage(
+  public PagingResponse<SwayTestModel> getTestByPage(@RequestParam(name = "testType", defaultValue = "HOMEWORK") TestType testType,
       @RequestParam(name = "page", defaultValue = "0") Integer page) {
-    Page<SwayTest> homeworks = lecturerService.getHomeworkByPage(page);
-    int totalPages = homeworks.getTotalPages();
+
+    Page<SwayTest> res = null;
+    switch (testType) {
+
+      case HOMEWORK:{
+        res = lecturerService.getHomeworkByPage(page);
+        break;
+      }
+      case TEST_ONLINE:{
+        res = lecturerService.getTestonlineByPage(page);
+        break;
+      }
+    }
+    int totalPages = res.getTotalPages();
     return new PagingResponse<>(
-        totalPages,
-        homeworks.getContent().stream().map(Entity2DTO::swayTest2DTO).collect(Collectors.toList()));
+            totalPages,
+            res.getContent().stream().map(Entity2DTO::swayTest2DTO).collect(Collectors.toList()));
   }
 
   @GetMapping("/create")

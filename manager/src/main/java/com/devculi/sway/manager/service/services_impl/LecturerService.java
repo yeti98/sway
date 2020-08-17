@@ -29,6 +29,11 @@ public class LecturerService implements ILecturerService {
         return testService.getHomeworkByPage(page);
     }
 
+    @Override
+    public Page<SwayTest> getTestonlineByPage(Integer page) {
+        return testService.getTestonlineByPage(page);
+    }
+
     public List<SwayTest> searchByTestId(String keyword) {
         return null;
     }
