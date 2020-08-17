@@ -1,4 +1,4 @@
-package com.devculi.sway.interceptor.attr;
+package com.devculi.sway.interceptor.attr.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;

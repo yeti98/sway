@@ -3,6 +3,7 @@ package com.devculi.sway.controller.mvc.manage.lecturer;
 import com.devculi.sway.business.shared.model.CourseModel;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
 import com.devculi.sway.dataaccess.entity.Course;
+import com.devculi.sway.interceptor.attr.annotations.ManageCoursesPage;
 import com.devculi.sway.manager.service.interfaces.ICourseService;
 import com.devculi.sway.sharedmodel.response.common.PagingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/admin/manage/courses")
+@ManageCoursesPage
 public class CourseController {
   @Autowired ICourseService courseService;
 

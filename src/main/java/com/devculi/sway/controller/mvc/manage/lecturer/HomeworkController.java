@@ -5,6 +5,7 @@ import com.devculi.sway.business.shared.utils.Entity2DTO;
 import com.devculi.sway.controller.api.lecturer.RestTestController;
 import com.devculi.sway.dataaccess.entity.SwayTest;
 import com.devculi.sway.dataaccess.entity.enums.TestType;
+import com.devculi.sway.interceptor.attr.annotations.ManageHomeworkPage;
 import com.devculi.sway.manager.service.services_impl.SwayTestService;
 import com.devculi.sway.sharedmodel.response.common.PagingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/admin/manage/homeworks")
+@ManageHomeworkPage
 public class HomeworkController {
   @Autowired RestTestController testController;
   @Autowired SwayTestService testService;
@@ -27,6 +29,7 @@ public class HomeworkController {
     PagingResponse<SwayTestModel> testByPage = testController.getTestByPage(page);
     model.addAttribute("totalPages", testByPage.getTotalPage());
     model.addAttribute("homeworks", testByPage.getContent());
+    model.addAttribute("current",page);
     return "admin/swaytest/homework";
   }
 
