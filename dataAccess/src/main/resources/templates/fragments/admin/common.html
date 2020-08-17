@@ -78,7 +78,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-              <a class="nav-link active" href="manage/users">
+              <a href="manage/users" th:class="${#httpServletRequest.requestURI.contains('manage/users')} ? 'nav-link active' : 'nav-link'">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Tài khoản</p>
               </a>
@@ -90,43 +90,43 @@
             <!--                    </a>-->
             <!--                  </li>-->
             <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">
-              <a class="nav-link" href="manage/classes">
+              <a href="manage/classes" th:class="${#httpServletRequest.requestURI.contains('manage/classes')} ? 'nav-link active' : 'nav-link'">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Lớp học</p>
               </a>
             </li>
             <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">
-              <a class="nav-link" href="manage/courses">
+              <a href="manage/courses" th:class="${#httpServletRequest.requestURI.contains('manage/courses')} ? 'nav-link active' : 'nav-link'">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Khóa học</p>
               </a>
             </li>
             <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">
-              <a class="nav-link" href="manage/lessons">
+              <a href="manage/lessons" th:class="${#httpServletRequest.requestURI.contains('manage/lessons')} ? 'nav-link active' : 'nav-link'">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Bài học</p>
               </a>
             </li>
             <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">
-              <a class="nav-link" href="manage/homeworks">
+              <a href="manage/homeworks" th:class="${#httpServletRequest.requestURI.contains('manage/homeworks')} ? 'nav-link active' : 'nav-link'">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Bài tập lớp</p>
               </a>
             </li>
             <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">
-              <a class="nav-link" href="manage/testonline">
+              <a href="manage/testonline" th:class="${#httpServletRequest.requestURI.contains('manage/testonline')} ? 'nav-link active' : 'nav-link'">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Test online</p>
               </a>
             </li>
             <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">
-              <a class="nav-link" href="manage/questions">
+              <a href="manage/questions" th:class="${#httpServletRequest.requestURI.contains('manage/questions')} ? 'nav-link active' : 'nav-link'">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Câu hỏi</p>
               </a>
             </li>
             <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">
-              <a class="nav-link" href="manage/posts">
+              <a href="manage/posts" th:class="${#httpServletRequest.requestURI.contains('manage/posts')} ? 'nav-link active' : 'nav-link'">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Bài viết</p>
               </a>

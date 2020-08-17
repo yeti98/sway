@@ -4,6 +4,7 @@ import com.devculi.sway.business.shared.model.QuestionModel;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
 import com.devculi.sway.controller.api.lecturer.RestQuestionController;
 import com.devculi.sway.dataaccess.entity.Question;
+import com.devculi.sway.interceptor.attr.annotations.ManageQuestionsPage;
 import com.devculi.sway.sharedmodel.request.UpsertQuestionRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -16,6 +17,7 @@ import java.util.LinkedList;
 
 @Controller
 @RequestMapping("/admin/manage/questions")
+@ManageQuestionsPage
 public class LecturerQuestionController {
   @Autowired RestQuestionController questionController;
   private LinkedList<QuestionModel> recentAddedQuestion = new LinkedList<>();

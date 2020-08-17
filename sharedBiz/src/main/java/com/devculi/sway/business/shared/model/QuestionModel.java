@@ -98,4 +98,8 @@ public class QuestionModel {
   public String toString() {
     return "";
   }
+
+  public String getJsonString(){
+    return GsonUtils.toJson(this);
+  }
 }

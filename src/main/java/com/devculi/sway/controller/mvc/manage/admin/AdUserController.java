@@ -4,6 +4,7 @@ import com.devculi.sway.business.shared.utils.Entity2DTO;
 import com.devculi.sway.controller.api.admin.AdminController;
 import com.devculi.sway.dataaccess.entity.Question;
 import com.devculi.sway.dataaccess.entity.SwayUser;
+import com.devculi.sway.interceptor.attr.annotations.ManageUsersPage;
 import com.devculi.sway.sharedmodel.model.UserModel;
 import com.devculi.sway.sharedmodel.request.UpsertQuestionRequest;
 import com.devculi.sway.sharedmodel.request.UpsertUserRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin/manage/users")
+@ManageUsersPage
 public class AdUserController {
   @Autowired AdminController adminController;
   //  @Autowired IAdminService adminService;
@@ -26,6 +28,7 @@ public class AdUserController {
     PagingResponse<UserModel> usersByPage = adminController.getUsersByPage(page);
     model.addAttribute("totalPages", usersByPage.getTotalPage());
     model.addAttribute("users", usersByPage.getContent());
+    model.addAttribute("current",page);
     return "admin/users";
   }
 

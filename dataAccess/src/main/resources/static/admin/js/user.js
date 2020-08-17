@@ -90,6 +90,7 @@ $(document).ready(function () {
     const $form = $(this);
     const $inputs = $form.find("input, select, button, textarea");
 
+    const name = "";
     const username = $("#addUsername").val();
     const password = $("#addPassword").val();
     const role = $("#addRole").val();
@@ -97,7 +98,7 @@ $(document).ready(function () {
 
     $inputs.prop("disabled", true);
     const addUser = JSON.stringify({
-      username, password, role, status
+      name,username, password, role, status
     });
 
     console.log(addUser);

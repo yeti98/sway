@@ -106,13 +106,13 @@
             <p class="float-left" th:text="'Tổng số: '+ ${totalPages} + ' trang'"></p>
             <ul class="pagination pagination-sm m-0 float-right" th:if="${totalPages} > 1">
               <li class="page-item" th:if="${current} > 0">
-                <a class="page-link" th:href="'manage/courses?page=' + (${current} - 1) ">«</a>
+                <a class="page-link" th:href="'manage/classes?page=' + (${current} - 1) ">«</a>
               </li>
               <li class="page-item active">
-                <a class="page-link" th:href="'manage/courses?page=' + ${current}" th:text="${current} + 1"></a>
+                <a class="page-link" th:href="'manage/classes?page=' + ${current}" th:text="${current} + 1"></a>
               </li>
               <li class="page-item" th:if="${current} +1 < ${totalPages} ">
-                <a class="page-link" th:href="'manage/courses?page=' + (${current} - 1) ">»</a>
+                <a class="page-link" th:href="'manage/classes?page=' + (${current} + 1) ">»</a>
               </li>
             </ul>
           </div>

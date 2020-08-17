@@ -100,7 +100,7 @@
                 <a class="page-link" th:href="'manage/lessons?page=' + ${current}" th:text="${current} + 1"></a>
               </li>
               <li class="page-item" th:if="${current} +1 < ${totalPages} ">
-                <a class="page-link" th:href="'manage/lessons?page=' + (${current} - 1) ">»</a>
+                <a class="page-link" th:href="'manage/lessons?page=' + (${current} + 1) ">»</a>
               </li>
             </ul>
           </div>

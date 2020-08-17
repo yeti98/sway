@@ -1,6 +1,6 @@
-package com.devculi.sway.interceptor.attr;
+package com.devculi.sway.interceptor.attr.controller;
 
-import com.devculi.sway.interceptor.attr.annotations.ManageClassPage;
+import com.devculi.sway.interceptor.attr.annotations.HomePage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
-@ControllerAdvice(annotations = ManageClassPage.class)
-public class ManageClassPageAttrController {
+@ControllerAdvice(annotations = HomePage.class)
+public class HomePageAttrController {
 
-  @Value("${site.page.manageClass.title}")
+  @Value("${site.page.homepage.title}")
   private String title;
 
   @ModelAttribute(name = "pageTitle")
