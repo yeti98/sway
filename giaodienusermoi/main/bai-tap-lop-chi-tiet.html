@@ -77,8 +77,8 @@
   <button class="btn btn--primary" aria-controls="sidebar">Show sidebar</button>
 </div>
 
-<div class="flex@md flex-row-reverse@md">
-  <aside class="sidebar sidebar--static@md js-sidebar" data-static-class="position-relative z-index-1 flex-grow max-width-xxxxs border-left" id="sidebar" aria-labelledby="sidebarTitle">
+<div class="flex@md flex-row-reverse@md max-height-100vh">
+  <aside style="overflow-y: scroll;" class="text-sm sidebar sidebar--static@md js-sidebar" data-static-class="position-relative z-index-1 flex-grow max-width-xxxxs border-left" id="sidebar" aria-labelledby="sidebarTitle">
     <div class="sidebar__panel">
       <header class="sidebar__header z-index-2">
         <h1 class="text-md text-truncate" id="sidebarTitle">Sidebar title</h1>
@@ -176,15 +176,15 @@
     </div>
   </aside>
 
-  <main class="position-relative z-index-1 flex-grow height-100vh">
+  <main class="position-relative z-index-1 flex-grow" style="overflow-y: scroll">
     <!-- start main content -->
     <div class="text-component padding-md text-sm">
-      <fieldset>
+      <fieldset class="margin-top-sm">
         <legend class="form-legend text-bold">Câu hỏi 1</legend>
 
         <div class="choice-btns gap-xxs js-choice-btns">
 
-          <div class="choice-btn padding-sm js-choice-btn">
+          <div class="choice-btn padding-x-xs js-choice-btn">
             <!-- fallback -->
             <div class="choice-btn__fallback">
               <input type="radio" name="choice-radio-buttons" id="choice-radio-button-1" checked>
@@ -200,7 +200,7 @@
 
               <div class="flex flex-wrap gap-xs justify-between">
                 <div>
-                  <p class="color-contrast-higher">Standard delivery</p>
+                  <p class="color-contrast-higher margin-top-sm">Standard delivery</p>
 <!--                  <p class="color-contrast-medium text-sm">4-5 days</p>-->
                 </div>
 <!--                <p class="color-contrast-higher">$9.00</p>-->
@@ -208,7 +208,7 @@
             </div>
           </div>
 
-          <div class="choice-btn padding-sm js-choice-btn">
+          <div class="choice-btn padding-x-xs js-choice-btn">
             <!-- fallback -->
             <div class="choice-btn__fallback">
               <input type="radio" name="choice-radio-buttons" id="choice-radio-button-2" checked>
@@ -224,7 +224,172 @@
 
               <div class="flex flex-wrap gap-xs justify-between">
                 <div>
-                  <p class="color-contrast-higher">Standard delivery</p>
+                  <p class="color-contrast-higher margin-top-sm">Standard delivery</p>
+                  <!--                  <p class="color-contrast-medium text-sm">4-5 days</p>-->
+                </div>
+                <!--                <p class="color-contrast-higher">$9.00</p>-->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </fieldset>
+      <fieldset class="margin-top-sm">
+        <legend class="form-legend text-bold">Câu hỏi 1</legend>
+
+        <div class="choice-btns gap-xxs js-choice-btns">
+
+          <div class="choice-btn padding-x-xs js-choice-btn">
+            <!-- fallback -->
+            <div class="choice-btn__fallback">
+              <input type="radio" name="choice-radio-buttons" id="choice-radio-button-2-1" checked>
+              <label for="choice-radio-button-1">Standard delivery, 4-5 days, $9.00</label>
+            </div>
+
+            <!-- custom input -->
+            <div class="choice-btn__grid" aria-hidden="true">
+              <div class="choice-btn__input choice-btn__input--radio">
+                <svg class="icon" viewBox="0 0 16 16">
+                  <circle fill="currentColor" cx="8" cy="8" r="4" /></svg>
+              </div>
+
+              <div class="flex flex-wrap gap-xs justify-between">
+                <div>
+                  <p class="color-contrast-higher margin-top-sm">Standard delivery</p>
+                  <!--                  <p class="color-contrast-medium text-sm">4-5 days</p>-->
+                </div>
+                <!--                <p class="color-contrast-higher">$9.00</p>-->
+              </div>
+            </div>
+          </div>
+
+          <div class="choice-btn padding-x-xs js-choice-btn">
+            <!-- fallback -->
+            <div class="choice-btn__fallback">
+              <input type="radio" name="choice-radio-buttons" id="choice-radio-button-2-2" checked>
+              <label for="choice-radio-button-1">Standard delivery, 4-5 days, $9.00</label>
+            </div>
+
+            <!-- custom input -->
+            <div class="choice-btn__grid" aria-hidden="true">
+              <div class="choice-btn__input choice-btn__input--radio">
+                <svg class="icon" viewBox="0 0 16 16">
+                  <circle fill="currentColor" cx="8" cy="8" r="4" /></svg>
+              </div>
+
+              <div class="flex flex-wrap gap-xs justify-between">
+                <div>
+                  <p class="color-contrast-higher margin-top-sm">Standard delivery</p>
+                  <!--                  <p class="color-contrast-medium text-sm">4-5 days</p>-->
+                </div>
+                <!--                <p class="color-contrast-higher">$9.00</p>-->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </fieldset>
+      <fieldset class="margin-top-sm">
+        <legend class="form-legend text-bold">Câu hỏi 1</legend>
+
+        <div class="choice-btns gap-xxs js-choice-btns">
+
+          <div class="choice-btn padding-x-xs js-choice-btn">
+            <!-- fallback -->
+            <div class="choice-btn__fallback">
+              <input type="radio" name="choice-radio-buttons" id="choice-radio-button-3-1" checked>
+              <label for="choice-radio-button-1">Standard delivery, 4-5 days, $9.00</label>
+            </div>
+
+            <!-- custom input -->
+            <div class="choice-btn__grid" aria-hidden="true">
+              <div class="choice-btn__input choice-btn__input--radio">
+                <svg class="icon" viewBox="0 0 16 16">
+                  <circle fill="currentColor" cx="8" cy="8" r="4" /></svg>
+              </div>
+
+              <div class="flex flex-wrap gap-xs justify-between">
+                <div>
+                  <p class="color-contrast-higher margin-top-sm">Standard delivery</p>
+                  <!--                  <p class="color-contrast-medium text-sm">4-5 days</p>-->
+                </div>
+                <!--                <p class="color-contrast-higher">$9.00</p>-->
+              </div>
+            </div>
+          </div>
+
+          <div class="choice-btn padding-x-xs js-choice-btn">
+            <!-- fallback -->
+            <div class="choice-btn__fallback">
+              <input type="radio" name="choice-radio-buttons" id="choice-radio-button-3-2" checked>
+              <label for="choice-radio-button-1">Standard delivery, 4-5 days, $9.00</label>
+            </div>
+
+            <!-- custom input -->
+            <div class="choice-btn__grid" aria-hidden="true">
+              <div class="choice-btn__input choice-btn__input--radio">
+                <svg class="icon" viewBox="0 0 16 16">
+                  <circle fill="currentColor" cx="8" cy="8" r="4" /></svg>
+              </div>
+
+              <div class="flex flex-wrap gap-xs justify-between">
+                <div>
+                  <p class="color-contrast-higher margin-top-sm">Standard delivery</p>
+                  <!--                  <p class="color-contrast-medium text-sm">4-5 days</p>-->
+                </div>
+                <!--                <p class="color-contrast-higher">$9.00</p>-->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </fieldset>
+      <fieldset class="margin-top-sm">
+        <legend class="form-legend text-bold">Câu hỏi 1</legend>
+
+        <div class="choice-btns gap-xxs js-choice-btns">
+
+          <div class="choice-btn padding-x-xs js-choice-btn">
+            <!-- fallback -->
+            <div class="choice-btn__fallback">
+              <input type="radio" name="choice-radio-buttons" id="choice-radio-button-4-1" checked>
+              <label for="choice-radio-button-1">Standard delivery, 4-5 days, $9.00</label>
+            </div>
+
+            <!-- custom input -->
+            <div class="choice-btn__grid" aria-hidden="true">
+              <div class="choice-btn__input choice-btn__input--radio">
+                <svg class="icon" viewBox="0 0 16 16">
+                  <circle fill="currentColor" cx="8" cy="8" r="4" /></svg>
+              </div>
+
+              <div class="flex flex-wrap gap-xs justify-between">
+                <div>
+                  <p class="color-contrast-higher margin-top-sm">Standard delivery</p>
+                  <!--                  <p class="color-contrast-medium text-sm">4-5 days</p>-->
+                </div>
+                <!--                <p class="color-contrast-higher">$9.00</p>-->
+              </div>
+            </div>
+          </div>
+
+          <div class="choice-btn padding-x-xs js-choice-btn">
+            <!-- fallback -->
+            <div class="choice-btn__fallback">
+              <input type="radio" name="choice-radio-buttons" id="choice-radio-button-4-2" checked>
+              <label for="choice-radio-button-1">Standard delivery, 4-5 days, $9.00</label>
+            </div>
+
+            <!-- custom input -->
+            <div class="choice-btn__grid" aria-hidden="true">
+              <div class="choice-btn__input choice-btn__input--radio">
+                <svg class="icon" viewBox="0 0 16 16">
+                  <circle fill="currentColor" cx="8" cy="8" r="4" /></svg>
+              </div>
+
+              <div class="flex flex-wrap gap-xs justify-between">
+                <div>
+                  <p class="color-contrast-higher margin-top-sm">Standard delivery</p>
                   <!--                  <p class="color-contrast-medium text-sm">4-5 days</p>-->
                 </div>
                 <!--                <p class="color-contrast-higher">$9.00</p>-->
@@ -240,11 +405,11 @@
 </div>
 
 <!--FOOTER-->
-<footer class="main-footer padding-y-lg">
+<footer class="main-footer padding-y-lg bg-contrast-lower">
   <div class="container max-width-lg">
     <div class="grid gap-lg">
       <div class="col-6@lg order-2@lg flex@lg justify-end@lg">
-        <section class="newsletter padding-y-xl text-center">
+        <section class="newsletter text-center">
           <div class="container max-width-xs">
             <form class="grid gap-xxs">
               <div class="col@xs min-width-0">
@@ -256,7 +421,7 @@
               </div>
 
               <div>
-                <button class="btn btn--primary width-100% height-100%">Subscribe</button>
+                <button class="btn btn--primary width-100% height-100%">Nhận tư vấn</button>
               </div>
             </form>
 
