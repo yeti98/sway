@@ -1,49 +1,30 @@
-package com.devculi.sway.dataaccess.entity;
+package com.devculi.sway.business.shared.model;
 
-import com.sun.istack.Nullable;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.UpdateTimestamp;
+import com.devculi.sway.sharedmodel.model.UserModel;
+import com.devculi.sway.utils.GsonUtils;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
-import javax.persistence.*;
+
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-@Entity
-@Table(name = "post", indexes = {
-        @Index(name = "post_slug_idx", unique = true, columnList = "slug")
-})
-public class Post {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class PostModel {
+
     private long id;
-
-    @Column(columnDefinition = "text")
-    private String coverPhoto;
-
-    private String slug;
-
-    @Column(nullable = false)
     private String Menu;
-
-    @Column(nullable = false)
+    private String coverPhoto;
     private String title;
-
-    @Column(nullable = false)
-    @Type(type = "text")
     private String contents;
-
-    @OneToOne
-    private SwayUser author;
-
-    @CreationTimestamp
-    @Column(nullable = false, updatable = false)
+    private UserModel author;
     private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    @Column(nullable = false)
+    private String createDay;
     private LocalDateTime updatedAt;
+    private String updateDay;
 
-    public Post() {
+
+
+    public PostModel() {
     }
 
     public String getMenu() {
@@ -56,14 +37,6 @@ public class Post {
 
     public String getCoverPhoto() {
         return coverPhoto;
-    }
-
-    public String getSlug() {
-        return slug;
-    }
-
-    public void setSlug(String slug) {
-        this.slug = slug;
     }
 
     public void setCoverPhoto(String coverPhoto) {
@@ -82,6 +55,22 @@ public class Post {
         return createdAt;
     }
 
+    public String getCreateDay() {
+        return DateTimeFormatter.ofPattern("dd/MM/yyyy").format(createdAt);
+    }
+
+    public void setCreateDay(String createDay) {
+        this.createDay = createDay;
+    }
+
+    public String getUpdateDay() {
+        return DateTimeFormatter.ofPattern("dd/MM/yyyy").format(updatedAt);
+    }
+
+    public void setUpdateDay(String updateDay) {
+        this.updateDay = updateDay;
+    }
+
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
@@ -92,6 +81,10 @@ public class Post {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getJsonString() {
+        return GsonUtils.toJson(this);
     }
 
     public long getId() {
@@ -110,11 +103,11 @@ public class Post {
         this.contents = contents;
     }
 
-    public SwayUser getAuthor() {
+    public UserModel getAuthor() {
         return author;
     }
 
-    public void setAuthor(SwayUser author) {
+    public void setAuthor(UserModel author) {
         this.author = author;
     }
 }

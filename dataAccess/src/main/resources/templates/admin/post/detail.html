@@ -7,7 +7,7 @@
 <head>
   <title>Quản lý bài viết - Hệ thống đào tạo ngoại ngữ Sway</title>
 </head>
-<body>
+<body onload="getEditPost()">
 <th:block layout:fragment="customNavBar">
   <div th:replace="fragments/admin/common :: navBarFragment"></div>
 </th:block>
@@ -16,33 +16,42 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card card-outline card-info">
-          <div class="card-header">
+          <!-- /.card-header -->
+          <div class="card-body pad">
+
+            <h3>Cover photo</h3>
+            <input id="coverPhoto" type="file" accept="image/x-png,image/gif,image/jpeg" onchange="encodeImageFileAsURL();"/>
+
+            <input id="title" class="form-control form-control-lg" placeholder="Tiêu đề" type="text">
+            <div class="form-group" style="margin-top: 10px;">
+              <select class="form-control" id="menu">
+                <option value="Homepage">Trang chủ</option>
+                <option value="Homework">Bài tập</option>
+                <option value="id">Đối tác</option>
+              </select>
+            </div>
+            <div class="mb-3" style="height: 350px">
+              <div id="inputContent" class="inputContent"></div>
+            </div>
+
+          </div>
+          <input type="hidden" id="idPost"/>
+          <div class="card-footer">
             <h3 class="card-title">
             </h3>
             <!-- tools box -->
             <div class="card-tools">
-              <button type="button" class="btn btn-block btn-success">Lưu</button>
+              <button type="button" id="btnsubmit" style="  width: 100px; float: right;"
+                      class="btn btn-block btn-success">Lưu
+              </button>
+            </div>
+
+            <div class="card-tools">
+              <button type="button" id="btnedit" style="  width: 100px; float: right;"
+                      class="btn btn-block btn-success">Lưu
+              </button>
             </div>
             <!-- /. tools -->
-          </div>
-          <!-- /.card-header -->
-          <div class="card-body pad">
-            <input id="txtTieuDe" class="form-control form-control-lg" placeholder="Tiêu đề" type="text">
-            <div class="form-group">
-              <select class="form-control" id="exampleFormControlSelect2">
-                <option>Trang chủ</option>
-                <option>Bài tập</option>
-                <option>Đối tác</option>
-              </select>
-            </div>
-            <div class="mb-3">
-                <textarea class="textarea" placeholder="Place some text here"
-                          style="width: 100%; height: 100vh; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-            </div>
-            <p class="text-sm mb-0">
-              Editor <a href="https://github.com/summernote/summernote">Documentation and license
-              information.</a>
-            </p>
           </div>
         </div>
       </div>
@@ -54,11 +63,15 @@
 
 <th:block layout:fragment="scriptFragment">
   <script th:inline="javascript">
-    $(function () {
-      // Summernote
-      $('.textarea').summernote()
-    })
+      $(function () {
+          // Summernote
+          $('.inputContent').summernote({
+              height: 300,
+
+          });
+      })
   </script>
+  <script th:src="@{/admin/js/post/detail.js}"></script>
 </th:block>
 </body>
 </html>

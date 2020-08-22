@@ -13,6 +13,7 @@ import com.devculi.sway.sharedmodel.exceptions.RecordNotFoundException;
 import com.devculi.sway.sharedmodel.response.common.PagingResponse;
 import com.devculi.sway.utils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,6 +30,7 @@ import java.util.stream.Collectors;
 @Service
 public class LessonService implements ILessonService {
   @Autowired LessonRepository lessonRepository;
+
   @Autowired ISwayTestService testService;
 
   @Value("${site.admin.pagination.limit.lesson}")

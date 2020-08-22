@@ -1,5 +1,6 @@
 package com.devculi.sway.sharedmodel.model;
 
+import com.devculi.sway.sharedmodel.utils.GsonUtils;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 
@@ -27,18 +28,8 @@ public class UserModel {
     this.role = role;
   }
 
-  @Override
-  public String toString() {
-    return "{" +
-            "\"id\":" + id +
-            ", \"name\":\"" + name + '\"' +
-            ", \"username\":\"" + username + '\"' +
-            ", \"avatar\":\"" + avatar + '\"' +
-            ", \"description\":\"" + description + '\"' +
-            ", \"status\":\"" + status + '\"' +
-            ", \"type\":\"" + type + '\"' +
-            ", \"role\":\"" + role + '\"' +
-            '}';
+  public String getJsonString() {
+    return GsonUtils.toJson(this);
   }
 
   public Long getId() {

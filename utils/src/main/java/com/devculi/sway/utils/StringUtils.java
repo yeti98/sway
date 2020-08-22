@@ -6,8 +6,12 @@ import java.math.BigDecimal;
 import java.net.InetAddress;
 import java.nio.charset.CharsetEncoder;
 import java.nio.charset.StandardCharsets;
+import java.text.Normalizer;
 import java.text.NumberFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -255,5 +259,49 @@ public class StringUtils {
     } catch (java.security.NoSuchAlgorithmException e) {
     }
     return null;
+  }
+
+
+
+  public static String convertToLatin(String str) {
+    str = str.replaceAll("à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ", "a");
+    str = str.replaceAll("è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ", "e");
+    str = str.replaceAll("ì|í|ị|ỉ|ĩ", "i");
+    str = str.replaceAll("ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ", "o");
+    str = str.replaceAll("ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ", "u");
+    str = str.replaceAll("ỳ|ý|ỵ|ỷ|ỹ", "y");
+    str = str.replaceAll("đ", "d");
+
+    str = str.replaceAll("À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ", "A");
+    str = str.replaceAll("È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ", "E");
+    str = str.replaceAll("Ì|Í|Ị|Ỉ|Ĩ", "I");
+    str = str.replaceAll("Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ", "O");
+    str = str.replaceAll("Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ", "U");
+    str = str.replaceAll("Ỳ|Ý|Ỵ|Ỷ|Ỹ", "Y");
+    str = str.replaceAll("Đ", "D");
+    return str;
+  }
+
+  public static String CurrentDateTime() {
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd-hhmmss");
+    LocalDateTime now = LocalDateTime.now();
+    return(dtf.format(now));
+  }
+
+  public static  String makeSlug(String input) {
+    final Pattern NONLATIN = Pattern.compile("[^\\w-]");
+    final Pattern WHITESPACE = Pattern.compile("[\\s]");
+
+    input = convertToLatin(input);
+    String nowhitespace = WHITESPACE.matcher(input).replaceAll("-");
+    String normalized = Normalizer.normalize(nowhitespace, Normalizer.Form.NFD);
+    String slug = NONLATIN.matcher(normalized).replaceAll("");
+    slug.toLowerCase(Locale.ENGLISH);
+    slug = slug + "-" + CurrentDateTime();
+    return slug;
+  }
+
+  public static void main(String[] args) {
+
   }
 }

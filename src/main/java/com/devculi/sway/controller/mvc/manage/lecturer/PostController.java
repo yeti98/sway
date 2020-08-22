@@ -1,6 +1,11 @@
 package com.devculi.sway.controller.mvc.manage.lecturer;
 
+import com.devculi.sway.business.shared.model.LessonModel;
+import com.devculi.sway.business.shared.model.PostModel;
 import com.devculi.sway.interceptor.attr.annotations.ManagePostsPage;
+import com.devculi.sway.manager.service.interfaces.IPostService;
+import com.devculi.sway.sharedmodel.response.common.PagingResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,17 +17,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/admin/manage/posts")
 @ManagePostsPage
 public class PostController {
+  @Autowired
+  IPostService postService;
+
   @GetMapping
-  public String renderHomeworkView(
+  public String renderPostView(
       Model model, @RequestParam(name = "page", defaultValue = "0") Integer page) {
+    PagingResponse<PostModel> PostByPage = postService.getPostByPage(page);
+    model.addAttribute("totalPages", PostByPage.getTotalPage());
+    model.addAttribute("posts", PostByPage.getContent());
+    model.addAttribute("current", page);
     return "admin/post/index";
   }
 
   // Post DETAIL
-  @GetMapping("/{id}")
-  public String create(Model model, @PathVariable(name = "id") Long id) {
-    //        SwayTest newSwayTest = testService.getTestByID(id);
-    //        model.addAttribute("swayTest", Entity2DTO.swayTest2DTO(newSwayTest));
+  @GetMapping("/create")
+  public String create(Model model) {
+
     return "admin/post/detail";
   }
 }
