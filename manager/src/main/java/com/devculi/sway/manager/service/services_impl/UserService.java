@@ -124,6 +124,16 @@ public class UserService implements IUserService {
     return new ArrayList<>();
   }
 
+  @Override
+  public List<SwayUser> searchBy(String keyword, boolean isIgnoreCase) {
+    if (isIgnoreCase) {
+      keyword = "%" + keyword.toLowerCase() + "%";
+    } else {
+      keyword = "%" + keyword + "%";
+    }
+    return userRepository.findByUsernameOrNameLike(keyword);
+  }
+
   private boolean isAnonymousAuthenticationToken(Authentication authentication) {
     return authentication instanceof AnonymousAuthenticationToken;
   }

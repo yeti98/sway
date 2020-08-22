@@ -124,4 +124,14 @@ public class SwayClassService implements IClassService {
     }
     return new ArrayList<>();
   }
+
+  @Override
+  public List<SwayClass> searchBy(String keyword, boolean isIgnoreCase) {
+    if (isIgnoreCase) {
+      keyword = "%" + keyword.toLowerCase() + "%";
+    } else {
+      keyword = "%" + keyword + "%";
+    }
+    return classRepository.findByClassIdLike(keyword);
+  }
 }

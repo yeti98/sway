@@ -19,5 +19,5 @@ public interface ILessonService {
 
   Long deleteLessonById(Long id);
 
-  List<Lesson> searchBy(String keyword, boolean b);
+  List<Lesson> searchBy(String keyword, boolean isIgnoreCase);
 }

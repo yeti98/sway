@@ -6,7 +6,6 @@ import com.devculi.sway.business.shared.request.UpsertCourseRequest;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
 import com.devculi.sway.controller.api.BaseController;
 import com.devculi.sway.dataaccess.entity.Course;
-import com.devculi.sway.dataaccess.entity.Lesson;
 import com.devculi.sway.manager.service.interfaces.ICourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

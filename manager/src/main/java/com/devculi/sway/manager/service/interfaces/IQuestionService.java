@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public interface IQuestionService {
@@ -18,4 +19,6 @@ public interface IQuestionService {
     Long deleteQuestion(Long questionID);
 
     Collection<Question> importQuestionFormExcel(Long targetID, MultipartFile file);
+
+    List<Question> searchBy(String keyword, boolean isIgnoreCase);
 }

@@ -11,6 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/api/classes")
 @RequireRoleAdmin
@@ -37,5 +41,15 @@ public class RestClassController extends BaseController {
   public ResponseEntity deleteTestByID(@PathVariable(name = "id") Long id) {
     Long deletedId = classService.deleteClassById(id);
     return ok(deletedId);
+  }
+
+  @GetMapping("/search")
+  public ResponseEntity<Object> searchByKeyword(
+          @RequestParam(name = "query", defaultValue = "") String keyword) {
+    if (keyword.length() == 0) {
+      return ok(new ArrayList<>());
+    }
+    List<SwayClass> results = classService.searchBy(keyword, true);
+    return ok(results.stream().map(Entity2DTO::class2DTO).collect(Collectors.toList()));
   }
 }

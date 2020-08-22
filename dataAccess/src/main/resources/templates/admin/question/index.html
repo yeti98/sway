@@ -19,8 +19,8 @@
             <h3 class="card-title">Danh sách câu hỏi</h3>
             <div class="card-tools">
               <div class="input-group input-group-sm" style="width: 150px;">
-                <input class="form-control float-right" name="table_search" placeholder="mã/nội dung" type="text">
-                <div class="input-group-append">
+                <input class="form-control float-right" name="table_search" placeholder="mã/nội dung" type="text" id="txtKeyword">
+                <div class="input-group-append" id="btnSearchQuestion">
                   <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
                 </div>
               </div>
@@ -29,7 +29,7 @@
 
           <!-- /.card-header -->
           <div class="card-body table-responsive p-0">
-            <table class="table table-hover text-nowrap">
+            <table class="table table-hover text-nowrap" id="tblQuestion">
               <thead>
               <tr>
                 <th>Mã câu hỏi</th>
