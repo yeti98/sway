@@ -21,4 +21,6 @@ public interface IClassService {
   Long deleteClassById(Long id);
 
   List<SwayClass> getJoinedClasses();
+
+  List<SwayClass> searchBy(String keyword, boolean isIgnoreCase);
 }

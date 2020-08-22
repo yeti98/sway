@@ -1,30 +1,66 @@
+function isEmpty(str) {
+  return (!str || 0 === str.length);
+}
+
+function isBlank(str) {
+  return (!str || /^\s*$/.test(str));
+}
+
+function isAllBlank(...strs) {
+  for (let idx in strs) {
+    if (!isBlank(String(strs[idx]))) {
+      return false;
+    }
+  }
+  return true;
+}
+
 $(document).ready(function () {
   // Activate tooltip
   $('[data-toggle="tooltip"]').tooltip();
+
+  // Select/Deselect checkboxes
+  var checkbox = $('table tbody input[type="checkbox"]');
+  $("#selectAll").click(function () {
+    if (this.checked) {
+      checkbox.each(function () {
+        this.checked = true;
+      });
+    } else {
+      checkbox.each(function () {
+        this.checked = false;
+      });
+    }
+  });
+  checkbox.click(function () {
+    if (!this.checked) {
+      $("#selectAll").prop("checked", false);
+    }
+  });
 
   // $(document).on("click", "#btnAddQuestion", function () {
   //   $("#formAddUserModal").trigger('reset');
   // });
 
-  $(document).on("click", "#removeLesson", function () {
-    $(".modal-body #mainContent").text(selectedLesson.name);
+  $(document).on("click", "#removeTest", function () {
+    $(".modal-body #mainContent").text(selectedHomework.testName);
   });
 
-  $("#formDeleteLessonModal").submit(function (event) {
+  $("#formDeleteTestModal").submit(function (event) {
     event.preventDefault();
 
     const $form = $(this);
     const $inputs = $form.find("input, select, button, textarea");
 
-    const id = selectedLesson.id;
+    const id = selectedHomework.id;
 
     request = $.ajax({
-      url: "/api/lessons/" + id,
+      url: "/api/tests/" + id,
       type: "delete",
       contentType: "application/json; charset=utf-8",
       success: function (msg) {
         $inputs.prop("disabled", false);
-        console.log(msg);
+        console.log(msg)
         window.location.reload();
       },
       error: function (msg) {
@@ -35,7 +71,7 @@ $(document).ready(function () {
     });
   });
 
-  $(document).on("click", "#btnSearchLesson", function (event) {
+  $(document).on("click", "#btnSearchTest", function (event) {
     event.preventDefault();
 
     const $form = $(this);
@@ -45,10 +81,10 @@ $(document).ready(function () {
     // lấy từ khóa
     const keyword = $('#txtKeyword').val();
     // Xóa bảng
-    $('#tblLesson tbody').empty();
+    $('#tblTestOnline tbody').empty();
     // Gửi request
     $.ajax({
-      url: "/api/lessons/search?query=" + keyword,
+      url: "/api/tests/search?query=" + keyword +"&type=TEST_ONLINE",
       type: "get",
       contentType: "application/json; charset=utf-8",
       success: function (matchedCourses) {

@@ -100,6 +100,16 @@ public class QuestionService implements IQuestionService {
     return newQuestionList;
   }
 
+  @Override
+  public List<Question> searchBy(String keyword, boolean isIgnoreCase) {
+    if (isIgnoreCase) {
+      keyword = "%" + keyword.toLowerCase() + "%";
+    } else {
+      keyword = "%" + keyword + "%";
+    }
+    return questionRepository.findByQuestionIdLike(keyword);
+  }
+
   private Question mapListStringToQuestion(List data) {
     Question question = new Question();
     int size = data.size();

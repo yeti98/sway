@@ -70,4 +70,31 @@ $(document).ready(function () {
       }
     });
   });
+
+  $(document).on("click", "#btnSearchBaiTapLop", function (event) {
+    event.preventDefault();
+
+    const $form = $(this);
+    const $inputs = $form.find("input, select, button, textarea");
+    $inputs.prop("disabled", true);
+
+    // lấy từ khóa
+    const keyword = $('#txtKeyword').val();
+    // Xóa bảng
+    $('#tblBaiTapLop tbody').empty();
+    // Gửi request
+    $.ajax({
+      url: "/api/tests/search?query=" + keyword +"&type=HOMEWORK",
+      type: "get",
+      contentType: "application/json; charset=utf-8",
+      success: function (matchedCourses) {
+        $inputs.prop("disabled", false);
+        // TODO: Chèn dl vào bảng
+      },
+      error: function (msg) {
+        $inputs.prop("disabled", false);
+        alert("Không tìm thấy: \n", msg);
+      }
+    });
+  });
 });

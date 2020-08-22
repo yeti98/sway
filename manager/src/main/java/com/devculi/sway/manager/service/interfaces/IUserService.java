@@ -25,9 +25,11 @@ public interface IUserService {
 
   SwayUser getUserById(Long tID);
 
-  SwayUser searchByUsername(String keyword, boolean b);
+  SwayUser searchByUsername(String keyword, boolean isIgnoreCase);
 
   SwayUser getCurrentUser() throws Exception;
 
   List<SwayClass> getJoinedClasses();
+
+  List<SwayUser> searchBy(String keyword, boolean isIgnoreCase);
 }

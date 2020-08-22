@@ -52,4 +52,5 @@ public class RestLessonController extends BaseController {
     List<Lesson> results = lessonService.searchBy(keyword, true);
     return ok(results.stream().map(Entity2DTO::lesson2DTO).collect(Collectors.toList()));
   }
+
 }
