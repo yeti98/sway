@@ -103,5 +103,14 @@ public class MainController {
     return "ket-qua";
   }
 
-
+  @GetMapping("/giaodienmoi/trang-chu")
+  public String newIndex(Model model) {
+    model.addAttribute("activeLink", "index");
+    return "gdmoi/trang-chu";
+  }
+  @GetMapping("/giaodienmoi/noi-dung")
+  public String newContent(Model model) {
+    model.addAttribute("activeLink", "index");
+    return "gdmoi/noi-dung";
+  }
 }
