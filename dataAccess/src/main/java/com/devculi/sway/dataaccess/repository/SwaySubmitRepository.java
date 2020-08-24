@@ -5,5 +5,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public interface SwaySubmitRepository extends JpaRepository<SwaySubmit, Long> {
-}
+public interface SwaySubmitRepository extends JpaRepository<SwaySubmit, Long> {}

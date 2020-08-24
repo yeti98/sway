@@ -4,7 +4,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class SwayUser {
 
   private String name;
 
-  @Column( nullable = false, updatable = false, unique = true)
+  @Column(nullable = false, updatable = false, unique = true)
   private String username;
 
   private String avatar;

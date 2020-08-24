@@ -26,7 +26,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     Optional<SwayUser> userByUsername = userRepository.getByUsername(username);
     if (userByUsername.isPresent()) {
       SwayUser user = userByUsername.get();
-      if (!user.getStatus()) return  null; // Locked user
+      if (!user.getStatus()) return null; // Locked user
       if (Protector.isMatch(password, user.getPassword(), user.getSaltValue())) {
         CustomUserDetails userDetails = new CustomUserDetails(user);
         return new UsernamePasswordAuthenticationToken(

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="vi"
+      layout:decorate="~{layouts/giao-dien}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link href="/gdmoi/assets/css/noi-dung/style.css" id="codyframe" rel="stylesheet">
+  <!-- browsers not supporting CSS variables -->
+  <script>
+    if (!('CSS' in window) || !CSS.supports('color', 'var(--color-var)')) {
+      var cfStyle = document.getElementById('codyframe');
+      if (cfStyle) {
+        var href = cfStyle.getAttribute('href');
+        href = href.replace('style.css', 'style-fallback.css');
+        cfStyle.setAttribute('href', href);
+      }
+    }
+  </script>
+</head>
+<body>
+
+<th:block layout:fragment="content">
+  <!-- Hero -->
+  <th:block th:insert="fragments/gdmoiFrg/trang-chu/_1_hero :: heroFrg"></th:block>
+  <!--MAIN CONTENT-->
+  <div class="parent grid gap-xs padding-y-sm padding-x-sm text-sm">
+    <div class="col-9@lg col-12@sm">
+      <section class="position-relative padding-y-xl">
+        <div class="position-relative z-index-2">
+          <div class="container max-width-lg">
+            <div class="grid gap-sm">
+              <div class="col-11@md">
+                <div class="color-primary margin-bottom-sm"> Lorem, ipsum dolor.</div>
+
+                <h1 class="text-xxxl@lg text-xl@sm">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum iure
+                  culpa
+                  repellendus.</h1>
+              </div>
+
+              <div class="col-10 offset-2 col-8@lg padding-y-lg">
+                <div class="text-component line-height-lg v-space-lg">
+                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta maxime, maiores reiciendis fuga
+                    animi, quidem similique perspiciatis neque doloremque ut veniam modi earum non iste assumenda
+                    voluptates impedit velit debitis, voluptas aspernatur dolore incidunt pariatur beatae?</p>
+
+                  <p class="bg-primary bg-opacity-10% padding-md border-left border-3 border-primary">Cum debitis aut
+                    voluptatum numquam architecto ratione unde, vitae neque facere obcaecati, quasi cupiditate pariatur
+                    delectus facilis in dignissimos dolor dolorem non doloremque repellat, ad officia. Non obcaecati eum
+                    exercitationem atque aspernatur illum, qui dolorum et sunt laborum iure saepe facere ullam. Non,
+                    deleniti!</p>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <footer class="border-top border-contrast-higher border-opacity-10% padding-top-sm">
+                  <p class="text-sm text-right">Page One.</p>
+                </footer>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div aria-hidden="true" class="grid-bg-fx z-index-1">
+          <div class="container height-100% max-width-lg">
+            <div class="grid-bg-fx__grid grid gap-sm color-contrast-higher color-opacity-10%">
+              <div class="col-2"></div>
+              <div class="col-2"></div>
+              <div class="col-2"></div>
+              <div class="col-2"></div>
+              <div class="col-2"></div>
+              <div class="col-2"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="col-3@lg col-12@sm">
+      <th:block th:insert="fragments/gdmoiFrg/common/sidebar/sideBar :: sideBarFrg"></th:block>
+    </div>
+  </div>
+</th:block>
+</body>
+</html>

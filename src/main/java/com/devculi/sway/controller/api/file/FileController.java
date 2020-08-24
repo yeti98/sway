@@ -1,6 +1,6 @@
 package com.devculi.sway.controller.api.file;
 
-import com.devculi.sway.annotations.RequireRoleAdmin;
+import com.devculi.sway.annotations.RequireRoleLecturer;
 import com.devculi.sway.business.shared.common.Constant;
 import com.devculi.sway.business.shared.model.QuestionModel;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
@@ -20,20 +20,20 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/files")
-@RequireRoleAdmin
+@RequireRoleLecturer
 public class FileController {
-  @Autowired
-  IQuestionService questionService;
-  @Autowired
-  ISwayTestService swayTestService;
+  @Autowired IQuestionService questionService;
+  @Autowired ISwayTestService swayTestService;
 
   @PostMapping("/upload")
   @Transactional(rollbackFor = Exception.class)
   public List<QuestionModel> uploadFile(
       @RequestParam("file") MultipartFile file,
-      @RequestParam(name = "operation") Integer fileOperation, @RequestParam("target") Long targetID) {
+      @RequestParam(name = "operation") Integer fileOperation,
+      @RequestParam("target") Long targetID) {
     if (fileOperation.equals(Constant.FILE_OPERATION.IMPORT_QUESTION)) {
-      List<Question> questions = (List<Question>) questionService.importQuestionFormExcel(targetID, file);
+      List<Question> questions =
+          (List<Question>) questionService.importQuestionFormExcel(targetID, file);
       swayTestService.insertQuestions(targetID, questions);
       return questions.stream().map(Entity2DTO::question2DTO).collect(Collectors.toList());
     }

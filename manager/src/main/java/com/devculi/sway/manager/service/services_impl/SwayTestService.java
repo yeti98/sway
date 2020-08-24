@@ -119,5 +119,4 @@ public class SwayTestService implements ISwayTestService {
     }
     return testRepository.findByTestIdLikeAndTypeEqual(keyword, type);
   }
-
 }

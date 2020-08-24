@@ -1,6 +1,5 @@
 package com.devculi.sway.interceptor.attr.controller;
 
-import com.devculi.sway.interceptor.attr.annotations.ManageClassPage;
 import com.devculi.sway.interceptor.attr.annotations.ManageQuestionsPage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;

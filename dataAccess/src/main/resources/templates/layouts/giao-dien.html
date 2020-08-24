@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <base href="/">
+  <link rel="icon" type="image/png" href="/favicon.png"/>
+  <th:block th:insert="fragments/commonHead :: pagehead"></th:block>
+</head>
+<body>
+<th:block th:replace="fragments/gdmoiFrg/headerFrg :: bodyheader"></th:block>
+<th:block layout:fragment="content">
+  <p>Page content goes here</p>
+</th:block>
+<th:block th:replace="fragments/gdmoiFrg/footerFrg :: bodyFooter"></th:block>
+<th:block th:replace="fragments/gdmoiFrg/backToTopFrg :: backToTopFrg"></th:block>
+<!--<div th:replace="fragments/bodyFrg :: endBodyCommonScripts"></div>-->
+<th:block layout:fragment="endBodyScripts"></th:block>
+<script src="/gdmoi/assets/js/scripts.js"></script>
+</body>
+</html>

@@ -5,8 +5,7 @@ public class AuthenticationModel {
   String token;
   String refreshToken;
 
-  public AuthenticationModel() {
-  }
+  public AuthenticationModel() {}
 
   public void setUserModel(UserModel userModel) {
     this.userModel = userModel;

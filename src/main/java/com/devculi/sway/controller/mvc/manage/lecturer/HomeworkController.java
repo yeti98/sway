@@ -24,12 +24,13 @@ public class HomeworkController {
   @Autowired SwayTestService testService;
 
   @GetMapping
-  public String renderHomeworkView(Model model,
-      @RequestParam(name = "page", defaultValue = "0") Integer page) {
-    PagingResponse<SwayTestModel> testByPage = testController.getTestByPage(TestType.HOMEWORK,page);
+  public String renderHomeworkView(
+      Model model, @RequestParam(name = "page", defaultValue = "0") Integer page) {
+    PagingResponse<SwayTestModel> testByPage =
+        testController.getTestByPage(TestType.HOMEWORK, page);
     model.addAttribute("totalPages", testByPage.getTotalPage());
     model.addAttribute("homeworks", testByPage.getContent());
-    model.addAttribute("current",page);
+    model.addAttribute("current", page);
     return "admin/swaytest/homework";
   }
 

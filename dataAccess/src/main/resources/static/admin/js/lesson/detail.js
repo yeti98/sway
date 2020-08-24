@@ -135,7 +135,7 @@ $(document).ready(function () {
       },
       error: function (msg) {
         $inputs.prop("disabled", false);
-        alert("Thêm thất bại: \n", msg);
+        alert("Không tìm thấy: \n", msg);
         $("#addQuestionModal").modal("hide");
       }
     });

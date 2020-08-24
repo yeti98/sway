@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/bai-tap-lop")
+@RequestMapping("/xem-bai-tap-lop")
 @RequireRoleStudent
 public class StuHomeworkController {
   @Autowired IClassService classService;
@@ -31,7 +31,8 @@ public class StuHomeworkController {
   @GetMapping
   public String renderHomework(Model model) {
     List<SwayClass> classList = classService.getJoinedClasses();
-    List<SwayClassModel> swayClassModels = classList.stream().map(Entity2DTO::class2DTO).collect(Collectors.toList());
+    List<SwayClassModel> swayClassModels =
+        classList.stream().map(Entity2DTO::class2DTO).collect(Collectors.toList());
     for (SwayClassModel swayClassModel : swayClassModels) {
       classesMap.put(swayClassModel.getId(), swayClassModel);
     }
@@ -40,7 +41,7 @@ public class StuHomeworkController {
   }
 
   @GetMapping("/{id}")
-  public String viewHomeworkDetail(Model model, @PathVariable(name = "id") Long id){
+  public String viewHomeworkDetail(Model model, @PathVariable(name = "id") Long id) {
     SwayClassModel classModel = classesMap.getOrDefault(id, null);
     System.out.println(classModel);
     if (classModel != null) {
@@ -59,7 +60,11 @@ public class StuHomeworkController {
   }
 
   @GetMapping("/{id}/{lId}/{tId}")
-  public String viewTestDetail(Model model, @PathVariable(name = "id") Long classID, @PathVariable(name = "lId") Long lessonId, @PathVariable(name = "tId") Long testId){
+  public String viewTestDetail(
+      Model model,
+      @PathVariable(name = "id") Long classID,
+      @PathVariable(name = "lId") Long lessonId,
+      @PathVariable(name = "tId") Long testId) {
     SwayClassModel classModel = classesMap.getOrDefault(classID, null);
     if (classModel != null) {
       CourseModel course = classModel.getCourse();
@@ -86,7 +91,7 @@ public class StuHomeworkController {
 
   private SwayTestModel getTestById(LessonModel lesson, Long testId) {
     for (SwayTestModel testModel : lesson.getTests()) {
-      if (testModel.getId().equals(lesson.getId())){
+      if (testModel.getId().equals(lesson.getId())) {
         return testModel;
       }
     }
@@ -95,11 +100,10 @@ public class StuHomeworkController {
 
   private LessonModel getLessonById(CourseModel course, Long lessonId) {
     for (LessonModel lessonModel : course.getLessons()) {
-      if (lessonModel.getId().equals(lessonId)){
+      if (lessonModel.getId().equals(lessonId)) {
         return lessonModel;
       }
     }
     return null;
   }
-
 }

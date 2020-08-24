@@ -5,7 +5,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,6 +12,7 @@ import java.time.LocalDateTime;
 public class SwaySubmit {
   @OneToOne SwayTest swayTest;
   @OneToOne SwayUser swayUser;
+  @OneToOne SwayClass swayClass;
   @OneToOne SwayUser checkUser;
 
   @Id
@@ -24,19 +24,93 @@ public class SwaySubmit {
   private String studentNote;
   private TestType submitType;
 
-  private String isChecked;
-  private Double score;
-  private String lecturerNote;
+  private boolean isChecked;
 
+  private boolean isPassed;
+
+  private Double score;
+  private String scoreInString;
+  private String lecturerNote;
   @CreationTimestamp
   @Column(nullable = false, updatable = false)
   private LocalDateTime createdAt;
-
   @UpdateTimestamp
   @Column(nullable = false)
   private LocalDateTime updatedAt;
 
   public SwaySubmit() {}
+
+  public String getScoreInString() {
+    return scoreInString;
+  }
+
+  public void setScoreInString(String scoreInString) {
+    this.scoreInString = scoreInString;
+  }
+
+  public SwayClass getSwayClass() {
+    return swayClass;
+  }
+
+  public void setSwayClass(SwayClass swayClass) {
+    this.swayClass = swayClass;
+  }
+
+  public SwayUser getCheckUser() {
+    return checkUser;
+  }
+
+  public void setCheckUser(SwayUser checkUser) {
+    this.checkUser = checkUser;
+  }
+
+  public boolean isChecked() {
+    return isChecked;
+  }
+
+  public void setChecked(boolean checked) {
+    isChecked = checked;
+  }
+
+  public boolean isPassed() {
+    return isPassed;
+  }
+
+  public void setPassed(boolean passed) {
+    isPassed = passed;
+  }
+
+  public Double getScore() {
+    return score;
+  }
+
+  public void setScore(Double score) {
+    this.score = score;
+  }
+
+  public String getLecturerNote() {
+    return lecturerNote;
+  }
+
+  public void setLecturerNote(String lecturerNote) {
+    this.lecturerNote = lecturerNote;
+  }
+
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public LocalDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(LocalDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+  }
 
   public SwayTest getSwayTest() {
     return swayTest;

@@ -8,7 +8,6 @@ import com.devculi.sway.sharedmodel.exceptions.RecordNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -23,8 +22,7 @@ import java.util.Optional;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-  @Autowired
-  SwayUserRepository userRepository;
+  @Autowired SwayUserRepository userRepository;
 
   private String getJwtFromRequest(HttpServletRequest request) {
     String bearerToken = request.getHeader("Authorization");
@@ -44,15 +42,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String username = JwtService.getUsernameFromToken(jwt);
         if (StringUtils.hasText(username)) {
           Optional<SwayUser> userOptional = userRepository.getByUsername(username);
-          userOptional.ifPresent(user -> {
-            CustomUserDetails userDetails = new CustomUserDetails(user);
-            Objects.requireNonNull(userDetails);
-            UsernamePasswordAuthenticationToken authentication =
+          userOptional.ifPresent(
+              user -> {
+                CustomUserDetails userDetails = new CustomUserDetails(user);
+                Objects.requireNonNull(userDetails);
+                UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(
-                            userDetails, null, userDetails.getAuthorities());
-            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-          });
+                        userDetails, null, userDetails.getAuthorities());
+                authentication.setDetails(
+                    new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+              });
           throw new RecordNotFoundException(SwayUser.class, "username", username);
         }
       }

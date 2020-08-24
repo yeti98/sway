@@ -1,10 +1,10 @@
 package com.devculi.sway.controller.api.lecturer;
 
-import com.devculi.sway.annotations.RequireRoleAdmin;
+import com.devculi.sway.annotations.RequireRoleLecturer;
 import com.devculi.sway.business.shared.model.LessonModel;
 import com.devculi.sway.business.shared.request.UpsertLessonRequest;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
-import com.devculi.sway.controller.api.BaseController;
+import com.devculi.sway.controller.api.RestBaseController;
 import com.devculi.sway.dataaccess.entity.Lesson;
 import com.devculi.sway.manager.service.interfaces.ILessonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +17,8 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/lessons")
-@RequireRoleAdmin
-public class RestLessonController extends BaseController {
+@RequireRoleLecturer
+public class RestLessonController extends RestBaseController {
   @Autowired ILessonService lessonService;
 
   @GetMapping("/{id}")

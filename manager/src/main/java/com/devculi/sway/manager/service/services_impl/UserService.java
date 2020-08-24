@@ -1,6 +1,7 @@
 package com.devculi.sway.manager.service.services_impl;
 
-import com.devculi.sway.dataaccess.entity.*;
+import com.devculi.sway.dataaccess.entity.SwayClass;
+import com.devculi.sway.dataaccess.entity.SwayUser;
 import com.devculi.sway.dataaccess.repository.SwayUserRepository;
 import com.devculi.sway.manager.service.interfaces.IUserService;
 import com.devculi.sway.manager.service.security.CustomUserDetails;
@@ -122,6 +123,16 @@ public class UserService implements IUserService {
       return user.getJoinedClasses();
     }
     return new ArrayList<>();
+  }
+
+  @Override
+  public List<SwayUser> searchBy(String keyword, boolean isIgnoreCase) {
+    if (isIgnoreCase) {
+      keyword = "%" + keyword.toLowerCase() + "%";
+    } else {
+      keyword = "%" + keyword + "%";
+    }
+    return userRepository.findByUsernameOrNameLike(keyword);
   }
 
   private boolean isAnonymousAuthenticationToken(Authentication authentication) {

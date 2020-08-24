@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="pagehead">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.getElementsByTagName("html")[0].className += " js";</script>
+  <title th:text="${pageTitle} + ' - ' + ${webTitle}"></title>
+</head>
+</html>
+

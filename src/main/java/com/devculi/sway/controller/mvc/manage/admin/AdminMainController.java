@@ -11,7 +11,7 @@ public class AdminMainController {
 
   @GetMapping
   public String adminIndex(Model model) {
-    model.addAttribute("pageTitle","Trang quản lý");
+    model.addAttribute("pageTitle", "Trang quản lý");
     return "admin/index";
   }
 }
