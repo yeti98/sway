@@ -16,5 +16,6 @@ public interface SwayTestRepository extends JpaRepository<SwayTest, Long> {
   Page<SwayTest> findByTestTypeAndActive(TestType type, boolean active, Pageable pageable);
 
   @Query("SELECT st FROM SwayTest st WHERE st.testId LIKE :keyword AND st.testType = :type")
-  List<SwayTest> findByTestIdLikeAndTypeEqual(@Param("keyword") String keyword, @Param("type") TestType type);
+  List<SwayTest> findByTestIdLikeAndTypeEqual(
+      @Param("keyword") String keyword, @Param("type") TestType type);
 }

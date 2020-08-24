@@ -3,15 +3,24 @@
       layout:decorate="~{layouts/giao-dien}"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <link id="codyframe" rel="stylesheet" href="/gdmoi/assets/css/noi-dung/style.css">
+  <link href="/gdmoi/assets/css/noi-dung/style.css" id="codyframe" rel="stylesheet">
   <!-- browsers not supporting CSS variables -->
   <script>
-    if(!('CSS' in window) || !CSS.supports('color', 'var(--color-var)')) {var cfStyle = document.getElementById('codyframe');if(cfStyle) {var href = cfStyle.getAttribute('href');href = href.replace('style.css', 'style-fallback.css');cfStyle.setAttribute('href', href);}}
+    if (!('CSS' in window) || !CSS.supports('color', 'var(--color-var)')) {
+      var cfStyle = document.getElementById('codyframe');
+      if (cfStyle) {
+        var href = cfStyle.getAttribute('href');
+        href = href.replace('style.css', 'style-fallback.css');
+        cfStyle.setAttribute('href', href);
+      }
+    }
   </script>
 </head>
 <body>
 
 <th:block layout:fragment="content">
+  <!-- Hero -->
+  <th:block th:insert="fragments/gdmoiFrg/trang-chu/_1_hero :: heroFrg"></th:block>
   <!--MAIN CONTENT-->
   <div class="parent grid gap-xs padding-y-sm padding-x-sm text-sm">
     <div class="col-9@lg col-12@sm">
@@ -22,7 +31,8 @@
               <div class="col-11@md">
                 <div class="color-primary margin-bottom-sm"> Lorem, ipsum dolor.</div>
 
-                <h1 class="text-xxxl@lg text-xl@sm">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum iure culpa
+                <h1 class="text-xxxl@lg text-xl@sm">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum iure
+                  culpa
                   repellendus.</h1>
               </div>
 
@@ -64,34 +74,7 @@
       </section>
     </div>
     <div class="col-3@lg col-12@sm">
-      <section>
-        <figure class="feature-v12__bg-item">
-          <img alt="Image description" class="block width-100%" src="/gdmoi/assets/img/img-15.png.jpeg">
-        </figure>
-      </section>
-      <section class="newsletter padding-y-xl text-center">
-        <div class="container width-90%">
-          <form class="grid gap-xxs">
-            <div class="row@xs min-width-0">
-              <input aria-label="Name" class="form-control width-100% height-100%" placeholder="Họ tên" type="text">
-            </div>
-            <div class="row@xs min-width-0">
-              <input aria-label="Email" class="form-control width-100% height-100%" placeholder="Số điện thoại"
-                     type="number">
-            </div>
-
-            <div>
-              <button class="btn btn--primary width-100% height-100%">Nhận tư vấn</button>
-            </div>
-          </form>
-
-          <!--        <p role="alert" class="bg-success bg-opacity-20% text-sm padding-xs radius-md margin-top-xs"><strong>Success!</strong> Please check your inbox for a confirmation email.</p>-->
-
-          <!--        <div class="margin-top-xs">-->
-          <!--          <small class="text-xs color-contrast-medium">By subscribing you agree to our <a class="color-contrast-high" href="#0">privacy policy</a>.</small>-->
-          <!--        </div>-->
-        </div>
-      </section>
+      <th:block th:insert="fragments/gdmoiFrg/common/sidebar/sideBar :: sideBarFrg"></th:block>
     </div>
   </div>
 </th:block>

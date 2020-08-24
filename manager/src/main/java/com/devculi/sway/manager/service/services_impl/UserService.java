@@ -1,6 +1,7 @@
 package com.devculi.sway.manager.service.services_impl;
 
-import com.devculi.sway.dataaccess.entity.*;
+import com.devculi.sway.dataaccess.entity.SwayClass;
+import com.devculi.sway.dataaccess.entity.SwayUser;
 import com.devculi.sway.dataaccess.repository.SwayUserRepository;
 import com.devculi.sway.manager.service.interfaces.IUserService;
 import com.devculi.sway.manager.service.security.CustomUserDetails;

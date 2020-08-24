@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="vi"
+      layout:decorate="~{layouts/giao-dien}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link href="/gdmoi/assets/css/bai-test/style.css" id="codyframe" rel="stylesheet">
+  <!-- browsers not supporting CSS variables -->
+  <script>
+    if (!('CSS' in window) || !CSS.supports('color', 'var(--color-var)')) {
+      var cfStyle = document.getElementById('codyframe');
+      if (cfStyle) {
+        var href = cfStyle.getAttribute('href');
+        href = href.replace('style.css', 'style-fallback.css');
+        cfStyle.setAttribute('href', href);
+      }
+    }
+  </script>
+</head>
+<body>
+
+<th:block layout:fragment="content">
+  <!--MAIN CONTENT-->
+  <div class="parent grid gap-xs padding-y-sm padding-x-sm text-sm">
+    <div class="col-9@lg col-12@sm">
+      <main class="position-relative z-index-1 flex-grow" style="overflow-y: scroll; max-height: 150vh">
+        <!-- start main content -->
+        <div class="text-component padding-md text-sm">
+          <fieldset class="margin-top-sm">
+            <legend class="form-legend text-bold">Câu hỏi 1</legend>
+
+            <div class="choice-btns gap-xxs js-choice-btns">
+
+              <div class="choice-btn padding-x-xs">
+                <!-- fallback -->
+                <div class="choice-btn__fallback">
+                  <input checked id="choice-radio-button-1" name="choice-radio-buttons" type="radio">
+                  <label for="choice-radio-button-1">Standard delivery, 4-5 days, $9.00</label>
+                </div>
+
+                <!-- custom input -->
+                <div aria-hidden="true" class="choice-btn__grid">
+                  <div class="choice-btn__input choice-btn__input--radio">
+                    <svg class="icon" viewBox="0 0 16 16">
+                      <circle cx="8" cy="8" fill="currentColor" r="4"/>
+                    </svg>
+                  </div>
+
+                  <div class="flex flex-wrap gap-xs justify-between">
+                    <div>
+                      <p class="color-contrast-higher margin-top-sm">Standard delivery</p>
+                      <!--                  <p class="color-contrast-medium text-sm">4-5 days</p>-->
+                    </div>
+                    <!--                <p class="color-contrast-higher">$9.00</p>-->
+                  </div>
+                </div>
+              </div>
+
+              <div class="choice-btn padding-x-xs">
+                <!-- fallback -->
+                <div class="choice-btn__fallback">
+                  <input checked id="choice-radio-button-2" name="choice-radio-buttons" type="radio">
+                  <label for="choice-radio-button-1">Standard delivery, 4-5 days, $9.00</label>
+                </div>
+
+                <!-- custom input -->
+                <div aria-hidden="true" class="choice-btn__grid">
+                  <div class="choice-btn__input choice-btn__input--radio">
+                    <svg class="icon" viewBox="0 0 16 16">
+                      <circle cx="8" cy="8" fill="currentColor" r="4"/>
+                    </svg>
+                  </div>
+
+                  <div class="flex flex-wrap gap-xs justify-between">
+                    <div>
+                      <p class="color-contrast-higher margin-top-sm">Standard delivery</p>
+                      <!--                  <p class="color-contrast-medium text-sm">4-5 days</p>-->
+                    </div>
+                    <!--                <p class="color-contrast-higher">$9.00</p>-->
+                  </div>
+                </div>
+              </div>
+
+              <div class="choice-btn padding-x-xs">
+                <!-- fallback -->
+                <div class="choice-btn__fallback">
+                  <input checked id="choice-radio-button-3" name="choice-radio-buttons" type="radio">
+                  <label for="choice-radio-button-1">Standard delivery, 4-5 days, $9.00</label>
+                </div>
+
+                <!-- custom input -->
+                <div aria-hidden="true" class="choice-btn__grid">
+                  <div class="choice-btn__input choice-btn__input--radio">
+                    <svg class="icon" viewBox="0 0 16 16">
+                      <circle cx="8" cy="8" fill="currentColor" r="4"/>
+                    </svg>
+                  </div>
+
+                  <div class="flex flex-wrap gap-xs justify-between">
+                    <div>
+                      <p class="color-contrast-higher margin-top-sm">Standard delivery</p>
+                      <!--                  <p class="color-contrast-medium text-sm">4-5 days</p>-->
+                    </div>
+                    <!--                <p class="color-contrast-higher">$9.00</p>-->
+                  </div>
+                </div>
+              </div>
+
+              <div class="choice-btn padding-x-xs choice-btn--checked" style="background-color: lightgreen">
+                <!-- fallback -->
+                <div class="choice-btn__fallback">
+                  <input checked id="choice-radio-button-4" name="choice-radio-buttons" type="radio">
+                  <label for="choice-radio-button-1">Standard delivery, 4-5 days, $9.00</label>
+                </div>
+
+                <!-- custom input -->
+                <div aria-hidden="true" class="choice-btn__grid">
+                  <div class="choice-btn__input choice-btn__input--radio">
+                    <svg class="icon" viewBox="0 0 16 16">
+                      <circle cx="8" cy="8" fill="currentColor" r="4"/>
+                    </svg>
+                  </div>
+
+                  <div class="flex flex-wrap gap-xs justify-between">
+                    <div>
+                      <p class="color-contrast-higher margin-top-sm">Standard delivery</p>
+                      <!--                  <p class="color-contrast-medium text-sm">4-5 days</p>-->
+                    </div>
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flat_tick_icon.svg/1024px-Flat_tick_icon.svg.png"
+                        style="width: 30px; object-fit: cover; position:absolute; right: 10px; top: 50%; transform: translateY(-50%)"/>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </fieldset>
+          <fieldset class="margin-top-sm">
+            <legend class="form-legend text-bold">Câu hỏi 1</legend>
+
+            <div class="choice-btns gap-xxs js-choice-btns">
+
+              <div class="choice-btn padding-x-xs">
+                <!-- fallback -->
+                <div class="choice-btn__fallback">
+                  <input checked id="choice-radio-button-2-1" name="choice-radio-buttons" type="radio">
+                  <label for="choice-radio-button-1">Standard delivery, 4-5 days, $9.00</label>
+                </div>
+
+                <!-- custom input -->
+                <div aria-hidden="true" class="choice-btn__grid">
+                  <div class="choice-btn__input choice-btn__input--radio">
+                    <svg class="icon" viewBox="0 0 16 16">
+                      <circle cx="8" cy="8" fill="currentColor" r="4"/>
+                    </svg>
+                  </div>
+
+                  <div class="flex flex-wrap gap-xs justify-between">
+                    <div>
+                      <p class="color-contrast-higher margin-top-sm">Standard delivery</p>
+                      <!--                  <p class="color-contrast-medium text-sm">4-5 days</p>-->
+                    </div>
+                    <!--                <p class="color-contrast-higher">$9.00</p>-->
+                  </div>
+                </div>
+              </div>
+
+              <div class="choice-btn padding-x-xs">
+                <!-- fallback -->
+                <div class="choice-btn__fallback">
+                  <input checked id="choice-radio-button-2-2" name="choice-radio-buttons" type="radio">
+                  <label for="choice-radio-button-1">Standard delivery, 4-5 days, $9.00</label>
+                </div>
+
+                <!-- custom input -->
+                <div aria-hidden="true" class="choice-btn__grid">
+                  <div class="choice-btn__input choice-btn__input--radio">
+                    <svg class="icon" viewBox="0 0 16 16">
+                      <circle cx="8" cy="8" fill="currentColor" r="4"/>
+                    </svg>
+                  </div>
+
+                  <div class="flex flex-wrap gap-xs justify-between">
+                    <div>
+                      <p class="color-contrast-higher margin-top-sm">Standard delivery</p>
+                      <!--                  <p class="color-contrast-medium text-sm">4-5 days</p>-->
+                    </div>
+                    <!--                <p class="color-contrast-higher">$9.00</p>-->
+                  </div>
+                </div>
+              </div>
+
+              <div class="choice-btn padding-x-xs choice-btn--checked" style="background-color: lightcoral">
+                <!-- fallback -->
+                <div class="choice-btn__fallback">
+                  <input checked id="choice-radio-button-3-2" name="choice-radio-buttons" type="radio">
+                  <label for="choice-radio-button-1">Standard delivery, 4-5 days, $9.00</label>
+                </div>
+
+                <!-- custom input -->
+                <div aria-hidden="true" class="choice-btn__grid">
+                  <div class="choice-btn__input choice-btn__input--radio">
+                    <svg class="icon" viewBox="0 0 16 16">
+                      <circle cx="8" cy="8" fill="currentColor" r="4"/>
+                    </svg>
+                  </div>
+
+                  <div class="flex flex-wrap gap-xs justify-between">
+                    <div>
+                      <p class="color-contrast-higher margin-top-sm">Standard delivery</p>
+                      <!--                  <p class="color-contrast-medium text-sm">4-5 days</p>-->
+                    </div>
+                    <img src="https://icon-library.com/images/wrong-icon/wrong-icon-8.jpg"
+                         style="width: 30px; object-fit: cover; position:absolute; right: 10px; top: 50%; transform: translateY(-50%)"/>
+                  </div>
+                </div>
+              </div>
+
+              <div class="choice-btn padding-x-xs" style="background-color: lightgreen">
+                <!-- fallback -->
+                <div class="choice-btn__fallback">
+                  <input checked id="choice-radio-button-4-2" name="choice-radio-buttons" type="radio">
+                  <label for="choice-radio-button-1">Standard delivery, 4-5 days, $9.00</label>
+                </div>
+
+                <!-- custom input -->
+                <div aria-hidden="true" class="choice-btn__grid">
+                  <div class="choice-btn__input choice-btn__input--radio">
+                    <svg class="icon" viewBox="0 0 16 16">
+                      <circle cx="8" cy="8" fill="currentColor" r="4"/>
+                    </svg>
+                  </div>
+
+                  <div class="flex flex-wrap gap-xs justify-between">
+                    <div>
+                      <p class="color-contrast-higher margin-top-sm">Standard delivery</p>
+                      <!--                  <p class="color-contrast-medium text-sm">4-5 days</p>-->
+                    </div>
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flat_tick_icon.svg/1024px-Flat_tick_icon.svg.png"
+                        style="width: 30px; object-fit: cover; position:absolute; right: 10px; top: 50%; transform: translateY(-50%)"/>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </fieldset>
+        </div>
+        <!-- end main content -->
+      </main>
+    </div>
+    <div class="col-3@lg col-12@sm">
+      <th:block th:insert="fragments/gdmoiFrg/common/sidebar/sideBar :: sideBarFrg"></th:block>
+    </div>
+  </div>
+</th:block>
+</body>
+</html>

@@ -108,9 +108,40 @@ public class MainController {
     model.addAttribute("activeLink", "index");
     return "gdmoi/trang-chu";
   }
+
   @GetMapping("/giaodienmoi/noi-dung")
   public String newContent(Model model) {
     model.addAttribute("activeLink", "index");
     return "gdmoi/noi-dung";
+  }
+
+  @GetMapping("/giaodienmoi/dang-nhap")
+  public String newDangNhap(Model model) {
+    model.addAttribute("activeLink", "index");
+    return "gdmoi/dang-nhap";
+  }
+
+  @GetMapping("/giaodienmoi/khct")
+  public String khoaHocChiTiet(Model model) {
+    model.addAttribute("activeLink", "index");
+    return "gdmoi/khoa-hoc-chi-tiet";
+  }
+
+  @GetMapping("/giaodienmoi/bt")
+  public String baitapChiTiet(Model model) {
+    model.addAttribute("activeLink", "index");
+    return "gdmoi/bai-tap";
+  }
+
+  @GetMapping("/giaodienmoi/kq")
+  public String ketquaSubmit(Model model) {
+    model.addAttribute("activeLink", "index");
+    return "gdmoi/ket-qua";
+  }
+
+  @GetMapping("/giaodienmoi/co-hoi-viec-lam")
+  public String chvl(Model model) {
+    model.addAttribute("activeLink", "index");
+    return "gdmoi/tuyen-dung";
   }
 }

@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="vi"
+      layout:decorate="~{layouts/giao-dien}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link href="/gdmoi/assets/css/trang-chu/style.css" id="codyframe" rel="stylesheet">
+  <!-- browsers not supporting CSS variables -->
+  <script>
+    if (!('CSS' in window) || !CSS.supports('color', 'var(--color-var)')) {
+      var cfStyle = document.getElementById('codyframe');
+      if (cfStyle) {
+        var href = cfStyle.getAttribute('href');
+        href = href.replace('style.css', 'style-fallback.css');
+        cfStyle.setAttribute('href', href);
+      }
+    }
+  </script>
+</head>
+<body>
+
+<th:block layout:fragment="content">
+  <!-- Hero -->
+  <th:block th:insert="fragments/gdmoiFrg/trang-chu/_1_hero :: heroFrg"></th:block>
+  <!-- Main content -->
+  <div class="parent grid gap-xs padding-y-xs padding-x-sm text-sm">
+    <div class="col-9@lg col-12@sm">
+      <!--      Danh sách việc làm -->
+      <section class="articles-v3">
+        <div class="container max-width-adaptive-lg">
+          <ul class="grid gap-lg">
+            <li>
+              <div class="grid gap-md items-start">
+                <a class="articles-v3__img col-6@md col-7@xl" href="#0">
+                  <figure class="media-wrapper">
+                    <img alt="Image description" src="/gdmoi/assets/img/article-gallery-v3-img-1.jpg">
+                  </figure>
+                </a>
+
+                <div class="col-6@md col-5@xl">
+                  <div class="text-component">
+                    <h2 class="articles-v3__headline"><a href="#0">Lorem ipsum dolor sit.</a></h2>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus nihil rem aliquid perferendis
+                      delectus in esse praesentium necessitatibus rerum consectetur!</p>
+                  </div>
+
+                  <div class="articles-v3__author">
+                    <a class="articles-v3__author-img" href="#0">
+                      <img alt="Author picture" src="/gdmoi/assets/img/article-gallery-v3-author-img-1.jpg">
+                    </a>
+
+                    <div class="text-component text-sm line-height-xs v-space-xs">
+                      <p><a class="articles-v3__author-name" href="#0" rel="author">Olivia Gribben</a></p>
+                      <p class="color-contrast-medium">
+                        <time>Oct 4, 2020</time>
+                        , &mdash; 5 min read
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="grid gap-md items-start">
+                <a class="articles-v3__img col-6@md col-7@xl" href="#0">
+                  <figure class="media-wrapper">
+                    <img alt="Image description" src="/gdmoi/assets/img/article-gallery-v3-img-2.jpg">
+                  </figure>
+                </a>
+
+                <div class="col-6@md col-5@xl">
+                  <div class="text-component">
+                    <h2 class="articles-v3__headline"><a href="#0">Lorem ipsum dolor sit amet consectetur adipisicing
+                      elit.</a></h2>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus nihil rem aliquid perferendis
+                      delectus in esse praesentium necessitatibus rerum consectetur!</p>
+                  </div>
+
+                  <div class="articles-v3__author">
+                    <a class="articles-v3__author-img" href="#0">
+                      <img alt="Author picture" src="/gdmoi/assets/img/article-gallery-v3-author-img-1.jpg">
+                    </a>
+
+                    <div class="text-component text-sm line-height-xs v-space-xs">
+                      <p><a class="articles-v3__author-name" href="#0" rel="author">Olivia Gribben</a></p>
+                      <p class="color-contrast-medium">
+                        <time>Oct 4, 2020</time>
+                        , &mdash; 5 min read
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="grid gap-md items-start">
+                <a class="articles-v3__img col-6@md col-7@xl" href="#0">
+                  <figure class="media-wrapper">
+                    <img alt="Image description" src="/gdmoi/assets/img/article-gallery-v3-img-3.jpg">
+                  </figure>
+                </a>
+
+                <div class="col-6@md col-5@xl">
+                  <div class="text-component">
+                    <h2 class="articles-v3__headline"><a href="#0">Lorem ipsum dolor sit.</a></h2>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus nihil rem aliquid perferendis
+                      delectus in esse praesentium necessitatibus rerum consectetur!</p>
+                  </div>
+
+                  <div class="articles-v3__author">
+                    <a class="articles-v3__author-img" href="#0">
+                      <img alt="Author picture" src="/gdmoi/assets/img/article-gallery-v3-author-img-1.jpg">
+                    </a>
+
+                    <div class="text-component text-sm line-height-xs v-space-xs">
+                      <p><a class="articles-v3__author-name" href="#0" rel="author">Olivia Gribben</a></p>
+                      <p class="color-contrast-medium">
+                        <time>Oct 4, 2020</time>
+                        , &mdash; 5 min read
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <div class="col-3@lg col-12@sm">
+      <th:block th:insert="fragments/gdmoiFrg/common/sidebar/sideBar :: sideBarFrg"></th:block>
+    </div>
+  </div>
+</th:block>
+</body>
+</html>

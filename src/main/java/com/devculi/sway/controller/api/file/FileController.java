@@ -22,18 +22,18 @@ import java.util.stream.Collectors;
 @RequestMapping("/files")
 @RequireRoleAdmin
 public class FileController {
-  @Autowired
-  IQuestionService questionService;
-  @Autowired
-  ISwayTestService swayTestService;
+  @Autowired IQuestionService questionService;
+  @Autowired ISwayTestService swayTestService;
 
   @PostMapping("/upload")
   @Transactional(rollbackFor = Exception.class)
   public List<QuestionModel> uploadFile(
       @RequestParam("file") MultipartFile file,
-      @RequestParam(name = "operation") Integer fileOperation, @RequestParam("target") Long targetID) {
+      @RequestParam(name = "operation") Integer fileOperation,
+      @RequestParam("target") Long targetID) {
     if (fileOperation.equals(Constant.FILE_OPERATION.IMPORT_QUESTION)) {
-      List<Question> questions = (List<Question>) questionService.importQuestionFormExcel(targetID, file);
+      List<Question> questions =
+          (List<Question>) questionService.importQuestionFormExcel(targetID, file);
       swayTestService.insertQuestions(targetID, questions);
       return questions.stream().map(Entity2DTO::question2DTO).collect(Collectors.toList());
     }

@@ -11,30 +11,29 @@ import java.util.List;
 
 @Service
 public class LecturerService implements ILecturerService {
-    @Autowired
-    SwayTestService testService;
-    @Override
-    public SwayClass getClassById(Long classId) {
-        return null;
-    }
+  @Autowired SwayTestService testService;
 
+  @Override
+  public SwayClass getClassById(Long classId) {
+    return null;
+  }
 
-    @Override
-    public Page<SwayClass> getClassesByPage(Long page) {
-        return null;
-    }
+  @Override
+  public Page<SwayClass> getClassesByPage(Long page) {
+    return null;
+  }
 
-    @Override
-    public Page<SwayTest> getHomeworkByPage(Integer page){
-        return testService.getHomeworkByPage(page);
-    }
+  @Override
+  public Page<SwayTest> getHomeworkByPage(Integer page) {
+    return testService.getHomeworkByPage(page);
+  }
 
-    @Override
-    public Page<SwayTest> getTestonlineByPage(Integer page) {
-        return testService.getTestonlineByPage(page);
-    }
+  @Override
+  public Page<SwayTest> getTestonlineByPage(Integer page) {
+    return testService.getTestonlineByPage(page);
+  }
 
-    public List<SwayTest> searchByTestId(String keyword) {
-        return null;
-    }
+  public List<SwayTest> searchByTestId(String keyword) {
+    return null;
+  }
 }

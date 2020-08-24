@@ -10,5 +10,4 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @PreAuthorize("hasAnyRole('STUDENT', 'ADMIN')")
-public @interface RequireRoleStudent {
-}
+public @interface RequireRoleStudent {}

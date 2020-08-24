@@ -36,8 +36,6 @@ public class LessonController {
     return "redirect:/admin/manage/lessons/" + newLesson.getId();
   }
 
-
-
   // HOMEWORK DETAIL
   @GetMapping("/{id}")
   public String getLessonDetail(Model model, @PathVariable(name = "id") Long id) {

@@ -5,7 +5,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -40,7 +39,14 @@ public class Question {
   @Column(nullable = false)
   private LocalDateTime updatedAt;
 
-  public Question(Long id, String choices, String answer, String content, String explanation, boolean active, String questionId) {
+  public Question(
+      Long id,
+      String choices,
+      String answer,
+      String content,
+      String explanation,
+      boolean active,
+      String questionId) {
     this.id = id;
     this.choices = choices;
     this.answer = answer;
@@ -50,8 +56,7 @@ public class Question {
     this.questionId = questionId;
   }
 
-  public Question() {
-  }
+  public Question() {}
 
   public String getContent() {
     return content;

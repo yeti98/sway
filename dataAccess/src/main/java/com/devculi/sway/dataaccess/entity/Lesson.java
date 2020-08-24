@@ -18,9 +18,11 @@ public class Lesson {
   private String description;
   private String lessonId;
   @ManyToMany private List<SwayTest> tests;
+
   @CreationTimestamp
   @Column(nullable = false, updatable = false)
   private LocalDateTime createdAt;
+
   @UpdateTimestamp
   @Column(nullable = false)
   private LocalDateTime updatedAt;

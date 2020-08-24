@@ -10,8 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -19,7 +17,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collection;
 
 @Configuration
 @EnableWebSecurity
@@ -58,9 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/user_assets/**")
         .permitAll();
 
-    http.authorizeRequests()
-        .antMatchers("/admin/**")
-        .access("hasAnyRole('ROLE_ADMIN')");
+    http.authorizeRequests().antMatchers("/admin/**").access("hasAnyRole('ROLE_ADMIN')");
 
     http.authorizeRequests()
         .antMatchers("/info**", "/homework**")
@@ -72,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .usernameParameter("username")
         .loginProcessingUrl("/login")
         .failureUrl("/login?error=true")
-//        .defaultSuccessUrl("/", true)
+        //        .defaultSuccessUrl("/", true)
         .and()
         .logout()
         .permitAll()
@@ -86,20 +81,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .csrf()
         .disable();
 
-    http.addFilterBefore(jwtAuthenticationFilter() , UsernamePasswordAuthenticationFilter.class);
+    http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
   }
 
-//  @Bean
-//  public AuthenticationSuccessHandler refererSuccessHandler() {
-//    SavedRequestAwareAuthenticationSuccessHandler handler = new SavedRequestAwareAuthenticationSuccessHandler();
-//    handler.setUseReferer(true);
-//    return handler;
-//  }
+  //  @Bean
+  //  public AuthenticationSuccessHandler refererSuccessHandler() {
+  //    SavedRequestAwareAuthenticationSuccessHandler handler = new
+  // SavedRequestAwareAuthenticationSuccessHandler();
+  //    handler.setUseReferer(true);
+  //    return handler;
+  //  }
 
-  static class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+  static class MyAuthenticationSuccessHandler
+      extends SavedRequestAwareAuthenticationSuccessHandler {
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                        Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(
+        HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+        throws IOException, ServletException {
       super.onAuthenticationSuccess(request, response, authentication);
     }
   }

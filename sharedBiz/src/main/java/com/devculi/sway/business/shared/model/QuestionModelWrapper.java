@@ -7,23 +7,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionModelWrapper {
-    List<QuestionModel2> questions;
+  List<QuestionModel2> questions;
 
-    public void setQuestions(List<Question> questions) {
-        this.questions = new ArrayList<>();
-        for(Question q : questions){
-            this.questions.add(Entity2DTO.toQuestionModel2(q));
-        }
-    }
+  public QuestionModelWrapper(List<QuestionModel2> questions) {
+    this.questions = questions;
+  }
 
-    public List<QuestionModel2> getQuestions() {
-        return questions;
-    }
+  public QuestionModelWrapper() {}
 
-    public QuestionModelWrapper(List<QuestionModel2> questions) {
-        this.questions = questions;
-    }
+  public List<QuestionModel2> getQuestions() {
+    return questions;
+  }
 
-    public QuestionModelWrapper() {
+  public void setQuestions(List<Question> questions) {
+    this.questions = new ArrayList<>();
+    for (Question q : questions) {
+      this.questions.add(Entity2DTO.toQuestionModel2(q));
     }
+  }
 }

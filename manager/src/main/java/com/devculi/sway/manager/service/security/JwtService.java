@@ -3,7 +3,6 @@ package com.devculi.sway.manager.service.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -31,22 +30,22 @@ public class JwtService {
   private static String doGenerateToken(Map<String, Object> claims, String subject) {
 
     return Jwts.builder()
-            .setClaims(claims)
-            .setSubject(subject)
-            .setIssuedAt(new Date(System.currentTimeMillis()))
-            .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY))
-            .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
-            .compact();
+        .setClaims(claims)
+        .setSubject(subject)
+        .setIssuedAt(new Date(System.currentTimeMillis()))
+        .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY))
+        .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+        .compact();
   }
 
   public static void main(String[] args) {
-//    System.out.println(JWTUtils.generateToken("trangnh"));
-//    System.out.println(JWTUtils.generateToken("trangnh"));
+    //    System.out.println(JWTUtils.generateToken("trangnh"));
+    //    System.out.println(JWTUtils.generateToken("trangnh"));
 
     System.out.println(
-            validateToken(
-                    "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0cmFuZ25oIiwiZGV2Y3VsaSI6InN3YXkiLCJleHAiOjE1OTUxMzMyMDEsImlhdCI6MTU5NTEzMjU5Nn0.pqcY5AHSjnAxMNEZbrTvx2hfIbfl7cCXAXs9UTGQMbcJS22PrJgiTrCt6g-JWmcfIlUSDUW980wZ3D_KfmYNTw",
-                    "trangnh1"));
+        validateToken(
+            "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0cmFuZ25oIiwiZGV2Y3VsaSI6InN3YXkiLCJleHAiOjE1OTUxMzMyMDEsImlhdCI6MTU5NTEzMjU5Nn0.pqcY5AHSjnAxMNEZbrTvx2hfIbfl7cCXAXs9UTGQMbcJS22PrJgiTrCt6g-JWmcfIlUSDUW980wZ3D_KfmYNTw",
+            "trangnh1"));
   }
 
   public static String getUsernameFromToken(String token) {

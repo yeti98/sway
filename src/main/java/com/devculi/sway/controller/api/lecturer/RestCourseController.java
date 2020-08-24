@@ -45,7 +45,7 @@ public class RestCourseController extends BaseController {
 
   @GetMapping("/search")
   public ResponseEntity<Object> searchByKeyword(
-          @RequestParam(name = "query", defaultValue = "") String keyword) {
+      @RequestParam(name = "query", defaultValue = "") String keyword) {
     if (keyword.length() == 0) {
       return ok(new ArrayList<>());
     }

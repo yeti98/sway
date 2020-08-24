@@ -2,7 +2,6 @@ package com.devculi.sway.controller.mvc.manage.lecturer;
 
 import com.devculi.sway.business.shared.model.SwayClassModel;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
-import com.devculi.sway.dataaccess.entity.Course;
 import com.devculi.sway.dataaccess.entity.SwayClass;
 import com.devculi.sway.interceptor.attr.annotations.ManageClassPage;
 import com.devculi.sway.manager.service.interfaces.IClassService;
@@ -19,12 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/admin/manage/classes")
 @ManageClassPage
 public class ClassController {
-  @Autowired
-  IClassService classService;
+  @Autowired IClassService classService;
 
   @GetMapping
   public String renderClassView(
-          Model model, @RequestParam(name = "page", defaultValue = "0") Integer page) {
+      Model model, @RequestParam(name = "page", defaultValue = "0") Integer page) {
     PagingResponse<SwayClassModel> classByPage = classService.getClassByPage(page);
     model.addAttribute("totalPages", classByPage.getTotalPage());
     model.addAttribute("swayClasses", classByPage.getContent());
