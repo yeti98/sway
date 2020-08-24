@@ -38,25 +38,27 @@ public class RestTestController extends BaseController {
   }
 
   @GetMapping
-  public PagingResponse<SwayTestModel> getTestByPage(@RequestParam(name = "testType", defaultValue = "HOMEWORK") TestType testType,
+  public PagingResponse<SwayTestModel> getTestByPage(
+      @RequestParam(name = "testType", defaultValue = "HOMEWORK") TestType testType,
       @RequestParam(name = "page", defaultValue = "0") Integer page) {
 
     Page<SwayTest> res = null;
     switch (testType) {
-
-      case HOMEWORK:{
-        res = lecturerService.getHomeworkByPage(page);
-        break;
-      }
-      case TEST_ONLINE:{
-        res = lecturerService.getTestonlineByPage(page);
-        break;
-      }
+      case HOMEWORK:
+        {
+          res = lecturerService.getHomeworkByPage(page);
+          break;
+        }
+      case TEST_ONLINE:
+        {
+          res = lecturerService.getTestonlineByPage(page);
+          break;
+        }
     }
     int totalPages = res.getTotalPages();
     return new PagingResponse<>(
-            totalPages,
-            res.getContent().stream().map(Entity2DTO::swayTest2DTO).collect(Collectors.toList()));
+        totalPages,
+        res.getContent().stream().map(Entity2DTO::swayTest2DTO).collect(Collectors.toList()));
   }
 
   @GetMapping("/create")
@@ -67,7 +69,8 @@ public class RestTestController extends BaseController {
 
   @GetMapping("/search")
   public ResponseEntity searchByKeyword(
-          @RequestParam(name = "query", defaultValue = "") String keyword, @RequestParam(name = "type") String testType) {
+      @RequestParam(name = "query", defaultValue = "") String keyword,
+      @RequestParam(name = "type") String testType) {
     if (keyword.length() == 0) {
       return ok(new ArrayList<>());
     }

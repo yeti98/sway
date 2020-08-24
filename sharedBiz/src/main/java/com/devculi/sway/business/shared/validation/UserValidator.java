@@ -15,8 +15,7 @@ public final class UserValidator extends AbstractValidator {
     }
   }
 
-  public void validateUpdateUser(UpsertUserRequest updateUserRequest) {
-  }
+  public void validateUpdateUser(UpsertUserRequest updateUserRequest) {}
 
   //	public static void validateAuthorization(AuthorizationRequestDTO request) throws
   // ValidationException{

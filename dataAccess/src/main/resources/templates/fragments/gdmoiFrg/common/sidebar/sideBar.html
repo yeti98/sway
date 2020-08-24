@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="sideBarFrg">
+  <section>
+    <figure class="feature-v12__bg-item">
+      <img alt="Image description" class="block width-100%" src="/gdmoi/assets/img/img-15.png.jpeg">
+    </figure>
+  </section>
+  <section class="newsletter padding-y-xl text-center">
+    <div class="container width-90%">
+      <form class="grid gap-xxs">
+        <div class="row@xs min-width-0">
+          <input aria-label="Name" class="form-control width-100% height-100%" placeholder="Họ tên" type="text">
+        </div>
+        <div class="row@xs min-width-0">
+          <input aria-label="Email" class="form-control width-100% height-100%" placeholder="Số điện thoại"
+                 type="number">
+        </div>
+
+        <div>
+          <button class="btn btn--primary width-100% height-100%">Nhận tư vấn</button>
+        </div>
+      </form>
+
+      <!--        <p role="alert" class="bg-success bg-opacity-20% text-sm padding-xs radius-md margin-top-xs"><strong>Success!</strong> Please check your inbox for a confirmation email.</p>-->
+
+      <!--        <div class="margin-top-xs">-->
+      <!--          <small class="text-xs color-contrast-medium">By subscribing you agree to our <a class="color-contrast-high" href="#0">privacy policy</a>.</small>-->
+      <!--        </div>-->
+    </div>
+  </section>
+</th:block>
+</html>

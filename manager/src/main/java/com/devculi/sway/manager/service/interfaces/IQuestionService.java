@@ -10,15 +10,15 @@ import java.util.List;
 
 @Service
 public interface IQuestionService {
-    Question getQuestionByID(Long questionID);
+  Question getQuestionByID(Long questionID);
 
-    Question insertQuestion(UpsertQuestionRequest insertQuestionRequest);
+  Question insertQuestion(UpsertQuestionRequest insertQuestionRequest);
 
-    Question updateQuestion(Long questionId, UpsertQuestionRequest updateQuestionRequest);
+  Question updateQuestion(Long questionId, UpsertQuestionRequest updateQuestionRequest);
 
-    Long deleteQuestion(Long questionID);
+  Long deleteQuestion(Long questionID);
 
-    Collection<Question> importQuestionFormExcel(Long targetID, MultipartFile file);
+  Collection<Question> importQuestionFormExcel(Long targetID, MultipartFile file);
 
-    List<Question> searchBy(String keyword, boolean isIgnoreCase);
+  List<Question> searchBy(String keyword, boolean isIgnoreCase);
 }

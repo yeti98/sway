@@ -2,7 +2,6 @@ package com.devculi.sway.sharedmodel.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserModel {
   private Long id;
@@ -16,7 +15,15 @@ public class UserModel {
 
   public UserModel() {}
 
-  public UserModel(Long id, String name, String username, String avatar, String description, boolean status, String type, String role) {
+  public UserModel(
+      Long id,
+      String name,
+      String username,
+      String avatar,
+      String description,
+      boolean status,
+      String type,
+      String role) {
     this.id = id;
     this.name = name;
     this.username = username;
@@ -29,16 +36,31 @@ public class UserModel {
 
   @Override
   public String toString() {
-    return "{" +
-            "\"id\":" + id +
-            ", \"name\":\"" + name + '\"' +
-            ", \"username\":\"" + username + '\"' +
-            ", \"avatar\":\"" + avatar + '\"' +
-            ", \"description\":\"" + description + '\"' +
-            ", \"status\":\"" + status + '\"' +
-            ", \"type\":\"" + type + '\"' +
-            ", \"role\":\"" + role + '\"' +
-            '}';
+    return "{"
+        + "\"id\":"
+        + id
+        + ", \"name\":\""
+        + name
+        + '\"'
+        + ", \"username\":\""
+        + username
+        + '\"'
+        + ", \"avatar\":\""
+        + avatar
+        + '\"'
+        + ", \"description\":\""
+        + description
+        + '\"'
+        + ", \"status\":\""
+        + status
+        + '\"'
+        + ", \"type\":\""
+        + type
+        + '\"'
+        + ", \"role\":\""
+        + role
+        + '\"'
+        + '}';
   }
 
   public Long getId() {

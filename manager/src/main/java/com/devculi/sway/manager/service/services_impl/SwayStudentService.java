@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SwayStudentService implements IStudentService {
-    @Override
-    public SwayUser getStudentByID(Long id) {
-        return null;
-    }
+  @Override
+  public SwayUser getStudentByID(Long id) {
+    return null;
+  }
 }

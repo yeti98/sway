@@ -3,10 +3,17 @@
       layout:decorate="~{layouts/giao-dien}"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <link id="codyframe" rel="stylesheet" href="/gdmoi/assets/css/trang-chu/style.css">
+  <link href="/gdmoi/assets/css/trang-chu/style.css" id="codyframe" rel="stylesheet">
   <!-- browsers not supporting CSS variables -->
   <script>
-    if(!('CSS' in window) || !CSS.supports('color', 'var(--color-var)')) {var cfStyle = document.getElementById('codyframe');if(cfStyle) {var href = cfStyle.getAttribute('href');href = href.replace('style.css', 'style-fallback.css');cfStyle.setAttribute('href', href);}}
+    if (!('CSS' in window) || !CSS.supports('color', 'var(--color-var)')) {
+      var cfStyle = document.getElementById('codyframe');
+      if (cfStyle) {
+        var href = cfStyle.getAttribute('href');
+        href = href.replace('style.css', 'style-fallback.css');
+        cfStyle.setAttribute('href', href);
+      }
+    }
   </script>
 </head>
 <body>
@@ -27,126 +34,9 @@
       <th:block th:insert="fragments/gdmoiFrg/trang-chu/_5_bai-hoc-moi-nhat :: bai-hoc-moi-nhatFrg"></th:block>
     </div>
     <div class="col-3@lg col-12@sm">
-      <section>
-        <figure class="feature-v12__bg-item">
-          <img class="block width-100%" src="/gdmoi/assets/img/img-15.png.jpeg" alt="Image description">
-        </figure>
-      </section>
-      <section class="newsletter padding-y-xl text-center">
-        <div class="container width-90%">
-          <form class="grid gap-xxs">
-            <div class="row@xs min-width-0">
-              <input class="form-control width-100% height-100%" aria-label="Name" type="text" placeholder="Họ tên">
-            </div>
-            <div class="row@xs min-width-0">
-              <input class="form-control width-100% height-100%" aria-label="Email" type="number" placeholder="Số điện thoại">
-            </div>
-
-            <div>
-              <button class="btn btn--primary width-100% height-100%">Nhận tư vấn</button>
-            </div>
-          </form>
-
-          <!--        <p role="alert" class="bg-success bg-opacity-20% text-sm padding-xs radius-md margin-top-xs"><strong>Success!</strong> Please check your inbox for a confirmation email.</p>-->
-
-          <!--        <div class="margin-top-xs">-->
-          <!--          <small class="text-xs color-contrast-medium">By subscribing you agree to our <a class="color-contrast-high" href="#0">privacy policy</a>.</small>-->
-          <!--        </div>-->
-        </div>
-      </section>
+      <th:block th:insert="fragments/gdmoiFrg/common/sidebar/sideBar :: sideBarFrg"></th:block>
     </div>
   </div>
-
-  <!--Bài học mới nhất-->
-<!--  <section class="articles-v3">-->
-<!--    <div class="container max-width-adaptive-lg">-->
-<!--      <ul class="grid gap-lg">-->
-<!--        <li>-->
-<!--          <div class="grid gap-md items-start">-->
-<!--            <a href="#0" class="articles-v3__img col-6@md col-7@xl">-->
-<!--              <figure class="media-wrapper">-->
-<!--                <img src="/gdmoi/assets/img/article-gallery-v3-img-1.jpg" alt="Image description">-->
-<!--              </figure>-->
-<!--            </a>-->
-
-<!--            <div class="col-6@md col-5@xl">-->
-<!--              <div class="text-component">-->
-<!--                <h2 class="articles-v3__headline"><a href="#0">Lorem ipsum dolor sit.</a></h2>-->
-<!--                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus nihil rem aliquid perferendis delectus in esse praesentium necessitatibus rerum consectetur!</p>-->
-<!--              </div>-->
-
-<!--              <div class="articles-v3__author">-->
-<!--                <a href="#0" class="articles-v3__author-img">-->
-<!--                  <img src="/gdmoi/assets/img/article-gallery-v3-author-img-1.jpg" alt="Author picture">-->
-<!--                </a>-->
-
-<!--                <div class="text-component text-sm line-height-xs v-space-xs">-->
-<!--                  <p><a href="#0" class="articles-v3__author-name" rel="author">Olivia Gribben</a></p>-->
-<!--                  <p class="color-contrast-medium"><time>Oct 4, 2020</time>, &mdash; 5 min read</p>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </li>-->
-
-<!--        <li>-->
-<!--          <div class="grid gap-md items-start">-->
-<!--            <a href="#0" class="articles-v3__img col-6@md col-7@xl">-->
-<!--              <figure class="media-wrapper">-->
-<!--                <img src="/gdmoi/assets/img/article-gallery-v3-img-2.jpg" alt="Image description">-->
-<!--              </figure>-->
-<!--            </a>-->
-
-<!--            <div class="col-6@md col-5@xl">-->
-<!--              <div class="text-component">-->
-<!--                <h2 class="articles-v3__headline"><a href="#0">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a></h2>-->
-<!--                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus nihil rem aliquid perferendis delectus in esse praesentium necessitatibus rerum consectetur!</p>-->
-<!--              </div>-->
-
-<!--              <div class="articles-v3__author">-->
-<!--                <a href="#0" class="articles-v3__author-img">-->
-<!--                  <img src="/gdmoi/assets/img/article-gallery-v3-author-img-1.jpg" alt="Author picture">-->
-<!--                </a>-->
-
-<!--                <div class="text-component text-sm line-height-xs v-space-xs">-->
-<!--                  <p><a href="#0" class="articles-v3__author-name" rel="author">Olivia Gribben</a></p>-->
-<!--                  <p class="color-contrast-medium"><time>Oct 4, 2020</time>, &mdash; 5 min read</p>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </li>-->
-
-<!--        <li>-->
-<!--          <div class="grid gap-md items-start">-->
-<!--            <a href="#0" class="articles-v3__img col-6@md col-7@xl">-->
-<!--              <figure class="media-wrapper">-->
-<!--                <img src="/gdmoi/assets/img/article-gallery-v3-img-3.jpg" alt="Image description">-->
-<!--              </figure>-->
-<!--            </a>-->
-
-<!--            <div class="col-6@md col-5@xl">-->
-<!--              <div class="text-component">-->
-<!--                <h2 class="articles-v3__headline"><a href="#0">Lorem ipsum dolor sit.</a></h2>-->
-<!--                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus nihil rem aliquid perferendis delectus in esse praesentium necessitatibus rerum consectetur!</p>-->
-<!--              </div>-->
-
-<!--              <div class="articles-v3__author">-->
-<!--                <a href="#0" class="articles-v3__author-img">-->
-<!--                  <img src="/gdmoi/assets/img/article-gallery-v3-author-img-1.jpg" alt="Author picture">-->
-<!--                </a>-->
-
-<!--                <div class="text-component text-sm line-height-xs v-space-xs">-->
-<!--                  <p><a href="#0" class="articles-v3__author-name" rel="author">Olivia Gribben</a></p>-->
-<!--                  <p class="color-contrast-medium"><time>Oct 4, 2020</time>, &mdash; 5 min read</p>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </li>-->
-<!--      </ul>-->
-<!--    </div>-->
-<!--  </section>-->
 
   <th:block th:insert="fragments/gdmoiFrg/trang-chu/_6_notice :: noticeFrg"></th:block>
   <th:block th:insert="fragments/gdmoiFrg/trang-chu/_7_khoa-hoc :: khoa-hocFrg"></th:block>

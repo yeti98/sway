@@ -8,11 +8,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SwaySubmitService implements ISubmitService {
-    @Autowired
-    SwaySubmitRepository submitRepository;
+  @Autowired SwaySubmitRepository submitRepository;
 
-    @Override
-    public SwaySubmit insertSubmit(SwaySubmit swaySubmit) {
-        return null;
-    }
+  @Override
+  public SwaySubmit insertSubmit(SwaySubmit swaySubmit) {
+    return null;
+  }
 }

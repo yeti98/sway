@@ -2,7 +2,6 @@ package com.devculi.sway.business.shared.model;
 
 import com.devculi.sway.utils.GsonUtils;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.google.gson.Gson;
 
 import java.util.List;
 
