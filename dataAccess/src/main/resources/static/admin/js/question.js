@@ -239,5 +239,32 @@ $(document).ready(function () {
       }
     });
   })
+
+  $(document).on("click", "#btnSearchQuestion", function (event) {
+    event.preventDefault();
+
+    const $form = $(this);
+    const $inputs = $form.find("input, select, button, textarea");
+    $inputs.prop("disabled", true);
+
+    // lấy từ khóa
+    const keyword = $('#txtKeyword').val();
+    // Xóa bảng
+    $('#tblQuestion tbody').empty();
+    // Gửi request
+    $.ajax({
+      url: "/api/questions/search?query=" + keyword,
+      type: "get",
+      contentType: "application/json; charset=utf-8",
+      success: function (matchedCourses) {
+        $inputs.prop("disabled", false);
+        // TODO: Chèn dl vào bảng
+      },
+      error: function (msg) {
+        $inputs.prop("disabled", false);
+        alert("Không tìm thấy: \n", msg);
+      }
+    });
+  });
 });
 //

@@ -7,7 +7,6 @@ import com.devculi.sway.dataaccess.entity.Question;
 import com.devculi.sway.interceptor.attr.annotations.ManageQuestionsPage;
 import com.devculi.sway.sharedmodel.request.UpsertQuestionRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;

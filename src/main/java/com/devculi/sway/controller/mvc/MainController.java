@@ -19,28 +19,28 @@ public class MainController {
   @GetMapping
   public String index(Model model) {
     model.addAttribute("activeLink", "index");
-    return "index";
+    return "gdmoi/trang-chu";
   }
 
   @GetMapping("/gioi-thieu")
   public String gioiThieu(Model model) {
     model.addAttribute("activeLink", "gt");
     model.addAttribute("pageTitle", "Giới thiệu");
-    return "gioi-thieu";
+    return "gdmoi/noi-dung";
   }
 
   @GetMapping("/doi-ngu")
   public String doiNgu(Model model) {
     model.addAttribute("activeLink", "doi-ngu");
     model.addAttribute("pageTitle", "Đội ngũ");
-    return "doi-ngu";
+    return "gdmoi/noi-dung";
   }
 
   @GetMapping("/about-us")
   public String aboutUs(Model model) {
     model.addAttribute("activeLink", "about-us");
     model.addAttribute("pageTitle", "About us");
-    return "about-us";
+    return "gdmoi/tuyen-dung";
   }
 
   @GetMapping(value = {"/robots.txt", "/robot.txt"})
@@ -49,18 +49,11 @@ public class MainController {
     return "User-agent: *\n" + "Disallow: /admin\n";
   }
 
-  @GetMapping("/homework")
+  @GetMapping("/bai-tap-lop")
   public String homework(Model model) {
     model.addAttribute("activeLink", "homework");
     model.addAttribute("pageTitle", "Bài tập về nhà");
-    return "homework";
-  }
-
-  @GetMapping("/loading")
-  public String loading(Model model) {
-    model.addAttribute("activeLink", "homework");
-    model.addAttribute("pageTitle", "Đang tải");
-    return "loading";
+    return "gdmoi/bai-tap";
   }
 
   @GetMapping("/test-online")
@@ -103,5 +96,45 @@ public class MainController {
     return "ket-qua";
   }
 
+  @GetMapping("/giaodienmoi/trang-chu")
+  public String newIndex(Model model) {
+    model.addAttribute("activeLink", "index");
+    return "gdmoi/trang-chu";
+  }
 
+  @GetMapping("/giaodienmoi/noi-dung")
+  public String newContent(Model model) {
+    model.addAttribute("activeLink", "index");
+    return "gdmoi/noi-dung";
+  }
+
+  @GetMapping("/giaodienmoi/dang-nhap")
+  public String newDangNhap(Model model) {
+    model.addAttribute("activeLink", "index");
+    return "gdmoi/dang-nhap";
+  }
+
+  @GetMapping("/giaodienmoi/khct")
+  public String khoaHocChiTiet(Model model) {
+    model.addAttribute("activeLink", "index");
+    return "gdmoi/khoa-hoc-chi-tiet";
+  }
+
+  @GetMapping("/giaodienmoi/bt")
+  public String baitapChiTiet(Model model) {
+    model.addAttribute("activeLink", "index");
+    return "gdmoi/bai-tap";
+  }
+
+  @GetMapping("/giaodienmoi/kq")
+  public String ketquaSubmit(Model model) {
+    model.addAttribute("activeLink", "index");
+    return "gdmoi/ket-qua";
+  }
+
+  @GetMapping("/giaodienmoi/co-hoi-viec-lam")
+  public String chvl(Model model) {
+    model.addAttribute("activeLink", "index");
+    return "gdmoi/tuyen-dung";
+  }
 }

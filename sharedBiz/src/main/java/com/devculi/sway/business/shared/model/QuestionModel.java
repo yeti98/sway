@@ -90,7 +90,7 @@ public class QuestionModel {
     this.updatedAt = updatedAt;
   }
 
-  public String getReadableChoices(){
+  public String getReadableChoices() {
     return String.join(" ", choices.split(Question.DETERMINER));
   }
 
@@ -99,11 +99,11 @@ public class QuestionModel {
     return "";
   }
 
-  public String getJsonString(){
+  public String getJsonString() {
     return GsonUtils.toJson(this);
   }
 
-  public String[] getChoicesList(){
+  public String[] getChoicesList() {
     System.out.println();
     return choices.split(Question.DETERMINER);
   }

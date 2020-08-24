@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface ISubmitService {
-  public SwaySubmit insertSubmit(SwaySubmit swaySubmit);
+  SwaySubmit insertSubmit(SwaySubmit swaySubmit);
 }

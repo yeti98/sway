@@ -18,8 +18,8 @@
             <h3 class="card-title">Danh sách tài khoản</h3>
             <div class="card-tools">
               <div class="input-group input-group-sm" style="width: 150px;">
-                <input class="form-control float-right" name="table_search" placeholder="email/tên" type="text">
-                <div class="input-group-append">
+                <input id="txtKeyword" class="form-control float-right" name="table_search" placeholder="email/tên" type="text">
+                <div class="input-group-append" id="btnSearchUser">
                   <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
                 </div>
               </div>
@@ -27,7 +27,7 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body table-responsive p-0">
-            <table class="table table-hover text-nowrap">
+            <table class="table table-hover text-nowrap" id="tblUser">
               <thead>
               <tr>
                 <th>STT</th>

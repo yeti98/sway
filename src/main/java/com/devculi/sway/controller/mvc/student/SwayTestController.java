@@ -5,5 +5,4 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/nop-bai")
-public class SwayTestController {
-}
+public class SwayTestController {}

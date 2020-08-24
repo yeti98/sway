@@ -14,19 +14,37 @@ public class UpsertUserRequest {
   private String type;
   private String password;
 
+  public UpsertUserRequest() {}
+
   @Override
   public String toString() {
-    return "UpsertUserRequest{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", username='" + username + '\'' +
-            ", avatar='" + avatar + '\'' +
-            ", description='" + description + '\'' +
-            ", status=" + status +
-            ", role='" + role + '\'' +
-            ", type='" + type + '\'' +
-            ", password='" + password + '\'' +
-            '}';
+    return "UpsertUserRequest{"
+        + "id="
+        + id
+        + ", name='"
+        + name
+        + '\''
+        + ", username='"
+        + username
+        + '\''
+        + ", avatar='"
+        + avatar
+        + '\''
+        + ", description='"
+        + description
+        + '\''
+        + ", status="
+        + status
+        + ", role='"
+        + role
+        + '\''
+        + ", type='"
+        + type
+        + '\''
+        + ", password='"
+        + password
+        + '\''
+        + '}';
   }
 
   public Long getId() {
@@ -49,14 +67,12 @@ public class UpsertUserRequest {
     return status;
   }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-  public UpsertUserRequest() {}
-
   public String getPassword() {
     return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 
   public String getName() {

@@ -1,11 +1,11 @@
 package com.devculi.sway.dataaccess.entity;
 
-import com.sun.istack.Nullable;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity

@@ -21,9 +21,11 @@ public class Course {
 
   private String courseId;
   private boolean active;
+
   @CreationTimestamp
   @Column(nullable = false, updatable = false)
   private LocalDateTime createdAt;
+
   @UpdateTimestamp
   @Column(nullable = false)
   private LocalDateTime updatedAt;

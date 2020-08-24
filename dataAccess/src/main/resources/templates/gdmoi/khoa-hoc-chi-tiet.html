@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="vi"
+      layout:decorate="~{layouts/giao-dien}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link href="/gdmoi/assets/css/khoa-hoc/style.css" id="codyframe" rel="stylesheet">
+  <!-- browsers not supporting CSS variables -->
+  <script>
+    if (!('CSS' in window) || !CSS.supports('color', 'var(--color-var)')) {
+      var cfStyle = document.getElementById('codyframe');
+      if (cfStyle) {
+        var href = cfStyle.getAttribute('href');
+        href = href.replace('style.css', 'style-fallback.css');
+        cfStyle.setAttribute('href', href);
+      }
+    }
+  </script>
+</head>
+<body>
+
+<th:block layout:fragment="content">
+  <!--HERO-->
+  <section class="feature-v12 feature-v12--bottom feature-v12--offset-sm feature-v12--offset-md@md padding-y-sm">
+    <div class="container max-width-adaptive-lg">
+      <div class="grid justify-center">
+        <div class="col-10 col-8@md order-2">
+          <div class="feature-v12__offset-item text-center">
+            <!--          <h1 class="text-xxxl@sm text-xxxxl@lg">Hệ thống đào tạo ngoại ngữ Sway</h1>-->
+          </div>
+        </div>
+
+        <div class="order-1">
+          <figure class="feature-v12__bg-item">
+            <img alt="Image description" class="block width-100%" src="/gdmoi/assets/img/toeic-0-500.png">
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--MAIN CONTENT-->
+  <div class="parent grid gap-xs padding-y-sm padding-x-sm text-sm">
+    <div class="col-9@lg col-12@sm">
+      <section class="position-relative">
+        <div class="position-relative z-index-2">
+          <div class="container max-width-lg">
+            <div class="grid gap-sm">
+              <div class="col-11@md">
+                <div class="color-primary margin-bottom-sm"><a href="khoa-hoc/tieng-anh">Khóa học tiếng Anh</a></div>
+
+                <h1 class="text-xxxl@lg text-xl@sm"> Khóa học TOEIC 0 - 500+ </h1>
+              </div>
+
+              <div class="col-12 offset-1 col-9@lg padding-y-lg">
+                <div class="text-component line-height-lg v-space-lg">
+                  <p class="bg-primary bg-opacity-10% padding-md border-left border-3 border-primary"> Khóa học "TOEIC 0
+                    - 500+ từ mất gốc" được xây dựng trên lộ trình học gồm 26 buổi trong vòng 3,5 tháng. Khóa học được
+                    xây dựng bởi Thạc sĩ Đỗ Vân Anh sau nhiều năm nghiên cứu, giảng dạy và đang được áp dụng thành công
+                    tại Anh ngữ Athena. Chương trình học liên tục được cô Vân Anh cập nhật và đổi mới, đảm bảo học viên
+                    có được kiến thức và kết quả học tập cao nhất. </p>
+
+                  <p>1. ĐỐI TƯỢNG THAM GIA KHÓA HỌC</p>
+                  <span>♦ Các bạn mất gốc tiếng Anh, chưa học, chưa thi Toeic bao giờ.</span><br>
+                  <span>♦ Các bạn muốn học lại từ đầu mà không phải test đầu vào, không phải chia làm nhiều giai đoạn như lớp pre/lớp 0-300 rồi lớp 300 - 500+, tiết kiệm thời gian.</span><br>
+                  <span>♦ Các bạn học tiếng Anh từ năm cấp 2, cấp 3, các bạn khối A đã quên kiến thức.</span><br>
+                  <span>♦ Các bạn đã tự học và đi học nhưng thất bại, có mục tiêu TOEIC 500+ để ra trường, để tìm được công việc tốt có thu nhập cao hơn.</span>
+                  <br>
+                  <p>2. LỊCH KHAI GIẢNG</p>
+                  <figure class="margin-y-sm">
+                    <img alt="Image description" class="block width-100%" src="/gdmoi/assets/img/lich-khai-giang-ex1.png">
+                  </figure>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <footer class="border-top border-contrast-higher border-opacity-10% padding-top-sm">
+                  <p class="text-sm text-right text-bold">Hệ thống đào tạo Sway</p>
+                </footer>
+              </div>
+            </div>
+          </div>
+
+          <div aria-hidden="true" class="grid-bg-fx z-index-1">
+            <div class="container height-100% max-width-lg">
+              <div class="grid-bg-fx__grid grid gap-sm color-contrast-higher color-opacity-10%">
+                <div class="col-2"></div>
+                <div class="col-2"></div>
+                <div class="col-2"></div>
+                <div class="col-2"></div>
+                <div class="col-2"></div>
+                <div class="col-2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="col-3@lg col-12@sm">
+      <th:block th:insert="fragments/gdmoiFrg/common/sidebar/sideBar :: sideBarFrg"></th:block>
+    </div>
+  </div>
+</th:block>
+</body>
+</html>
