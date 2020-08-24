@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/bai-tap-lop")
+@RequestMapping("/xem-bai-tap-lop")
 @RequireRoleStudent
 public class StuHomeworkController {
   @Autowired IClassService classService;
