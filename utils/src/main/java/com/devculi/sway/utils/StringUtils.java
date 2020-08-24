@@ -247,48 +247,46 @@ public class StringUtils {
     return false;
   }
 
-  public static String generateMcCustCode(String md5) {
+  public static String generateMcCustomCode(String md5) {
     try {
       java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
       byte[] array = md.digest(md5.getBytes());
-      StringBuffer sb = new StringBuffer();
-      for (int i = 0; i < array.length; ++i) {
-        sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100), 1, 3);
+      StringBuilder sb = new StringBuilder();
+      for (byte b : array) {
+        sb.append(Integer.toHexString((b & 0xFF) | 0x100), 1, 3);
       }
       return sb.toString();
-    } catch (java.security.NoSuchAlgorithmException e) {
+    } catch (java.security.NoSuchAlgorithmException ignored) {
     }
     return null;
   }
 
-
-
   public static String convertToLatin(String str) {
-    str = str.replaceAll("à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ", "a");
-    str = str.replaceAll("è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ", "e");
-    str = str.replaceAll("ì|í|ị|ỉ|ĩ", "i");
-    str = str.replaceAll("ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ", "o");
-    str = str.replaceAll("ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ", "u");
-    str = str.replaceAll("ỳ|ý|ỵ|ỷ|ỹ", "y");
+    str = str.replaceAll("[àáạảãâầấậẩẫăằắặẳẵ]", "a");
+    str = str.replaceAll("[èéẹẻẽêềếệểễ]", "e");
+    str = str.replaceAll("[ìíịỉĩ]", "i");
+    str = str.replaceAll("[òóọỏõôồốộổỗơờớợởỡ]", "o");
+    str = str.replaceAll("[ùúụủũưừứựửữ]", "u");
+    str = str.replaceAll("[ỳýỵỷỹ]", "y");
     str = str.replaceAll("đ", "d");
 
-    str = str.replaceAll("À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ", "A");
-    str = str.replaceAll("È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ", "E");
-    str = str.replaceAll("Ì|Í|Ị|Ỉ|Ĩ", "I");
-    str = str.replaceAll("Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ", "O");
-    str = str.replaceAll("Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ", "U");
-    str = str.replaceAll("Ỳ|Ý|Ỵ|Ỷ|Ỹ", "Y");
+    str = str.replaceAll("[ÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴ]", "A");
+    str = str.replaceAll("[ÈÉẸẺẼÊỀẾỆỂỄ]", "E");
+    str = str.replaceAll("[ÌÍỊỈĨ]", "I");
+    str = str.replaceAll("[ÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠ]", "O");
+    str = str.replaceAll("[ÙÚỤỦŨƯỪỨỰỬỮ]", "U");
+    str = str.replaceAll("[ỲÝỴỶỸ]", "Y");
     str = str.replaceAll("Đ", "D");
     return str;
   }
 
-  public static String CurrentDateTime() {
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd-hhmmss");
+  public static String currentTimeInFormat(String pattern) {
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern(pattern);
     LocalDateTime now = LocalDateTime.now();
-    return(dtf.format(now));
+    return (dtf.format(now));
   }
 
-  public static  String makeSlug(String input) {
+  public static String makeSlug(String input) {
     final Pattern NONLATIN = Pattern.compile("[^\\w-]");
     final Pattern WHITESPACE = Pattern.compile("[\\s]");
 
@@ -296,12 +294,18 @@ public class StringUtils {
     String nowhitespace = WHITESPACE.matcher(input).replaceAll("-");
     String normalized = Normalizer.normalize(nowhitespace, Normalizer.Form.NFD);
     String slug = NONLATIN.matcher(normalized).replaceAll("");
-    slug.toLowerCase(Locale.ENGLISH);
-    slug = slug + "-" + CurrentDateTime();
+    slug = slug.toLowerCase(Locale.ENGLISH) + "-" + currentTimeInFormat("yyyyMMdd-hhmmss");
     return slug;
   }
 
   public static void main(String[] args) {
+    System.out.println(makeSlug("Học ăn cơm chó để làm tỷ phú"));
 
+    String input = "Học ăn cơm chó để làm tỷ phú";
+    System.out.println("Input: " + input);
+    String normalized = Normalizer.normalize(input, Normalizer.Form.NFD);
+    System.out.println("Normalized: " + normalized);
+    String accentRemoved = normalized.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+    System.out.println("Result: " + accentRemoved);
   }
 }
