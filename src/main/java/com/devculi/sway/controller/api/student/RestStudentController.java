@@ -1,6 +1,6 @@
 package com.devculi.sway.controller.api.student;
 
-import com.devculi.sway.controller.api.BaseController;
+import com.devculi.sway.controller.api.RestBaseController;
 import com.devculi.sway.manager.service.interfaces.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/students")
-public class StudentController extends BaseController {
+public class RestStudentController extends RestBaseController {
   @Autowired IStudentService studentService;
 
   @GetMapping("/{id}")

@@ -1,5 +1,6 @@
 package com.devculi.sway.controller.api.admin;
 
+import com.devculi.sway.annotations.RequireRoleAdmin;
 import com.devculi.sway.business.shared.factory.SwayFactory;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
 import com.devculi.sway.dataaccess.entity.SwayUser;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/admin")
+@RequireRoleAdmin
 public class AdminController {
   @Autowired IAdminService adminService;
   @Autowired IAuthService authService;

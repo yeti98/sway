@@ -1,6 +1,6 @@
 package com.devculi.sway.controller.api.file;
 
-import com.devculi.sway.annotations.RequireRoleAdmin;
+import com.devculi.sway.annotations.RequireRoleLecturer;
 import com.devculi.sway.business.shared.common.Constant;
 import com.devculi.sway.business.shared.model.QuestionModel;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/files")
-@RequireRoleAdmin
+@RequireRoleLecturer
 public class FileController {
   @Autowired IQuestionService questionService;
   @Autowired ISwayTestService swayTestService;

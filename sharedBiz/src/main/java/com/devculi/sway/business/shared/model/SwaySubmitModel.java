@@ -8,17 +8,52 @@ import java.time.LocalDateTime;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SwaySubmitModel {
-  UserModel swayUser;
+  private UserModel swayUser;
   private Long id;
   private String studentName;
   private String studentContact;
   private String studentNote;
   private TestType submitType;
-  private String isChecked;
+  private boolean isChecked;
   private Double score;
+  private String scoreInString;
+  private boolean isPassed;
+  private SwayClassModel swayClass;
   private String lecturerNote;
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
+
+  public boolean isChecked() {
+    return isChecked;
+  }
+
+  public void setChecked(boolean checked) {
+    isChecked = checked;
+  }
+
+  public String getScoreInString() {
+    return scoreInString;
+  }
+
+  public void setScoreInString(String scoreInString) {
+    this.scoreInString = scoreInString;
+  }
+
+  public boolean isPassed() {
+    return isPassed;
+  }
+
+  public void setPassed(boolean passed) {
+    isPassed = passed;
+  }
+
+  public SwayClassModel getSwayClass() {
+    return swayClass;
+  }
+
+  public void setSwayClass(SwayClassModel swayClass) {
+    this.swayClass = swayClass;
+  }
 
   public UserModel getSwayUser() {
     return swayUser;
@@ -66,14 +101,6 @@ public class SwaySubmitModel {
 
   public void setSubmitType(TestType submitType) {
     this.submitType = submitType;
-  }
-
-  public String getIsChecked() {
-    return isChecked;
-  }
-
-  public void setIsChecked(String isChecked) {
-    this.isChecked = isChecked;
   }
 
   public Double getScore() {

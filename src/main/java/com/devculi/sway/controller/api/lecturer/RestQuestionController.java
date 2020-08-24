@@ -1,8 +1,9 @@
 package com.devculi.sway.controller.api.lecturer;
 
+import com.devculi.sway.annotations.RequireRoleLecturer;
 import com.devculi.sway.business.shared.model.QuestionModel;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
-import com.devculi.sway.controller.api.BaseController;
+import com.devculi.sway.controller.api.RestBaseController;
 import com.devculi.sway.dataaccess.entity.Question;
 import com.devculi.sway.manager.service.interfaces.IQuestionService;
 import com.devculi.sway.sharedmodel.request.UpsertQuestionRequest;
@@ -17,7 +18,8 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/questions")
-public class RestQuestionController extends BaseController {
+@RequireRoleLecturer
+public class RestQuestionController extends RestBaseController {
   @Autowired IQuestionService questionService;
 
   @PostMapping

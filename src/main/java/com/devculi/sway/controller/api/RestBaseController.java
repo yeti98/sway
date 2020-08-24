@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import java.util.logging.Logger;
 
 @SuppressWarnings("ALL")
-public class BaseController<T> {
-  private static final Logger logger = Logger.getLogger(BaseController.class.getName());
+public class RestBaseController<T> {
+  private static final Logger logger = Logger.getLogger(RestBaseController.class.getName());
 
   public ResponseEntity ok(T body) {
     return ResponseEntity.ok(body);

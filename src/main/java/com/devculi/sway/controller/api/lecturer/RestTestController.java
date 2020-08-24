@@ -1,10 +1,10 @@
 package com.devculi.sway.controller.api.lecturer;
 
-import com.devculi.sway.annotations.RequireRoleAdmin;
+import com.devculi.sway.annotations.RequireRoleLecturer;
 import com.devculi.sway.business.shared.model.SwayTestModel;
 import com.devculi.sway.business.shared.request.UpsertTestRequest;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
-import com.devculi.sway.controller.api.BaseController;
+import com.devculi.sway.controller.api.RestBaseController;
 import com.devculi.sway.dataaccess.entity.SwayTest;
 import com.devculi.sway.dataaccess.entity.enums.TestType;
 import com.devculi.sway.manager.service.interfaces.ISwayTestService;
@@ -21,8 +21,8 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/tests")
-@RequireRoleAdmin
-public class RestTestController extends BaseController {
+@RequireRoleLecturer
+public class RestTestController extends RestBaseController {
   @Autowired ISwayTestService swayTestService;
   @Autowired LecturerService lecturerService;
 
