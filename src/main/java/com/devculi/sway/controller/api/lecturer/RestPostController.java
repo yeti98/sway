@@ -4,7 +4,7 @@ import com.devculi.sway.annotations.RequireRoleAdmin;
 import com.devculi.sway.business.shared.model.PostModel;
 import com.devculi.sway.business.shared.request.UpsertPostRequest;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
-import com.devculi.sway.controller.api.BaseController;
+import com.devculi.sway.controller.api.RestBaseController;
 import com.devculi.sway.dataaccess.entity.Post;
 import com.devculi.sway.manager.service.interfaces.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/posts")
 @RequireRoleAdmin
-public class RestPostController extends BaseController {
+public class RestPostController extends RestBaseController {
 
   @Autowired IPostService postService;
 
