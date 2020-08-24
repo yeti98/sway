@@ -11,9 +11,11 @@ public interface IPostService {
 
     PagingResponse getPostByPage(Integer page);
 
-    PostModel createPost(UpsertPostRequest upsertPostRequest);
+    Post createPost(UpsertPostRequest upsertPostRequest);
+
+    Post getPostById(Long id);
 
     Long deletePostById(Long id);
 
-    PostModel updatePost(UpsertPostRequest upsertPostRequest, Long idPost);
+    Post updatePost(UpsertPostRequest upsertPostRequest, Long idPost);
 }

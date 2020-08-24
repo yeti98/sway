@@ -38,9 +38,9 @@ function isImage(filename) {
 }
 
 function getEditPost(){
-    selectedPost = undefined;
-    selectedPost = JSON.parse(sessionStorage.getItem("editPost"));
+
     console.log(selectedPost);
+    selectedPost = JSON.parse(selectedPost);
 
 
     if (selectedPost != undefined) {
@@ -53,6 +53,7 @@ function getEditPost(){
         $("#btnsubmit").css("display","none");
     }
     else {
+
         $("#btnedit").css("display","none");
         $("#btnsubmit").css("display","block");
     }
@@ -89,11 +90,10 @@ $(document).ready(function () {
 
             $.ajax({
                 url: "/api/posts/",
-                type: "get",
+                type: "post",
                 data: payLoad,
                 contentType: "application/json; charset=utf-8",
                 success: function (msg) {
-
                     console.log(msg)
                     window.location.href="/admin/manage/posts"
                 },

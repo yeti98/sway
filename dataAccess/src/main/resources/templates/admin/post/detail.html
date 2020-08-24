@@ -6,8 +6,9 @@
     xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Quản lý bài viết - Hệ thống đào tạo ngoại ngữ Sway</title>
+
 </head>
-<body onload="getEditPost()">
+<body onload = getEditPost()>
 <th:block layout:fragment="customNavBar">
   <div th:replace="fragments/admin/common :: navBarFragment"></div>
 </th:block>
@@ -27,7 +28,7 @@
               <select class="form-control" id="menu">
                 <option value="Homepage">Trang chủ</option>
                 <option value="Homework">Bài tập</option>
-                <option value="id">Đối tác</option>
+                <option value="abc">Đối tác</option>
               </select>
             </div>
             <div class="mb-3" style="height: 350px">
@@ -63,6 +64,10 @@
 
 <th:block layout:fragment="scriptFragment">
   <script th:inline="javascript">
+      /*<![CDATA[*/
+      var selectedPost = /*[[${editPost}]]*/ 'default';
+      console.log(selectedPost);
+      /*]]>*/
       $(function () {
           // Summernote
           $('.inputContent').summernote({

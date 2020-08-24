@@ -1,9 +1,11 @@
 package com.devculi.sway.controller.api.lecturer;
 
-
 import com.devculi.sway.annotations.RequireRoleAdmin;
 import com.devculi.sway.business.shared.model.PostModel;
 import com.devculi.sway.business.shared.request.UpsertPostRequest;
+import com.devculi.sway.business.shared.utils.Entity2DTO;
+import com.devculi.sway.controller.api.BaseController;
+import com.devculi.sway.dataaccess.entity.Post;
 import com.devculi.sway.manager.service.interfaces.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,31 +14,32 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/posts")
 @RequireRoleAdmin
-public class RestPostController {
+public class RestPostController extends BaseController {
 
-    @Autowired
-    IPostService postService;
+  @Autowired IPostService postService;
 
+  @PostMapping
+  public PostModel createPost(@RequestBody UpsertPostRequest upsertPostRequest) {
+    Post post = postService.createPost(upsertPostRequest);
+    return Entity2DTO.post2DTO(post);
+  }
 
+  @DeleteMapping("/{id}")
+  public ResponseEntity deletePostById(@PathVariable(name = "id") Long id) {
+    Long deleteId = postService.deletePostById(id);
+    return ok(deleteId);
+  }
 
-    @GetMapping
-    public PostModel createPost(@RequestBody UpsertPostRequest upsertPostRequest){
+  @GetMapping("/{id}")
+  public PostModel getPostById(@PathVariable(name = "id") Long id) {
+    Post postById = postService.getPostById(id);
+    return Entity2DTO.post2DTO(postById);
+  }
 
-        System.out.println(upsertPostRequest.getTitle());
-        System.out.println(upsertPostRequest.getContents());
-        return postService.createPost(upsertPostRequest);
-
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity deletePostById(@PathVariable(name = "id") Long id){
-        Long deleteId = postService.deletePostById(id);
-        return ResponseEntity.ok(deleteId);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<PostModel> getEditPost(@RequestBody UpsertPostRequest upsertPostRequest,@PathVariable(name = "id") Long id){
-        return ResponseEntity.ok(postService.updatePost(upsertPostRequest,id));
-
-    }
+  @PutMapping("/{id}")
+  public ResponseEntity<PostModel> editPost(
+      @RequestBody UpsertPostRequest upsertPostRequest, @PathVariable(name = "id") Long id) {
+    Post post = postService.updatePost(upsertPostRequest, id);
+    return ok(Entity2DTO.post2DTO(post));
+  }
 }

@@ -54,10 +54,8 @@
                     <p th:text="${post.getCreateDay()}"></p>
                   </td>
                   <td style="display: flex">
-                    <div id="editPost" th:attr="data-post=${post.getJsonString()}"
-                         th:onclick="javascript:setSelectedObject(this.getAttribute('data-post'));">
-                      <a class="edit"
-                         style="cursor: pointer;">
+                    <div id="editPost">
+                      <a class="edit" th:href="@{/admin/manage/posts/__${post.id}__}">
                         <i class="material-icons"
                            data-toggle="tooltip"
                            title="Chỉnh sửa">&#xE254;
@@ -142,9 +140,6 @@
           //var str = json_str.replace('UserModel', '');
 
           selectedPost = JSON.parse(json_str);
-          sessionStorage.setItem("editPost", JSON.stringify(selectedPost));
-
-          window.location.href="/admin/manage/posts/create";
 
       }
   </script>
