@@ -30,6 +30,7 @@
             <table class="table table-hover text-nowrap" id="tblUser">
               <thead>
               <tr>
+                <th>STT</th>
                 <th>Họ Tên</th>
                 <th>Email</th>
                 <th>Khóa</th>
@@ -38,8 +39,9 @@
               </tr>
               </thead>
               <tbody>
-              <th:block th:each="user: ${users}">
+              <th:block th:each="user,stats: ${users}">
                 <tr>
+                  <td th:text="${stats.index}"></td>
                   <td>
                     <p th:text="${user.name}"></p>
                   </td>
@@ -57,7 +59,7 @@
                   </td>
                   <td style="display: flex">
                     <div id="editAnUser"
-                         th:attr="data-user=${user.toString()}"
+                         th:attr="data-user=${user.getJsonString()}"
                          th:onclick="javascript:setSelectedObject(this.getAttribute('data-user'));">
                       <a class="edit" data-toggle="modal" href="#editUserModal">
                         <i class="material-icons"
@@ -66,7 +68,7 @@
                         </i>
                       </a>
                     </div>
-                    <div id="removeAnUser" th:attr="data-user=${user.toString()}"
+                    <div id="removeAnUser" th:attr="data-user=${user.getJsonString()}"
                          th:onclick="javascript:setSelectedObject(this.getAttribute('data-user'));">
                       <a class="delete" data-toggle="modal" href="#deleteUserModal">
                         <i class="material-icons"
