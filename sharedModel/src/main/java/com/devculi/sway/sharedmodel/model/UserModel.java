@@ -1,5 +1,6 @@
 package com.devculi.sway.sharedmodel.model;
 
+import com.devculi.sway.sharedmodel.utils.GsonUtils;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
