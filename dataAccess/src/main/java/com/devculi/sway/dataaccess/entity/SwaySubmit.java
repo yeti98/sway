@@ -12,12 +12,21 @@ import java.time.LocalDateTime;
 public class SwaySubmit {
   @OneToOne SwayTest swayTest;
   @OneToOne SwayUser swayUser;
+  @OneToOne Lesson lesson;
   @OneToOne SwayClass swayClass;
   @OneToOne SwayUser checkUser;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
+  public Lesson getLesson() {
+    return lesson;
+  }
+
+  public void setLesson(Lesson lesson) {
+    this.lesson = lesson;
+  }
 
   private String studentName;
   private String studentContact;

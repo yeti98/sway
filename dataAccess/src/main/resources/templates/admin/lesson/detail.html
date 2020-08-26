@@ -56,14 +56,14 @@
                       <tbody>
                       <th:block th:each="test, stats : *{tests}">
                         <tr>
-                          <th scope="row"><a th:href="@{'manage/tests/'+${test.id}}"><span
+                          <th scope="row"><a th:href="@{'manage/homeworks/'+${test.id}}"><span
                               th:text="${stats.index + 1}"></span></a></th>
                           <td><p th:text="${test.testId}"></p></td>
                           <td><p th:text="${test.testName}"></p></td>
                           <td><p th:text="${test.getNumberOfQuestion()}"></p></td>
                           <td style="display: flex">
                             <div id="editAnUser">
-                              <a class="edit" th:href="@{'manage/tests/'+${test.id}}">
+                              <a class="edit" th:href="@{'manage/homeworks/'+${test.id}}">
                                 <i class="material-icons"
                                    data-toggle="tooltip"
                                    style="color: orange" title="Chỉnh sửa bài tập">&#xE254;

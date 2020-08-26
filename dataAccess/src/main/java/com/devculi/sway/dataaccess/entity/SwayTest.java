@@ -10,7 +10,9 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Entity
-@Table(name = "stests")
+@Table(name = "stests", indexes = {
+        @Index(name = "stest_slug_idx", unique = true, columnList = "slug")
+})
 public class SwayTest {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +21,8 @@ public class SwayTest {
   private String testId;
 
   private String testName;
+
+  private String slug;
 
   @ManyToMany private Collection<Question> questions;
 
@@ -116,5 +120,13 @@ public class SwayTest {
 
   public void setSubmits(Collection<SwaySubmit> submits) {
     this.submits = submits;
+  }
+
+  public String getSlug() {
+    return slug;
+  }
+
+  public void setSlug(String slug) {
+    this.slug = slug;
   }
 }

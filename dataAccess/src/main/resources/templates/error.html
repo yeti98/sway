@@ -14,6 +14,7 @@
     <p style="margin-top: 100px">
       Đã có lỗi xảy ra. Vui lòng thử lại
     </p>
+    <p th:unless="${error == true}", th:text="${errorMessage}"></p>
     <th:block th:replace="fragments/user/footerFragment :: footer"></th:block>
   </div>
 </th:block>

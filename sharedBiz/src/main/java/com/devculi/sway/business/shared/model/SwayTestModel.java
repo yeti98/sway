@@ -7,117 +7,145 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SwayTestModel {
-  private Long id;
+    private Long id;
 
-  private String testId;
+    private String testId;
 
-  private String testName;
+    private String testName;
 
-  private Collection<QuestionModel> questions;
+    private List<QuestionModel> questions;
 
-  private LocalDate deadline;
-  private boolean active;
-  private TestType testType;
+    private LocalDate deadline;
+    private boolean active;
+    private TestType testType;
 
-  private LocalDateTime createdAt;
-  private LocalDateTime updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
-  private Collection<SwaySubmitModel> submits;
+    private Collection<SwaySubmitModel> submits;
 
-  public SwayTestModel() {}
+    private String slug;
 
-  public Long getId() {
-    return id;
-  }
+    public String getSlug() {
+        return slug;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
 
-  public String getTestId() {
-    return testId;
-  }
+    public SwayTestModel() {
+    }
 
-  public void setTestId(String testId) {
-    this.testId = testId;
-  }
+    public Long getId() {
+        return id;
+    }
 
-  public String getTestName() {
-    return testName;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public void setTestName(String testName) {
-    this.testName = testName;
-  }
+    public String getTestId() {
+        return testId;
+    }
 
-  public Collection<QuestionModel> getQuestions() {
-    return questions;
-  }
+    public void setTestId(String testId) {
+        this.testId = testId;
+    }
 
-  public void setQuestions(Collection<QuestionModel> questions) {
-    this.questions = questions;
-  }
+    public String getTestName() {
+        return testName;
+    }
 
-  public LocalDate getDeadline() {
-    return deadline;
-  }
+    public void setTestName(String testName) {
+        this.testName = testName;
+    }
 
-  public void setDeadline(LocalDate deadline) {
-    this.deadline = deadline;
-  }
+    public List<QuestionModel> getQuestions() {
+        return questions;
+    }
 
-  public boolean isActive() {
-    return active;
-  }
+    public void setQuestions(List<QuestionModel> questions) {
+        this.questions = questions;
+    }
 
-  public void setActive(boolean active) {
-    this.active = active;
-  }
+    public LocalDate getDeadline() {
+        return deadline;
+    }
 
-  public TestType getTestType() {
-    return testType;
-  }
+    public void setDeadline(LocalDate deadline) {
+        this.deadline = deadline;
+    }
 
-  public void setTestType(TestType testType) {
-    this.testType = testType;
-  }
+    public boolean isActive() {
+        return active;
+    }
 
-  public LocalDateTime getCreatedAt() {
-    return createdAt;
-  }
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
-  public void setCreatedAt(LocalDateTime createdAt) {
-    this.createdAt = createdAt;
-  }
+    public TestType getTestType() {
+        return testType;
+    }
 
-  public LocalDateTime getUpdatedAt() {
-    return updatedAt;
-  }
+    public void setTestType(TestType testType) {
+        this.testType = testType;
+    }
 
-  public void setUpdatedAt(LocalDateTime updatedAt) {
-    this.updatedAt = updatedAt;
-  }
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
 
-  public Collection<SwaySubmitModel> getSubmits() {
-    return submits;
-  }
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 
-  public void setSubmits(Collection<SwaySubmitModel> submits) {
-    this.submits = submits;
-  }
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
 
-  public int getNumberOfQuestion() {
-    return questions.size();
-  }
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
-  public int getTotalSubmition() {
-    return submits.size();
-  }
+    public Collection<SwaySubmitModel> getSubmits() {
+        return submits;
+    }
 
-  public String getJsonString() {
-    return GsonUtils.toJson(this);
-  }
+    public void setSubmits(Collection<SwaySubmitModel> submits) {
+        this.submits = submits;
+    }
+
+    public int getNumberOfQuestion() {
+        return questions.size();
+    }
+
+    public int getTotalSubmition() {
+        return submits.size();
+    }
+
+    public String getJsonString() {
+        return GsonUtils.toJson(this);
+    }
+
+    @Override
+    public String toString() {
+        return "SwayTestModel{" +
+                "id=" + id +
+                ", testId='" + testId + '\'' +
+                ", testName='" + testName + '\'' +
+                ", questions=" + questions +
+                ", deadline=" + deadline +
+                ", active=" + active +
+                ", testType=" + testType +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", submits=" + submits +
+                '}';
+    }
 }

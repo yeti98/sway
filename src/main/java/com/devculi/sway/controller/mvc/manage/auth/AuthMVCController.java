@@ -15,7 +15,7 @@ public class AuthMVCController {
   @GetMapping("/login")
   public String renderLoginView(Model model) {
     model.addAttribute("pageTitle", "Đăng nhập");
-    return "gdmoi/dang-nhap";
+    return "login";
   }
 
   @GetMapping("/logout")

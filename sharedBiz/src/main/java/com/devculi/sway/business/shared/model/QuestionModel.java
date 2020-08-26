@@ -6,105 +6,134 @@ import com.devculi.sway.utils.GsonUtils;
 import java.time.LocalDateTime;
 
 public class QuestionModel {
-  private Long id;
-  private String choices;
-  private String answer;
-  private String content;
-  private String explanation;
-  private boolean active;
-  private String questionId;
-  private LocalDateTime createdAt;
-  private LocalDateTime updatedAt;
+    private Long id;
+    private String choices;
+    private String answer;
+    private String content;
+    private String explanation;
+    private boolean active;
+    private String questionId;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private String selected;
+    private boolean isWrong;
 
-  public QuestionModel() {}
+    public QuestionModel() {
+    }
 
-  public Long getId() {
-    return id;
-  }
+    public boolean isWrong() {
+        return isWrong;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public void setWrong(boolean wrong) {
+        isWrong = wrong;
+    }
 
-  public String getChoices() {
-    return choices;
-  }
+    public String getSelected() {
+        return selected;
+    }
 
-  public void setChoices(String choices) {
-    this.choices = choices;
-  }
+    public void setSelected(String selected) {
+        this.selected = selected;
+    }
 
-  public String getAnswer() {
-    return answer;
-  }
+    public Long getId() {
+        return id;
+    }
 
-  public void setAnswer(String answer) {
-    this.answer = answer;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public String getContent() {
-    return content;
-  }
+    public String getChoices() {
+        return choices;
+    }
 
-  public void setContent(String content) {
-    this.content = content;
-  }
+    public void setChoices(String choices) {
+        this.choices = choices;
+    }
 
-  public String getExplanation() {
-    return explanation;
-  }
+    public String getAnswer() {
+        return answer;
+    }
 
-  public void setExplanation(String explanation) {
-    this.explanation = explanation;
-  }
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 
-  public boolean isActive() {
-    return active;
-  }
+    public String getContent() {
+        return content;
+    }
 
-  public void setActive(boolean active) {
-    this.active = active;
-  }
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-  public String getQuestionId() {
-    return questionId;
-  }
+    public String getExplanation() {
+        return explanation;
+    }
 
-  public void setQuestionId(String questionId) {
-    this.questionId = questionId;
-  }
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
+    }
 
-  public LocalDateTime getCreatedAt() {
-    return createdAt;
-  }
+    public boolean isActive() {
+        return active;
+    }
 
-  public void setCreatedAt(LocalDateTime createdAt) {
-    this.createdAt = createdAt;
-  }
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
-  public LocalDateTime getUpdatedAt() {
-    return updatedAt;
-  }
+    public String getQuestionId() {
+        return questionId;
+    }
 
-  public void setUpdatedAt(LocalDateTime updatedAt) {
-    this.updatedAt = updatedAt;
-  }
+    public void setQuestionId(String questionId) {
+        this.questionId = questionId;
+    }
 
-  public String getReadableChoices() {
-    return String.join(" ", choices.split(Question.DETERMINER));
-  }
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
 
-  @Override
-  public String toString() {
-    return "";
-  }
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 
-  public String getJsonString() {
-    return GsonUtils.toJson(this);
-  }
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
 
-  public String[] getChoicesList() {
-    System.out.println();
-    return choices.split(Question.DETERMINER);
-  }
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public String getReadableChoices() {
+        return String.join(" ", choices.split(Question.DETERMINER));
+    }
+
+    public String getJsonString() {
+        return GsonUtils.toJson(this);
+    }
+
+    public String[] getChoicesList() {
+        return choices.split(Question.DETERMINER);
+    }
+
+    @Override
+    public String toString() {
+        return "QuestionModel{" +
+                "id=" + id +
+                ", choices='" + choices + '\'' +
+                ", answer='" + answer + '\'' +
+                ", content='" + content + '\'' +
+                ", explanation='" + explanation + '\'' +
+                ", active=" + active +
+                ", questionId='" + questionId + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", selected='" + selected + '\'' +
+                '}';
+    }
 }

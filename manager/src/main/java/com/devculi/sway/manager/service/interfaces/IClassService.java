@@ -16,6 +16,8 @@ public interface IClassService {
 
   SwayClass getClassById(Long id);
 
+  SwayClass getClassBySlug(String slug);
+
   SwayClass updateClass(Long id, UpsertClassRequest upsertClassRequest);
 
   Long deleteClassById(Long id);
@@ -23,4 +25,6 @@ public interface IClassService {
   List<SwayClass> getJoinedClasses();
 
   List<SwayClass> searchBy(String keyword, boolean isIgnoreCase);
+
+  boolean isRegistered(SwayClass swayClass);
 }

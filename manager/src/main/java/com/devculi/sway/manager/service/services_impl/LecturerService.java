@@ -30,7 +30,7 @@ public class LecturerService implements ILecturerService {
 
   @Override
   public Page<SwayTest> getTestonlineByPage(Integer page) {
-    return testService.getTestonlineByPage(page);
+    return testService.getTestOnlineByPage(page);
   }
 
   public List<SwayTest> searchByTestId(String keyword) {

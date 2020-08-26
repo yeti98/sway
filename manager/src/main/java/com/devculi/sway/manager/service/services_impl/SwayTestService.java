@@ -3,13 +3,16 @@ package com.devculi.sway.manager.service.services_impl;
 import com.devculi.sway.business.shared.model.QuestionModel;
 import com.devculi.sway.business.shared.request.UpsertTestRequest;
 import com.devculi.sway.dataaccess.entity.Question;
+import com.devculi.sway.dataaccess.entity.SwayClass;
 import com.devculi.sway.dataaccess.entity.SwayTest;
+import com.devculi.sway.dataaccess.entity.SwayUser;
 import com.devculi.sway.dataaccess.entity.enums.TestType;
 import com.devculi.sway.dataaccess.repository.SwayTestRepository;
 import com.devculi.sway.manager.service.interfaces.IQuestionService;
 import com.devculi.sway.manager.service.interfaces.ISwayTestService;
 import com.devculi.sway.sharedmodel.exceptions.RecordNotFoundException;
 import com.devculi.sway.utils.PropertyUtils;
+import com.devculi.sway.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -25,6 +28,7 @@ import java.util.stream.Collectors;
 public class SwayTestService implements ISwayTestService {
   @Autowired IQuestionService questionService;
   @Autowired SwayTestRepository testRepository;
+  @Autowired SwaySubmitService swaySubmitService;
 
   @Value("${site.admin.pagination.limit.test}")
   private Integer TestPerPage;
@@ -33,6 +37,12 @@ public class SwayTestService implements ISwayTestService {
   public SwayTest getTestByID(Long id) {
     Optional<SwayTest> byId = testRepository.findById(id);
     return byId.orElseThrow(() -> new RecordNotFoundException(SwayTest.class, "id", id.toString()));
+  }
+
+  @Override
+  public SwayTest getTestBySlug(String slug) {
+    Optional<SwayTest> bySlug = testRepository.findByActiveAndSlug(true, slug);
+    return bySlug.orElseThrow(() -> new RecordNotFoundException(SwayTest.class, "slug", slug));
   }
 
   @Override
@@ -49,9 +59,14 @@ public class SwayTestService implements ISwayTestService {
   }
 
   @Override
-  public Page<SwayTest> getTestonlineByPage(Integer page) {
+  public Page<SwayTest> getTestOnlineByPage(Integer page) {
     Pageable pageable = PageRequest.of(page, TestPerPage, Sort.by("createdAt").descending());
     return testRepository.findByTestTypeAndActive(TestType.TEST_ONLINE, true, pageable);
+  }
+
+  @Override
+  public boolean isPassedTest(SwayUser swayUser, SwayTest lesson) {
+    return false;
   }
 
   @Override
@@ -60,8 +75,9 @@ public class SwayTestService implements ISwayTestService {
     swayTest.setTestType(testType);
     swayTest.setSubmits(new ArrayList<>());
     swayTest.setQuestions(new ArrayList<>());
-    swayTest.setActive(true);
+    swayTest.setActive(false);
     swayTest.setDeadline(null);
+    swayTest.setSlug(null);
     testRepository.save(swayTest);
     return swayTest;
   }
@@ -74,6 +90,13 @@ public class SwayTestService implements ISwayTestService {
     String testId = updateHomeworkRequest.getTestId();
     if (!nullProperties.contains("testName")) {
       swayTest.setTestName(testName);
+      // first time update
+      if (!swayTest.isActive()) {
+        swayTest.setActive(true);
+      }
+      if (swayTest.getSlug() == null) {
+        swayTest.setSlug(StringUtils.makeSlug(testName));;
+      }
     }
     if (!nullProperties.contains("testId")) {
       swayTest.setTestId(testId);

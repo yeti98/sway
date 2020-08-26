@@ -7,9 +7,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public interface SwayClassRepository extends JpaRepository<SwayClass, Long> {
   @Query("SELECT cl FROM SwayClass cl WHERE cl.classId LIKE :keyword")
   List<SwayClass> findByClassIdLike(@Param("keyword") String keyword);
+
+  Optional<SwayClass> findByActiveAndSlug(boolean status, String slug);
 }

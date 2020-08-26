@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface SwayTestRepository extends JpaRepository<SwayTest, Long> {
@@ -18,4 +19,6 @@ public interface SwayTestRepository extends JpaRepository<SwayTest, Long> {
   @Query("SELECT st FROM SwayTest st WHERE st.testId LIKE :keyword AND st.testType = :type")
   List<SwayTest> findByTestIdLikeAndTypeEqual(
       @Param("keyword") String keyword, @Param("type") TestType type);
+
+  Optional<SwayTest> findByActiveAndSlug(boolean status, String slug);
 }
