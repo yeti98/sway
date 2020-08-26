@@ -54,7 +54,7 @@ $(document).ready(function () {
 
     $("#editName").val(name);
     $("#editEmail").val(username);
-    $("#editIsLocked").val(status);
+    $("#editIsLocked").val(String(status));
     $("#editRole").val(role);
 
   });
