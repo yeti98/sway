@@ -19,24 +19,12 @@ public class SwaySubmit {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-
-  public Lesson getLesson() {
-    return lesson;
-  }
-
-  public void setLesson(Lesson lesson) {
-    this.lesson = lesson;
-  }
-
   private String studentName;
   private String studentContact;
   private String studentNote;
   private TestType submitType;
-
   private boolean isChecked;
-
   private boolean isPassed;
-
   private Double score;
   private String scoreInString;
   private String lecturerNote;
@@ -48,6 +36,14 @@ public class SwaySubmit {
   private LocalDateTime updatedAt;
 
   public SwaySubmit() {}
+
+  public Lesson getLesson() {
+    return lesson;
+  }
+
+  public void setLesson(Lesson lesson) {
+    this.lesson = lesson;
+  }
 
   public String getScoreInString() {
     return scoreInString;

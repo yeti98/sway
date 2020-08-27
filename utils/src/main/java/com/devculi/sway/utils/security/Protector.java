@@ -2,7 +2,6 @@ package com.devculi.sway.utils.security;
 
 import com.devculi.sway.sharedmodel.constants.StandardConstant;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -15,7 +14,6 @@ import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
-
 
 public class Protector {
 
@@ -136,7 +134,6 @@ public class Protector {
 
   public static void main(String[] args) throws Exception {
 
-
     String plainPassword = generatePassword(8);
     String salt = generateSalt();
     String valueEnc = encrypt(plainPassword, salt);
@@ -152,5 +149,10 @@ public class Protector {
             "trangnh",
             "g1DpeSINzvffUaKfHsE6v6hTTCxcsUt58Ye6W8iB+3z7KH5wgFPh0mPj4PJ6v+3gcrYc5qbgERAVJqs2TXnmak8hI4ppo80KSeRoFpNSNguRWj0+1JOhu6cWzEmj9b4ZOVrz/1tLuWRPlj3ynnoF7g==",
             "5FBpV3ewtpY="));
+
+    System.out.println(
+        decrypt(
+            "9vIqA6qnltuyLSqf5cjFUTsVZAosVqTXYLfDnuStsUdetOQQRcqsIDqHxkPnMumKHf4DPnfdV2KHs3KlnE3TMtEORQzx8oBMCTAj7FoayvPCutRwUupUBOWTllNKy/MgbtkY6DXFlYuG/UXycbFz0A==",
+            "tvnWbi316sM="));
   }
 }

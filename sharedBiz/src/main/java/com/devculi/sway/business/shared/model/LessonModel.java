@@ -14,9 +14,18 @@ public class LessonModel {
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
   private String lessonId;
+  private String slug;
   private List<SwayTestModel> tests;
 
   public LessonModel() {}
+
+  public String getSlug() {
+    return slug;
+  }
+
+  public void setSlug(String slug) {
+    this.slug = slug;
+  }
 
   public String getLessonId() {
     return lessonId;

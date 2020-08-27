@@ -291,11 +291,25 @@ public class StringUtils {
     final Pattern WHITESPACE = Pattern.compile("[\\s]");
 
     input = convertToLatin(input);
-    String nowhitespace = WHITESPACE.matcher(input).replaceAll("-");
+    String nowhitespace = WHITESPACE.matcher(input).replaceAll("");
     String normalized = Normalizer.normalize(nowhitespace, Normalizer.Form.NFD);
     String slug = NONLATIN.matcher(normalized).replaceAll("");
     slug = slug.toLowerCase(Locale.ENGLISH) + "-" + currentTimeInFormat("yyyyMMdd-hhmmss");
     return slug;
+  }
+
+  public static String makeSlug(String input, String identifier, boolean isConcatAtFirst) {
+    final Pattern NONLATIN = Pattern.compile("[^\\w-]");
+    final Pattern WHITESPACE = Pattern.compile("[\\s]");
+
+    input = convertToLatin(input);
+    String nowhitespace = WHITESPACE.matcher(input).replaceAll("");
+    String normalized = Normalizer.normalize(nowhitespace, Normalizer.Form.NFD);
+    String slug = NONLATIN.matcher(normalized).replaceAll("");
+    if (isConcatAtFirst) {
+      return identifier + "-" + slug.toLowerCase(Locale.ENGLISH);
+    }
+    return slug.toLowerCase(Locale.ENGLISH) + "-" + identifier;
   }
 
   public static void main(String[] args) {

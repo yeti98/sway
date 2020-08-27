@@ -5,6 +5,7 @@ import com.devculi.sway.business.shared.model.SwayTestModel;
 import com.devculi.sway.business.shared.request.UpsertLessonRequest;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
 import com.devculi.sway.dataaccess.entity.Lesson;
+import com.devculi.sway.dataaccess.entity.SwayClass;
 import com.devculi.sway.dataaccess.entity.SwayTest;
 import com.devculi.sway.dataaccess.entity.SwayUser;
 import com.devculi.sway.dataaccess.repository.LessonRepository;
@@ -15,7 +16,6 @@ import com.devculi.sway.sharedmodel.response.common.PagingResponse;
 import com.devculi.sway.utils.PropertyUtils;
 import com.devculi.sway.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -82,8 +82,8 @@ public class LessonService implements ILessonService {
       if (!lessonByID.isActive()) {
         lessonByID.setActive(true);
       }
-      if (lessonByID.getSlug() == null) {
-        lessonByID.setSlug(StringUtils.makeSlug(lessonName));
+      if (StringUtils.isNullOrEmpty(lessonByID.getSlug())) {
+        lessonByID.setSlug(StringUtils.makeSlug(lessonName, lessonByID.getId().toString(), false));
       }
       // end
     }
@@ -126,9 +126,10 @@ public class LessonService implements ILessonService {
   }
 
   @Override
-  public boolean isPassedLesson(SwayUser swayUser, Lesson lesson) {
+  public boolean isPassedLesson(
+      final SwayUser swayUser, final SwayClass swayClass, final Lesson lesson) {
     for (SwayTest test : lesson.getTests()) {
-      if (!testService.isPassedTest(swayUser, test)){
+      if (!testService.isPassedTest(swayUser, swayClass, lesson, test)) {
         return false;
       }
     }

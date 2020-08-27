@@ -84,14 +84,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
   }
 
-  //  @Bean
-  //  public AuthenticationSuccessHandler refererSuccessHandler() {
-  //    SavedRequestAwareAuthenticationSuccessHandler handler = new
-  // SavedRequestAwareAuthenticationSuccessHandler();
-  //    handler.setUseReferer(true);
-  //    return handler;
-  //  }
-
   static class MyAuthenticationSuccessHandler
       extends SavedRequestAwareAuthenticationSuccessHandler {
     @Override

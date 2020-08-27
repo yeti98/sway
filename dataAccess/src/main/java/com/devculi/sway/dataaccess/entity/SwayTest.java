@@ -1,5 +1,6 @@
 package com.devculi.sway.dataaccess.entity;
 
+import com.devculi.sway.dataaccess.entity.enums.Subject;
 import com.devculi.sway.dataaccess.entity.enums.TestType;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -10,9 +11,9 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Entity
-@Table(name = "stests", indexes = {
-        @Index(name = "stest_slug_idx", unique = true, columnList = "slug")
-})
+@Table(
+    name = "stests",
+    indexes = {@Index(name = "stest_slug_idx", unique = true, columnList = "slug")})
 public class SwayTest {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,18 +30,24 @@ public class SwayTest {
   private LocalDate deadline;
   private boolean active;
   private TestType testType;
-
+  private Subject subject;
   @CreationTimestamp
   @Column(nullable = false, updatable = false)
   private LocalDateTime createdAt;
-
   @UpdateTimestamp
   @Column(nullable = false)
   private LocalDateTime updatedAt;
-
   @OneToMany
   @JoinTable(name = "stest_submits")
   private Collection<SwaySubmit> submits;
+
+  public Subject getSubject() {
+    return subject;
+  }
+
+  public void setSubject(Subject subject) {
+    this.subject = subject;
+  }
 
   public Long getId() {
     return id;

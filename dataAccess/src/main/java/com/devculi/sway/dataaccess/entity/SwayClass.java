@@ -7,12 +7,11 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
-@Table(name = "sclasses", indexes = {
-        @Index(name = "sclass_slug_idx", unique = true, columnList = "slug")
-})
+@Table(
+    name = "sclasses",
+    indexes = {@Index(name = "sclass_slug_idx", unique = true, columnList = "slug")})
 public class SwayClass {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +20,31 @@ public class SwayClass {
   private String name;
 
   private String slug;
+  private String classId;
+  private Double minScore;
+  @ManyToMany
+  @JoinTable(
+      name = "sclass_lecturers",
+      joinColumns = {@JoinColumn(name = "suser_id")},
+      inverseJoinColumns = {@JoinColumn(name = "sclass_id")})
+  private List<SwayUser> lecturers;
+  private String description;
+  @ManyToMany
+  @JoinTable(
+      name = "sclass_students",
+      joinColumns = {@JoinColumn(name = "suser_id")},
+      inverseJoinColumns = {@JoinColumn(name = "sclass_id")})
+  private List<SwayUser> students;
+  @OneToOne private Course course;
+  @CreationTimestamp
+  @Column(nullable = false, updatable = false)
+  private LocalDateTime createdAt;
+  @UpdateTimestamp
+  @Column(nullable = false)
+  private LocalDateTime updatedAt;
+  private boolean active;
+
+  public SwayClass() {}
 
   public String getSlug() {
     return slug;
@@ -29,40 +53,6 @@ public class SwayClass {
   public void setSlug(String slug) {
     this.slug = slug;
   }
-
-  private String classId;
-
-  private Double minScore;
-
-  @ManyToMany
-  @JoinTable(
-      name = "sclass_lecturers",
-      joinColumns = {@JoinColumn(name = "suser_id")},
-      inverseJoinColumns = {@JoinColumn(name = "sclass_id")})
-  private List<SwayUser> lecturers;
-
-  private String description;
-
-  @ManyToMany
-  @JoinTable(
-      name = "sclass_students",
-      joinColumns = {@JoinColumn(name = "suser_id")},
-      inverseJoinColumns = {@JoinColumn(name = "sclass_id")})
-  private List<SwayUser> students;
-
-  @OneToOne private Course course;
-
-  @CreationTimestamp
-  @Column(nullable = false, updatable = false)
-  private LocalDateTime createdAt;
-
-  @UpdateTimestamp
-  @Column(nullable = false)
-  private LocalDateTime updatedAt;
-
-  private boolean active;
-
-  public SwayClass() {}
 
   public String getClassId() {
     return classId;
@@ -161,12 +151,12 @@ public class SwayClass {
     if (this == o) return true;
     if (!(o instanceof SwayClass)) return false;
     SwayClass swayClass = (SwayClass) o;
-    return isActive() == swayClass.isActive() &&
-            getId().equals(swayClass.getId()) &&
-            Objects.equals(getName(), swayClass.getName()) &&
-            Objects.equals(getSlug(), swayClass.getSlug()) &&
-            Objects.equals(getClassId(), swayClass.getClassId()) &&
-            getCreatedAt().equals(swayClass.getCreatedAt());
+    return isActive() == swayClass.isActive()
+        && getId().equals(swayClass.getId())
+        && Objects.equals(getName(), swayClass.getName())
+        && Objects.equals(getSlug(), swayClass.getSlug())
+        && Objects.equals(getClassId(), swayClass.getClassId())
+        && getCreatedAt().equals(swayClass.getCreatedAt());
   }
 
   @Override

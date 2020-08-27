@@ -52,6 +52,7 @@ public class PostService implements IPostService {
     post.setTitle(title);
     post.setCoverPhoto(upsertPostRequest.getCoverPhoto());
     post.setContents(upsertPostRequest.getContents());
+    postRepository.save(post);
 
     String slug = StringUtils.makeSlug(title);
     post.setSlug(slug);

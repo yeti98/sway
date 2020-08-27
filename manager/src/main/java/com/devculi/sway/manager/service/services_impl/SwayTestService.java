@@ -1,11 +1,10 @@
 package com.devculi.sway.manager.service.services_impl;
 
 import com.devculi.sway.business.shared.model.QuestionModel;
+import com.devculi.sway.business.shared.model.SwayTestModel;
 import com.devculi.sway.business.shared.request.UpsertTestRequest;
-import com.devculi.sway.dataaccess.entity.Question;
-import com.devculi.sway.dataaccess.entity.SwayClass;
-import com.devculi.sway.dataaccess.entity.SwayTest;
-import com.devculi.sway.dataaccess.entity.SwayUser;
+import com.devculi.sway.dataaccess.entity.*;
+import com.devculi.sway.dataaccess.entity.enums.Subject;
 import com.devculi.sway.dataaccess.entity.enums.TestType;
 import com.devculi.sway.dataaccess.repository.SwayTestRepository;
 import com.devculi.sway.manager.service.interfaces.IQuestionService;
@@ -13,6 +12,7 @@ import com.devculi.sway.manager.service.interfaces.ISwayTestService;
 import com.devculi.sway.sharedmodel.exceptions.RecordNotFoundException;
 import com.devculi.sway.utils.PropertyUtils;
 import com.devculi.sway.utils.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -65,8 +65,33 @@ public class SwayTestService implements ISwayTestService {
   }
 
   @Override
-  public boolean isPassedTest(SwayUser swayUser, SwayTest lesson) {
-    return false;
+  public boolean isPassedTest(
+      SwayUser swayUser, SwayClass swayClass, Lesson lesson, SwayTest test) {
+    return swaySubmitService.isSubmitPassed(swayUser, swayClass, lesson, test);
+  }
+
+  @Override
+  public Integer countCorrectAnswer(SwayTestModel submittedTestModel, SwayTest testByID) {
+    int count = 0;
+    for (QuestionModel question : submittedTestModel.getQuestions()) {
+      Long questionId = question.getId();
+      String selected = question.getSelected();
+      Question questionEntity = questionService.getQuestionByID(questionId);
+      boolean isCorrect = questionEntity.getAnswer().equalsIgnoreCase(selected);
+      BeanUtils.copyProperties(questionEntity, question);
+      if (isCorrect) {
+        count += 1;
+        question.setWrong(false); // used later when render result view
+      } else {
+        question.setWrong(true); // used later when render result view
+      }
+    }
+    return count;
+  }
+
+  @Override
+  public List<SwayTest> getTestOnlineBySubject(Subject subject) {
+    return testRepository.findAllByTestTypeAndSubject(TestType.TEST_ONLINE, subject);
   }
 
   @Override
@@ -94,8 +119,8 @@ public class SwayTestService implements ISwayTestService {
       if (!swayTest.isActive()) {
         swayTest.setActive(true);
       }
-      if (swayTest.getSlug() == null) {
-        swayTest.setSlug(StringUtils.makeSlug(testName));;
+      if (StringUtils.isNullOrEmpty(swayTest.getSlug())) {
+        swayTest.setSlug(StringUtils.makeSlug(testName, swayTest.getId().toString(), false));
       }
     }
     if (!nullProperties.contains("testId")) {

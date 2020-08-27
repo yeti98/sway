@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequireRoleStudent
 public class StuRestTestController extends RestBaseController {
 
-    @PostMapping
-    public ResponseEntity submitTest(){
-        return ok(null);
-    }
+  @PostMapping
+  public ResponseEntity submitTest() {
+    return ok(null);
+  }
 }

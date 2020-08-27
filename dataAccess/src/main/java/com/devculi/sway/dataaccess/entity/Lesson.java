@@ -19,25 +19,7 @@ public class Lesson {
   private String description;
   private String lessonId;
   private String slug;
-
-  public String getSlug() {
-    return slug;
-  }
-
-  public void setSlug(String slug) {
-    this.slug = slug;
-  }
-
   private boolean active;
-
-  public boolean isActive() {
-    return active;
-  }
-
-  public void setActive(boolean active) {
-    this.active = active;
-  }
-
   @ManyToMany private List<SwayTest> tests;
 
   @CreationTimestamp
@@ -49,6 +31,22 @@ public class Lesson {
   private LocalDateTime updatedAt;
 
   public Lesson() {}
+
+  public String getSlug() {
+    return slug;
+  }
+
+  public void setSlug(String slug) {
+    this.slug = slug;
+  }
+
+  public boolean isActive() {
+    return active;
+  }
+
+  public void setActive(boolean active) {
+    this.active = active;
+  }
 
   public String getLessonId() {
     return lessonId;
@@ -111,12 +109,12 @@ public class Lesson {
     if (this == o) return true;
     if (!(o instanceof Lesson)) return false;
     Lesson lesson = (Lesson) o;
-    return isActive() == lesson.isActive() &&
-            getId().equals(lesson.getId()) &&
-            Objects.equals(getName(), lesson.getName()) &&
-            Objects.equals(getLessonId(), lesson.getLessonId()) &&
-            getSlug().equals(lesson.getSlug()) &&
-            getCreatedAt().equals(lesson.getCreatedAt());
+    return isActive() == lesson.isActive()
+        && getId().equals(lesson.getId())
+        && Objects.equals(getName(), lesson.getName())
+        && Objects.equals(getLessonId(), lesson.getLessonId())
+        && getSlug().equals(lesson.getSlug())
+        && getCreatedAt().equals(lesson.getCreatedAt());
   }
 
   @Override

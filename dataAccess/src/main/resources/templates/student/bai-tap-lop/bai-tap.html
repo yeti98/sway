@@ -6,14 +6,14 @@
   <link href="/gdmoi/assets/css/bai-test/style.css" id="codyframe" rel="stylesheet">
   <!-- browsers not supporting CSS variables -->
   <script>
-      if (!('CSS' in window) || !CSS.supports('color', 'var(--color-var)')) {
-          var cfStyle = document.getElementById('codyframe');
-          if (cfStyle) {
-              var href = cfStyle.getAttribute('href');
-              href = href.replace('style.css', 'style-fallback.css');
-              cfStyle.setAttribute('href', href);
-          }
+    if (!('CSS' in window) || !CSS.supports('color', 'var(--color-var)')) {
+      var cfStyle = document.getElementById('codyframe');
+      if (cfStyle) {
+        var href = cfStyle.getAttribute('href');
+        href = href.replace('style.css', 'style-fallback.css');
+        cfStyle.setAttribute('href', href);
       }
+    }
   </script>
 </head>
 <body>
@@ -21,19 +21,22 @@
 <th:block layout:fragment="content">
   <!--  HERO-->
   <th:block th:insert="fragments/gdmoiFrg/trang-chu/_1_hero :: heroFrg"></th:block>
+
   <!--MAIN CONTENT-->
   <div class="parent grid gap-xs padding-y-sm padding-x-sm text-sm">
-    <div class="col-9@lg col-12@sm">
-      <form th:object="${swayTest}" th:action="@{/giaodienmoi/kq}" method="post">
+    <div class="col-9@lg col-12@sm" style="min-height: 50vh">
+      <p class="text-center" th:if="${error == true}" th:utext="${errorMessage}"></p>
+      <form method="post" th:action="@{'/bai-tap-lop/nop-bai?class=' + ${swayClass.id} + '&lesson=' + ${lesson.id}}"
+            th:if="${error == false || error == null}" th:object="${swayTest}">
         <div style="display: none">
-          <input type="text" th:field="*{id}" th:value="*{id}"/>
+          <input th:field="*{id}" th:value="*{id}" type="text"/>
         </div>
         <main class="position-relative z-index-1 flex-grow" style="overflow-y: scroll; max-height: 150vh">
           <!-- start main content -->
           <div class="text-component padding-md text-sm">
             <th:block th:each="question, stats : *{questions}">
               <div style="display: none">
-                <input type="text" th:field="*{questions[__${stats.index}__].id}" th:value="${question.id}"/>
+                <input th:field="*{questions[__${stats.index}__].id}" th:value="${question.id}" type="text"/>
               </div>
               <fieldset class="margin-top-sm">
                 <legend class="form-legend text-bold" th:text="${question.content}"></legend>
@@ -44,9 +47,9 @@
                     <div class="choice-btn padding-x-xs js-choice-btn">
                       <!-- fallback -->
                       <div class="choice-btn__fallback">
-                        <input th:value="${choice}"
-                               th:field="*{questions[__${stats.index}__].selected}"
+                        <input th:field="*{questions[__${stats.index}__].selected}"
                                th:id="${'choice-radio-button-1' + choiceStats.index}"
+                               th:value="${choice}"
                                type="radio">
                         <label th:for="${'choice-radio-button-1' + choiceStats.index}"></label>
                       </div>

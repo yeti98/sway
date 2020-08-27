@@ -67,8 +67,7 @@ public class SwayClassService implements IClassService {
   @Override
   public SwayClass getClassBySlug(String slug) {
     Optional<SwayClass> bySlug = classRepository.findByActiveAndSlug(true, slug);
-    return bySlug.orElseThrow(
-            () -> new RecordNotFoundException(SwayClass.class, "slug", slug));
+    return bySlug.orElseThrow(() -> new RecordNotFoundException(SwayClass.class, "slug", slug));
   }
 
   @Override
@@ -85,8 +84,8 @@ public class SwayClassService implements IClassService {
       if (!classById.isActive()) {
         classById.setActive(true);
       }
-      if (classById.getSlug() == null) {
-        classById.setSlug(StringUtils.makeSlug(className));
+      if (StringUtils.isNullOrEmpty(classById.getSlug())) {
+        classById.setSlug(StringUtils.makeSlug(className, classById.getId().toString(), false));
       }
       // end
     }

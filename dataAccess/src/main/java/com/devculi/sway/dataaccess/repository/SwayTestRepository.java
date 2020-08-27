@@ -1,6 +1,7 @@
 package com.devculi.sway.dataaccess.repository;
 
 import com.devculi.sway.dataaccess.entity.SwayTest;
+import com.devculi.sway.dataaccess.entity.enums.Subject;
 import com.devculi.sway.dataaccess.entity.enums.TestType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,4 +22,6 @@ public interface SwayTestRepository extends JpaRepository<SwayTest, Long> {
       @Param("keyword") String keyword, @Param("type") TestType type);
 
   Optional<SwayTest> findByActiveAndSlug(boolean status, String slug);
+
+  List<SwayTest> findAllByTestTypeAndSubject(TestType testType, Subject subject);
 }

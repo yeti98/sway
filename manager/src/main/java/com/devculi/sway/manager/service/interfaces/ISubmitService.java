@@ -1,12 +1,11 @@
 package com.devculi.sway.manager.service.interfaces;
 
-import com.devculi.sway.dataaccess.entity.SwayClass;
-import com.devculi.sway.dataaccess.entity.SwaySubmit;
+import com.devculi.sway.dataaccess.entity.*;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface ISubmitService {
-  SwaySubmit insertSubmit(SwaySubmit swaySubmit);
+  boolean isSubmitPassed(SwayUser swayUser, SwayClass swayClass,  Lesson lesson, SwayTest test);
 
-  SwaySubmit findLastSubmit(SwayClass swayClass);
+  SwaySubmit saveSubmittedHomework(SwayUser currentUser, SwayClass currentClass, Lesson currentLesson, SwayTest currentTest, Integer numberOfCorrectAns);
 }

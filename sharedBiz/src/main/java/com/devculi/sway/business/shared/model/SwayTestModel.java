@@ -1,5 +1,6 @@
 package com.devculi.sway.business.shared.model;
 
+import com.devculi.sway.dataaccess.entity.enums.Subject;
 import com.devculi.sway.dataaccess.entity.enums.TestType;
 import com.devculi.sway.utils.GsonUtils;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -11,141 +12,153 @@ import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SwayTestModel {
-    private Long id;
+  private Long id;
 
-    private String testId;
+  private String testId;
+  private Subject subject;
 
-    private String testName;
+  private String testName;
 
-    private List<QuestionModel> questions;
+  private List<QuestionModel> questions;
 
-    private LocalDate deadline;
-    private boolean active;
-    private TestType testType;
+  private LocalDate deadline;
+  private boolean active;
+  private TestType testType;
 
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+  private LocalDateTime createdAt;
+  private LocalDateTime updatedAt;
 
-    private Collection<SwaySubmitModel> submits;
+  private Collection<SwaySubmitModel> submits;
 
-    private String slug;
+  private String slug;
 
-    public String getSlug() {
-        return slug;
-    }
+  public SwayTestModel() {}
 
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
+  public String getSlug() {
+    return slug;
+  }
 
-    public SwayTestModel() {
-    }
+  public void setSlug(String slug) {
+    this.slug = slug;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public String getTestId() {
-        return testId;
-    }
+  public String getTestId() {
+    return testId;
+  }
 
-    public void setTestId(String testId) {
-        this.testId = testId;
-    }
+  public void setTestId(String testId) {
+    this.testId = testId;
+  }
 
-    public String getTestName() {
-        return testName;
-    }
+  public String getTestName() {
+    return testName;
+  }
 
-    public void setTestName(String testName) {
-        this.testName = testName;
-    }
+  public void setTestName(String testName) {
+    this.testName = testName;
+  }
 
-    public List<QuestionModel> getQuestions() {
-        return questions;
-    }
+  public List<QuestionModel> getQuestions() {
+    return questions;
+  }
 
-    public void setQuestions(List<QuestionModel> questions) {
-        this.questions = questions;
-    }
+  public void setQuestions(List<QuestionModel> questions) {
+    this.questions = questions;
+  }
 
-    public LocalDate getDeadline() {
-        return deadline;
-    }
+  public LocalDate getDeadline() {
+    return deadline;
+  }
 
-    public void setDeadline(LocalDate deadline) {
-        this.deadline = deadline;
-    }
+  public void setDeadline(LocalDate deadline) {
+    this.deadline = deadline;
+  }
 
-    public boolean isActive() {
-        return active;
-    }
+  public boolean isActive() {
+    return active;
+  }
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
+  public void setActive(boolean active) {
+    this.active = active;
+  }
 
-    public TestType getTestType() {
-        return testType;
-    }
+  public TestType getTestType() {
+    return testType;
+  }
 
-    public void setTestType(TestType testType) {
-        this.testType = testType;
-    }
+  public void setTestType(TestType testType) {
+    this.testType = testType;
+  }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
 
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
+  public LocalDateTime getUpdatedAt() {
+    return updatedAt;
+  }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+  public void setUpdatedAt(LocalDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+  }
 
-    public Collection<SwaySubmitModel> getSubmits() {
-        return submits;
-    }
+  public Collection<SwaySubmitModel> getSubmits() {
+    return submits;
+  }
 
-    public void setSubmits(Collection<SwaySubmitModel> submits) {
-        this.submits = submits;
-    }
+  public void setSubmits(Collection<SwaySubmitModel> submits) {
+    this.submits = submits;
+  }
 
-    public int getNumberOfQuestion() {
-        return questions.size();
-    }
+  public int getNumberOfQuestion() {
+    return questions.size();
+  }
 
-    public int getTotalSubmition() {
-        return submits.size();
-    }
+  public int getTotalSubmition() {
+    return submits.size();
+  }
 
-    public String getJsonString() {
-        return GsonUtils.toJson(this);
-    }
+  public String getJsonString() {
+    return GsonUtils.toJson(this);
+  }
 
-    @Override
-    public String toString() {
-        return "SwayTestModel{" +
-                "id=" + id +
-                ", testId='" + testId + '\'' +
-                ", testName='" + testName + '\'' +
-                ", questions=" + questions +
-                ", deadline=" + deadline +
-                ", active=" + active +
-                ", testType=" + testType +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                ", submits=" + submits +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "SwayTestModel{"
+        + "id="
+        + id
+        + ", testId='"
+        + testId
+        + '\''
+        + ", testName='"
+        + testName
+        + '\''
+        + ", questions="
+        + questions
+        + ", deadline="
+        + deadline
+        + ", active="
+        + active
+        + ", testType="
+        + testType
+        + ", createdAt="
+        + createdAt
+        + ", updatedAt="
+        + updatedAt
+        + ", submits="
+        + submits
+        + '}';
+  }
 }
