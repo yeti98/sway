@@ -23,10 +23,18 @@
   <div class="parent grid gap-xs padding-y-sm padding-x-sm text-sm">
     <div class="col-3@lg"></div>
     <div class="col-6@lg shadow-xl">
-      <form class="login-form padding-y-xxl">
+      <form class="login-form padding-y-xxl" action="/login" method="post">
         <div class="text-component text-center margin-bottom-sm">
           <h2>Đăng nhập</h2>
+          <div class="alert alert-danger col-xs-offset-1 col-xs-10" th:if="${param.error}">
+            Sai tên đăng nhập hoặc mật khẩu
+          </div>
+          <div class="alert alert-success col-xs-offset-1 col-xs-10" th:if="${param.logout}">
+            Đăng xuất thành công
+          </div>
+
         </div>
+
 
         <!--      <div class="grid gap-xs">-->
         <!--        <div class="col-6@xs">-->
@@ -47,7 +55,7 @@
         <div class="padding-x-xl">
           <div class="margin-bottom-sm">
             <label class="form-label margin-bottom-xxxs" for="input-email">Tài khoản</label>
-            <input class="form-control width-100%" id="input-email" name="input-email" placeholder="example@sway.vn"
+            <input class="form-control width-100%" id="input-email" name="username" placeholder="example@sway.vn"
                    type="email">
           </div>
 
@@ -57,7 +65,7 @@
               <span class="text-sm"><a href="#0">Quên mật khẩu?</a></span>
             </div>
 
-            <input class="form-control width-100%" id="input-password" name="input-password" placeholder="********"
+            <input class="form-control width-100%" id="input-password" name="password" placeholder="********"
                    type="password">
           </div>
           <div class="margin-bottom-sm margin-top-md">

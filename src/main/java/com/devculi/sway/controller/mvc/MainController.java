@@ -24,21 +24,18 @@ public class MainController {
 
   @GetMapping("/gioi-thieu")
   public String gioiThieu(Model model) {
-    model.addAttribute("activeLink", "gt");
     model.addAttribute("pageTitle", "Giới thiệu");
     return "gdmoi/noi-dung";
   }
 
   @GetMapping("/doi-ngu")
   public String doiNgu(Model model) {
-    model.addAttribute("activeLink", "doi-ngu");
     model.addAttribute("pageTitle", "Đội ngũ");
     return "gdmoi/noi-dung";
   }
 
-  @GetMapping("/about-us")
+  @GetMapping("/co-hoi-viec-lam")
   public String aboutUs(Model model) {
-    model.addAttribute("activeLink", "about-us");
     model.addAttribute("pageTitle", "About us");
     return "gdmoi/tuyen-dung";
   }
@@ -51,14 +48,12 @@ public class MainController {
 
   @GetMapping("/bai-tap-lop")
   public String homework(Model model) {
-    model.addAttribute("activeLink", "homework");
     model.addAttribute("pageTitle", "Bài tập về nhà");
     return "gdmoi/bai-tap";
   }
 
   @GetMapping("/test-online")
   public String testOnline(Model model) {
-    model.addAttribute("activeLink", "test-online");
     model.addAttribute("pageTitle", "Test online");
     List<Question> qs = new ArrayList<>();
     qs.add(
@@ -68,7 +63,7 @@ public class MainController {
     QuestionModelWrapper wrapper = new QuestionModelWrapper();
     wrapper.setQuestions(qs);
     model.addAttribute("wrapper", wrapper);
-    return "test-online";
+    return "gdmoi/bai-tap";
   }
 
   @PostMapping("/submit-test")
@@ -89,7 +84,6 @@ public class MainController {
         qm.setResult(false);
       }
     }
-    model.addAttribute("activeLink", "homework");
     model.addAttribute("pageTitle", "Kết quả");
     model.addAttribute("diem", diem + "/" + wrapper.getQuestions().size());
     model.addAttribute("wrapper", wrapper);
@@ -104,37 +98,48 @@ public class MainController {
 
   @GetMapping("/giaodienmoi/noi-dung")
   public String newContent(Model model) {
-    model.addAttribute("activeLink", "index");
+
+    model.addAttribute("pageTitle", "Nội dung");
     return "gdmoi/noi-dung";
+  }
+
+  @GetMapping("/dang-nhap")
+  public String dangNhap(Model model) {
+    model.addAttribute("pageTitle", "Đăng nhập");
+    return "gdmoi/dang-nhap";
   }
 
   @GetMapping("/giaodienmoi/dang-nhap")
   public String newDangNhap(Model model) {
-    model.addAttribute("activeLink", "index");
+    model.addAttribute("pageTitle", "Đăng nhập");
     return "gdmoi/dang-nhap";
   }
 
   @GetMapping("/giaodienmoi/khct")
   public String khoaHocChiTiet(Model model) {
-    model.addAttribute("activeLink", "index");
+
+    model.addAttribute("pageTitle", "Khoá học chi tiết");
     return "gdmoi/khoa-hoc-chi-tiet";
   }
 
   @GetMapping("/giaodienmoi/bt")
   public String baitapChiTiet(Model model) {
-    model.addAttribute("activeLink", "index");
+
+    model.addAttribute("pageTitle", "Bài tập về nhà");
     return "gdmoi/bai-tap";
   }
 
   @GetMapping("/giaodienmoi/kq")
   public String ketquaSubmit(Model model) {
-    model.addAttribute("activeLink", "index");
+
+    model.addAttribute("pageTitle", "Kết quả");
     return "gdmoi/ket-qua";
   }
 
   @GetMapping("/giaodienmoi/co-hoi-viec-lam")
   public String chvl(Model model) {
-    model.addAttribute("activeLink", "index");
+
+    model.addAttribute("pageTitle", "Cơ hội việc làm");
     return "gdmoi/tuyen-dung";
   }
 }

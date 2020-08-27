@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <th:block th:fragment="bodyheader">
   <header class="f-header js-f-header position-relative">
@@ -36,8 +36,8 @@
         </div>
 
         <ul class="f-header__list flex-grow flex-basis-0 justify-center@md">
-          <li class="f-header__item"><a href="#" class="f-header__link">Trang chủ</a></li>
-          <li class="f-header__item"><a href="khoa-hoc" class="f-header__link">
+          <li class="f-header__item"><a href="#" class="f-header__link" th:attrappend="aria-current=${#strings.equals(activeLink, 'index')} ? 'page' : ''">Trang chủ</a></li>
+          <li class="f-header__item"><a href="khoa-hoc" class="f-header__link" th:attrappend="aria-current=${#httpServletRequest.requestURI.contains('khoa-hoc')} ? 'page' : ''">
             <span>Khóa học</span>
             <svg class="f-header__dropdown-icon icon" aria-hidden="true" viewBox="0 0 12 12">
               <path d="M6,9l4-5H2Z" /></svg>
@@ -50,18 +50,18 @@
               <li><a href="khoa-hoc/tieng-han" class="f-header__dropdown-link">Tiếng Hàn</a></li>
             </ul>
           </li>
-          <li class="f-header__item"><a href="doi-ngu" class="f-header__link" aria-current="page">Đội ngũ</a></li>
-          <li class="f-header__item"><a href="test-online" class="f-header__link">Test online</a></li>
-          <li class="f-header__item"><a href="co-hoi-viec-lam" class="f-header__link">Tuyển dụng</a></li>
+          <li class="f-header__item"><a href="doi-ngu" class="f-header__link" th:attrappend="aria-current=${#httpServletRequest.requestURI.contains('doi-ngu')} ? 'page' : ''">Đội ngũ</a></li>
+          <li class="f-header__item"><a href="test-online" class="f-header__link" th:attrappend="aria-current=${#httpServletRequest.requestURI.contains('test-online')} ? 'page' : ''">Test online</a></li>
+          <li class="f-header__item"><a href="co-hoi-viec-lam" class="f-header__link" th:attrappend="aria-current=${#httpServletRequest.requestURI.contains('co-hoi-viec-lam')} ? 'page' : ''">Tuyển dụng</a></li>
         </ul>
 
         <ul class="f-header__list flex-grow flex-basis-0 justify-end@md">
           <!--        <li class="f-header__item"><a href="#0" class="f-header__link">Login</a></li>-->
-          <li class="f-header__item"><a href="dang-nhap" class="f-header__btn btn btn--primary">Đăng nhập</a></li>
-          <li>
+          <li sec:authorize="!isAuthenticated()" class="f-header__item"><a href="dang-nhap" class="f-header__btn btn btn--primary">Đăng nhập</a></li>
+          <li sec:authorize="isAuthenticated()">
             <div class="flex items-center" aria-controls="menu-example">
               <img class="radius-50%" width="32" height="32" src="https://ui-avatars.com/api/?name=Nguyen+Huu+Trang" alt="avatar"/>
-              <span>user.name</span>
+              <span th:utext="${#authentication.getPrincipal().getUsername()}"></span>
             </div>
           </li>
         </ul>
@@ -87,12 +87,14 @@
     <!--  </li>-->
 
     <li role="menuitem">
-    <span class="menu__content js-menu__content">
+      <a href="/logout" style="text-decoration: none">
+    <span class="menu__content js-menu__content" >
       <svg aria-hidden="true" class="icon menu__icon" viewBox="0 0 12 12"><path
           d="M8.354,3.646a.5.5,0,0,0-.708,0L6,5.293,4.354,3.646a.5.5,0,0,0-.708.708L5.293,6,3.646,7.646a.5.5,0,0,0,.708.708L6,6.707,7.646,8.354a.5.5,0,1,0,.708-.708L6.707,6,8.354,4.354A.5.5,0,0,0,8.354,3.646Z"></path><path
           d="M6,0a6,6,0,1,0,6,6A6.006,6.006,0,0,0,6,0ZM6,10a4,4,0,1,1,4-4A4,4,0,0,1,6,10Z"></path></svg>
       <span>Đăng xuất</span>
     </span>
+      </a>
     </li>
 
     <li class="menu__separator" role="separator"></li>
@@ -104,11 +106,11 @@
     </li>
 
     <li role="menuitem">
-      <a class="menu__content js-menu__content" href="#0">Quản lý lớp học</a>
+      <a class="menu__content js-menu__content" href="#0" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">Quản lý lớp học</a>
     </li>
 
     <li role="menuitem">
-      <a class="menu__content js-menu__content" href="#0">Trang admin</a>
+      <a class="menu__content js-menu__content" href="/admin" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">Trang admin</a>
     </li>
   </menu>
 </th:block>
