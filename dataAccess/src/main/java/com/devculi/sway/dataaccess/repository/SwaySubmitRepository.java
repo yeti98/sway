@@ -6,9 +6,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface SwaySubmitRepository extends JpaRepository<SwaySubmit, Long> {
-  SwaySubmit getFirstBySwayClassAndSwayUserOrderByCreatedAtDesc(
-      SwayClass swayClass, SwayUser swayUser);
-
   SwaySubmit findFirstBySwayUserAndSwayClassAndLessonAndSwayTestAndIsPassed(
       SwayUser swayUser, SwayClass swayClass, Lesson lesson, SwayTest test, boolean isPassed);
 }
