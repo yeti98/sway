@@ -22,26 +22,33 @@ public class SwayClass {
   private String slug;
   private String classId;
   private Double minScore;
+
   @ManyToMany
   @JoinTable(
       name = "sclass_lecturers",
       joinColumns = {@JoinColumn(name = "suser_id")},
       inverseJoinColumns = {@JoinColumn(name = "sclass_id")})
   private List<SwayUser> lecturers;
+
   private String description;
+
   @ManyToMany
   @JoinTable(
       name = "sclass_students",
       joinColumns = {@JoinColumn(name = "suser_id")},
       inverseJoinColumns = {@JoinColumn(name = "sclass_id")})
   private List<SwayUser> students;
+
   @OneToOne private Course course;
+
   @CreationTimestamp
   @Column(nullable = false, updatable = false)
   private LocalDateTime createdAt;
+
   @UpdateTimestamp
   @Column(nullable = false)
   private LocalDateTime updatedAt;
+
   private boolean active;
 
   public SwayClass() {}

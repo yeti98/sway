@@ -29,7 +29,7 @@ public class UserService implements IUserService {
   @Autowired SwayUserRepository userRepository;
 
   @Value("${randomPasswordLength}")
-  String len;
+  private String defaultPasswordLength;
 
   @Override
   public SwayUser findUserByUsername(String username) {
@@ -86,7 +86,7 @@ public class UserService implements IUserService {
 
   @Override
   public String randomPassword() {
-    return Protector.generatePassword(Integer.parseInt(len));
+    return Protector.generatePassword(Integer.parseInt(defaultPasswordLength));
   }
 
   @Override

@@ -33,7 +33,8 @@ public interface ISwayTestService {
   boolean isPassedTest(
       final SwayUser swayUser, final SwayClass swayClass, final Lesson lesson, final SwayTest test);
 
-  Integer countCorrectAnswer(final SwayTestModel swayTestModel, final SwayTest swayTest) throws Exception;
+  Integer countCorrectAnswer(final SwayTestModel swayTestModel, final SwayTest swayTest)
+      throws Exception;
 
   List<SwayTest> getTestOnlineBySubject(Subject subject);
 }

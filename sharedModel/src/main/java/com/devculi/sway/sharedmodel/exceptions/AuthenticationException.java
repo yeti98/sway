@@ -3,7 +3,7 @@ package com.devculi.sway.sharedmodel.exceptions;
 public class AuthenticationException extends BaseRuntimeException {
 
   private static final long serialVersionUID = 176023227975132626L;
-  private int HttpStatusCode = 401;
+  private final int HttpStatusCode = 401;
   private String code;
 
   public AuthenticationException(String message) {

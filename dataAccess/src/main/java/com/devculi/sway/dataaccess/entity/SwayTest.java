@@ -31,12 +31,15 @@ public class SwayTest {
   private boolean active;
   private TestType testType;
   private Subject subject;
+
   @CreationTimestamp
   @Column(nullable = false, updatable = false)
   private LocalDateTime createdAt;
+
   @UpdateTimestamp
   @Column(nullable = false)
   private LocalDateTime updatedAt;
+
   @OneToMany
   @JoinTable(name = "stest_submits")
   private Collection<SwaySubmit> submits;

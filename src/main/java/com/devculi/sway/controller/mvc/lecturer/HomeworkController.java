@@ -6,7 +6,7 @@ import com.devculi.sway.controller.api.lecturer.LecRestTestController;
 import com.devculi.sway.dataaccess.entity.SwayTest;
 import com.devculi.sway.dataaccess.entity.enums.TestType;
 import com.devculi.sway.interceptor.attr.annotations.ManageHomeworkPage;
-import com.devculi.sway.manager.service.services_impl.SwayTestService;
+import com.devculi.sway.manager.service.interfaces.ISwayTestService;
 import com.devculi.sway.sharedmodel.response.common.PagingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @ManageHomeworkPage
 public class HomeworkController {
   @Autowired LecRestTestController testController;
-  @Autowired SwayTestService testService;
+  @Autowired ISwayTestService testService;
 
   @GetMapping
   public String renderHomeworkView(

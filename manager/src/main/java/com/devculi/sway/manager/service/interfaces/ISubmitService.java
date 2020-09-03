@@ -5,7 +5,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface ISubmitService {
-  boolean isSubmitPassed(SwayUser swayUser, SwayClass swayClass,  Lesson lesson, SwayTest test);
+  boolean isSubmitPassed(SwayUser swayUser, SwayClass swayClass, Lesson lesson, SwayTest test);
 
-  SwaySubmit saveSubmittedHomework(SwayUser currentUser, SwayClass currentClass, Lesson currentLesson, SwayTest currentTest, Integer numberOfCorrectAns);
+  SwaySubmit saveSubmittedHomework(
+      SwayUser currentUser,
+      SwayClass currentClass,
+      Lesson currentLesson,
+      SwayTest currentTest,
+      Integer numberOfCorrectAns);
 }

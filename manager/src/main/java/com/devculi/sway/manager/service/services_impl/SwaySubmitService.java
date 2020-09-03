@@ -41,11 +41,7 @@ public class SwaySubmitService implements ISubmitService {
     // type of submit
     submit.setSubmitType(TestType.HOMEWORK);
     // passed or not
-    if (currentClass.getMinScore() < score) {
-      submit.setPassed(true);
-    } else {
-      submit.setPassed(false);
-    }
+    submit.setPassed(currentClass.getMinScore() < score);
     submitRepository.save(submit);
     return submit;
   }

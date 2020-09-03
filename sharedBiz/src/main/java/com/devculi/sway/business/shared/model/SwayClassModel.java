@@ -18,15 +18,6 @@ public class SwayClassModel {
   private Set<UserModel> lecturers;
 
   private String slug;
-
-  public String getSlug() {
-    return slug;
-  }
-
-  public void setSlug(String slug) {
-    this.slug = slug;
-  }
-
   private String classId;
   private String description;
   private List<UserModel> students;
@@ -37,6 +28,14 @@ public class SwayClassModel {
   private Double minScore;
 
   public SwayClassModel() {}
+
+  public String getSlug() {
+    return slug;
+  }
+
+  public void setSlug(String slug) {
+    this.slug = slug;
+  }
 
   public Double getMinScore() {
     return minScore;

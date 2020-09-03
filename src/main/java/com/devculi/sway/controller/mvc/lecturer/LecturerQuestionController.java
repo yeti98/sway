@@ -18,8 +18,8 @@ import java.util.LinkedList;
 @RequestMapping("/admin/manage/questions")
 @ManageQuestionsPage
 public class LecturerQuestionController {
-  @Autowired LecRestQuestionController questionController;
   private final LinkedList<QuestionModel> recentAddedQuestion = new LinkedList<>();
+  @Autowired LecRestQuestionController questionController;
 
   @GetMapping
   public String renderQuestionsView(Model model) {

@@ -19,6 +19,7 @@ public class SwaySubmit {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
   private String studentName;
   private String studentContact;
   private String studentNote;
@@ -28,9 +29,11 @@ public class SwaySubmit {
   private Double score;
   private String scoreInString;
   private String lecturerNote;
+
   @CreationTimestamp
   @Column(nullable = false, updatable = false)
   private LocalDateTime createdAt;
+
   @UpdateTimestamp
   @Column(nullable = false)
   private LocalDateTime updatedAt;

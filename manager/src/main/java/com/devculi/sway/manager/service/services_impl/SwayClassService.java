@@ -39,7 +39,7 @@ public class SwayClassService implements IClassService {
   @Override
   public PagingResponse<SwayClassModel> getClassByPage(Integer page) {
     Pageable pageable = PageRequest.of(page, ClassPerPage, Sort.by("createdAt").descending());
-    Page<SwayClass> all = classRepository.findAll(pageable);
+    Page<SwayClass> all = classRepository.findByActive(true, pageable);
     return new PagingResponse<>(
         all.getTotalPages(),
         all.getContent().stream().map(Entity2DTO::class2DTO).collect(Collectors.toList()));

@@ -20,7 +20,7 @@ public class Protector {
   private static final String ALGORITHM = "AES";
   private static final int ITERATIONS = 3;
 
-  private static Logger logger = Logger.getLogger(Protector.class.getName());
+  private static final Logger logger = Logger.getLogger(Protector.class.getName());
 
   public static String encrypt(String value, String salt) {
     Key key = generateKey();

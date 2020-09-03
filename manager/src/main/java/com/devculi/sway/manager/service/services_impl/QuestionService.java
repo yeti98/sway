@@ -3,6 +3,7 @@ package com.devculi.sway.manager.service.services_impl;
 import com.devculi.sway.dataaccess.entity.Question;
 import com.devculi.sway.dataaccess.repository.QuestionRepository;
 import com.devculi.sway.manager.service.interfaces.IQuestionService;
+import com.devculi.sway.manager.service.interfaces.ISwayTestService;
 import com.devculi.sway.manager.service.threadpool.MainExecutor;
 import com.devculi.sway.sharedmodel.exceptions.RecordNotFoundException;
 import com.devculi.sway.sharedmodel.request.UpsertQuestionRequest;
@@ -22,7 +23,7 @@ import java.util.concurrent.ExecutionException;
 public class QuestionService implements IQuestionService {
   @Autowired QuestionRepository questionRepository;
   @Autowired FileService fileService;
-  @Autowired SwayTestService testService;
+  @Autowired ISwayTestService testService;
 
   @Override
   public Question getQuestionByID(Long questionID) {
