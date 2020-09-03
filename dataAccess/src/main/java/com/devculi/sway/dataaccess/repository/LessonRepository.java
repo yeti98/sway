@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface LessonRepository extends JpaRepository<Lesson, Long> {
-  @Query("SELECT ls FROM Lesson ls WHERE ls.lessonId LIKE :keyword")
+  @Query("SELECT ls FROM Lesson ls WHERE lower(ls.lessonId) LIKE :keyword")
   List<Lesson> findByLessonIdLike(@Param("keyword") String keyword);
 
   Optional<Lesson> findByActiveAndSlug(boolean status, String slug);

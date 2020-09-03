@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Service
 public interface SwayClassRepository extends JpaRepository<SwayClass, Long> {
-  @Query("SELECT cl FROM SwayClass cl WHERE cl.classId LIKE :keyword")
+  @Query("SELECT cl FROM SwayClass cl WHERE lower(cl.classId) LIKE :keyword")
   List<SwayClass> findByClassIdLike(@Param("keyword") String keyword);
 
   Optional<SwayClass> findByActiveAndSlug(boolean status, String slug);

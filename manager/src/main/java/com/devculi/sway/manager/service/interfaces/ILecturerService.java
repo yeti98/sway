@@ -13,5 +13,5 @@ public interface ILecturerService {
 
   Page<SwayTest> getHomeworkByPage(Integer page);
 
-  Page<SwayTest> getTestonlineByPage(Integer page);
+  Page<SwayTest> getTestOnlineByPage(Integer page);
 }

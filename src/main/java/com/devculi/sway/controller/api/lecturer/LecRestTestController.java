@@ -51,7 +51,7 @@ public class LecRestTestController extends RestBaseController {
         }
       case TEST_ONLINE:
         {
-          res = lecturerService.getTestonlineByPage(page);
+          res = lecturerService.getTestOnlineByPage(page);
           break;
         }
     }
