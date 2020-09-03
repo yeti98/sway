@@ -43,10 +43,12 @@
           <div class="accordion__panel js-accordion__panel">
             <div class="text-component padding-top-xxxs padding-x-md padding-bottom-md">
               <th:block th:each="test, tStat : ${lesson.tests}">
-                <a class="margin-left-md@lg
+                <div>
+                  <a class="margin-left-md@lg
                     margin-left-sm" th:href="'bai-tap-lop/'+ ${class.slug} + '/' + ${lesson.slug} + '/'+ ${test.slug}">
-                  <span th:text="${test.testName}"></span>
-                </a>
+                    <span th:text="${test.testName}"></span>
+                  </a>
+                </div>
               </th:block>
             </div>
           </div>
