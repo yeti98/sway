@@ -21,8 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @ManageTestonlinePage
 public class TestonlineController {
 
-  @Autowired
-  LecRestTestController testController;
+  @Autowired LecRestTestController testController;
   @Autowired SwayTestService testService;
 
   @GetMapping

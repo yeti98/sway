@@ -34,11 +34,13 @@ public class StuHomeworkController {
   }
 
   @GetMapping("/{classSlug}")
-  public String renderLessonOfClass(Model model, @PathVariable(name = "classSlug") String classSlug) {
+  public String renderLessonOfClass(
+      Model model, @PathVariable(name = "classSlug") String classSlug) {
     SwayClass classBySlug = classService.getClassBySlug(classSlug);
     List<Lesson> lessonList = classBySlug.getCourse().getLessons();
     model.addAttribute("class", classBySlug);
-    model.addAttribute("lessons", lessonList.stream().map(Entity2DTO::lesson2DTO).collect(Collectors.toList()));
+    model.addAttribute(
+        "lessons", lessonList.stream().map(Entity2DTO::lesson2DTO).collect(Collectors.toList()));
     return "student/bai-tap-lop/lop-hoc/index";
   }
 

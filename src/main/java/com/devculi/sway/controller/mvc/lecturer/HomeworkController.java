@@ -20,8 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/admin/manage/homeworks")
 @ManageHomeworkPage
 public class HomeworkController {
-  @Autowired
-  LecRestTestController testController;
+  @Autowired LecRestTestController testController;
   @Autowired SwayTestService testService;
 
   @GetMapping
