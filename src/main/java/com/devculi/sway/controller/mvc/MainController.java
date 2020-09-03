@@ -2,14 +2,10 @@ package com.devculi.sway.controller.mvc;
 
 import com.devculi.sway.business.shared.model.QuestionModel2;
 import com.devculi.sway.business.shared.model.QuestionModelWrapper;
-import com.devculi.sway.dataaccess.entity.Question;
 import com.devculi.sway.interceptor.attr.annotations.HomePage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -46,24 +42,29 @@ public class MainController {
     return "User-agent: *\n" + "Disallow: /admin\n";
   }
 
-  @GetMapping("/bai-tap-lop")
-  public String homework(Model model) {
-    model.addAttribute("pageTitle", "Bài tập về nhà");
-    return "gdmoi/bai-tap";
-  }
+  @PostMapping("/submit-test")
+  public String handleSubmitTest(@ModelAttribute QuestionModelWrapper wrapper, Model model) {
+    // Save vao submit
 
-  @GetMapping("/test-online")
-  public String testOnline(Model model) {
-    model.addAttribute("pageTitle", "Test online");
-    List<Question> qs = new ArrayList<>();
-    qs.add(
-        new Question((long) 1, "A###DEVCULI###B###DEVCULI###C", "A", "ABCD?", "asd", true, "123"));
-    qs.add(
-        new Question((long) 2, "A###DEVCULI###B###DEVCULI###C", "A", "ABCD?", "asd", true, "124"));
-    QuestionModelWrapper wrapper = new QuestionModelWrapper();
-    wrapper.setQuestions(qs);
+    // Chuyen vao service. Kb o dau
+    // Cham diem
+    int diem = 0;
+    for (QuestionModel2 qm : wrapper.getQuestions()) {
+      if (qm.getSelected() == null) {
+        qm.setSelected("");
+        qm.setResult(false);
+      } else if (qm.getSelected() != null && qm.getSelected().equalsIgnoreCase(qm.getAnswer())) {
+        diem++;
+        qm.setResult(true);
+      } else {
+        qm.setResult(false);
+      }
+    }
+    model.addAttribute("activeLink", "homework");
+    model.addAttribute("pageTitle", "Kết quả");
+    model.addAttribute("diem", diem + "/" + wrapper.getQuestions().size());
     model.addAttribute("wrapper", wrapper);
-    return "gdmoi/bai-tap";
+    return "ket-qua";
   }
 
   @GetMapping("/giaodienmoi/trang-chu")
@@ -77,18 +78,6 @@ public class MainController {
 
     model.addAttribute("pageTitle", "Nội dung");
     return "gdmoi/noi-dung";
-  }
-
-  @GetMapping("/dang-nhap")
-  public String dangNhap(Model model) {
-    model.addAttribute("pageTitle", "Đăng nhập");
-    return "gdmoi/dang-nhap";
-  }
-
-  @GetMapping("/giaodienmoi/dang-nhap")
-  public String newDangNhap(Model model) {
-    model.addAttribute("pageTitle", "Đăng nhập");
-    return "gdmoi/dang-nhap";
   }
 
   @GetMapping("/giaodienmoi/khct")

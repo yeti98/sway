@@ -2,7 +2,6 @@ package com.devculi.sway.manager.service.services_impl;
 
 import com.devculi.sway.business.shared.request.UpsertPostRequest;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
-import com.devculi.sway.dataaccess.entity.Lesson;
 import com.devculi.sway.dataaccess.entity.Post;
 import com.devculi.sway.dataaccess.repository.PostRepository;
 import com.devculi.sway.manager.service.interfaces.IPostService;
@@ -52,6 +51,7 @@ public class PostService implements IPostService {
     post.setTitle(title);
     post.setCoverPhoto(upsertPostRequest.getCoverPhoto());
     post.setContents(upsertPostRequest.getContents());
+    postRepository.save(post);
 
     String slug = StringUtils.makeSlug(title);
     post.setSlug(slug);

@@ -5,15 +5,17 @@ import com.devculi.sway.business.shared.model.SwayTestModel;
 import com.devculi.sway.business.shared.request.UpsertLessonRequest;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
 import com.devculi.sway.dataaccess.entity.Lesson;
+import com.devculi.sway.dataaccess.entity.SwayClass;
 import com.devculi.sway.dataaccess.entity.SwayTest;
+import com.devculi.sway.dataaccess.entity.SwayUser;
 import com.devculi.sway.dataaccess.repository.LessonRepository;
 import com.devculi.sway.manager.service.interfaces.ILessonService;
 import com.devculi.sway.manager.service.interfaces.ISwayTestService;
 import com.devculi.sway.sharedmodel.exceptions.RecordNotFoundException;
 import com.devculi.sway.sharedmodel.response.common.PagingResponse;
 import com.devculi.sway.utils.PropertyUtils;
+import com.devculi.sway.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -43,6 +45,12 @@ public class LessonService implements ILessonService {
   }
 
   @Override
+  public Lesson getLessonBySlug(String slug) {
+    Optional<Lesson> byId = lessonRepository.findByActiveAndSlug(true, slug);
+    return byId.orElseThrow(() -> new RecordNotFoundException(Lesson.class, "slug", slug));
+  }
+
+  @Override
   public PagingResponse<LessonModel> getLessonByPage(Integer page) {
     Pageable pageable = PageRequest.of(page, LessonPerPage, Sort.by("createdAt").descending());
     Page<Lesson> all = lessonRepository.findAll(pageable);
@@ -54,6 +62,8 @@ public class LessonService implements ILessonService {
   @Override
   public Lesson createLesson() {
     Lesson lesson = new Lesson();
+    lesson.setActive(false);
+    lesson.setSlug(null);
     lessonRepository.save(lesson);
     return lesson;
   }
@@ -68,6 +78,14 @@ public class LessonService implements ILessonService {
 
     if (!nullProperties.contains("name")) {
       lessonByID.setName(lessonName);
+      // first time update
+      if (!lessonByID.isActive()) {
+        lessonByID.setActive(true);
+      }
+      if (StringUtils.isNullOrEmpty(lessonByID.getSlug())) {
+        lessonByID.setSlug(StringUtils.makeSlug(lessonName, lessonByID.getId().toString(), false));
+      }
+      // end
     }
     if (!nullProperties.contains("lessonId")) {
       lessonByID.setLessonId(lessonId);
@@ -105,5 +123,16 @@ public class LessonService implements ILessonService {
       keyword = "%" + keyword + "%";
     }
     return lessonRepository.findByLessonIdLike(keyword);
+  }
+
+  @Override
+  public boolean isPassedLesson(
+      final SwayUser swayUser, final SwayClass swayClass, final Lesson lesson) {
+    for (SwayTest test : lesson.getTests()) {
+      if (!testService.isPassedTest(swayUser, swayClass, lesson, test)) {
+        return false;
+      }
+    }
+    return true;
   }
 }

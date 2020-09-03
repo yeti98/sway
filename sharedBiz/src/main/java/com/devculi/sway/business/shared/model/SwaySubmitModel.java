@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 public class SwaySubmitModel {
   private UserModel swayUser;
   private Long id;
+  private LessonModel lesson;
   private String studentName;
   private String studentContact;
   private String studentNote;
@@ -19,9 +20,59 @@ public class SwaySubmitModel {
   private String scoreInString;
   private boolean isPassed;
   private SwayClassModel swayClass;
+  private SwayTestModel swayTest;
   private String lecturerNote;
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
+
+  public SwayTestModel getSwayTest() {
+    return swayTest;
+  }
+
+  public void setSwayTest(SwayTestModel swayTest) {
+    this.swayTest = swayTest;
+  }
+
+  @Override
+  public String toString() {
+    return "SwaySubmitModel{"
+        + "swayUser="
+        + swayUser
+        + ", id="
+        + id
+        + ", studentName='"
+        + studentName
+        + '\''
+        + ", studentContact='"
+        + studentContact
+        + '\''
+        + ", studentNote='"
+        + studentNote
+        + '\''
+        + ", submitType="
+        + submitType
+        + ", isChecked="
+        + isChecked
+        + ", score="
+        + score
+        + ", scoreInString='"
+        + scoreInString
+        + '\''
+        + ", isPassed="
+        + isPassed
+        + ", swayClass="
+        + swayClass
+        + ", swayTest="
+        + swayTest
+        + ", lecturerNote='"
+        + lecturerNote
+        + '\''
+        + ", createdAt="
+        + createdAt
+        + ", updatedAt="
+        + updatedAt
+        + '}';
+  }
 
   public boolean isChecked() {
     return isChecked;

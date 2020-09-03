@@ -4,110 +4,106 @@ import com.devculi.sway.sharedmodel.model.UserModel;
 import com.devculi.sway.utils.GsonUtils;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PostModel {
 
-    private long id;
-    private String Menu;
-    private String coverPhoto;
-    private String title;
-    private String contents;
-    private UserModel author;
-    private LocalDateTime createdAt;
-    private String createDay;
-    private LocalDateTime updatedAt;
-    private String updateDay;
+  private long id;
+  private String Menu;
+  private String coverPhoto;
+  private String title;
+  private String contents;
+  private UserModel author;
+  private LocalDateTime createdAt;
+  private String createDay;
+  private LocalDateTime updatedAt;
+  private String updateDay;
 
+  public PostModel() {}
 
+  public String getMenu() {
+    return Menu;
+  }
 
-    public PostModel() {
-    }
+  public void setMenu(String menu) {
+    Menu = menu;
+  }
 
-    public String getMenu() {
-        return Menu;
-    }
+  public String getCoverPhoto() {
+    return coverPhoto;
+  }
 
-    public void setMenu(String menu) {
-        Menu = menu;
-    }
+  public void setCoverPhoto(String coverPhoto) {
+    this.coverPhoto = coverPhoto;
+  }
 
-    public String getCoverPhoto() {
-        return coverPhoto;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public void setCoverPhoto(String coverPhoto) {
-        this.coverPhoto = coverPhoto;
-    }
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+  public String getCreateDay() {
+    return DateTimeFormatter.ofPattern("dd/MM/yyyy").format(createdAt);
+  }
 
-    public String getCreateDay() {
-        return DateTimeFormatter.ofPattern("dd/MM/yyyy").format(createdAt);
-    }
+  public void setCreateDay(String createDay) {
+    this.createDay = createDay;
+  }
 
-    public void setCreateDay(String createDay) {
-        this.createDay = createDay;
-    }
+  public String getUpdateDay() {
+    return DateTimeFormatter.ofPattern("dd/MM/yyyy").format(updatedAt);
+  }
 
-    public String getUpdateDay() {
-        return DateTimeFormatter.ofPattern("dd/MM/yyyy").format(updatedAt);
-    }
+  public void setUpdateDay(String updateDay) {
+    this.updateDay = updateDay;
+  }
 
-    public void setUpdateDay(String updateDay) {
-        this.updateDay = updateDay;
-    }
+  public LocalDateTime getUpdatedAt() {
+    return updatedAt;
+  }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+  public void setUpdatedAt(LocalDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+  }
 
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
+  public String getJsonString() {
+    return GsonUtils.toJson(this);
+  }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+  public long getId() {
+    return id;
+  }
 
-    public String getJsonString() {
-        return GsonUtils.toJson(this);
-    }
+  public void setId(long id) {
+    this.id = id;
+  }
 
-    public long getId() {
-        return id;
-    }
+  public String getContents() {
+    return contents;
+  }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+  public void setContents(String contents) {
+    this.contents = contents;
+  }
 
-    public String getContents() {
-        return contents;
-    }
+  public UserModel getAuthor() {
+    return author;
+  }
 
-    public void setContents(String contents) {
-        this.contents = contents;
-    }
-
-    public UserModel getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(UserModel author) {
-        this.author = author;
-    }
+  public void setAuthor(UserModel author) {
+    this.author = author;
+  }
 }

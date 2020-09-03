@@ -7,9 +7,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface LessonRepository extends JpaRepository<Lesson, Long> {
   @Query("SELECT ls FROM Lesson ls WHERE ls.lessonId LIKE :keyword")
   List<Lesson> findByLessonIdLike(@Param("keyword") String keyword);
+
+  Optional<Lesson> findByActiveAndSlug(boolean status, String slug);
 }

@@ -4,7 +4,7 @@ public enum LoginType {
   NORMAL("Normal"),
   CONTINUE_CHECK("2FA");
 
-  private String type;
+  private final String type;
 
   LoginType(String type) {
     this.type = type;

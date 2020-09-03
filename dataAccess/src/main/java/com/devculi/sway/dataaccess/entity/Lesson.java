@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "slessons")
@@ -17,6 +18,8 @@ public class Lesson {
   private String name;
   private String description;
   private String lessonId;
+  private String slug;
+  private boolean active;
   @ManyToMany private List<SwayTest> tests;
 
   @CreationTimestamp
@@ -28,6 +31,22 @@ public class Lesson {
   private LocalDateTime updatedAt;
 
   public Lesson() {}
+
+  public String getSlug() {
+    return slug;
+  }
+
+  public void setSlug(String slug) {
+    this.slug = slug;
+  }
+
+  public boolean isActive() {
+    return active;
+  }
+
+  public void setActive(boolean active) {
+    this.active = active;
+  }
 
   public String getLessonId() {
     return lessonId;
@@ -83,5 +102,23 @@ public class Lesson {
 
   public void setUpdatedAt(LocalDateTime updatedAt) {
     this.updatedAt = updatedAt;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Lesson)) return false;
+    Lesson lesson = (Lesson) o;
+    return isActive() == lesson.isActive()
+        && getId().equals(lesson.getId())
+        && Objects.equals(getName(), lesson.getName())
+        && Objects.equals(getLessonId(), lesson.getLessonId())
+        && getSlug().equals(lesson.getSlug())
+        && getCreatedAt().equals(lesson.getCreatedAt());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getId(), getName(), getLessonId(), getSlug(), isActive(), getCreatedAt());
   }
 }

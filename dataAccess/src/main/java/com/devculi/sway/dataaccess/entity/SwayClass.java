@@ -6,10 +6,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
+import java.util.Objects;
 
 @Entity
-@Table(name = "sclasses")
+@Table(
+    name = "sclasses",
+    indexes = {@Index(name = "sclass_slug_idx", unique = true, columnList = "slug")})
 public class SwayClass {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,8 +19,8 @@ public class SwayClass {
 
   private String name;
 
+  private String slug;
   private String classId;
-
   private Double minScore;
 
   @ManyToMany
@@ -26,7 +28,7 @@ public class SwayClass {
       name = "sclass_lecturers",
       joinColumns = {@JoinColumn(name = "suser_id")},
       inverseJoinColumns = {@JoinColumn(name = "sclass_id")})
-  private Set<SwayUser> lecturers;
+  private List<SwayUser> lecturers;
 
   private String description;
 
@@ -50,6 +52,14 @@ public class SwayClass {
   private boolean active;
 
   public SwayClass() {}
+
+  public String getSlug() {
+    return slug;
+  }
+
+  public void setSlug(String slug) {
+    this.slug = slug;
+  }
 
   public String getClassId() {
     return classId;
@@ -99,11 +109,11 @@ public class SwayClass {
     this.name = name;
   }
 
-  public Set<SwayUser> getLecturers() {
+  public List<SwayUser> getLecturers() {
     return lecturers;
   }
 
-  public void setLecturers(Set<SwayUser> lecturers) {
+  public void setLecturers(List<SwayUser> lecturers) {
     this.lecturers = lecturers;
   }
 
@@ -141,5 +151,23 @@ public class SwayClass {
 
   public void setMinScore(Double minScore) {
     this.minScore = minScore;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof SwayClass)) return false;
+    SwayClass swayClass = (SwayClass) o;
+    return isActive() == swayClass.isActive()
+        && getId().equals(swayClass.getId())
+        && Objects.equals(getName(), swayClass.getName())
+        && Objects.equals(getSlug(), swayClass.getSlug())
+        && Objects.equals(getClassId(), swayClass.getClassId())
+        && getCreatedAt().equals(swayClass.getCreatedAt());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getId(), getName(), getSlug(), getClassId(), getCreatedAt(), isActive());
   }
 }

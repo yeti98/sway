@@ -15,8 +15,26 @@ public class QuestionModel {
   private String questionId;
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
+  private String selected;
+  private boolean isWrong;
 
   public QuestionModel() {}
+
+  public boolean isWrong() {
+    return isWrong;
+  }
+
+  public void setWrong(boolean wrong) {
+    isWrong = wrong;
+  }
+
+  public String getSelected() {
+    return selected;
+  }
+
+  public void setSelected(String selected) {
+    this.selected = selected;
+  }
 
   public Long getId() {
     return id;
@@ -94,17 +112,49 @@ public class QuestionModel {
     return String.join(" ", choices.split(Question.DETERMINER));
   }
 
-  @Override
-  public String toString() {
-    return "";
-  }
-
   public String getJsonString() {
     return GsonUtils.toJson(this);
   }
 
   public String[] getChoicesList() {
-    System.out.println();
     return choices.split(Question.DETERMINER);
+  }
+
+  @Override
+  public String toString() {
+    return "QuestionModel{"
+        + "id="
+        + id
+        + ", choices='"
+        + choices
+        + '\''
+        + ", answer='"
+        + answer
+        + '\''
+        + ", content='"
+        + content
+        + '\''
+        + ", explanation='"
+        + explanation
+        + '\''
+        + ", active="
+        + active
+        + ", questionId='"
+        + questionId
+        + '\''
+        + ", createdAt="
+        + createdAt
+        + ", updatedAt="
+        + updatedAt
+        + ", selected='"
+        + selected
+        + '\''
+        + '}';
+  }
+
+  public String getBackground(String choice) {
+    if (!choice.equalsIgnoreCase(this.selected)) return "";
+    if (this.isWrong) return "background-color: lightcoral";
+    return "background-color: lightgreen";
   }
 }

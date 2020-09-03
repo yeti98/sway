@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public class SwaySubmit {
   @OneToOne SwayTest swayTest;
   @OneToOne SwayUser swayUser;
+  @OneToOne Lesson lesson;
   @OneToOne SwayClass swayClass;
   @OneToOne SwayUser checkUser;
 
@@ -23,22 +24,29 @@ public class SwaySubmit {
   private String studentContact;
   private String studentNote;
   private TestType submitType;
-
   private boolean isChecked;
-
   private boolean isPassed;
-
   private Double score;
   private String scoreInString;
   private String lecturerNote;
+
   @CreationTimestamp
   @Column(nullable = false, updatable = false)
   private LocalDateTime createdAt;
+
   @UpdateTimestamp
   @Column(nullable = false)
   private LocalDateTime updatedAt;
 
   public SwaySubmit() {}
+
+  public Lesson getLesson() {
+    return lesson;
+  }
+
+  public void setLesson(Lesson lesson) {
+    this.lesson = lesson;
+  }
 
   public String getScoreInString() {
     return scoreInString;

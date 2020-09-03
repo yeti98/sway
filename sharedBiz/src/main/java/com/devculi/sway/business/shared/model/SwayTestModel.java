@@ -1,5 +1,6 @@
 package com.devculi.sway.business.shared.model;
 
+import com.devculi.sway.dataaccess.entity.enums.Subject;
 import com.devculi.sway.dataaccess.entity.enums.TestType;
 import com.devculi.sway.utils.GsonUtils;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -7,16 +8,18 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SwayTestModel {
   private Long id;
 
   private String testId;
+  private Subject subject;
 
   private String testName;
 
-  private Collection<QuestionModel> questions;
+  private List<QuestionModel> questions;
 
   private LocalDate deadline;
   private boolean active;
@@ -27,7 +30,17 @@ public class SwayTestModel {
 
   private Collection<SwaySubmitModel> submits;
 
+  private String slug;
+
   public SwayTestModel() {}
+
+  public String getSlug() {
+    return slug;
+  }
+
+  public void setSlug(String slug) {
+    this.slug = slug;
+  }
 
   public Long getId() {
     return id;
@@ -53,11 +66,11 @@ public class SwayTestModel {
     this.testName = testName;
   }
 
-  public Collection<QuestionModel> getQuestions() {
+  public List<QuestionModel> getQuestions() {
     return questions;
   }
 
-  public void setQuestions(Collection<QuestionModel> questions) {
+  public void setQuestions(List<QuestionModel> questions) {
     this.questions = questions;
   }
 
@@ -119,5 +132,33 @@ public class SwayTestModel {
 
   public String getJsonString() {
     return GsonUtils.toJson(this);
+  }
+
+  @Override
+  public String toString() {
+    return "SwayTestModel{"
+        + "id="
+        + id
+        + ", testId='"
+        + testId
+        + '\''
+        + ", testName='"
+        + testName
+        + '\''
+        + ", questions="
+        + questions
+        + ", deadline="
+        + deadline
+        + ", active="
+        + active
+        + ", testType="
+        + testType
+        + ", createdAt="
+        + createdAt
+        + ", updatedAt="
+        + updatedAt
+        + ", submits="
+        + submits
+        + '}';
   }
 }

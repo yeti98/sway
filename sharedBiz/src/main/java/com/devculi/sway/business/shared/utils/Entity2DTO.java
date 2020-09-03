@@ -8,7 +8,7 @@ import org.modelmapper.ModelMapper;
 import java.util.Arrays;
 
 public final class Entity2DTO {
-  private static ModelMapper modelMapper = new ModelMapper();
+  private static final ModelMapper modelMapper = new ModelMapper();
 
   public static UserModel user2DTO(SwayUser user) {
     return modelMapper.map(user, UserModel.class);
@@ -35,7 +35,9 @@ public final class Entity2DTO {
     return qm2;
   }
 
-  public static PostModel post2DTO(Post post){return modelMapper.map(post,PostModel.class);}
+  public static PostModel post2DTO(Post post) {
+    return modelMapper.map(post, PostModel.class);
+  }
 
   public static SwayTestModel swayTest2DTO(SwayTest swayTest) {
     return modelMapper.map(swayTest, SwayTestModel.class);

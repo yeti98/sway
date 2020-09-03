@@ -40,8 +40,8 @@ public class JWTUtils {
   }
 
   public static void main(String[] args) {
-//    System.out.println(JWTUtils.generateToken("trangnh"));
-//    System.out.println(JWTUtils.generateToken("trangnh"));
+    //    System.out.println(JWTUtils.generateToken("trangnh"));
+    //    System.out.println(JWTUtils.generateToken("trangnh"));
 
     System.out.println(
         validateToken(

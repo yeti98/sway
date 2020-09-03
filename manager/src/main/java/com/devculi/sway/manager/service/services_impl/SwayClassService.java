@@ -12,6 +12,7 @@ import com.devculi.sway.sharedmodel.exceptions.RecordNotFoundException;
 import com.devculi.sway.sharedmodel.model.UserModel;
 import com.devculi.sway.sharedmodel.response.common.PagingResponse;
 import com.devculi.sway.utils.PropertyUtils;
+import com.devculi.sway.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -38,7 +39,7 @@ public class SwayClassService implements IClassService {
   @Override
   public PagingResponse<SwayClassModel> getClassByPage(Integer page) {
     Pageable pageable = PageRequest.of(page, ClassPerPage, Sort.by("createdAt").descending());
-    Page<SwayClass> all = classRepository.findAll(pageable);
+    Page<SwayClass> all = classRepository.findByActive(true, pageable);
     return new PagingResponse<>(
         all.getTotalPages(),
         all.getContent().stream().map(Entity2DTO::class2DTO).collect(Collectors.toList()));
@@ -47,6 +48,11 @@ public class SwayClassService implements IClassService {
   @Override
   public SwayClass createClass() {
     SwayClass swayClass = new SwayClass();
+    swayClass.setActive(false);
+    swayClass.setMinScore(0.0);
+    swayClass.setStudents(new ArrayList<>());
+    swayClass.setLecturers(new ArrayList<>());
+    swayClass.setSlug(null);
     classRepository.save(swayClass);
     return swayClass;
   }
@@ -59,6 +65,12 @@ public class SwayClassService implements IClassService {
   }
 
   @Override
+  public SwayClass getClassBySlug(String slug) {
+    Optional<SwayClass> bySlug = classRepository.findByActiveAndSlug(true, slug);
+    return bySlug.orElseThrow(() -> new RecordNotFoundException(SwayClass.class, "slug", slug));
+  }
+
+  @Override
   public SwayClass updateClass(Long id, UpsertClassRequest upsertClassRequest) {
     SwayClass classById = getClassById(id);
     Set<String> nullPropertiesString = PropertyUtils.getNullProperties(upsertClassRequest);
@@ -66,7 +78,16 @@ public class SwayClassService implements IClassService {
       classById.setClassId(upsertClassRequest.getClassId());
     }
     if (!nullPropertiesString.contains("name")) {
-      classById.setName(upsertClassRequest.getName());
+      String className = upsertClassRequest.getName();
+      classById.setName(className);
+      // first time update
+      if (!classById.isActive()) {
+        classById.setActive(true);
+      }
+      if (StringUtils.isNullOrEmpty(classById.getSlug())) {
+        classById.setSlug(StringUtils.makeSlug(className, classById.getId().toString(), false));
+      }
+      // end
     }
     if (!nullPropertiesString.contains("minScore")) {
       classById.setMinScore(upsertClassRequest.getMinScore());
@@ -133,5 +154,11 @@ public class SwayClassService implements IClassService {
       keyword = "%" + keyword + "%";
     }
     return classRepository.findByClassIdLike(keyword);
+  }
+
+  @Override
+  public boolean isRegistered(SwayClass swayClass) {
+    List<SwayClass> joinedClasses = getJoinedClasses();
+    return joinedClasses.contains(swayClass);
   }
 }

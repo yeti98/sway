@@ -5,7 +5,6 @@ import com.devculi.sway.business.shared.factory.SwayFactory;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
 import com.devculi.sway.dataaccess.entity.SwayUser;
 import com.devculi.sway.manager.service.interfaces.IAdminService;
-import com.devculi.sway.manager.service.interfaces.IAuthService;
 import com.devculi.sway.sharedmodel.model.UserModel;
 import com.devculi.sway.sharedmodel.request.UpsertUserRequest;
 import com.devculi.sway.sharedmodel.response.common.PagingResponse;
@@ -23,7 +22,6 @@ import java.util.stream.Collectors;
 @RequireRoleAdmin
 public class AdminController {
   @Autowired IAdminService adminService;
-  @Autowired IAuthService authService;
 
   @GetMapping("/users")
   public PagingResponse<UserModel> getUsersByPage(
@@ -39,10 +37,6 @@ public class AdminController {
   public UserModel insertUser(@RequestBody UpsertUserRequest insertUserRequest) {
     SwayFactory.getUserValidation().validateInsertUser(insertUserRequest);
     SwayUser user = adminService.insertNewUser(insertUserRequest);
-    if (user != null) {
-      authService.createAuthenticationModelForUser(user);
-    }
-
     return Entity2DTO.user2DTO(user);
   }
 

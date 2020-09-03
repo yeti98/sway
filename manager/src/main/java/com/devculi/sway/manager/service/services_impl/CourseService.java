@@ -37,7 +37,7 @@ public class CourseService implements ICourseService {
   @Override
   public PagingResponse<CourseModel> getCourseByPage(Integer page) {
     Pageable pageable = PageRequest.of(page, CoursePerPage, Sort.by("createdAt").descending());
-    Page<Course> all = courseRepository.findAll(pageable);
+    Page<Course> all = courseRepository.findByActive(true, pageable);
     return new PagingResponse<>(
         all.getTotalPages(),
         all.getContent().stream().map(Entity2DTO::course2DTO).collect(Collectors.toList()));
@@ -46,6 +46,7 @@ public class CourseService implements ICourseService {
   @Override
   public Course createCourse() {
     Course course = new Course();
+    course.setActive(false);
     courseRepository.save(course);
     return course;
   }
@@ -66,6 +67,10 @@ public class CourseService implements ICourseService {
 
     if (!nullProperties.contains("name")) {
       courseById.setName(courseName);
+      // first time update
+      if (!courseById.isActive()) {
+        courseById.setActive(true);
+      }
     }
     if (!nullProperties.contains("courseId")) {
       courseById.setCourseId(courseId);
