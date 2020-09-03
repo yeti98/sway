@@ -66,30 +66,6 @@ public class MainController {
     return "gdmoi/bai-tap";
   }
 
-  @PostMapping("/submit-test")
-  public String handleSubmitTest(@ModelAttribute QuestionModelWrapper wrapper, Model model) {
-    // Save vao submit
-
-    // Chuyen vao service. Kb o dau
-    // Cham diem
-    int diem = 0;
-    for (QuestionModel2 qm : wrapper.getQuestions()) {
-      if (qm.getSelected() == null) {
-        qm.setSelected("");
-        qm.setResult(false);
-      } else if (qm.getSelected() != null && qm.getSelected().equalsIgnoreCase(qm.getAnswer())) {
-        diem++;
-        qm.setResult(true);
-      } else {
-        qm.setResult(false);
-      }
-    }
-    model.addAttribute("pageTitle", "Kết quả");
-    model.addAttribute("diem", diem + "/" + wrapper.getQuestions().size());
-    model.addAttribute("wrapper", wrapper);
-    return "ket-qua";
-  }
-
   @GetMapping("/giaodienmoi/trang-chu")
   public String newIndex(Model model) {
     model.addAttribute("activeLink", "index");
