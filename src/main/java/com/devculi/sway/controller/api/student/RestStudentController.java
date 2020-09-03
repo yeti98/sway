@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class RestStudentController extends RestBaseController {
   @Autowired IStudentService studentService;
 
-  @GetMapping("/{id}")
-  public ResponseEntity getStudentInfo(@PathVariable(name = "id") Long id) {
-    return ok(studentService.getStudentByID(id));
-  }
+//  @GetMapping("/{id}")
+//  public ResponseEntity getStudentInfo(@PathVariable(name = "id") Long id) {
+//    return ok(studentService.getStudentByID(id));
+//  }
 }
