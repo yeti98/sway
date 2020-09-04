@@ -16,28 +16,4 @@ public final class UserValidator extends AbstractValidator {
   }
 
   public void validateUpdateUser(UpsertUserRequest updateUserRequest) {}
-
-  //	public static void validateAuthorization(AuthorizationRequestDTO request) throws
-  // ValidationException{
-  //		if(request == null)
-  //			throw new ValidationException("Email/Mobile and Password input is required.");
-  //
-  //		if(StringUtils.isNullOrEmpty(request.getAccountName()))
-  //			throw new ValidationException("Email/Mobile is required.");
-  //
-  //		if(StringUtils.isNullOrEmpty(request.getPassword()))
-  //			throw new ValidationException("Password is required.");
-  //	}
-  //
-  //	public static void validateRefreshToken(AuthorizationRefreshTokenDTO request) throws
-  // ValidationException{
-  //		if(request == null)
-  //			throw new ValidationException("Email/Mobile and Refresh Token input is required.");
-  //
-  //		if(StringUtils.isNullOrEmpty(request.getUuid()))
-  //			throw new ValidationException("UUID is required.");
-  //
-  //		if(StringUtils.isNullOrEmpty(request.getRefreshToken()))
-  //			throw new ValidationException("Refresh Token is required.");
-  //	}
 }
