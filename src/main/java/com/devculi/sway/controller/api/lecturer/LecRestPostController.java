@@ -1,6 +1,6 @@
 package com.devculi.sway.controller.api.lecturer;
 
-import com.devculi.sway.annotations.RequireRoleAdmin;
+import com.devculi.sway.annotations.RequireRoleLecturer;
 import com.devculi.sway.business.shared.model.PostModel;
 import com.devculi.sway.business.shared.request.UpsertPostRequest;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/posts")
-@RequireRoleAdmin
+@RequireRoleLecturer
 public class LecRestPostController extends RestBaseController {
 
   @Autowired IPostService postService;
