@@ -11,7 +11,7 @@ import java.util.Set;
 public class UpsertClassRequest {
   private Long id;
   private String name;
-  private Set<UserModel> lecturers;
+  private List<UserModel> lecturers;
   private String classId;
   private String description;
   private List<UserModel> students;
@@ -34,11 +34,11 @@ public class UpsertClassRequest {
     this.name = name;
   }
 
-  public Set<UserModel> getLecturers() {
+  public List<UserModel> getLecturers() {
     return lecturers;
   }
 
-  public void setLecturers(Set<UserModel> lecturers) {
+  public void setLecturers(List<UserModel> lecturers) {
     this.lecturers = lecturers;
   }
 

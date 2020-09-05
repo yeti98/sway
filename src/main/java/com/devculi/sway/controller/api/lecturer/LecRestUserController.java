@@ -24,11 +24,19 @@ public class LecRestUserController extends RestBaseController {
 
   @GetMapping("/search")
   public ResponseEntity<Object> searchByUsername(
-      @RequestParam(name = "username", defaultValue = "") String keyword) {
+      @RequestParam(name = "username", defaultValue = "") String keyword,
+      @RequestParam(name = "role", defaultValue = "all") String role) {
     if (keyword.length() == 0) {
       return ok(new ArrayList<>());
     }
-    SwayUser user = userService.searchByUsername(keyword, true);
+    System.out.println(role);
+    System.out.println("\n\n\n\n\n\n");
+    SwayUser user = null;
+    if ("all".equalsIgnoreCase(role)) {
+      user = userService.searchByUsername(keyword, true);
+    } else {
+      user = userService.searchByUsername(keyword, true, role.toUpperCase());
+    }
     if (user == null) {
       return ok(new ArrayList<>());
     }

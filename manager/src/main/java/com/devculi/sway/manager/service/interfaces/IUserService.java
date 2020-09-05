@@ -32,4 +32,7 @@ public interface IUserService {
   List<SwayClass> getJoinedClasses();
 
   List<SwayUser> searchBy(String keyword, boolean isIgnoreCase);
+
+  SwayUser searchByUsername(String keyword, boolean isIgnoreCase, String role);
+
 }

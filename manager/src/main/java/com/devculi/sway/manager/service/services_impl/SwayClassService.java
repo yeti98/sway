@@ -123,6 +123,7 @@ public class SwayClassService implements IClassService {
             lecturers.add(userById);
           }
         });
+    classById.setLecturers(lecturers);
     classRepository.save(classById);
     return classById;
   }
@@ -160,5 +161,17 @@ public class SwayClassService implements IClassService {
   public boolean isRegistered(SwayClass swayClass) {
     List<SwayClass> joinedClasses = getJoinedClasses();
     return joinedClasses.contains(swayClass);
+  }
+
+  @Override
+  public List<SwayClass> getClassesTeachingByCurrentUser() {
+    SwayUser currentUser = null;
+    try {
+      currentUser = userService.getCurrentUser();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    classRepository.findByLecturerId(currentUser.getId());
+    return new ArrayList<>();
   }
 }

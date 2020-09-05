@@ -1,4 +1,4 @@
-package com.devculi.sway.controller.mvc.lecturer;
+package com.devculi.sway.controller.mvc.lecturer.manage;
 
 import com.devculi.sway.business.shared.model.PostModel;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
