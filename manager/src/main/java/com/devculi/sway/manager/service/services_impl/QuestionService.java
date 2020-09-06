@@ -86,13 +86,18 @@ public class QuestionService implements IQuestionService {
                         MainExecutor.getInstance())
                     .thenApplyAsync(
                         question -> {
-                          return questionRepository.save(question);
+                          if (question != null) {
+                            return questionRepository.save(question);
+                          }
+                          return null;
                         },
                         MainExecutor.getInstance());
 
             try {
               Question question = future.get();
-              newQuestionList.add(question);
+              if (question != null) {
+                newQuestionList.add(question);
+              }
             } catch (InterruptedException | ExecutionException e) {
               e.printStackTrace();
             }
@@ -115,7 +120,9 @@ public class QuestionService implements IQuestionService {
     Question question = new Question();
     int size = data.size();
     question.setQuestionId(data.get(0).toString());
-    question.setContent(String.valueOf(data.get(1)));
+    String content = String.valueOf(data.get(1));
+    if (!StringUtils.hasText(content)) return null;
+    question.setContent(content);
     question.setAnswer(String.valueOf(data.get(2)));
     List<String> choices = new ArrayList<>();
     for (int idx = 1; idx < 5; idx++) { // Upto 5 choices

@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -27,8 +26,6 @@ public class SwayTestModel {
 
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
-
-  private Collection<SwaySubmitModel> submits;
 
   private String slug;
 
@@ -114,51 +111,11 @@ public class SwayTestModel {
     this.updatedAt = updatedAt;
   }
 
-  public Collection<SwaySubmitModel> getSubmits() {
-    return submits;
-  }
-
-  public void setSubmits(Collection<SwaySubmitModel> submits) {
-    this.submits = submits;
-  }
-
   public int getNumberOfQuestion() {
     return questions.size();
   }
 
-  public int getTotalSubmition() {
-    return submits.size();
-  }
-
   public String getJsonString() {
     return GsonUtils.toJson(this);
-  }
-
-  @Override
-  public String toString() {
-    return "SwayTestModel{"
-        + "id="
-        + id
-        + ", testId='"
-        + testId
-        + '\''
-        + ", testName='"
-        + testName
-        + '\''
-        + ", questions="
-        + questions
-        + ", deadline="
-        + deadline
-        + ", active="
-        + active
-        + ", testType="
-        + testType
-        + ", createdAt="
-        + createdAt
-        + ", updatedAt="
-        + updatedAt
-        + ", submits="
-        + submits
-        + '}';
   }
 }
