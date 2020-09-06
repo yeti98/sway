@@ -34,6 +34,14 @@ public class SwayTestModel {
 
   public SwayTestModel() {}
 
+  public Subject getSubject() {
+    return subject;
+  }
+
+  public void setSubject(Subject subject) {
+    this.subject = subject;
+  }
+
   public String getSlug() {
     return slug;
   }
@@ -136,29 +144,19 @@ public class SwayTestModel {
 
   @Override
   public String toString() {
-    return "SwayTestModel{"
-        + "id="
-        + id
-        + ", testId='"
-        + testId
-        + '\''
-        + ", testName='"
-        + testName
-        + '\''
-        + ", questions="
-        + questions
-        + ", deadline="
-        + deadline
-        + ", active="
-        + active
-        + ", testType="
-        + testType
-        + ", createdAt="
-        + createdAt
-        + ", updatedAt="
-        + updatedAt
-        + ", submits="
-        + submits
-        + '}';
+    return "SwayTestModel{" +
+            "id=" + id +
+            ", testId='" + testId + '\'' +
+            ", subject=" + subject +
+            ", testName='" + testName + '\'' +
+            ", questions=" + questions +
+            ", deadline=" + deadline +
+            ", active=" + active +
+            ", testType=" + testType +
+            ", createdAt=" + createdAt +
+            ", updatedAt=" + updatedAt +
+            ", submits=" + submits +
+            ", slug='" + slug + '\'' +
+            '}';
   }
 }

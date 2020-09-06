@@ -1,6 +1,7 @@
 package com.devculi.sway.business.shared.request;
 
 import com.devculi.sway.business.shared.model.QuestionModel;
+import com.devculi.sway.dataaccess.entity.enums.Subject;
 import com.devculi.sway.dataaccess.entity.enums.TestType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -13,6 +14,8 @@ public class UpsertTestRequest {
 
   private String testId;
 
+  private Subject subject;
+
   private String testName;
 
   private Collection<QuestionModel> questions;
@@ -22,6 +25,14 @@ public class UpsertTestRequest {
   private TestType testType;
 
   public UpsertTestRequest() {}
+
+  public Subject getSubject() {
+    return subject;
+  }
+
+  public void setSubject(Subject subject) {
+    this.subject = subject;
+  }
 
   public Long getId() {
     return id;

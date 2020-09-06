@@ -98,6 +98,7 @@ public class SwayTestService implements ISwayTestService {
   public SwayTest createTestByType(TestType testType) {
     SwayTest swayTest = new SwayTest();
     swayTest.setTestType(testType);
+    swayTest.setSubject(Subject.ENGLISH);
     swayTest.setSubmits(new ArrayList<>());
     swayTest.setQuestions(new ArrayList<>());
     swayTest.setActive(false);
@@ -139,6 +140,7 @@ public class SwayTestService implements ISwayTestService {
           }
         });
     swayTest.setQuestions(questions);
+    swayTest.setSubject(updateHomeworkRequest.getSubject());
     testRepository.save(swayTest);
     return swayTest;
   }

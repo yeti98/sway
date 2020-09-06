@@ -78,10 +78,11 @@ $(document).ready(function () {
     const id = swayTest.id;
     swayTest.testId = $("#testId").val();
     swayTest.testName = $("#testName").val();
-
+    swayTest.subject = $("#subject").val();
 
     $inputs.prop("disabled", true);
     const payload = JSON.stringify(swayTest);
+    console.log(swayTest);
     $.ajax({
       url: "/api/tests/" + swayTest.id,
       type: "put",
