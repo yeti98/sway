@@ -9,9 +9,6 @@ import java.util.List;
 
 @Service
 public interface ILecturerService {
-  SwayClass getClassById(Long classId);
-
-  Page<SwayClass> getClassesByPage(Long page);
 
   Page<SwayTest> getHomeworkByPage(Integer page);
 

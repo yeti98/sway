@@ -2,7 +2,6 @@ package com.devculi.sway.manager.service.services_impl;
 
 import com.devculi.sway.dataaccess.entity.SwayClass;
 import com.devculi.sway.dataaccess.entity.SwayTest;
-import com.devculi.sway.manager.service.interfaces.IClassService;
 import com.devculi.sway.manager.service.interfaces.ILecturerService;
 import com.devculi.sway.manager.service.interfaces.ISwayTestService;
 import com.devculi.sway.manager.service.interfaces.IUserService;
@@ -16,17 +15,6 @@ import java.util.List;
 public class LecturerService implements ILecturerService {
   @Autowired ISwayTestService testService;
   @Autowired IUserService userService;
-  @Autowired IClassService classService;
-
-  @Override
-  public SwayClass getClassById(Long classId) {
-    return null;
-  }
-
-  @Override
-  public Page<SwayClass> getClassesByPage(Long page) {
-    return null;
-  }
 
   @Override
   public Page<SwayTest> getHomeworkByPage(Integer page) {
@@ -40,10 +28,6 @@ public class LecturerService implements ILecturerService {
 
   @Override
   public List<SwayClass> getLeadingClasses() {
-    return classService.getClassesTeachingByCurrentUser();
-  }
-
-  public List<SwayTest> searchByTestId(String keyword) {
-    return null;
+    return userService.getClassesTeachingByCurrentUser();
   }
 }

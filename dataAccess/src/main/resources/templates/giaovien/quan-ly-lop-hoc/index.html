@@ -27,18 +27,38 @@
     <div class="col-9@lg col-12@sm" style="min-height: 50vh">
       <div class="margin-x-xxl@lg margin-x-xl">
         <h4>Các lớp đang dạy: </h4>
+        <span th:text="${param}"></span>
         <ul class="accordion  js-accordion" data-animation="on" data-multi-items="on">
-          <li th:each="class, stat : ${classes}" class="accordion__item accordion__item--is-open js-accordion__item">
-            <p th:text="${class.name}"></p>
-<!--            <button class="reset accordion__header padding-y-sm padding-x-md js-tab-focus" type="button">-->
-<!--              <a th:href="'bai-tap-lop/'+ ${class.slug}"><span th:text="${stat.index +1}+'. '+${class.name}"></span></a>-->
-<!--            </button>-->
+          <li class="accordion__item accordion__item--is-open js-accordion__item" th:each="class, stat : ${classes}">
+            <button class="reset accordion__header padding-y-sm padding-x-md js-tab-focus" type="button">
+              <span th:text="${stat.index +1}+'. '+${class.name}"></span>
+
+              <svg aria-hidden="true" class="icon accordion__icon-plus no-js:is-hidden" viewBox="0 0 16 16">
+                <g class="icon__group" fill="none" stroke="currentColor" stroke-miterlimit="10">
+                  <line x1="1" x2="15" y1="8" y2="8"/>
+                  <line x1="1" x2="15" y1="8" y2="8"/>
+                </g>
+              </svg>
+            </button>
+
+            <div class="accordion__panel js-accordion__panel">
+              <div class="text-component padding-top-xxxs padding-x-md padding-bottom-md">
+                <th:block th:each="lesson, lStat : ${class.course.lessons}">
+                  <div>
+                    <a class="margin-left-md@lg margin-left-sm"
+                       th:href="'quan-ly-lop-hoc/'+ ${class.slug} + '/' + ${lesson.slug}">
+                      <span th:text="${lesson.name}"></span>
+                    </a>
+                  </div>
+                </th:block>
+              </div>
+            </div>
           </li>
         </ul>
       </div>
     </div>
     <div class="col-3@lg col-12@sm">
-<!--      <th:block th:insert="fragments/gdmoiFrg/common/sidebar/sideBar :: sideBarFrg"></th:block>-->
+      <!--      <th:block th:insert="fragments/gdmoiFrg/common/sidebar/sideBar :: sideBarFrg"></th:block>-->
     </div>
   </div>
 </th:block>

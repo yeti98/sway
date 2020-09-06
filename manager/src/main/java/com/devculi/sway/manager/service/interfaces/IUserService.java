@@ -35,4 +35,5 @@ public interface IUserService {
 
   SwayUser searchByUsername(String keyword, boolean isIgnoreCase, String role);
 
+  List<SwayClass> getClassesTeachingByCurrentUser();
 }

@@ -26,4 +26,9 @@ public class LeadingClassController {
         "classes", leadingClasses.stream().map(Entity2DTO::class2DTO).collect(Collectors.toList()));
     return "giaovien/quan-ly-lop-hoc/index";
   }
+
+  @GetMapping("/{classSlug}/{lessonSlug}")
+  public String renderLessonStatDetail(){
+    return "giaovien/quan-ly-lop-hoc/bai-hoc/index";
+  }
 }

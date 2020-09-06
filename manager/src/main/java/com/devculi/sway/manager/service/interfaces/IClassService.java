@@ -27,6 +27,4 @@ public interface IClassService {
   List<SwayClass> searchBy(String keyword, boolean isIgnoreCase);
 
   boolean isRegistered(SwayClass swayClass);
-
-  List<SwayClass> getClassesTeachingByCurrentUser();
 }
