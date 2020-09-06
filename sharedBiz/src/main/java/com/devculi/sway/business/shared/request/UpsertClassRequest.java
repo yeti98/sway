@@ -5,7 +5,6 @@ import com.devculi.sway.sharedmodel.model.UserModel;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.List;
-import java.util.Set;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UpsertClassRequest {

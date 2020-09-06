@@ -19,5 +19,5 @@ public interface SwayUserRepository extends JpaRepository<SwayUser, Long> {
   List<SwayUser> findByUsernameOrNameLike(@Param("keyword") String keyword);
 
   @Query("SELECT u FROM SwayUser u WHERE u.username = :username AND u.role LIKE :role")
-  SwayUser findByUsernameAndRole(@Param("username") String username,@Param("role") String role);
+  SwayUser findByUsernameAndRole(@Param("username") String username, @Param("role") String role);
 }

@@ -27,7 +27,7 @@
     <div class="col-9@lg col-12@sm" style="min-height: 50vh">
       <div class="margin-x-xxl@lg margin-x-xl">
         <h4>Các lớp đang dạy: </h4>
-        <span th:text="${param}"></span>
+        <!--        <span th:text="${param.keySet()}"></span>-->
         <ul class="accordion  js-accordion" data-animation="on" data-multi-items="on">
           <li class="accordion__item accordion__item--is-open js-accordion__item" th:each="class, stat : ${classes}">
             <button class="reset accordion__header padding-y-sm padding-x-md js-tab-focus" type="button">
@@ -43,7 +43,7 @@
 
             <div class="accordion__panel js-accordion__panel">
               <div class="text-component padding-top-xxxs padding-x-md padding-bottom-md">
-                <th:block th:each="lesson, lStat : ${class.course.lessons}">
+                <th:block th:each="lesson, lStat : ${class.course.lessons}" th:if="${class.course}">
                   <div>
                     <a class="margin-left-md@lg margin-left-sm"
                        th:href="'quan-ly-lop-hoc/'+ ${class.slug} + '/' + ${lesson.slug}">

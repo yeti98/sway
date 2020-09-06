@@ -1,10 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="vi"
+      layout:decorate="~{layouts/giao-dien}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+  <link href="/gdmoi/assets/css/bai-test/style.css" id="codyframe" rel="stylesheet">
+  <!-- browsers not supporting CSS variables -->
+  <script>
+    if (!('CSS' in window) || !CSS.supports('color', 'var(--color-var)')) {
+      var cfStyle = document.getElementById('codyframe');
+      if (cfStyle) {
+        var href = cfStyle.getAttribute('href');
+        href = href.replace('style.css', 'style-fallback.css');
+        cfStyle.setAttribute('href', href);
+      }
+    }
+  </script>
+  <style>
+    table, td, th {
+      border: 1px solid black;
+      padding: 1%;
+    }
+  </style>
 </head>
 <body>
 
+<th:block layout:fragment="content">
+  <!--  HERO-->
+  <th:block th:insert="fragments/gdmoiFrg/trang-chu/_1_hero :: heroFrg"></th:block>
+
+  <!--MAIN CONTENT-->
+  <div class="parent grid gap-xs padding-y-sm padding-x-sm text-sm">
+    <div class="col-9@lg col-12@sm" style="min-height: 50vh">
+      <p class="text-center" th:if="${error == true}" th:utext="${errorMessage}"></p>
+      <div class="margin-x-xxl@lg margin-x-sm">
+        <!--        <span th:text="${param.keySet()}"></span>-->
+        <ul class="accordion  js-accordion" data-animation="on" data-multi-items="on">
+          <li class="accordion__item accordion__item--is-open js-accordion__item" th:each="test, stat : ${tests}">
+            <button class="reset accordion__header padding-y-sm padding-x-md js-tab-focus" type="button">
+              <span th:text="${stat.index +1}+'. '+${test.testName}"></span>
+
+              <svg aria-hidden="true" class="icon accordion__icon-plus no-js:is-hidden" viewBox="0 0 16 16">
+                <g class="icon__group" fill="none" stroke="currentColor" stroke-miterlimit="10">
+                  <line x1="1" x2="15" y1="8" y2="8"/>
+                  <line x1="1" x2="15" y1="8" y2="8"/>
+                </g>
+              </svg>
+            </button>
+
+            <div class="accordion__panel js-accordion__panel">
+              <div class="text-component padding-top-xxxs padding-x-md padding-bottom-md">
+                <table style="width: 100%;">
+                  <thead>
+                  <tr role="row">
+                    <th>STT</th>
+                    <th>Họ tên</th>
+                    <th>Số lần nộp</th>
+                    <th>Điểm cao nhất</th>
+                    <th>Trạng thái</th>
+                  </tr>
+                  </thead>
+                  <tbody th:each="statModel, smStat : ${statsData.get(stat.index)}">
+                  <tr>
+                    <td>
+                      <span th:text="${smStat.index+1}"></span>
+                    </td>
+                    <td>
+                      <span th:text="${statModel.student.name}"></span>
+                    </td>
+                    <td>
+                      <span th:text="${statModel.totalAttempt}"></span>
+                    </td>
+                    <td>
+                      <span th:text="${statModel.maxScore}"></span>
+                    </td>
+                    <td>
+                      <span th:text="${statModel.isPassed() == true ? 'Đã hoàn thành' : 'Chưa hoàn thành'}"></span>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-3@lg col-12@sm">
+      <!--      <th:block th:insert="fragments/gdmoiFrg/common/sidebar/sideBar :: sideBarFrg"></th:block>-->
+    </div>
+  </div>
+</th:block>
 </body>
 </html>

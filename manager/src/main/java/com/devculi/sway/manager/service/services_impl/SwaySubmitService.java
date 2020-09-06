@@ -7,6 +7,8 @@ import com.devculi.sway.manager.service.interfaces.ISubmitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SwaySubmitService implements ISubmitService {
   @Autowired SwaySubmitRepository submitRepository;
@@ -44,5 +46,10 @@ public class SwaySubmitService implements ISubmitService {
     submit.setPassed(currentClass.getMinScore() < score);
     submitRepository.save(submit);
     return submit;
+  }
+
+  @Override
+  public List<SwaySubmit> getAllSubmitsOfTest(SwayTest swayTest, SwayClass swayClass) {
+    return submitRepository.findAllBySwayTestAndSwayClass(swayTest, swayClass);
   }
 }
