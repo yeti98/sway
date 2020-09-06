@@ -79,6 +79,7 @@ public class UserService implements IUserService {
   public SwayUser updateUser(Long id, UpsertUserRequest upsertUserRequest) {
     SwayUser user = userRepository.findById(id).orElse(null);
     String[] nullPropertiesString = PropertyUtils.getNullPropertiesString(upsertUserRequest);
+    assert user != null;
     BeanUtils.copyProperties(upsertUserRequest, user, nullPropertiesString);
     userRepository.save(user);
     return user;
@@ -133,6 +134,27 @@ public class UserService implements IUserService {
       keyword = "%" + keyword + "%";
     }
     return userRepository.findByUsernameOrNameLike(keyword);
+  }
+
+  @Override
+  public SwayUser searchByUsername(String username, boolean isIgnoreCase, String role) {
+    return userRepository.findByUsernameAndRole(username, "%" + role.toUpperCase() + "%");
+  }
+
+  @Override
+  public List<SwayClass> getClassesTeachingByCurrentUser() {
+    SwayUser currentUser = null;
+    try {
+      currentUser = getCurrentUser();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    Optional<SwayUser> userOptional = userRepository.getByUsername(currentUser.getUsername());
+    if (userOptional.isPresent()) {
+      SwayUser user = userOptional.get();
+      return user.getLeadingClasses();
+    }
+    return new ArrayList<>();
   }
 
   private boolean isAnonymousAuthenticationToken(Authentication authentication) {

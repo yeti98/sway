@@ -60,7 +60,7 @@
           <li sec:authorize="!isAuthenticated()" class="f-header__item"><a href="dang-nhap" class="f-header__btn btn btn--primary">Đăng nhập</a></li>
           <li sec:authorize="isAuthenticated()">
             <div class="flex items-center" aria-controls="menu-example">
-              <img class="radius-50%" width="32" height="32" src="https://ui-avatars.com/api/?name=Nguyen+Huu+Trang" alt="avatar"/>
+              <img class="radius-50%" width="32" height="32" th:src="${'https://ui-avatars.com/api/?name='+#authentication.getPrincipal().getUsername()}" alt="avatar"/>
               <span th:utext="${#authentication.getPrincipal().getUsername()}"></span>
             </div>
           </li>
@@ -68,7 +68,7 @@
       </div>
     </div>
   </header>
-  <menu class="menu js-menu" id="menu-example">
+  <menu sec:authorize="isAuthenticated()" class="menu js-menu" id="menu-example">
     <li role="menuitem">
       <span class="menu__content js-menu__content">
         <svg aria-hidden="true" class="icon menu__icon" viewBox="0 0 12 12"><path
@@ -83,12 +83,12 @@
       <a class="menu__content js-menu__content" href="/bai-tap-lop">Bài tập lớp</a>
     </li>
 
-    <li role="menuitem">
-      <a class="menu__content js-menu__content" href="/quan-ly-lop-hoc" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">Quản lý lớp học</a>
+    <li role="menuitem" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">
+      <a class="menu__content js-menu__content" href="/quan-ly-lop-hoc">Quản lý lớp học</a>
     </li>
 
-    <li role="menuitem">
-      <a class="menu__content js-menu__content" href="/admin" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">Trang admin</a>
+    <li role="menuitem" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">
+      <a class="menu__content js-menu__content" href="/admin">Trang admin</a>
     </li>
 
     <!--  <li role="menuitem">-->

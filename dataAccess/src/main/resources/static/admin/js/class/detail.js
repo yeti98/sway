@@ -6,14 +6,48 @@ function getTableBody() {
   return document.getElementById("tblUserList").getElementsByTagName("tbody")[0];
 }
 
-function deleteRow(index, question) {
+function deleteStudent(index, data) {
   swayClass.students.splice(index, 1);
-  const tblUserList = getTableBody();
-  tblUserList.deleteRow(index);
-  rerenderTable()
+  const tblStudentList = getTableBody();
+  tblStudentList.deleteRow(index);
+  rerenderStudentTable()
 }
 
-function rerenderTable() {
+function deleteLecturer(index, data) {
+  swayClass.lecturers.splice(index, 1);
+  const tblLecturerList = document.getElementById("tblLecturerList").getElementsByTagName("tbody")[0];
+  tblLecturerList.deleteRow(index);
+  rerenderLecturerTable()
+}
+
+function rerenderLecturerTable() {
+  const tblLecturerList = document.getElementById("tblLecturerList").getElementsByTagName("tbody")[0];
+  $("#tblLecturerList tbody").empty();
+  swayClass.lecturers.forEach((lecturer, index) => {
+    var row = tblLecturerList.insertRow(index);
+    var stt = row.insertCell(0);
+    var tengv = row.insertCell(1);
+    var username = row.insertCell(2);
+    var capnhat = row.insertCell(3);
+    stt.innerHTML = `<span>${index + 1}</span>`;
+    tengv.innerHTML = lecturer.name;
+    username.innerHTML = lecturer.username;
+    capnhat.innerHTML =
+      "<div style='display: ruby'>" +
+      "   <div id=\"removeUser\" " + `onclick="deleteLecturer(${index}, ${lecturer.id})" >` +
+      "      <a class=\"delete\" data-toggle=\"modal\" href=\"#deleteUserModal\">\n" +
+      "         <i class=\"material-icons\"\n" +
+      "            data-toggle=\"tooltip\"\n" +
+      "            title=\"Xóa khỏi lớp học này\" style=\"color: red\">&#xE872;\n" +
+      "         </i>\n" +
+      "      </a>\n" +
+      "   </div>\n" +
+      "</div>"
+  });
+}
+
+
+function rerenderStudentTable() {
   const tblUserList = document.getElementById("tblUserList").getElementsByTagName("tbody")[0];
   $("#tblUserList tbody").empty();
   swayClass.students.forEach((student, index) => {
@@ -27,7 +61,7 @@ function rerenderTable() {
     username.innerHTML = student.username;
     capnhat.innerHTML =
       "<div style='display: ruby'>" +
-      "   <div id=\"removeUser\" " + `onclick="deleteRow(${index}, ${student.id})" >` +
+      "   <div id=\"removeUser\" " + `onclick="deleteStudent(${index}, ${student.id})" >` +
       "      <a class=\"delete\" data-toggle=\"modal\" href=\"#deleteUserModal\">\n" +
       "         <i class=\"material-icons\"\n" +
       "            data-toggle=\"tooltip\"\n" +
@@ -104,7 +138,8 @@ $(document).ready(function () {
     $('#findCourseModal').modal('hide')
   });
 
-  $("#formAddUser").submit(function (event) {
+  $(document).on("click", "#btnAddUser", function (event) {
+    console.log(event)
     event.preventDefault();
 
     const $form = $(this);
@@ -119,7 +154,6 @@ $(document).ready(function () {
       contentType: "application/json; charset=utf-8",
       success: function (msg) {
         $inputs.prop("disabled", false);
-        console.log(msg);
         if (msg.length === 0) {
           $('#searchNotify').show();
           setTimeout(function () {
@@ -129,7 +163,45 @@ $(document).ready(function () {
           const user = msg;
           if (!isExisted(user, swayClass.students)) {
             swayClass.students.push(user);
-            rerenderTable()
+            rerenderStudentTable()
+          }
+          $('#findUserModal').modal('hide');
+        }
+      },
+      error: function (msg) {
+        $inputs.prop("disabled", false);
+        alert("Không tìm thấy: " + username);
+      }
+    });
+
+  });
+
+  $(document).on("click", "#btnAddLecturer", function (event) {
+    console.log(event)
+    event.preventDefault();
+
+    const $form = $(this);
+    const $inputs = $form.find("input, select, button, textarea");
+
+    const username = $("#txtAddLecturer").val();
+
+    $inputs.prop("disabled", true);
+    $.ajax({
+      url: "/api/users/search?username=" + username +"&role=LECTURER",
+      type: "get",
+      contentType: "application/json; charset=utf-8",
+      success: function (msg) {
+        $inputs.prop("disabled", false);
+        if (msg.length === 0) {
+          $('#searchNotify').show();
+          setTimeout(function () {
+            $('#searchNotify').hide()
+          }, 2000)
+        } else {
+          const user = msg;
+          if (!isExisted(user, swayClass.lecturers)) {
+            swayClass.lecturers.push(user);
+            rerenderLecturerTable()
           }
           $('#findUserModal').modal('hide');
         }
@@ -142,7 +214,6 @@ $(document).ready(function () {
   });
 
   $("#swayClassForm").submit(function (event) {
-    console.log("submit");
     event.preventDefault();
 
     const $form = $(this);
@@ -199,71 +270,4 @@ $(document).ready(function () {
       }
     });
   });
-
-  // $("#formAddswayClass").submit(function (event) {
-  //   event.preventDefault();
-  //
-  //   const $form = $(this);
-  //   const $inputs = $form.find("input, select, button, textarea");
-  //
-  //   const questionId = $("#addQuestionID").val();
-  //   const content = $("#addQuestionContent").val();
-  //   const explanation = $("#addQuestionExpl").val();
-  //
-  //   const A = $("#addChoiceA").val().trim();
-  //   const B = $("#addChoiceB").val().trim();
-  //   const C = $("#addChoiceC").val().trim();
-  //   const D = $("#addChoiceD").val().trim();
-  //   const E = $("#addChoiceE").val().trim();
-  //   let answer;
-  //   // TODO: Sửa lại các lấy input checked jquery
-  //   // TODO: Check đáp án trùng nhau
-  //   if (document.getElementById("radioBtnA").checked && !isBlank(A)) {
-  //     answer = A;
-  //   } else if (document.getElementById("radioBtnB").checked && !isBlank(B)) {
-  //     answer = B
-  //   } else if (document.getElementById("radioBtnC").checked && !isBlank(C)) {
-  //     answer = C;
-  //   } else if (document.getElementById("radioBtnD").checked && !isBlank(D)) {
-  //     answer = D;
-  //   } else if (document.getElementById("radioBtnE").checked && !isBlank(E)) {
-  //     answer = E;
-  //   }
-  //   const choices = [];
-  //   if (isAllBlank(A, B, C, D, E) || isBlank(answer)) {
-  //     alert("Vui lòng điền thông tin đáp án");
-  //   } else {
-  //     if (!isBlank(A)) choices.push(A);
-  //     if (!isBlank(B)) choices.push(B);
-  //     if (!isBlank(C)) choices.push(C);
-  //     if (!isBlank(D)) choices.push(D);
-  //     if (!isBlank(E)) choices.push(E);
-  //
-  //     $inputs.prop("disabled", true);
-  //
-  //     const payload = JSON.stringify(
-  //       {
-  //         choices, answer, explanation, active: true, questionId, content
-  //       }
-  //     );
-  //     console.log(payload);
-  //     $.ajax({
-  //       url: "/api/questions",
-  //       type: "post",
-  //       data: payload,
-  //       contentType: "application/json; charset=utf-8",
-  //       success: function (msg) {
-  //         $inputs.prop("disabled", false);
-  //         swayClass.questions.push(msg);
-  //         rerenderTable();
-  //         $("#addQuestionModal").modal("hide");
-  //       },
-  //       error: function (msg) {
-  //         $inputs.prop("disabled", false);
-  //         alert("Thêm thất bại: \n", msg);
-  //         $("#addQuestionModal").modal("hide");
-  //       }
-  //     });
-  //   }
-  // });
 });

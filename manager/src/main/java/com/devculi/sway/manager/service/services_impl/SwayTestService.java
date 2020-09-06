@@ -98,7 +98,6 @@ public class SwayTestService implements ISwayTestService {
   public SwayTest createTestByType(TestType testType) {
     SwayTest swayTest = new SwayTest();
     swayTest.setTestType(testType);
-    swayTest.setSubmits(new ArrayList<>());
     swayTest.setQuestions(new ArrayList<>());
     swayTest.setActive(false);
     swayTest.setDeadline(null);

@@ -31,7 +31,7 @@
                 </div>
                 <div class="card-tools">
                   <button class="btn btn-block btn-primary" data-toggle="modal"
-                          href="#findUserModal" id="btnUser" type="button">Thêm học viên
+                          href="#findUserModal" id="btnUser" type="button">Thêm HV/GV
                   </button>
                 </div>
               </div>
@@ -50,8 +50,8 @@
                   </div>
                   <div class="form-group">
                     <label for="swayClassName">Điểm tối thiểu</label>
-                    <input class="form-control" id="swayClassMinScore" step="0.1"
-                           max="10" min="0" required th:field="*{minScore}"
+                    <input class="form-control" id="swayClassMinScore" max="10"
+                           min="0" required step="0.1" th:field="*{minScore}"
                            type="number">
                   </div>
                   <div class="form-group">
@@ -135,7 +135,42 @@
                           <td>
                             <div style="display: ruby">
                               <div id="removeAnUser" th:attr="data-index=${stats.index}, data-student=${student}"
-                                   th:onclick="javascript:deleteRow(this.getAttribute('data-index'), this.getAttribute('data-student'));">
+                                   th:onclick="javascript:deleteStudent(this.getAttribute('data-index'), this.getAttribute('data-student'));">
+                                <a class="delete" data-toggle="modal" href="#deleteUserModal">
+                                  <i class="material-icons"
+                                     data-toggle="tooltip" style="color: red"
+                                     title="Xóa khỏi lớp học này">&#xE872;
+                                  </i>
+                                </a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </th:block>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="form-group">
+                    <label for="tblUserList">Danh sách giảng viên</label>
+                    <table class="table table-striped" id="tblLecturerList">
+                      <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tên giảng viên</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Cập nhật</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <th:block th:each="lecturer, stats : *{lecturers}">
+                        <tr>
+                          <th scope="row"><span th:text="${stats.index + 1}"></span></th>
+                          <td><p th:text="${lecturer.name}"></p></td>
+                          <td><p th:text="${lecturer.username}"></p></td>
+                          <td>
+                            <div style="display: ruby">
+                              <div id="removeAnUser" th:attr="data-index=${stats.index}, data-lecturer=${lecturer}"
+                                   th:onclick="javascript:deleteLecturer(this.getAttribute('data-index'), this.getAttribute('data-lecturer'));">
                                 <a class="delete" data-toggle="modal" href="#deleteUserModal">
                                   <i class="material-icons"
                                      data-toggle="tooltip" style="color: red"
@@ -194,7 +229,7 @@
         <div class="modal-content">
           <form id="formAddUser">
             <div class="modal-header">
-              <h4>Thêm học viên</h4>
+              <h4>Thêm học viên/giảng viên</h4>
               <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
             </div>
             <div class="modal-body">
@@ -202,7 +237,14 @@
                 <div class="input-group-append">
                   <input class="form-control" id="txtAddStudent" name="table_search" placeholder="username học viên"
                          type="text">
-                  <button class="btn btn-default" formaction="" id="btnAddUser" name="addUser"><i
+                  <button type="button" class="btn btn-default" formaction="" id="btnAddUser" name="addUser"><i
+                      class="fas fa-plus-circle"></i></button>
+                </div>
+                <br>
+                <div class="input-group-append">
+                  <input class="form-control" id="txtAddLecturer" name="table_search" placeholder="username giảng viên"
+                         type="text">
+                  <button type="button" class="btn btn-default" formaction="" id="btnAddLecturer" name="addLecturer"><i
                       class="fas fa-plus-circle"></i></button>
                 </div>
               </div>
