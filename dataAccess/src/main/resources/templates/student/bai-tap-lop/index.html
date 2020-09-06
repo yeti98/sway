@@ -27,8 +27,8 @@
     <div class="col-9@lg col-12@sm" style="min-height: 50vh">
       <div class="margin-x-xxl@lg margin-x-xl">
         <h4>Các lớp đang theo học: </h4>
-        <ul class="accordion  js-accordion" data-animation="on" data-multi-items="on">
-          <li th:each="class, stat : ${classes}" class="accordion__item accordion__item--is-open js-accordion__item">
+        <ul class="accordion js-accordion" data-animation="on" data-multi-items="on">
+          <li th:each="class, stat : ${classes}" class="accordion__item accordion__item--is-open">
             <button class="reset accordion__header padding-y-sm padding-x-md js-tab-focus" type="button">
               <a th:href="'bai-tap-lop/'+ ${class.slug}"><span th:text="${stat.index +1}+'. '+${class.name}"></span></a>
             </button>
