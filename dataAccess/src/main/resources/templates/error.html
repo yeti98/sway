@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="vi"
+      layout:decorate="~{layouts/giao-dien}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link href="/gdmoi/assets/css/style.css" id="codyframe" rel="stylesheet">
+  <!-- browsers not supporting CSS variables -->
+  <script>
+    if (!('CSS' in window) || !CSS.supports('color', 'var(--color-var)')) {
+      var cfStyle = document.getElementById('codyframe');
+      if (cfStyle) {
+        var href = cfStyle.getAttribute('href');
+        href = href.replace('style.css', 'style-fallback.css');
+        cfStyle.setAttribute('href', href);
+      }
+    }
+  </script>
+</head>
+<body>
+
+<th:block layout:fragment="content">
+  <section class="fof" style="min-height: 80vh">
+    <div class="container max-width-lg">
+      <div class="grid gap-lg">
+        <div class="col-6@lg order-2">
+          <div aria-lable="404 animation" class="fof__animation">
+            <svg id="i-fof" viewBox="0 0 520 450">
+              <g id="i-fof-ship">
+                <path d="M260,9a53,53,0,0,0-53,53H313A53,53,0,0,0,260,9Z" fill="var(--color-contrast-lower)"
+                      id="i-fof-capsule"/>
+                <path d="M448,73H72s78-37,188-37S448,73,448,73Z" fill="var(--color-contrast-low)" id="i-fof-ship-top"/>
+                <path d="M448,73A1185.633,1185.633,0,0,0,72,73c80.173,34.484,144.2,37,188,37C370,110,448,73,448,73Z"
+                      fill="var(--color-contrast-high)"
+                      id="i-fof-ship-bottom"/>
+              </g>
+              <g id="i-fof-browser">
+                <rect fill="var(--color-contrast-higher)" height="109" id="i-fof-browser-canvas" rx="6"
+                      transform="translate(131.361 -75.723) rotate(22.162)" width="160"
+                      x="179" y="243"/>
+                <g fill="var(--color-bg)" id="i-fof-browser-dots">
+                  <circle cx="211.713" cy="228.029" r="3"/>
+                  <circle cx="221.9" cy="232.179" r="3"/>
+                  <circle cx="232.088" cy="236.328" r="3"/>
+                </g>
+                <rect fill="var(--color-bg)" height="89" id="i-fof-browser-body" rx="2"
+                      transform="translate(133.29 -74.459) rotate(22.162)" width="152"
+                      x="180.737" y="258.557"/>
+                <g id="i-fof-emoji">
+                  <path d="M248.626,322.968A22,22,0,1,1,277.3,310.893,22,22,0,0,1,248.626,322.968Z" fill="#ffd764"/>
+                  <path d="M264.3,311a7,7,0,1,1,9.124-3.843A7,7,0,0,1,264.3,311Z" fill="#fff"/>
+                  <path d="M245.778,303.452a7,7,0,1,1,9.123-3.842A7,7,0,0,1,245.778,303.452Z" fill="#fff"/>
+                  <path d="M258.5,317.274l-12.966-5.281a1,1,0,0,1,.755-1.853l12.966,5.282a1,1,0,0,1-.755,1.852Z"
+                        fill="#444"/>
+                  <path d="M247.287,299.747a3,3,0,1,1,3.91-1.646A3,3,0,0,1,247.287,299.747Z" fill="#444"/>
+                  <path d="M265.809,307.292a3,3,0,1,1,3.91-1.647A3,3,0,0,1,265.809,307.292Z" fill="#444"/>
+                </g>
+              </g>
+              <polygon fill="#4ad36b" id="i-fof-radar-body" opacity="0.5"
+                       points="415 410 105 410 196 106 324 106 415 410"/>
+              <ellipse cx="260" cy="410" fill="#4ad36b" id="i-fof-radar-bottom" rx="155" ry="28"/>
+              <ellipse cx="282" cy="410" fill="var(--color-black)" id="i-fof-shadow" opacity="0.4" rx="72" ry="10"/>
+              <ellipse cx="260" cy="106" fill="#4ad36b" id="i-fof-radar-top" rx="64" ry="6"/>
+            </svg>
+          </div>
+        </div>
+        <div class="col-6@lg order-1">
+          <div class="text-component text-center margin-bottom-lg margin-y-xxl">
+            <h3>Không tìm thấy trang</h3>
+            <p>Xin lỗi, trang bạn đang tìm kiếm không tồn tại</p>
+            <p>Vui lòng trở về <a href="/">trang chủ</a> hoặc <a href="mailto:support@sway.vn">liên hệ với quản trị viên</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</th:block>
+</body>
+</html>
