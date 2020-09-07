@@ -37,7 +37,7 @@
 
         <ul class="f-header__list flex-grow flex-basis-0 justify-center@md">
           <li class="f-header__item"><a href="" class="f-header__link" th:attrappend="aria-current=${#strings.equals(activeLink, 'index')} ? 'page' : ''">Trang chủ</a></li>
-          <li class="f-header__item"><a href="khoa-hoc" class="f-header__link" th:attrappend="aria-current=${#httpServletRequest.requestURI.contains('khoa-hoc')} ? 'page' : ''">
+          <li class="f-header__item"><a class="f-header__link" th:attrappend="aria-current=${#httpServletRequest.requestURI.contains('khoa-hoc')} ? 'page' : ''">
             <span>Khóa học</span>
             <svg class="f-header__dropdown-icon icon" aria-hidden="true" viewBox="0 0 12 12">
               <path d="M6,9l4-5H2Z" /></svg>
@@ -90,16 +90,6 @@
     <li role="menuitem" sec:authorize="hasAnyRole('ADMIN', 'LECTURER')">
       <a class="menu__content js-menu__content" href="/admin">Trang admin</a>
     </li>
-
-    <!--  <li role="menuitem">-->
-    <!--    <span class="menu__content js-menu__content">-->
-    <!--      <svg aria-hidden="true" class="icon menu__icon" viewBox="0 0 16 16"><path-->
-    <!--          d="M15,4H1C0.4,4,0,4.4,0,5v10c0,0.6,0.4,1,1,1h14c0.6,0,1-0.4,1-1V5C16,4.4,15.6,4,15,4z M14,14H2V6h12V14z"></path><rect-->
-    <!--          height="2" width="12" x="2"></rect></svg>-->
-    <!--      <span>Copy</span>-->
-    <!--    </span>-->
-    <!--  </li>-->
-
     <li class="menu__separator" role="separator"></li>
 
     <li role="menuitem">
