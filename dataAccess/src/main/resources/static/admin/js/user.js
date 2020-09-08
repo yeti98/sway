@@ -79,6 +79,55 @@ $(document).ready(function () {
       success: function (matchedCourses) {
         $inputs.prop("disabled", false);
         // TODO: Chèn dl vào bảng
+        var tbody ="";
+        matchedCourses.forEach(function (user){
+
+          if (user.status == true) {
+            user.status = "Hoạt động";
+          }
+          else{
+            user.status = "Khoá";
+          }
+
+          console.log("user" + user.jsonString);
+          tbody += "<tr>\n" +
+              "<td>\n" +
+              "<p>"+user.name+"</p>\n" +
+              "</td>\n" +
+              "<td>\n" +
+              "<p>"+user.username+"</p>\n" +
+              "</td>\n" +
+              "<td>\n" +
+              "<p>"+ user.status + "</p>\n" +
+              "</td>\n" +
+              "<td>\n" +
+              "<p>" + user.readableRole + "</p>\n" +
+              "</td> \n" +
+              "<td style=\"display: flex\">\n" +
+              "<div id=\"editAnUser\"" +
+              "onclick=\"javascript:setSelectedObject(this.getAttribute('data-user'));\"\n" +
+              "data-user=\""+user.jsonString+"\">\n" +
+              "<a class=\"edit\" data-toggle=\"modal\" href=\"#editUserModal\">\n" +
+              "   <i class=\"material-icons\"" +
+              "       data-toggle=\"tooltip\"" +
+              "       title=\"Chỉnh sửa\">&#xE254;" +
+              "   </i>\n" +
+              "</a>\n" +
+              "</div>\n" +
+              "   <div id=\"removeAnUser\" data-user\"=" + user.jsonString + "\"" +
+              "       onclick=\"javascript:setSelectedObject(this.getAttribute('data-user'));\">\n" +
+              "       <a class=\"delete\" data-toggle=\"modal\" href=\"#deleteUserModal\">\n" +
+              "         <i class=\"material-icons\"" +
+              "             data-toggle=\"tooltip\"" +
+              "             title=\"Xóa\">&#xE872;" +
+              "         </i>\n" +
+              "       </a>\n" +
+              "     </div>\n" +
+              "</td>\n" +
+              "</tr>\n";
+        });
+        console.log(tbody);
+        document.getElementById('tblbodyUser').innerHTML += tbody;
       },
       error: function (msg) {
         $inputs.prop("disabled", false);
