@@ -1,5 +1,6 @@
 package com.devculi.sway.controller.mvc.guest;
 
+import com.devculi.sway.business.shared.model.SwayTestModel;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
 import com.devculi.sway.dataaccess.entity.SwayTest;
 import com.devculi.sway.dataaccess.entity.enums.Subject;
@@ -7,9 +8,7 @@ import com.devculi.sway.manager.service.interfaces.ISwayTestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,7 +19,7 @@ public class TestOnlineController {
   @Autowired ISwayTestService testService;
 
   @GetMapping
-  public String testOnline(Model model, @RequestParam(name = "subject", defaultValue = "ENGLISH") Subject subject) {
+  public String testOnline(Model model) {
     List<SwayTest> englishTestList = testService.getTestOnlineBySubject(Subject.ENGLISH);
     List<SwayTest> koreanTestList = testService.getTestOnlineBySubject(Subject.KOREAN);
     List<SwayTest> chineseTestList = testService.getTestOnlineBySubject(Subject.CHINESE);
@@ -40,5 +39,33 @@ public class TestOnlineController {
         "japaneseTests",
         japaneseTestList.stream().map(Entity2DTO::swayTest2DTO).collect(Collectors.toList()));
     return "guest/test-online/index";
+  }
+
+  @GetMapping("/{slug}")
+  public String getTestBySlug(Model model, @PathVariable(name = "slug") String slug){
+    SwayTest test = testService.getTestBySlug(slug);
+
+    model.addAttribute("pageTitle","Test-online");
+    model.addAttribute("swayTest",Entity2DTO.swayTest2DTO(test));
+    model.addAttribute("slug",slug);
+
+    return "guest/test-online/bai-tap";
+  }
+
+  @PostMapping("/nop-bai")
+  public String nopBai(@ModelAttribute(name = "swayTest") SwayTestModel submittedTestModel,
+          Model model,
+          @RequestParam(name = "slug") String slug) throws Exception {
+    SwayTest currentTest = testService.getTestBySlug(slug);
+    int numberOfCorrectAns = testService.countCorrectAnswer(submittedTestModel,currentTest);
+    int numberOfQuestion = currentTest.getNumberOfQuestion();
+    
+    model.addAttribute("swayTest",submittedTestModel);
+    double score = (double) numberOfCorrectAns * 10 / numberOfQuestion;
+    score = (double) Math.round(score*100)/100;
+    model.addAttribute("score",score);
+    model.addAttribute("scoreInString",String.format("%s / %s", numberOfCorrectAns, numberOfQuestion));
+
+    return "guest/test-online/ket-qua";
   }
 }

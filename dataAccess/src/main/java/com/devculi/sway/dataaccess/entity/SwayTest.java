@@ -137,4 +137,8 @@ public class SwayTest {
   public void setSlug(String slug) {
     this.slug = slug;
   }
+
+  public int getNumberOfQuestion(){
+    return questions.size();
+  }
 }
