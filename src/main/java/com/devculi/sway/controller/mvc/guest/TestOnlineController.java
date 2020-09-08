@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/test-online")
 public class TestOnlineController {
+  private static final String PAGE_TITLE = "Bài test online miễn phí";
   @Autowired ISwayTestService testService;
 
   @GetMapping
@@ -24,8 +25,8 @@ public class TestOnlineController {
     List<SwayTest> koreanTestList = testService.getTestOnlineBySubject(Subject.KOREAN);
     List<SwayTest> chineseTestList = testService.getTestOnlineBySubject(Subject.CHINESE);
     List<SwayTest> japaneseTestList = testService.getTestOnlineBySubject(Subject.JAPANESE);
-    System.out.println(englishTestList.size());
-    model.addAttribute("pageTitle","Test-online");
+
+    model.addAttribute("pageTitle", PAGE_TITLE);
     model.addAttribute(
         "englishTests",
         englishTestList.stream().map(Entity2DTO::swayTest2DTO).collect(Collectors.toList()));
@@ -42,29 +43,34 @@ public class TestOnlineController {
   }
 
   @GetMapping("/{slug}")
-  public String getTestBySlug(Model model, @PathVariable(name = "slug") String slug){
+  public String getTestBySlug(Model model, @PathVariable(name = "slug") String slug) {
     SwayTest test = testService.getTestBySlug(slug);
 
-    model.addAttribute("pageTitle","Test-online");
-    model.addAttribute("swayTest",Entity2DTO.swayTest2DTO(test));
-    model.addAttribute("slug",slug);
+    model.addAttribute("pageTitle", PAGE_TITLE);
+    model.addAttribute("swayTest", Entity2DTO.swayTest2DTO(test));
+    model.addAttribute("slug", slug);
 
     return "guest/test-online/bai-tap";
   }
 
   @PostMapping("/nop-bai")
-  public String nopBai(@ModelAttribute(name = "swayTest") SwayTestModel submittedTestModel,
-          Model model,
-          @RequestParam(name = "slug") String slug) throws Exception {
+  public String nopBai(
+      @ModelAttribute(name = "swayTest") SwayTestModel submittedTestModel,
+      Model model,
+      @RequestParam(name = "slug") String slug)
+      throws Exception {
+    model.addAttribute("pageTitle", "Kết quả làm bài test");
+
     SwayTest currentTest = testService.getTestBySlug(slug);
-    int numberOfCorrectAns = testService.countCorrectAnswer(submittedTestModel,currentTest);
+    int numberOfCorrectAns = testService.countCorrectAnswer(submittedTestModel, currentTest);
     int numberOfQuestion = currentTest.getNumberOfQuestion();
-    
-    model.addAttribute("swayTest",submittedTestModel);
+
+    model.addAttribute("swayTest", submittedTestModel);
     double score = (double) numberOfCorrectAns * 10 / numberOfQuestion;
-    score = (double) Math.round(score*100)/100;
-    model.addAttribute("score",score);
-    model.addAttribute("scoreInString",String.format("%s / %s", numberOfCorrectAns, numberOfQuestion));
+    score = (double) Math.round(score * 100) / 100;
+    model.addAttribute("score", score);
+    model.addAttribute(
+        "scoreInString", String.format("%s / %s", numberOfCorrectAns, numberOfQuestion));
 
     return "guest/test-online/ket-qua";
   }

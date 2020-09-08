@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
 @ControllerAdvice(annotations = ManageTestonlinePage.class)
-public class ManageTestonlineAttrController {
+public class ManageTestOnlineAttrController {
   @Value("${site.page.manageTestonline.title}")
   private String title;
 

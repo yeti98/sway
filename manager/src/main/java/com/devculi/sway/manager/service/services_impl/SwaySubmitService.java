@@ -31,7 +31,7 @@ public class SwaySubmitService implements ISubmitService {
     // score
     int numberOfQuestion = currentTest.getQuestions().size();
     double score = (double) numberOfCorrectAns * 10 / numberOfQuestion;
-    score = (double)Math.round(score*100)/100;
+    score = (double) Math.round(score * 100) / 100;
     submit.setScore(score);
     submit.setScoreInString(String.format("%s / %s", numberOfCorrectAns, numberOfQuestion));
     // identifier
@@ -46,6 +46,4 @@ public class SwaySubmitService implements ISubmitService {
     submitRepository.save(submit);
     return submit;
   }
-
-
 }

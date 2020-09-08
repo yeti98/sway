@@ -44,7 +44,9 @@ public class SwayTest {
   @JoinTable(name = "stest_submits")
   private Collection<SwaySubmit> submits;
 
-  public Subject getSubject() { return subject; }
+  public Subject getSubject() {
+    return subject;
+  }
 
   public void setSubject(Subject subject) {
     this.subject = subject;
@@ -138,7 +140,7 @@ public class SwayTest {
     this.slug = slug;
   }
 
-  public int getNumberOfQuestion(){
+  public int getNumberOfQuestion() {
     return questions.size();
   }
 }

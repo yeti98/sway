@@ -144,19 +144,34 @@ public class SwayTestModel {
 
   @Override
   public String toString() {
-    return "SwayTestModel{" +
-            "id=" + id +
-            ", testId='" + testId + '\'' +
-            ", subject=" + subject +
-            ", testName='" + testName + '\'' +
-            ", questions=" + questions +
-            ", deadline=" + deadline +
-            ", active=" + active +
-            ", testType=" + testType +
-            ", createdAt=" + createdAt +
-            ", updatedAt=" + updatedAt +
-            ", submits=" + submits +
-            ", slug='" + slug + '\'' +
-            '}';
+    return "SwayTestModel{"
+        + "id="
+        + id
+        + ", testId='"
+        + testId
+        + '\''
+        + ", subject="
+        + subject
+        + ", testName='"
+        + testName
+        + '\''
+        + ", questions="
+        + questions
+        + ", deadline="
+        + deadline
+        + ", active="
+        + active
+        + ", testType="
+        + testType
+        + ", createdAt="
+        + createdAt
+        + ", updatedAt="
+        + updatedAt
+        + ", submits="
+        + submits
+        + ", slug='"
+        + slug
+        + '\''
+        + '}';
   }
 }

@@ -4,8 +4,6 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
 <head>
   <link href="/gdmoi/assets/css/bai-test/style.css" id="codyframe" rel="stylesheet">
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <!-- browsers not supporting CSS variables -->
   <script>
     if (!('CSS' in window) || !CSS.supports('color', 'var(--color-var)')) {
@@ -19,7 +17,6 @@
   </script>
 </head>
 <body>
-
 <th:block layout:fragment="content">
   <!--  HERO-->
   <th:block th:insert="fragments/gdmoiFrg/trang-chu/_1_hero :: heroFrg"></th:block>
@@ -28,64 +25,66 @@
   <div class="parent grid gap-xs padding-y-sm padding-x-sm text-sm">
     <div class="col-9@lg col-12@sm" style="min-height: 50vh">
       <div class="margin-x-xxl@lg margin-x-xl">
-        <h4>Danh sách bài test: </h4>
+        <h4>Các bài tập miễn phí cung cấp bởi Sway</h4>
         <div class="form-group">
           <label for="choose_subject">Chọn môn học</label>
-          <select id="choose_subject" class="form-control" onchange="chooseSubject()">
-            <option value="ENGLISH">English</option>
-            <option value="KOREAN">Korean</option>
-            <option value="JAPANESE">Japanese</option>
-            <option value="CHINESE">Chinese</option>
+          <select class="form-control" id="choose_subject" onchange="chooseSubject()">
+            <option value="ENGLISH">Tiếng Anh</option>
+            <option value="KOREAN">Tiếng Hàn</option>
+            <option value="JAPANESE">Tiếng Nhật</option>
+            <option value="CHINESE">Tiếng Trung</option>
           </select>
         </div>
         <div>
-
-          <table class="table table-bordered table-hover" >
+          <table class="table table-bordered table-hover">
             <thead>
             <tr>
-              <th>Mã bài tập</th>
               <th>Tên bài học</th>
               <th>Số câu hỏi</th>
               <th></th>
             </tr>
             </thead>
             <tbody id="table_Korean" style="display: none">
-            <th:block th:each="koreanTest : ${koreanTests}" >
+            <th:block th:each="koreanTest : ${koreanTests}">
               <tr th:if="${koreanTest.slug}">
-                <td class="truncatable" th:utext="${koreanTest.testId}"></td>
-                <td class="truncatable" th:utext="${koreanTest.testName}"></td>
-                <td class="truncatable" th:utext="${koreanTest.getNumberOfQuestion()}"></td>
-                <td><a th:href="@{/test-online/__${koreanTest.slug}__}"><button class="btn btn-success">Go to</button></a></td>
+                <td th:utext="${koreanTest.testName}"></td>
+                <td th:utext="${koreanTest.getNumberOfQuestion()}"></td>
+                <td><a th:href="@{/test-online/__${koreanTest.slug}__}">
+                  <button class="btn btn-success">Làm bài</button>
+                </a></td>
               </tr>
             </th:block>
             </tbody>
             <tbody id="table_English" style="display: contents">
             <th:block th:each="englishTest : ${englishTests}">
               <tr th:if="${englishTest.slug}">
-                <td class="truncatable" th:utext="${englishTest.testId}"></td>
-                <td class="truncatable" th:utext="${englishTest.testName}"></td>
-                <td class="truncatable" th:utext="${englishTest.getNumberOfQuestion()}"></td>
-                <td><a th:href="@{/test-online/__${englishTest.slug}__}"><button class="btn btn-success">Go to</button></a></td>
+                <td th:utext="${englishTest.testName}"></td>
+                <td th:utext="${englishTest.getNumberOfQuestion()}"></td>
+                <td><a th:href="@{/test-online/__${englishTest.slug}__}">
+                  <button class="btn btn-success">Làm bài</button>
+                </a></td>
               </tr>
             </th:block>
             </tbody>
             <tbody id="table_Japanese" style="display: none">
-            <th:block th:each="japaneseTest : ${japaneseTests}" >
+            <th:block th:each="japaneseTest : ${japaneseTests}">
               <tr th:if="${japaneseTest.slug}">
-                <td class="truncatable" th:utext="${japaneseTest.testId}"></td>
-                <td class="truncatable" th:utext="${japaneseTest.testName}"></td>
-                <td class="truncatable" th:utext="${japaneseTest.getNumberOfQuestion()}"></td>
-                <td><a th:href="@{/test-online/__${japaneseTest.slug}__}"><button class="btn btn-success">Go to</button></a></td>
+                <td th:utext="${japaneseTest.testName}"></td>
+                <td th:utext="${japaneseTest.getNumberOfQuestion()}"></td>
+                <td><a th:href="@{/test-online/__${japaneseTest.slug}__}">
+                  <button class="btn btn-success">Làm bài</button>
+                </a></td>
               </tr>
             </th:block>
             </tbody>
             <tbody id="table_Chinese" style="display: none">
             <th:block th:each="chineseTest : ${chineseTests}">
               <tr th:if="${chineseTest.slug}">
-                <td class="truncatable" th:utext="${chineseTest.testId}"></td>
-                <td class="truncatable" th:utext="${chineseTest.testName}"></td>
-                <td class="truncatable" th:utext="${chineseTest.getNumberOfQuestion()}"></td>
-                <td><a th:href="@{/test-online/__${chineseTest.slug}__}"><button class="btn btn-success">Go to</button></a></td>
+                <td th:utext="${chineseTest.testName}"></td>
+                <td th:utext="${chineseTest.getNumberOfQuestion()}"></td>
+                <td><a th:href="@{/test-online/__${chineseTest.slug}__}">
+                  <button class="btn btn-success">Làm bài</button>
+                </a></td>
               </tr>
             </th:block>
             </tbody>
@@ -98,39 +97,36 @@
     </div>
   </div>
   <script>
-      function chooseSubject(){
-          var subject = document.getElementById("choose_subject").value;
-          switch (subject) {
-              case 'ENGLISH':
-                  document.getElementById("table_English").style.display="contents";
-                  document.getElementById("table_Chinese").style.display="none";
-                  document.getElementById("table_Korean").style.display="none";
-                  document.getElementById("table_Japanese").style.display="none";
-                  break;
-              case 'KOREAN':
-                  document.getElementById("table_Korean").style.display="contents";
-                  document.getElementById("table_Chinese").style.display="none";
-                  document.getElementById("table_English").style.display="none";
-                  document.getElementById("table_Japanese").style.display="none";
-                  break;
-              case 'JAPANESE':
-                  document.getElementById("table_Korean").style.display="none";
-                  document.getElementById("table_Chinese").style.display="none";
-                  document.getElementById("table_English").style.display="none";
-                  document.getElementById("table_Japanese").style.display="contents";
-                  break;
-              case 'CHINESE':
-                  document.getElementById("table_Korean").style.display="none";
-                  document.getElementById("table_Chinese").style.display="contents";
-                  document.getElementById("table_English").style.display="none";
-                  document.getElementById("table_Japanese").style.display="none";
-                  break;
-          }
+    function chooseSubject() {
+      var subject = document.getElementById("choose_subject").value;
+      switch (subject) {
+        case 'ENGLISH':
+          document.getElementById("table_English").style.display = "contents";
+          document.getElementById("table_Chinese").style.display = "none";
+          document.getElementById("table_Korean").style.display = "none";
+          document.getElementById("table_Japanese").style.display = "none";
+          break;
+        case 'KOREAN':
+          document.getElementById("table_Korean").style.display = "contents";
+          document.getElementById("table_Chinese").style.display = "none";
+          document.getElementById("table_English").style.display = "none";
+          document.getElementById("table_Japanese").style.display = "none";
+          break;
+        case 'JAPANESE':
+          document.getElementById("table_Korean").style.display = "none";
+          document.getElementById("table_Chinese").style.display = "none";
+          document.getElementById("table_English").style.display = "none";
+          document.getElementById("table_Japanese").style.display = "contents";
+          break;
+        case 'CHINESE':
+          document.getElementById("table_Korean").style.display = "none";
+          document.getElementById("table_Chinese").style.display = "contents";
+          document.getElementById("table_English").style.display = "none";
+          document.getElementById("table_Japanese").style.display = "none";
+          break;
       }
+    }
   </script>
 </th:block>
-
-
 </body>
-
 </html>

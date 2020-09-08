@@ -36,8 +36,6 @@ public class MainController {
     return "gdmoi/tuyen-dung";
   }
 
-
-
   @GetMapping(value = {"/robots.txt", "/robot.txt"})
   @ResponseBody
   public String getRobotsTxt() {

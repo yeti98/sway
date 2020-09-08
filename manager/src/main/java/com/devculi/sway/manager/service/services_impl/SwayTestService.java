@@ -47,7 +47,8 @@ public class SwayTestService implements ISwayTestService {
 
   @Override
   public List<SwayTest> getTestOnlineBySubject(Subject subject) {
-    List<SwayTest> bySubject = testRepository.findAllByTestTypeAndSubject(TestType.TEST_ONLINE, subject);
+    List<SwayTest> bySubject =
+        testRepository.findAllByTestTypeAndSubject(TestType.TEST_ONLINE, subject);
     return bySubject;
   }
 
@@ -94,7 +95,6 @@ public class SwayTestService implements ISwayTestService {
     }
     return count;
   }
-
 
   @Override
   public SwayTest createTestByType(TestType testType) {
