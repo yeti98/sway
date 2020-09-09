@@ -42,11 +42,11 @@
               </div>
               <div class="form-group">
                 <label for="subject">Môn học</label>
-                <select id="subject" class="form-control" th:field="*{subject}">
-                  <option value="ENGLISH">English</option>
-                  <option value="KOREAN">Korean</option>
-                  <option value="JAPANESE">Japanese</option>
-                  <option value="CHINESE">Chinese</option>
+                <select id="subject" class="form-control" th:field="*{subject}" required>
+                  <option value="ENGLISH" selected>Tiếng Anh</option>
+                  <option value="KOREAN">Tiếng Hàn</option>
+                  <option value="JAPANESE">Tiếng Trung</option>
+                  <option value="CHINESE">Tiếng Nhật</option>
                 </select>
               </div>
               <div class="form-group">
@@ -106,28 +106,28 @@
             <b>Câu hỏi</b>
           </div>
           <div class="card-body">
-            <form>
-              <div class="form-group">
-                <label for="exampleFormControlSelect2">Example select</label>
-                <select class="form-control" id="exampleFormControlSelect2">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                </select>
-              </div>
-              <div class="input-group input-group-sm" style="width: 150px;">
-                <input class="form-control float-right" name="table_search" placeholder="Mã câu hỏi" type="text">
-                <div class="input-group-append">
-                  <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
-                </div>
-              </div>
-            </form>
-            <hr>
+<!--            <form>-->
+<!--              <div class="form-group">-->
+<!--                <label for="exampleFormControlSelect2">Example select</label>-->
+<!--                <select class="form-control" id="exampleFormControlSelect2">-->
+<!--                  <option>1</option>-->
+<!--                  <option>2</option>-->
+<!--                  <option>3</option>-->
+<!--                  <option>4</option>-->
+<!--                  <option>5</option>-->
+<!--                </select>-->
+<!--              </div>-->
+<!--              <div class="input-group input-group-sm" style="width: 150px;">-->
+<!--                <input class="form-control float-right" name="table_search" placeholder="Mã câu hỏi" type="text">-->
+<!--                <div class="input-group-append">-->
+<!--                  <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </form>-->
+<!--            <hr>-->
             <div>
               <a class="btn btn-info" data-toggle="modal" href="#addQuestionModal" id="btnAddQuestion">
-                <i class="material-icons">&#xE147;</i>
+                <i class="material-icons" style="vertical-align: middle">&#xE147;</i>
                 <span>Thêm mới</span></a>
             </div>
             <hr>
