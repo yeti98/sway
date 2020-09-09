@@ -31,6 +31,14 @@ public class SwayTestModel {
 
   public SwayTestModel() {}
 
+  public Subject getSubject() {
+    return subject;
+  }
+
+  public void setSubject(Subject subject) {
+    this.subject = subject;
+  }
+
   public String getSlug() {
     return slug;
   }
@@ -118,4 +126,5 @@ public class SwayTestModel {
   public String getJsonString() {
     return GsonUtils.toJson(this);
   }
+
 }

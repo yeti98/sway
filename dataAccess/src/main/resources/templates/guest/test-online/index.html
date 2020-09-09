@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="vi"
+      layout:decorate="~{layouts/giao-dien}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link href="/gdmoi/assets/css/bai-test/style.css" id="codyframe" rel="stylesheet">
+  <!-- browsers not supporting CSS variables -->
+  <script>
+    if (!('CSS' in window) || !CSS.supports('color', 'var(--color-var)')) {
+      var cfStyle = document.getElementById('codyframe');
+      if (cfStyle) {
+        var href = cfStyle.getAttribute('href');
+        href = href.replace('style.css', 'style-fallback.css');
+        cfStyle.setAttribute('href', href);
+      }
+    }
+  </script>
+  <link href="/gdmoi/assets/css/bootstrap/bootstrap.css?v=20200907" rel="stylesheet">
+</head>
+<body>
+<th:block layout:fragment="content">
+  <!--  HERO-->
+  <th:block th:insert="fragments/gdmoiFrg/trang-chu/_1_hero :: heroFrg"></th:block>
+
+  <!--MAIN CONTENT-->
+  <div class="parent grid gap-xs padding-y-sm padding-x-sm text-sm">
+    <div class="col-9@lg col-12@sm" style="min-height: 50vh">
+      <div class="margin-x-xxl@lg margin-x-sm">
+        <h4>Các bài tập miễn phí cung cấp bởi Sway: </h4>
+        <div class="bootstrap__scope">
+          <div class="form-group">
+            <label for="choose_subject">Chọn môn học</label>
+            <select class="form-control" id="choose_subject" onchange="chooseSubject()">
+              <option value="ENGLISH">Tiếng Anh</option>
+              <option value="KOREAN">Tiếng Hàn</option>
+              <option value="JAPANESE">Tiếng Nhật</option>
+              <option value="CHINESE">Tiếng Trung</option>
+            </select>
+          </div>
+          <div>
+            <table class="table table-bordered table-hover">
+              <tbody id="table_Korean" style="display: none">
+              <th:block th:each="koreanTest : ${koreanTests}">
+                <tr th:if="${koreanTest.slug}">
+                  <td>
+                    <a th:href="@{/test-online/__${koreanTest.slug}__}">
+                      <span th:utext="${koreanTest.testName}"></span>
+                    </a>
+                  </td>
+                  <td align="center" th:utext="${koreanTest.getNumberOfQuestion()}  + ' câu hỏi'"></td>
+                </tr>
+              </th:block>
+              </tbody>
+              <tbody id="table_English" style="display: contents">
+              <th:block th:each="englishTest : ${englishTests}">
+                <tr th:if="${englishTest.slug}">
+                  <td>
+                    <a th:href="@{/test-online/__${englishTest.slug}__}">
+                      <span th:utext="${englishTest.testName}"></span>
+                    </a>
+                  </td>
+                  <td align="center" th:utext="${englishTest.getNumberOfQuestion()}  + ' câu hỏi'"></td>
+                </tr>
+              </th:block>
+              </tbody>
+              <tbody id="table_Japanese" style="display: none">
+              <th:block th:each="japaneseTest : ${japaneseTests}">
+                <tr th:if="${japaneseTest.slug}">
+                  <td align="center">
+                    <a th:href="@{/test-online/__${japaneseTest.slug}__}">
+                      <span th:utext="${japaneseTest.testName}"></span>
+                    </a>
+                  </td>
+                  <td align="center" th:utext="${japaneseTest.getNumberOfQuestion()}  + ' câu hỏi'"></td>
+                </tr>
+              </th:block>
+              </tbody>
+              <tbody id="table_Chinese" style="display: none">
+              <th:block th:each="chineseTest : ${chineseTests}">
+                <tr th:if="${chineseTest.slug}">
+                  <td>
+                    <a th:href="@{/test-online/__${chineseTest.slug}__}">
+                      <span th:utext="${chineseTest.testName}"></span>
+                    </a>
+                  </td>
+                  <td align="center" th:utext="${chineseTest.getNumberOfQuestion()}  + ' câu hỏi'"></td>
+                </tr>
+              </th:block>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-3@lg col-12@sm">
+      <th:block th:insert="fragments/gdmoiFrg/common/sidebar/sideBar :: sideBarFrg"></th:block>
+    </div>
+  </div>
+  <script>
+    function chooseSubject() {
+      var subject = document.getElementById("choose_subject").value;
+      switch (subject) {
+        case 'ENGLISH':
+          document.getElementById("table_English").style.display = "contents";
+          document.getElementById("table_Chinese").style.display = "none";
+          document.getElementById("table_Korean").style.display = "none";
+          document.getElementById("table_Japanese").style.display = "none";
+          break;
+        case 'KOREAN':
+          document.getElementById("table_Korean").style.display = "contents";
+          document.getElementById("table_Chinese").style.display = "none";
+          document.getElementById("table_English").style.display = "none";
+          document.getElementById("table_Japanese").style.display = "none";
+          break;
+        case 'JAPANESE':
+          document.getElementById("table_Korean").style.display = "none";
+          document.getElementById("table_Chinese").style.display = "none";
+          document.getElementById("table_English").style.display = "none";
+          document.getElementById("table_Japanese").style.display = "contents";
+          break;
+        case 'CHINESE':
+          document.getElementById("table_Korean").style.display = "none";
+          document.getElementById("table_Chinese").style.display = "contents";
+          document.getElementById("table_English").style.display = "none";
+          document.getElementById("table_Japanese").style.display = "none";
+          break;
+      }
+    }
+  </script>
+</th:block>
+</body>
+</html>

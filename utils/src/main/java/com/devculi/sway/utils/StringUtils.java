@@ -22,6 +22,8 @@ public class StringUtils {
       Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
   public static String Empty = "";
   static CharsetEncoder asciiEncoder = StandardCharsets.US_ASCII.newEncoder();
+  public static final Pattern NONLATIN = Pattern.compile("[^\\w-]");
+  public static final Pattern WHITESPACE = Pattern.compile("\\s+");
 
   public static String putArrayStringIntoParameter(String input) {
 
@@ -262,6 +264,7 @@ public class StringUtils {
   }
 
   public static String convertToLatin(String str) {
+    str = str.trim();
     str = str.replaceAll("[àáạảãâầấậẩẫăằắặẳẵ]", "a");
     str = str.replaceAll("[èéẹẻẽêềếệểễ]", "e");
     str = str.replaceAll("[ìíịỉĩ]", "i");
@@ -287,11 +290,8 @@ public class StringUtils {
   }
 
   public static String makeSlug(String input) {
-    final Pattern NONLATIN = Pattern.compile("[^\\w-]");
-    final Pattern WHITESPACE = Pattern.compile("[\\s]");
-
     input = convertToLatin(input);
-    String nowhitespace = WHITESPACE.matcher(input).replaceAll("");
+    String nowhitespace = WHITESPACE.matcher(input).replaceAll("-");
     String normalized = Normalizer.normalize(nowhitespace, Normalizer.Form.NFD);
     String slug = NONLATIN.matcher(normalized).replaceAll("");
     slug = slug.toLowerCase(Locale.ENGLISH) + "-" + currentTimeInFormat("yyyyMMdd-hhmmss");
@@ -299,11 +299,8 @@ public class StringUtils {
   }
 
   public static String makeSlug(String input, String identifier, boolean isConcatAtFirst) {
-    final Pattern NONLATIN = Pattern.compile("[^\\w-]");
-    final Pattern WHITESPACE = Pattern.compile("[\\s]");
-
     input = convertToLatin(input);
-    String nowhitespace = WHITESPACE.matcher(input).replaceAll("");
+    String nowhitespace = WHITESPACE.matcher(input).replaceAll("-");
     String normalized = Normalizer.normalize(nowhitespace, Normalizer.Form.NFD);
     String slug = NONLATIN.matcher(normalized).replaceAll("");
     if (isConcatAtFirst) {
@@ -321,5 +318,8 @@ public class StringUtils {
     System.out.println("Normalized: " + normalized);
     String accentRemoved = normalized.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
     System.out.println("Result: " + accentRemoved);
+
+    String sample = makeSlug("Test kiểm     tra trình độ TOEIC Reading, Listening", "1", false);
+    System.out.println(sample);
   }
 }
