@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/test-online")
-public class TestOnlineController {
+public class GuestTestOnlineController {
   private static final String PAGE_TITLE = "Bài test online miễn phí";
   @Autowired ISwayTestService testService;
 
