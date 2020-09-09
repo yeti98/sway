@@ -1,5 +1,6 @@
 package com.devculi.sway.dataaccess.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -23,20 +24,22 @@ public class SwayClass {
   private String classId;
   private Double minScore;
 
+  @JsonBackReference
   @ManyToMany
   @JoinTable(
       name = "sclass_lecturers",
-      joinColumns = {@JoinColumn(name = "suser_id")},
-      inverseJoinColumns = {@JoinColumn(name = "sclass_id")})
+      joinColumns = {@JoinColumn(name = "sclass_id")},
+      inverseJoinColumns = {@JoinColumn(name = "suser_id")})
   private List<SwayUser> lecturers;
 
   private String description;
 
+  @JsonBackReference
   @ManyToMany
   @JoinTable(
       name = "sclass_students",
-      joinColumns = {@JoinColumn(name = "suser_id")},
-      inverseJoinColumns = {@JoinColumn(name = "sclass_id")})
+      joinColumns = {@JoinColumn(name = "sclass_id")},
+      inverseJoinColumns = {@JoinColumn(name = "suser_id")})
   private List<SwayUser> students;
 
   @OneToOne private Course course;

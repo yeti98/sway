@@ -15,6 +15,7 @@
       }
     }
   </script>
+  <link href="/gdmoi/assets/css/bootstrap/bootstrap.css?v=20200907" rel="stylesheet">
 </head>
 <body>
 <th:block layout:fragment="content">
@@ -24,71 +25,70 @@
   <!--MAIN CONTENT-->
   <div class="parent grid gap-xs padding-y-sm padding-x-sm text-sm">
     <div class="col-9@lg col-12@sm" style="min-height: 50vh">
-      <div class="margin-x-xxl@lg margin-x-xl">
-        <h4>Các bài tập miễn phí cung cấp bởi Sway</h4>
-        <div class="form-group">
-          <label for="choose_subject">Chọn môn học</label>
-          <select class="form-control" id="choose_subject" onchange="chooseSubject()">
-            <option value="ENGLISH">Tiếng Anh</option>
-            <option value="KOREAN">Tiếng Hàn</option>
-            <option value="JAPANESE">Tiếng Nhật</option>
-            <option value="CHINESE">Tiếng Trung</option>
-          </select>
-        </div>
-        <div>
-          <table class="table table-bordered table-hover">
-            <thead>
-            <tr>
-              <th>Tên bài học</th>
-              <th>Số câu hỏi</th>
-              <th></th>
-            </tr>
-            </thead>
-            <tbody id="table_Korean" style="display: none">
-            <th:block th:each="koreanTest : ${koreanTests}">
-              <tr th:if="${koreanTest.slug}">
-                <td th:utext="${koreanTest.testName}"></td>
-                <td th:utext="${koreanTest.getNumberOfQuestion()}"></td>
-                <td><a th:href="@{/test-online/__${koreanTest.slug}__}">
-                  <button class="btn btn-success">Làm bài</button>
-                </a></td>
-              </tr>
-            </th:block>
-            </tbody>
-            <tbody id="table_English" style="display: contents">
-            <th:block th:each="englishTest : ${englishTests}">
-              <tr th:if="${englishTest.slug}">
-                <td th:utext="${englishTest.testName}"></td>
-                <td th:utext="${englishTest.getNumberOfQuestion()}"></td>
-                <td><a th:href="@{/test-online/__${englishTest.slug}__}">
-                  <button class="btn btn-success">Làm bài</button>
-                </a></td>
-              </tr>
-            </th:block>
-            </tbody>
-            <tbody id="table_Japanese" style="display: none">
-            <th:block th:each="japaneseTest : ${japaneseTests}">
-              <tr th:if="${japaneseTest.slug}">
-                <td th:utext="${japaneseTest.testName}"></td>
-                <td th:utext="${japaneseTest.getNumberOfQuestion()}"></td>
-                <td><a th:href="@{/test-online/__${japaneseTest.slug}__}">
-                  <button class="btn btn-success">Làm bài</button>
-                </a></td>
-              </tr>
-            </th:block>
-            </tbody>
-            <tbody id="table_Chinese" style="display: none">
-            <th:block th:each="chineseTest : ${chineseTests}">
-              <tr th:if="${chineseTest.slug}">
-                <td th:utext="${chineseTest.testName}"></td>
-                <td th:utext="${chineseTest.getNumberOfQuestion()}"></td>
-                <td><a th:href="@{/test-online/__${chineseTest.slug}__}">
-                  <button class="btn btn-success">Làm bài</button>
-                </a></td>
-              </tr>
-            </th:block>
-            </tbody>
-          </table>
+      <div class="margin-x-xxl@lg margin-x-sm">
+        <h4>Các bài tập miễn phí cung cấp bởi Sway: </h4>
+        <div class="bootstrap__scope">
+          <div class="form-group">
+            <label for="choose_subject">Chọn môn học</label>
+            <select class="form-control" id="choose_subject" onchange="chooseSubject()">
+              <option value="ENGLISH">Tiếng Anh</option>
+              <option value="KOREAN">Tiếng Hàn</option>
+              <option value="JAPANESE">Tiếng Nhật</option>
+              <option value="CHINESE">Tiếng Trung</option>
+            </select>
+          </div>
+          <div>
+            <table class="table table-bordered table-hover">
+              <tbody id="table_Korean" style="display: none">
+              <th:block th:each="koreanTest : ${koreanTests}">
+                <tr th:if="${koreanTest.slug}">
+                  <td>
+                    <a th:href="@{/test-online/__${koreanTest.slug}__}">
+                      <span th:utext="${koreanTest.testName}"></span>
+                    </a>
+                  </td>
+                  <td align="center" th:utext="${koreanTest.getNumberOfQuestion()}  + ' câu hỏi'"></td>
+                </tr>
+              </th:block>
+              </tbody>
+              <tbody id="table_English" style="display: contents">
+              <th:block th:each="englishTest : ${englishTests}">
+                <tr th:if="${englishTest.slug}">
+                  <td>
+                    <a th:href="@{/test-online/__${englishTest.slug}__}">
+                      <span th:utext="${englishTest.testName}"></span>
+                    </a>
+                  </td>
+                  <td align="center" th:utext="${englishTest.getNumberOfQuestion()}  + ' câu hỏi'"></td>
+                </tr>
+              </th:block>
+              </tbody>
+              <tbody id="table_Japanese" style="display: none">
+              <th:block th:each="japaneseTest : ${japaneseTests}">
+                <tr th:if="${japaneseTest.slug}">
+                  <td align="center">
+                    <a th:href="@{/test-online/__${japaneseTest.slug}__}">
+                      <span th:utext="${japaneseTest.testName}"></span>
+                    </a>
+                  </td>
+                  <td align="center" th:utext="${japaneseTest.getNumberOfQuestion()}  + ' câu hỏi'"></td>
+                </tr>
+              </th:block>
+              </tbody>
+              <tbody id="table_Chinese" style="display: none">
+              <th:block th:each="chineseTest : ${chineseTests}">
+                <tr th:if="${chineseTest.slug}">
+                  <td>
+                    <a th:href="@{/test-online/__${chineseTest.slug}__}">
+                      <span th:utext="${chineseTest.testName}"></span>
+                    </a>
+                  </td>
+                  <td align="center" th:utext="${chineseTest.getNumberOfQuestion()}  + ' câu hỏi'"></td>
+                </tr>
+              </th:block>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

@@ -63,7 +63,7 @@ public class TestOnlineController {
 
     SwayTest currentTest = testService.getTestBySlug(slug);
     int numberOfCorrectAns = testService.countCorrectAnswer(submittedTestModel, currentTest);
-    int numberOfQuestion = currentTest.getNumberOfQuestion();
+    int numberOfQuestion = currentTest.getQuestions().size();
 
     model.addAttribute("swayTest", submittedTestModel);
     double score = (double) numberOfCorrectAns * 10 / numberOfQuestion;

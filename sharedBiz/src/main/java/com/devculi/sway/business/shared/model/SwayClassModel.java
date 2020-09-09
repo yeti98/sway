@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SwayClassModel {
@@ -15,7 +14,7 @@ public class SwayClassModel {
 
   private String name;
 
-  private Set<UserModel> lecturers;
+  private List<UserModel> lecturers;
 
   private String slug;
   private String classId;
@@ -69,11 +68,11 @@ public class SwayClassModel {
     this.name = name;
   }
 
-  public Set<UserModel> getLecturers() {
+  public List<UserModel> getLecturers() {
     return lecturers;
   }
 
-  public void setLecturers(Set<UserModel> lecturers) {
+  public void setLecturers(List<UserModel> lecturers) {
     this.lecturers = lecturers;
   }
 

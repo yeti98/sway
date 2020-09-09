@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 @Table(
@@ -39,10 +40,6 @@ public class SwayTest {
   @UpdateTimestamp
   @Column(nullable = false)
   private LocalDateTime updatedAt;
-
-  @OneToMany
-  @JoinTable(name = "stest_submits")
-  private Collection<SwaySubmit> submits;
 
   public Subject getSubject() {
     return subject;
@@ -124,14 +121,6 @@ public class SwayTest {
     this.updatedAt = updatedAt;
   }
 
-  public Collection<SwaySubmit> getSubmits() {
-    return submits;
-  }
-
-  public void setSubmits(Collection<SwaySubmit> submits) {
-    this.submits = submits;
-  }
-
   public String getSlug() {
     return slug;
   }
@@ -140,7 +129,26 @@ public class SwayTest {
     this.slug = slug;
   }
 
-  public int getNumberOfQuestion() {
-    return questions.size();
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof SwayTest)) return false;
+    SwayTest swayTest = (SwayTest) o;
+    return active == swayTest.active
+        && id.equals(swayTest.id)
+        && Objects.equals(testId, swayTest.testId)
+        && Objects.equals(testName, swayTest.testName)
+        && Objects.equals(slug, swayTest.slug)
+        && Objects.equals(deadline, swayTest.deadline)
+        && testType == swayTest.testType
+        && subject == swayTest.subject
+        && createdAt.equals(swayTest.createdAt)
+        && Objects.equals(updatedAt, swayTest.updatedAt);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+        id, testId, testName, slug, deadline, active, testType, subject, createdAt, updatedAt);
   }
 }

@@ -6,11 +6,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "ssubmits")
 public class SwaySubmit {
-  @OneToOne SwayTest swayTest;
+  @ManyToOne SwayTest swayTest;
   @OneToOne SwayUser swayUser;
   @OneToOne Lesson lesson;
   @OneToOne SwayClass swayClass;
@@ -174,5 +175,51 @@ public class SwaySubmit {
 
   public void setSubmitType(TestType submitType) {
     this.submitType = submitType;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof SwaySubmit)) return false;
+    SwaySubmit submit = (SwaySubmit) o;
+    return isChecked == submit.isChecked
+        && isPassed == submit.isPassed
+        && swayTest.equals(submit.swayTest)
+        && Objects.equals(swayUser, submit.swayUser)
+        && Objects.equals(lesson, submit.lesson)
+        && Objects.equals(swayClass, submit.swayClass)
+        && Objects.equals(checkUser, submit.checkUser)
+        && id.equals(submit.id)
+        && Objects.equals(studentName, submit.studentName)
+        && Objects.equals(studentContact, submit.studentContact)
+        && Objects.equals(studentNote, submit.studentNote)
+        && submitType == submit.submitType
+        && score.equals(submit.score)
+        && scoreInString.equals(submit.scoreInString)
+        && Objects.equals(lecturerNote, submit.lecturerNote)
+        && createdAt.equals(submit.createdAt)
+        && Objects.equals(updatedAt, submit.updatedAt);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+        swayTest,
+        swayUser,
+        lesson,
+        swayClass,
+        checkUser,
+        id,
+        studentName,
+        studentContact,
+        studentNote,
+        submitType,
+        isChecked,
+        isPassed,
+        score,
+        scoreInString,
+        lecturerNote,
+        createdAt,
+        updatedAt);
   }
 }

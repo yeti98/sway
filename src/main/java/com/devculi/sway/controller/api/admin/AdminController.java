@@ -41,14 +41,13 @@ public class AdminController {
   }
 
   @DeleteMapping("/users/{id}")
-  public UserModel deleteUser(@PathVariable(name = "id") Long userID) {
+  public UserModel deleteUser(@PathVariable(name = "id") Long userID) throws Exception {
     try {
       SwayUser user = adminService.deleteUserByID(userID);
       return Entity2DTO.user2DTO(user);
     } catch (Exception e) {
-      e.printStackTrace();
+      throw e;
     }
-    return null;
   }
 
   @PutMapping("/users/{id}")

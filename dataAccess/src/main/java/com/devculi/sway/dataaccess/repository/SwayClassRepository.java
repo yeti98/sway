@@ -19,4 +19,7 @@ public interface SwayClassRepository extends JpaRepository<SwayClass, Long> {
   Optional<SwayClass> findByActiveAndSlug(boolean status, String slug);
 
   Page<SwayClass> findByActive(boolean isActive, Pageable pageable);
+
+  @Query("SELECT cl FROM SwayClass cl WHERE lower(cl.classId) LIKE :keyword")
+  List<SwayClass> findByLecturerId(Long id);
 }

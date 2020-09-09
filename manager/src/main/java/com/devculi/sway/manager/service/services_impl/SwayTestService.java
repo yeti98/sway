@@ -101,7 +101,6 @@ public class SwayTestService implements ISwayTestService {
     SwayTest swayTest = new SwayTest();
     swayTest.setTestType(testType);
     swayTest.setSubject(Subject.ENGLISH);
-    swayTest.setSubmits(new ArrayList<>());
     swayTest.setQuestions(new ArrayList<>());
     swayTest.setActive(false);
     swayTest.setDeadline(null);

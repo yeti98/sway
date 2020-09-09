@@ -5,13 +5,12 @@ import com.devculi.sway.sharedmodel.model.UserModel;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.List;
-import java.util.Set;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UpsertClassRequest {
   private Long id;
   private String name;
-  private Set<UserModel> lecturers;
+  private List<UserModel> lecturers;
   private String classId;
   private String description;
   private List<UserModel> students;
@@ -34,11 +33,11 @@ public class UpsertClassRequest {
     this.name = name;
   }
 
-  public Set<UserModel> getLecturers() {
+  public List<UserModel> getLecturers() {
     return lecturers;
   }
 
-  public void setLecturers(Set<UserModel> lecturers) {
+  public void setLecturers(List<UserModel> lecturers) {
     this.lecturers = lecturers;
   }
 

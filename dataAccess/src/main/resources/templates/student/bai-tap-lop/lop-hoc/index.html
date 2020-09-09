@@ -26,7 +26,7 @@
   <div class="parent grid gap-xs padding-y-sm padding-x-sm text-sm">
     <div class="col-9@lg col-12@sm" style="min-height: 50vh">
       <h3 th:text="${class.name}"></h3>
-      <h4>Danh sách bài học</h4>
+      <h4 class="margin-top-sm">Danh sách bài học</h4>
       <ul class="accordion  js-accordion" data-animation="on" data-multi-items="on">
         <li class="accordion__item accordion__item--is-open js-accordion__item" th:each="lesson, stat : ${lessons}">
           <button class="reset accordion__header padding-y-sm padding-x-md js-tab-focus" type="button">

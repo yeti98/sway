@@ -1,11 +1,13 @@
 package com.devculi.sway.dataaccess.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "susers")
@@ -25,8 +27,13 @@ public class SwayUser {
   private String type;
   private String role;
 
+  @JsonManagedReference
   @ManyToMany(mappedBy = "students")
   private List<SwayClass> joinedClasses;
+
+  @JsonManagedReference
+  @ManyToMany(mappedBy = "lecturers")
+  private List<SwayClass> leadingClasses;
 
   @CreationTimestamp
   @Column(nullable = false, updatable = false)
@@ -43,6 +50,14 @@ public class SwayUser {
   private String saltValue;
 
   public SwayUser() {}
+
+  public List<SwayClass> getLeadingClasses() {
+    return leadingClasses;
+  }
+
+  public void setLeadingClasses(List<SwayClass> leadingClasses) {
+    this.leadingClasses = leadingClasses;
+  }
 
   public String getRole() {
     return role;
@@ -130,5 +145,24 @@ public class SwayUser {
 
   public void setJoinedClasses(List<SwayClass> joinedClasses) {
     this.joinedClasses = joinedClasses;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof SwayUser)) return false;
+    SwayUser user = (SwayUser) o;
+    return status == user.status
+        && id.equals(user.id)
+        && Objects.equals(name, user.name)
+        && username.equals(user.username)
+        && role.equals(user.role)
+        && createdAt.equals(user.createdAt)
+        && Objects.equals(password, user.password);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, name, username, status, role, createdAt, password);
   }
 }

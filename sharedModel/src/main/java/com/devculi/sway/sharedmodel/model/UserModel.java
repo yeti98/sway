@@ -102,4 +102,10 @@ public class UserModel {
   public void setRole(String role) {
     this.role = role;
   }
+
+  public String getReadableRole() {
+    if (role.equalsIgnoreCase("STUDENT")) return "Học sinh";
+    if (role.equalsIgnoreCase("LECTURER")) return "Giáo viên";
+    return "Quản trị viên";
+  }
 }

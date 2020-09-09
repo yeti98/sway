@@ -123,6 +123,7 @@ public class SwayClassService implements IClassService {
             lecturers.add(userById);
           }
         });
+    classById.setLecturers(lecturers);
     classRepository.save(classById);
     return classById;
   }
