@@ -123,8 +123,23 @@ public class SwayTestModel {
     return questions.size();
   }
 
+  public String getReadableSubject() {
+    if (subject == null) return "Chưa phân loại";
+    switch (subject) {
+      case ENGLISH:
+        return "Tiếng Anh";
+      case KOREAN:
+        return "Tiếng Hàn";
+      case CHINESE:
+        return "Tiếng Trung";
+      case JAPANESE:
+        return "Tiếng Nhật";
+      default:
+    }
+    return "Chưa phân loại";
+  }
+
   public String getJsonString() {
     return GsonUtils.toJson(this);
   }
-
 }
