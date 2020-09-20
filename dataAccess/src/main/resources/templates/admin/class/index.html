@@ -56,7 +56,7 @@
                 </th>
               </tr>
               </thead>
-              <tbody>
+              <tbody id="tbody">
               <th:block th:each="class: ${swayClasses}" th:if="${classStat.size > 0}">
                 <tr>
                   <td>
@@ -75,7 +75,7 @@
                     <p th:text="${class.minScore}"></p>
                   </td>
                   <td>
-                    <div style="display: ruby">
+                    <div style="display: flex">
                       <div id="editLesson" th:attr="data-class=${class.getJsonString()}"
                            th:onclick="javascript:setSelectedObject(this.getAttribute('data-class'));">
                         <a class="edit" th:href="'manage/classes/'+${class.id}">

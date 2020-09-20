@@ -91,7 +91,7 @@
                           <p th:text="${swayClass.course.getNumberOfLesson()}"></p>
                         </td>
                         <td>
-                          <div style="display: ruby">
+                          <div style="display: flex">
                             <div id="editLesson">
                               <a class="edit" th:href="@{'manage/courses/'+${swayClass.course.id}}">
                                 <i class="material-icons"
@@ -133,7 +133,7 @@
                           <td><p th:text="${student.name}"></p></td>
                           <td><p th:text="${student.username}"></p></td>
                           <td>
-                            <div style="display: ruby">
+                            <div style="display: flex">
                               <div id="removeAnUser" th:attr="data-index=${stats.index}, data-student=${student}"
                                    th:onclick="javascript:deleteStudent(this.getAttribute('data-index'), this.getAttribute('data-student'));">
                                 <a class="delete" data-toggle="modal" href="#deleteUserModal">
@@ -168,7 +168,7 @@
                           <td><p th:text="${lecturer.name}"></p></td>
                           <td><p th:text="${lecturer.username}"></p></td>
                           <td>
-                            <div style="display: ruby">
+                            <div style="display: flex">
                               <div id="removeAnUser" th:attr="data-index=${stats.index}, data-lecturer=${lecturer}"
                                    th:onclick="javascript:deleteLecturer(this.getAttribute('data-index'), this.getAttribute('data-lecturer'));">
                                 <a class="delete" data-toggle="modal" href="#deleteUserModal">

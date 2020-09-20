@@ -1,10 +1,3 @@
-function isEmpty(str) {
-  return (!str || 0 === str.length);
-}
-
-function isBlank(str) {
-  return (!str || /^\s*$/.test(str));
-}
 
 function onCopy() {
   const txtInfo = (document.getElementById('txtUserInfo'));
@@ -17,6 +10,56 @@ function onCopy() {
     $('#copyTooltip').tooltip('hide')
   }, 2000)
 
+}
+
+function renderTableBody(matchedCourses){
+  let tbody ="";
+  matchedCourses.forEach(function (user){
+
+    if (user.status == true) {
+      user.status = "Hoạt động";
+    }
+    else{
+      user.status = "Khoá";
+    }
+    user.jsonString = user.jsonString.replaceAll(' ','###DEV_CULI###');
+    tbody += "<tr>\n" +
+        "<td>\n" +
+        "<p>"+user.name+"</p>\n" +
+        "</td>\n" +
+        "<td>\n" +
+        "<p>"+user.username+"</p>\n" +
+        "</td>\n" +
+        "<td>\n" +
+        "<p>"+ user.status + "</p>\n" +
+        "</td>\n" +
+        "<td>\n" +
+        "<p>" + user.readableRole + "</p>\n" +
+        "</td> \n" +
+        "<td style=\"display: flex\">\n" +
+        "<div id=\"editAnUser\" " +
+        "onclick=\"javascript:setSelectedObject(this.getAttribute('data-user'));\"\n" +
+        "data-user="+user.jsonString+">\n" +
+        "<a class=\"edit\" data-toggle=\"modal\" href=\"#editUserModal\">\n" +
+        "<i class=\"material-icons\"" +
+        "data-toggle=\"tooltip\"" +
+        "title=\"Chỉnh sửa\">&#xE254;" +
+        "</i>\n" +
+        "</a>\n" +
+        "</div>\n" +
+        "<div id=\"removeAnUser\" onclick=\"javascript:setSelectedObject(this.getAttribute('data-user'));\"\n" +
+        "data-user=" + user.jsonString + ">\n" +
+        "<a class=\"delete\" data-toggle=\"modal\" href=\"#deleteUserModal\">\n" +
+        "<i class=\"material-icons\"" +
+        "data-toggle=\"tooltip\"" +
+        "title=\"Xóa\">&#xE872;" +
+        "</i>\n" +
+        "</a>\n" +
+        "</div>\n" +
+        "</td>\n" +
+        "</tr>\n";
+  });
+  document.getElementById('tblbodyUser').innerHTML += tbody;
 }
 
 $(document).ready(function () {
@@ -45,9 +88,14 @@ $(document).ready(function () {
   });
 
   $(document).on("click", "#editAnUser", function () {
-    // console.log(selectedUser);
+    //reset
+    $("#editName").val('');
+    $("#editEmail").val('');
+    $("#editIsLocked").val(String('false'));
+    $("#editRole").val('STUDENT');
+
     const id = selectedUser.id;
-    const name = selectedUser.name;
+    const name = selectedUser.name.replaceAll('###DEV_CULI###',' ');
     const username = selectedUser.username;
     const status = selectedUser.status;
     const role = selectedUser.role;
@@ -78,56 +126,7 @@ $(document).ready(function () {
       contentType: "application/json; charset=utf-8",
       success: function (matchedCourses) {
         $inputs.prop("disabled", false);
-        // TODO: Chèn dl vào bảng
-        var tbody ="";
-        matchedCourses.forEach(function (user){
-
-          if (user.status == true) {
-            user.status = "Hoạt động";
-          }
-          else{
-            user.status = "Khoá";
-          }
-
-          console.log("user" + user.jsonString);
-          tbody += "<tr>\n" +
-              "<td>\n" +
-              "<p>"+user.name+"</p>\n" +
-              "</td>\n" +
-              "<td>\n" +
-              "<p>"+user.username+"</p>\n" +
-              "</td>\n" +
-              "<td>\n" +
-              "<p>"+ user.status + "</p>\n" +
-              "</td>\n" +
-              "<td>\n" +
-              "<p>" + user.readableRole + "</p>\n" +
-              "</td> \n" +
-              "<td style=\"display: flex\">\n" +
-              "<div id=\"editAnUser\"" +
-              "onclick=\"javascript:setSelectedObject(this.getAttribute('data-user'));\"\n" +
-              "data-user=\""+user.jsonString+"\">\n" +
-              "<a class=\"edit\" data-toggle=\"modal\" href=\"#editUserModal\">\n" +
-              "   <i class=\"material-icons\"" +
-              "       data-toggle=\"tooltip\"" +
-              "       title=\"Chỉnh sửa\">&#xE254;" +
-              "   </i>\n" +
-              "</a>\n" +
-              "</div>\n" +
-              "   <div id=\"removeAnUser\" data-user\"=" + user.jsonString + "\"" +
-              "       onclick=\"javascript:setSelectedObject(this.getAttribute('data-user'));\">\n" +
-              "       <a class=\"delete\" data-toggle=\"modal\" href=\"#deleteUserModal\">\n" +
-              "         <i class=\"material-icons\"" +
-              "             data-toggle=\"tooltip\"" +
-              "             title=\"Xóa\">&#xE872;" +
-              "         </i>\n" +
-              "       </a>\n" +
-              "     </div>\n" +
-              "</td>\n" +
-              "</tr>\n";
-        });
-        console.log(tbody);
-        document.getElementById('tblbodyUser').innerHTML += tbody;
+        renderTableBody(matchedCourses);
       },
       error: function (msg) {
         $inputs.prop("disabled", false);
@@ -203,7 +202,7 @@ $(document).ready(function () {
     const $inputs = $form.find("input, select, button, textarea");
 
     const id = selectedUser.id;
-    const name = $("#editName").val();
+    const name = $("#editName").val().replaceAll('###DEV_CULI###',' ');
     const username = $("#editEmail").val();
     const avatar = selectedUser.avatar;
     const description = selectedUser.description;

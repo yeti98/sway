@@ -47,7 +47,7 @@
                 </th>
               </tr>
               </thead>
-              <tbody>
+              <tbody id="tbody">
               <th:block th:each="lesson: ${lessons}" th:if="${lessonStat.size > 0}">
                 <tr>
                   <td>
@@ -60,7 +60,7 @@
                     <p th:text="${lesson.getNumberOfTest()}"></p>
                   </td>
                   <td>
-                    <div style="display: ruby">
+                    <div style="display: flex">
                       <div id="editLesson" th:attr="data-homework=${lesson.getJsonString()}"
                            th:onclick="javascript:setSelectedObject(this.getAttribute('data-homework'));">
                         <a class="edit" th:href="'manage/lessons/'+${lesson.id}">

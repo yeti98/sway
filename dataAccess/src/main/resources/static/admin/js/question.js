@@ -14,7 +14,52 @@ function isAllBlank(...strs) {
   }
   return true;
 }
-
+function renderTableBody(matchedCoursed){
+  var tbody = "";
+  matchedCoursed.forEach(function (question){
+    question.jsonString = question.jsonString.replaceAll(' ','###DEV_CULI###');
+    tbody+= "<tr>\n" +
+        "                  <td>\n" +
+        "                    <p>"+question.questionId+"</p>\n" +
+        "                  </td>\n" +
+        "                  <td class=\"truncatable\">\n" +
+        "                    <p>"+question.content+"</p>\n" +
+        "                  </td>\n" +
+        "                  <td class=\"truncatable\">\n" +
+        "                    <p>"+question.readableChoices+"</p>\n" +
+        "                  </td>\n" +
+        "                  <td class=\"truncatable\">\n" +
+        "                    <p>"+question.answer+"</p>\n" +
+        "                  </td>\n" +
+        "                  <td>\n" +
+        "                    <p>"+question.explanation+"</p>\n" +
+        "                  </td>\n" +
+        "\n" +
+        "                  <td style=\"display: flex\">\n" +
+        "                    <div id=\"editAnUser\"\n" +
+        "                         data-question=" + question.jsonString + "\n" +
+        "                         onclick=\"javascript:setSelectedObject(this.getAttribute('data-question'));\">\n" +
+        "                      <a class=\"edit\" data-toggle=\"modal\" href=\"#editQuestionModal\">\n" +
+        "                        <i class=\"material-icons\"\n" +
+        "                           data-toggle=\"tooltip\"\n" +
+        "                           title=\"Chỉnh sửa\">&#xE254;\n" +
+        "                        </i>\n" +
+        "                      </a>\n" +
+        "                    </div>\n" +
+        "                    <div id=\"removeAnUser\" data-question=" + question.jsonString + "\n" +
+        "                         onclick=\"javascript:setSelectedObject(this.getAttribute('data-question'));\">\n" +
+        "                      <a class=\"delete\" data-toggle=\"modal\" href=\"#deleteQuestionModal\">\n" +
+        "                        <i class=\"material-icons\"\n" +
+        "                           data-toggle=\"tooltip\"\n" +
+        "                           title=\"Xóa\">&#xE872;\n" +
+        "                        </i>\n" +
+        "                      </a>\n" +
+        "                    </div>\n" +
+        "                  </td>\n" +
+        "                </tr>";
+  });
+  document.getElementById('mainTableBody').innerHTML = tbody;
+}
 $(document).ready(function () {
   // Activate tooltip
   $('[data-toggle="tooltip"]').tooltip();
@@ -258,7 +303,7 @@ $(document).ready(function () {
       contentType: "application/json; charset=utf-8",
       success: function (matchedCourses) {
         $inputs.prop("disabled", false);
-        // TODO: Chèn dl vào bảng
+        renderTableBody(matchedCourses);
       },
       error: function (msg) {
         $inputs.prop("disabled", false);
