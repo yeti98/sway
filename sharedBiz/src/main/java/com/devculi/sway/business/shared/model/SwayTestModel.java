@@ -31,6 +31,14 @@ public class SwayTestModel {
 
   public SwayTestModel() {}
 
+  public Subject getSubject() {
+    return subject;
+  }
+
+  public void setSubject(Subject subject) {
+    this.subject = subject;
+  }
+
   public String getSlug() {
     return slug;
   }
@@ -113,6 +121,22 @@ public class SwayTestModel {
 
   public int getNumberOfQuestion() {
     return questions.size();
+  }
+
+  public String getReadableSubject() {
+    if (subject == null) return "Chưa phân loại";
+    switch (subject) {
+      case ENGLISH:
+        return "Tiếng Anh";
+      case KOREAN:
+        return "Tiếng Hàn";
+      case CHINESE:
+        return "Tiếng Trung";
+      case JAPANESE:
+        return "Tiếng Nhật";
+      default:
+    }
+    return "Chưa phân loại";
   }
 
   public String getJsonString() {

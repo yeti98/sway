@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/admin/manage/testonline")
 @ManageTestonlinePage
-public class TestonlineController {
+public class TestOnlineController {
 
   @Autowired LecRestTestController testController;
   @Autowired ISwayTestService testService;
@@ -36,7 +36,7 @@ public class TestonlineController {
   }
 
   @GetMapping("/create")
-  public String createNewTestonline(Model model) {
+  public String createNewTestOnline(Model model) {
     SwayTest newSwayTest = testService.createTestByType(TestType.TEST_ONLINE);
     return "redirect:/admin/manage/testonline/" + newSwayTest.getId();
   }

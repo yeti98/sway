@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="vi"
+      layout:decorate="~{layouts/giao-dien}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link href="/gdmoi/assets/css/bai-test/style.css" id="codyframe" rel="stylesheet">
+  <!-- browsers not supporting CSS variables -->
+  <script>
+    if (!('CSS' in window) || !CSS.supports('color', 'var(--color-var)')) {
+      var cfStyle = document.getElementById('codyframe');
+      if (cfStyle) {
+        var href = cfStyle.getAttribute('href');
+        href = href.replace('style.css', 'style-fallback.css');
+        cfStyle.setAttribute('href', href);
+      }
+    }
+  </script>
+</head>
+<body>
+
+<th:block layout:fragment="content">
+  <!--  HERO-->
+  <th:block th:insert="fragments/gdmoiFrg/trang-chu/_1_hero :: heroFrg"></th:block>
+
+  <!--MAIN CONTENT-->
+  <div class="parent grid gap-xs padding-y-sm padding-x-sm text-sm">
+    <div class="col-9@lg col-12@sm" style="min-height: 50vh">
+      <p class="text-center" th:if="${error == true}" th:utext="${errorMessage}"></p>
+      <form method="post" th:action="@{test-online/nop-bai?slug=__${slug}__}"
+            th:if="${error == false || error == null}" th:object="${swayTest}">
+        <div style="display: none">
+          <input th:field="*{id}" th:value="*{id}" type="text"/>
+        </div>
+        <main class="position-relative z-index-1 flex-grow" style="overflow-y: scroll; max-height: 150vh">
+          <!-- start main content -->
+          <div class="text-component padding-md text-sm">
+            <th:block th:each="question, stats : *{questions}">
+              <div style="display: none">
+                <input th:field="*{questions[__${stats.index}__].id}" th:value="${question.id}" type="text"/>
+              </div>
+              <fieldset class="margin-top-sm">
+                <legend class="form-legend text-bold" th:text="${question.content}"></legend>
+
+                <div class="choice-btns gap-xxs js-choice-btns">
+
+                  <th:block th:each="choice, choiceStats : ${question.getChoicesList()}">
+                    <div class="choice-btn padding-x-xs js-choice-btn">
+                      <!-- fallback -->
+                      <div class="choice-btn__fallback">
+                        <input th:field="*{questions[__${stats.index}__].selected}"
+                               th:id="${'choice-radio-button-1' + choiceStats.index}"
+                               th:value="${choice}"
+                               type="radio">
+                        <label th:for="${'choice-radio-button-1' + choiceStats.index}"></label>
+                      </div>
+
+                      <!-- custom input -->
+                      <div aria-hidden="true" class="choice-btn__grid">
+                        <div class="choice-btn__input choice-btn__input--radio">
+                          <svg class="icon" viewBox="0 0 16 16">
+                            <circle cx="8" cy="8" fill="currentColor" r="4"/>
+                          </svg>
+                        </div>
+
+                        <div class="flex flex-wrap gap-xs justify-between">
+                          <div>
+                            <p class="color-contrast-higher margin-top-sm"
+                               th:text="${choice}"></p>
+                            <!--                  <p class="color-contrast-medium text-sm">4-5 days</p>-->
+                          </div>
+                          <!--                <p class="color-contrast-higher">$9.00</p>-->
+                        </div>
+                      </div>
+                    </div>
+                  </th:block>
+                </div>
+              </fieldset>
+            </th:block>
+          </div>
+          <!-- end main content -->
+        </main>
+        <div class="justify-center flex">
+          <button class="btn btn--primary margin-top-sm" type="submit">Nộp bài</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-3@lg col-12@sm">
+      <th:block th:insert="fragments/gdmoiFrg/common/sidebar/sideBar :: sideBarFrg"></th:block>
+    </div>
+  </div>
+</th:block>
+</body>
+</html>

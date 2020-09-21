@@ -37,11 +37,12 @@
 
         <ul class="f-header__list flex-grow flex-basis-0 justify-center@md">
           <li class="f-header__item"><a href="" class="f-header__link" th:attrappend="aria-current=${#strings.equals(activeLink, 'index')} ? 'page' : ''">Trang chủ</a></li>
-          <li class="f-header__item"><a class="f-header__link" th:attrappend="aria-current=${#httpServletRequest.requestURI.contains('khoa-hoc')} ? 'page' : ''">
-            <span>Khóa học</span>
-            <svg class="f-header__dropdown-icon icon" aria-hidden="true" viewBox="0 0 12 12">
+          <li class="f-header__item">
+            <a class="f-header__link" style="cursor: pointer" th:attrappend="aria-current=${#httpServletRequest.requestURI.contains('khoa-hoc')} ? 'page' : ''">
+              <span>Khóa học</span>
+              <svg class="f-header__dropdown-icon icon" aria-hidden="true" viewBox="0 0 12 12">
               <path d="M6,9l4-5H2Z" /></svg>
-          </a>
+            </a>
 
             <ul class="f-header__dropdown">
               <li><a href="khoa-hoc/tieng-anh" class="f-header__dropdown-link">Tiếng Anh</a></li>
