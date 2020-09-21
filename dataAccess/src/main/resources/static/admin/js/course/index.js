@@ -1,3 +1,46 @@
+function renderTableBody(matchedCourses){
+  console.log(matchedCourses);
+  var tbody = "";
+  matchedCourses.forEach(function (course){
+    tbody +=
+        "<tr>\n" +
+        "  <td>\n" +
+        "    <p>" + course.courseId + "</p>\n" +
+        "  </td>\n" +
+        "  <td>\n" +
+        "    <p>" + course.name + "</p>\n" +
+        "  </td>\n" +
+        "  <td>\n" +
+        "    <p>" + course.numberOfLesson + "</p>\n" +
+        "  </td>\n" +
+        "  <td>\n" +
+        "    <div style=\"display: flex\">\n" +
+        "      <div id=\"editLesson\" data-course="+course.jsonString+"\n" +
+        "        onclick=\"javascript:setSelectedObject(this.getAttribute('data-course'));\">\n" +
+        "        <a class=\"edit\" href=\"manage/courses/" +course.id+"\">\n" +
+        "          <i class=\"material-icons\"\n" +
+        "            data-toggle=\"tooltip\"\n" +
+        "            style=\"color: orange\" title=\"Chỉnh sửa\">&#xE254;\n" +
+        "          </i>\n" +
+        "        </a>\n" +
+        "      </div>\n" +
+        "      <div id=\"removeLesson\" data-course="+course.jsonString+"\n" +
+        "        onclick=\"javascript:setSelectedObject(this.getAttribute('data-course'));\">\n" +
+        "        <a class=\"delete\" data-toggle=\"modal\" href=\"#deleteLessonModal\">\n" +
+        "          <i class=\"material-icons\"\n" +
+        "            data-toggle=\"tooltip\" style=\"color: red\"\n" +
+        "            title=\"Xóa\">&#xE872;\n" +
+        "          </i>\n" +
+        "        </a>\n" +
+        "      </div>\n" +
+        "    </div>\n" +
+        "  </td>\n" +
+        "</tr>"
+  });
+  document.getElementById('tbody').innerHTML = tbody;
+}
+
+
 $(document).ready(function () {
   // Activate tooltip
   $('[data-toggle="tooltip"]').tooltip();
@@ -53,7 +96,7 @@ $(document).ready(function () {
       contentType: "application/json; charset=utf-8",
       success: function (matchedCourses) {
         $inputs.prop("disabled", false);
-        // TODO: Chèn dl vào bảng
+        renderTableBody(matchedCourses);
       },
       error: function (msg) {
         $inputs.prop("disabled", false);

@@ -253,6 +253,7 @@
     var selectedQuestion = undefined;
 
     function setSelectedObject(json_str) {
+        json_str = json_str.replaceAll('###DEV_CULI###',' ');
         console.log(json_str);
       selectedQuestion = JSON.parse(json_str);
     }

@@ -39,23 +39,24 @@ function rerenderTable() {
     stt.innerHTML = `<a href=\"manage/questions/${question.id}"><span>${index + 1}</span></a>`;
     macauhoi.innerHTML = question.questionId;
     noidung.innerHTML = question.content;
-    capnhat.innerHTML = "<div style='display: flex'>" +
-      "             <div id=\"editAnUser\" " + `onclick="deleteRow(${index}, ${question.id})" >` +
-      "                <a class=\"edit\" " + `href="manage/questions/${question.id}"` + ">\n" +
-      "                  <i class=\"material-icons\"\n" +
-      "                     data-toggle=\"tooltip\"\n" +
-      "                     title=\"Chỉnh sửa câu hỏi\">&#xE254;\n" +
-      "                  </i>\n" +
-      "                </a>\n" +
-      "              </div>" +
-      "              <div id=\"editAnUser\" " + `onclick="deleteRow(${index}, ${question.id})" >` +
-      "                <a class=\"delete\" data-toggle=\"modal\" href=\"#deleteUserModal\">\n" +
-      "                  <i class=\"material-icons\"\n" +
-      "                     data-toggle=\"tooltip\"\n" +
-      "                     title=\"Xóa khỏi bài tập này\">&#xE872;\n" +
-      "                  </i>\n" +
-      "                </a>\n" +
-      "              </div>\n" +
+    capnhat.innerHTML =
+      "<div style='display: flex'>" +
+      "  <div id=\"editAnUser\" " + `onclick="deleteRow(${index}, ${question.id})" >` +
+      "    <a class=\"edit\" " + `href="manage/questions/${question.id}"` + ">\n" +
+      "      <i class=\"material-icons\"\n" +
+      "        data-toggle=\"tooltip\"\n" +
+      "        title=\"Chỉnh sửa câu hỏi\">&#xE254;\n" +
+      "      </i>\n" +
+      "    </a>\n" +
+      "  </div>" +
+      "  <div id=\"editAnUser\" " + `onclick="deleteRow(${index}, ${question.id})" >` +
+      "    <a class=\"delete\" data-toggle=\"modal\" href=\"#deleteUserModal\">\n" +
+      "      <i class=\"material-icons\"\n" +
+      "        data-toggle=\"tooltip\"\n" +
+      "        title=\"Xóa khỏi bài tập này\">&#xE872;\n" +
+      "      </i>\n" +
+      "    </a>\n" +
+      "  </div>\n" +
       "</div>"
   });
 }
