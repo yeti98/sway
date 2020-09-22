@@ -20,6 +20,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -44,19 +45,11 @@ public class PostService implements IPostService {
 
   @Override
   @Transactional
-  public Post createPost(UpsertPostRequest upsertPostRequest) {
+  public Post createPost() {
     Post post = new Post();
-
-    String title = upsertPostRequest.getTitle();
-    post.setTitle(title);
-    post.setCoverPhoto(upsertPostRequest.getCoverPhoto());
-    post.setContents(upsertPostRequest.getContents());
-    postRepository.save(post);
-
-    String slug = StringUtils.makeSlug(title);
-    post.setSlug(slug);
-    post.setMenu(upsertPostRequest.getMenu());
-
+    post.setTitle("");
+    post.setContents("");
+    post.setMenu("Homepage");
     try {
       post.setAuthor(userService.getCurrentUser());
     } catch (Exception e) {
@@ -84,7 +77,22 @@ public class PostService implements IPostService {
     Post post = postRepository.findById(idPost).orElse(null);
     String[] nullPropertiesString = PropertyUtils.getNullPropertiesString(upsertPostRequest);
     BeanUtils.copyProperties(upsertPostRequest, post, nullPropertiesString);
+    if (post.getSlug() == null) {
+      String slug = StringUtils.makeSlug(post.getTitle());
+      post.setSlug(slug);
+    }
     postRepository.save(post);
     return post;
+  }
+
+  @Override
+  public List<Post> searchByTitle(String keyword, boolean isIgnoreCase) {
+    if (isIgnoreCase) {
+      keyword = "%" + keyword.toLowerCase() + "%";
+    } else {
+      keyword = "%" + keyword + "%";
+    }
+
+    return postRepository.findPostsByTitleLike(keyword);
   }
 }
