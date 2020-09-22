@@ -19,29 +19,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/admin/manage/posts")
 @ManagePostsPage
 public class PostController {
-  @Autowired IPostService postService;
+    @Autowired
+    IPostService postService;
 
-  @GetMapping
-  public String renderPostView(
-      Model model, @RequestParam(name = "page", defaultValue = "0") Integer page) {
-    PagingResponse<PostModel> PostByPage = postService.getPostByPage(page);
-    model.addAttribute("totalPages", PostByPage.getTotalPage());
-    model.addAttribute("posts", PostByPage.getContent());
-    model.addAttribute("current", page);
-    return "admin/post/index";
-  }
+    @GetMapping
+    public String renderPostView(
+            Model model, @RequestParam(name = "page", defaultValue = "0") Integer page) {
+        PagingResponse<PostModel> PostByPage = postService.getPostByPage(page);
+        model.addAttribute("totalPages", PostByPage.getTotalPage());
+        model.addAttribute("posts", PostByPage.getContent());
+        model.addAttribute("current", page);
+        return "admin/post/index";
+    }
 
-  // Post DETAIL
-  @GetMapping("/create")
-  public String create(Model model) {
+    // Post DETAIL
+    @GetMapping("/create")
+    public String create(Model model) {
+        System.out.println("create");
+        Post post = postService.createPost();
+        return "redirect:/admin/manage/posts/" + post.getId();
+    }
 
-    return "admin/post/detail";
-  }
-
-  @GetMapping("/{id}")
-  public String edit(Model model, @PathVariable(name = "id") Long id) {
-    Post postById = postService.getPostById(id);
-    model.addAttribute("editPost", GsonUtils.toJson(Entity2DTO.post2DTO(postById)));
-    return "admin/post/detail";
-  }
+    @GetMapping("/{id}")
+    public String edit(Model model, @PathVariable(name = "id") Long id) {
+        Post postById = postService.getPostById(id);
+        model.addAttribute("editPost", GsonUtils.toJson(Entity2DTO.post2DTO(postById)));
+        return "admin/post/detail";
+    }
 }

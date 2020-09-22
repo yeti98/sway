@@ -17,13 +17,17 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card card-outline card-info">
-          <!-- /.card-header -->
+          <div class="card-header pad">
+            <h3 class="card-title">Soạn bài viết</h3>
+
+          </div>
           <div class="card-body pad">
 
-            <h3>Cover photo</h3>
-            <input id="coverPhoto" type="file" accept="image/x-png,image/gif,image/jpeg" onchange="encodeImageFileAsURL();"/>
+            <h3 class="card-title">Cover photo</h3>
+            <br>
+            <input id="coverPhoto" type="file" accept="image/x-png,image/gif,image/jpeg" onchange="encodeImageFileAsURL();" />
 
-            <input id="title" class="form-control form-control-lg" placeholder="Tiêu đề" type="text">
+            <input style="margin-top: 10px;"  id="title" class="form-control form-control-lg" placeholder="Tiêu đề" type="text">
             <div class="form-group" style="margin-top: 10px;">
               <select class="form-control" id="menu">
                 <option value="Homepage">Trang chủ</option>
@@ -37,22 +41,12 @@
 
           </div>
           <input type="hidden" id="idPost"/>
-          <div class="card-footer">
-            <h3 class="card-title">
-            </h3>
-            <!-- tools box -->
-            <div class="card-tools">
-              <button type="button" id="btnsubmit" style="  width: 100px; float: right;"
-                      class="btn btn-block btn-success">Lưu
-              </button>
-            </div>
-
+          <div class="card-footer pad">
             <div class="card-tools">
               <button type="button" id="btnedit" style="  width: 100px; float: right;"
                       class="btn btn-block btn-success">Lưu
               </button>
             </div>
-            <!-- /. tools -->
           </div>
         </div>
       </div>
@@ -66,13 +60,13 @@
   <script th:inline="javascript">
       /*<![CDATA[*/
       var selectedPost = /*[[${editPost}]]*/ 'default';
-      console.log(selectedPost);
       /*]]>*/
       $(function () {
           // Summernote
           $('.inputContent').summernote({
               height: 300,
-
+              maxHeight: 300,
+              minHeight: 300,
           });
       })
   </script>

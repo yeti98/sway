@@ -5,11 +5,16 @@ import com.devculi.sway.business.shared.model.PostModel;
 import com.devculi.sway.business.shared.request.UpsertPostRequest;
 import com.devculi.sway.business.shared.utils.Entity2DTO;
 import com.devculi.sway.controller.api.RestBaseController;
+import com.devculi.sway.dataaccess.entity.Lesson;
 import com.devculi.sway.dataaccess.entity.Post;
 import com.devculi.sway.manager.service.interfaces.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/posts")
@@ -20,7 +25,7 @@ public class LecRestPostController extends RestBaseController {
 
   @PostMapping
   public PostModel createPost(@RequestBody UpsertPostRequest upsertPostRequest) {
-    Post post = postService.createPost(upsertPostRequest);
+    Post post = postService.createPost();
     return Entity2DTO.post2DTO(post);
   }
 
@@ -41,5 +46,15 @@ public class LecRestPostController extends RestBaseController {
       @RequestBody UpsertPostRequest upsertPostRequest, @PathVariable(name = "id") Long id) {
     Post post = postService.updatePost(upsertPostRequest, id);
     return ok(Entity2DTO.post2DTO(post));
+  }
+
+  @GetMapping("/search")
+  public ResponseEntity<Object> searchByKeyword(
+          @RequestParam(name = "query", defaultValue = "") String keyword) {
+    if (keyword.length() == 0) {
+      return ok(new ArrayList<>());
+    }
+    List<Post> results = postService.searchByTitle(keyword, true);
+    return ok(results.stream().map(Entity2DTO::post2DTO).collect(Collectors.toList()));
   }
 }
