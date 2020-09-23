@@ -25,10 +25,10 @@ function renderTableBody(matchedTests){
         "    <p>"+test.testId+"</p>\n" +
         "  </td>\n" +
         "  <td class=\"truncatable\">\n" +
-        "    <p>"+test.testName+"</p>\n" +
+        "    <p>"+test.readableSubject+"</p>\n" +
         "  </td>\n" +
         "  <td class=\"truncatable\">\n" +
-        "    <p>"+test.readableSubject+"</p>\n" +
+        "    <p>"+test.testName+"</p>\n" +
         "  </td>" +
         "  <td class=\"truncatable\">\n" +
         "    <p>"+test.numberOfQuestion+"</p>\n" +
