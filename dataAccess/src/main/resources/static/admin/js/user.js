@@ -23,40 +23,41 @@ function renderTableBody(matchedCourses){
       user.status = "Khoá";
     }
     user.jsonString = user.jsonString.replaceAll(' ','###DEV_CULI###');
-    tbody += "<tr>\n" +
-        "<td>\n" +
-        "<p>"+user.name+"</p>\n" +
-        "</td>\n" +
-        "<td>\n" +
-        "<p>"+user.username+"</p>\n" +
-        "</td>\n" +
-        "<td>\n" +
-        "<p>"+ user.status + "</p>\n" +
-        "</td>\n" +
-        "<td>\n" +
-        "<p>" + user.readableRole + "</p>\n" +
-        "</td> \n" +
-        "<td style=\"display: flex\">\n" +
-        "<div id=\"editAnUser\" " +
-        "onclick=\"javascript:setSelectedObject(this.getAttribute('data-user'));\"\n" +
-        "data-user="+user.jsonString+">\n" +
-        "<a class=\"edit\" data-toggle=\"modal\" href=\"#editUserModal\">\n" +
-        "<i class=\"material-icons\"" +
-        "data-toggle=\"tooltip\"" +
-        "title=\"Chỉnh sửa\">&#xE254;" +
-        "</i>\n" +
-        "</a>\n" +
-        "</div>\n" +
-        "<div id=\"removeAnUser\" onclick=\"javascript:setSelectedObject(this.getAttribute('data-user'));\"\n" +
-        "data-user=" + user.jsonString + ">\n" +
-        "<a class=\"delete\" data-toggle=\"modal\" href=\"#deleteUserModal\">\n" +
-        "<i class=\"material-icons\"" +
-        "data-toggle=\"tooltip\"" +
-        "title=\"Xóa\">&#xE872;" +
-        "</i>\n" +
-        "</a>\n" +
-        "</div>\n" +
-        "</td>\n" +
+    tbody +=
+        " <tr>\n" +
+        "   <td>\n" +
+        "     <p>"+user.name+"</p>\n" +
+        "   </td>\n" +
+        "   <td>\n" +
+        "     <p>"+user.username+"</p>\n" +
+        "   </td>\n" +
+        "   <td>\n" +
+        "     <p>"+ user.status + "</p>\n" +
+        "   </td>\n" +
+        "   <td>\n" +
+        "     <p>" + user.readableRole + "</p>\n" +
+        "   </td> \n" +
+        "   <td style=\"display: flex\">\n" +
+        "     <div id=\"editAnUser\" " +
+        "       onclick=\"javascript:setSelectedObject(this.getAttribute('data-user'));\"\n" +
+        "       data-user="+user.jsonString+">\n" +
+        "         <a class=\"edit\" data-toggle=\"modal\" href=\"#editUserModal\">\n" +
+        "           <i class=\"material-icons\"" +
+        "             data-toggle=\"tooltip\"" +
+        "             title=\"Chỉnh sửa\">&#xE254;" +
+        "           </i>\n" +
+        "         </a>\n" +
+        "     </div>\n" +
+        "     <div id=\"removeAnUser\" onclick=\"javascript:setSelectedObject(this.getAttribute('data-user'));\"\n" +
+        "       data-user=" + user.jsonString + ">\n" +
+        "       <a class=\"delete\" data-toggle=\"modal\" href=\"#deleteUserModal\">\n" +
+        "         <i class=\"material-icons\"" +
+        "           data-toggle=\"tooltip\"" +
+        "           title=\"Xóa\">&#xE872;" +
+        "         </i>\n" +
+        "       </a>\n" +
+        "     </div>\n" +
+        "   </td>\n" +
         "</tr>\n";
   });
   document.getElementById('tblbodyUser').innerHTML += tbody;

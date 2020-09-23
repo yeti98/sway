@@ -2,48 +2,48 @@ function renderTableBody(matchedCourses){
   let tbody = "";
   matchedCourses.forEach(function (_class){
     tbody +=
-    "<r>\n" +
-    "<td>\n" +
-    "<p>" + _class.classId + "</p>\n" +
-    "</td>\n" +
-    "<td>\n" +
-    "<p>" +_class.name+ "</p>\n" +
-    "</td>\n" +
-    "<td>\n" +
-    "<p>" +_class.courseName+ "</p>\n" +
-    "</td>\n" +
-    "<td>\n" +
-    "<p>" +_class.numberOfStudent+ "</p>\n" +
-    "</td>\n" +
-    "<td>\n" +
-    "<p>" +_class.minScore+ "</p>\n" +
-    "</td>\n" +
-    "<td>\n" +
-    "<div style=\"display: flex\">\n" +
-    "<div id=\"editLesson\" data-class=" + _class.jsonString + "\n" +
-    "onclick=\"javascript:setSelectedObject(this.getAttribute('data-class'));\">\n" +
-    "<a class=\"edit\" href=\"manage/classes/"+_class.id+"\">\n" +
-    "<i class=\"material-icons\"\n" +
-    "data-toggle=\"tooltip\"\n" +
-    "style=\"color: orange\" title=\"Chỉnh sửa\">&#xE254;\n" +
-    "</i>\n" +
-    "</a>\n" +
-    "</div>\n"+
-    "<div id=\"removeLesson\" data-class=" + _class.jsonString + "\n" +
-    "onclick=\"javascript:setSelectedObject(this.getAttribute('data-class'));\">\n" +
-    "<a class=\"delete\" data-toggle=\"modal\" href=\"#deleteClassModal\">\n" +
-    "<i class=\"material-icons\"\n" +
-    "data-toggle=\"tooltip\" style=\"color: red\"\n" +
-    "title=\"Xóa\">&#xE872;\n" +
+    " <tr>\n" +
+    "   <td>\n" +
+    "     <p>" + _class.classId + "</p>\n" +
+    "   </td>\n" +
+    "   <td>\n" +
+    "     <p>" +_class.name+ "</p>\n" +
+    "   </td>\n" +
+    "   <td>\n" +
+    "     <p>" +_class.courseName+ "</p>\n" +
+    "   </td>\n" +
+    "   <td>\n" +
+    "     <p>" +_class.numberOfStudent+ "</p>\n" +
+    "   </td>\n" +
+    "   <td>\n" +
+    "     <p>" +_class.minScore+ "</p>\n" +
+    "   </td>\n" +
+    "   <td>\n" +
+    "     <div style=\"display: flex\">\n" +
+    "       <div id=\"editLesson\" data-class=" + _class.jsonString + "\n" +
+    "         onclick=\"javascript:setSelectedObject(this.getAttribute('data-class'));\">\n" +
+    "         <a class=\"edit\" href=\"manage/classes/"+_class.id+"\">\n" +
+    "           <i class=\"material-icons\"\n" +
+    "             data-toggle=\"tooltip\"\n" +
+    "             style=\"color: orange\" title=\"Chỉnh sửa\">&#xE254;\n" +
+    "           </i>\n" +
+    "         </a>\n" +
+    "       </div>\n"+
+    "       <div id=\"removeLesson\" data-class=" + _class.jsonString + "\n" +
+    "         onclick=\"javascript:setSelectedObject(this.getAttribute('data-class'));\">\n" +
+    "         <a class=\"delete\" data-toggle=\"modal\" href=\"#deleteClassModal\">\n" +
+    "          <i class=\"material-icons\"\n" +
+    "            data-toggle=\"tooltip\" style=\"color: red\"\n" +
+    "            title=\"Xóa\">&#xE872;\n" +
+    "          </i>\n" +
+    "        </a>\n" +
+    "      </div>\n" +
+    "    </div>" +
+    "  </td>" +
+    " </tr>";
 
-    "</i>\n" +
-    "</a>\n" +
-    "</div>\n" +
-    "</div00r>"
-    console.log(tbody);
-    document.getElementById('tbody').innerHTML += tbody;
   })
-
+  document.getElementById('tbody').innerHTML = tbody;
 
 }
 $(document).ready(function () {

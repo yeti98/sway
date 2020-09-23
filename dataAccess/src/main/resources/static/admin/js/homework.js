@@ -18,38 +18,38 @@ function isAllBlank(...strs) {
 function renderTableBody(matchedCoursed){
   var tbody = "";
   matchedCoursed.forEach(function (test){
-    tbody += "<tr>\n" +
-        "\n" +
-        "                  <td class=\"truncatable\">\n" +
-        "                    <p>"+test.testId+"</p>\n" +
-        "                  </td>\n" +
-        "                  <td class=\"truncatable\">\n" +
-        "                    <p>"+test.testName+"</p>\n" +
-        "                  </td>\n" +
-        "                  <td class=\"truncatable\">\n" +
-        "                    <p>"+test.numberOfQuestion+"</p>\n" +
-        "                  </td>\n" +
-        "                  <td style=\"display: flex\">\n" +
-        "                    <div id=\"editAnUser\" data-homework="+test.jsonString +"\n" +
-        "                         onclick=\"javascript:setSelectedObject(this.getAttribute('data-homework'));\">\n" +
-        "                      <a class=\"edit\" href=\"manage/testonline/"+test.id+"\">\n" +
-        "                        <i class=\"material-icons\"\n" +
-        "                           data-toggle=\"tooltip\"\n" +
-        "                           title=\"Chỉnh sửa\">&#xE254;\n" +
-        "                        </i>\n" +
-        "                      </a>\n" +
-        "                    </div>\n" +
-        "                    <div id=\"removeTest\" data-homework="+test.jsonString +"\n" +
-        "                         onclick=\"javascript:setSelectedObject(this.getAttribute('data-homework'));\">\n" +
-        "                      <a class=\"delete\" data-toggle=\"modal\" href=\"#deleteTestModal\">\n" +
-        "                        <i class=\"material-icons\"\n" +
-        "                           data-toggle=\"tooltip\"\n" +
-        "                           title=\"Xóa\">&#xE872;\n" +
-        "                        </i>\n" +
-        "                      </a>\n" +
-        "                    </div>\n" +
-        "                  </td>\n" +
-        "                </tr>"
+    tbody +=
+        "<tr>\n" +
+        "  <td class=\"truncatable\">\n" +
+        "    <p>"+test.testId+"</p>\n" +
+        "  </td>\n" +
+        "  <td class=\"truncatable\">\n" +
+        "    <p>"+test.testName+"</p>\n" +
+        "  </td>\n" +
+        "  <td class=\"truncatable\">\n" +
+        "    <p>"+test.numberOfQuestion+"</p>\n" +
+        "  </td>\n" +
+        "  <td style=\"display: flex\">\n" +
+        "    <div id=\"editAnUser\" data-homework="+test.jsonString +"\n" +
+        "      onclick=\"javascript:setSelectedObject(this.getAttribute('data-homework'));\">\n" +
+        "      <a class=\"edit\" href=\"manage/testonline/"+test.id+"\">\n" +
+        "        <i class=\"material-icons\"\n" +
+        "          data-toggle=\"tooltip\"\n" +
+        "          title=\"Chỉnh sửa\">&#xE254;\n" +
+        "        </i>\n" +
+        "      </a>\n" +
+        "    </div>\n" +
+        "    <div id=\"removeTest\" data-homework="+test.jsonString +"\n" +
+        "      onclick=\"javascript:setSelectedObject(this.getAttribute('data-homework'));\">\n" +
+        "      <a class=\"delete\" data-toggle=\"modal\" href=\"#deleteTestModal\">\n" +
+        "        <i class=\"material-icons\"\n" +
+        "          data-toggle=\"tooltip\"\n" +
+        "          title=\"Xóa\">&#xE872;\n" +
+        "        </i>\n" +
+        "      </a>\n" +
+        "    </div>\n" +
+        "  </td>\n" +
+        "</tr>";
   });
   document.getElementById('mainTableBody').innerHTML = tbody;
 }
