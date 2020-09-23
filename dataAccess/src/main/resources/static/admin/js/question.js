@@ -14,9 +14,10 @@ function isAllBlank(...strs) {
   }
   return true;
 }
-function renderTableBody(matchedCoursed){
+
+function renderTableBody(matchedQuestion){
   var tbody = "";
-  matchedCoursed.forEach(function (question){
+  matchedQuestion.forEach(function (question){
     question.jsonString = question.jsonString.replaceAll(' ','###DEV_CULI###');
     tbody+=
         "<tr>\n" +
@@ -295,6 +296,10 @@ $(document).ready(function () {
 
     // lấy từ khóa
     const keyword = $('#txtKeyword').val();
+    if (keyword.length == 0) {
+      $inputs.prop("disabled", false);
+      return ;
+    }
     // Xóa bảng
     $('#tblQuestion tbody').empty();
     // Gửi request
@@ -302,9 +307,9 @@ $(document).ready(function () {
       url: "/api/questions/search?query=" + keyword,
       type: "get",
       contentType: "application/json; charset=utf-8",
-      success: function (matchedCourses) {
+      success: function (matchedQuestion) {
         $inputs.prop("disabled", false);
-        renderTableBody(matchedCourses);
+        renderTableBody(matchedQuestion);
       },
       error: function (msg) {
         $inputs.prop("disabled", false);

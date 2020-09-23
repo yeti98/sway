@@ -15,9 +15,10 @@ function isAllBlank(...strs) {
   return true;
 }
 
-function renderTableBody(matchedCoursed){
+
+function renderTableBody(matchedTests){
   var tbody = "";
-  matchedCoursed.forEach(function (test){
+  matchedTests.forEach(function (test){
     tbody +=
         "<tr>\n" +
         "  <td class=\"truncatable\">\n" +
@@ -26,6 +27,9 @@ function renderTableBody(matchedCoursed){
         "  <td class=\"truncatable\">\n" +
         "    <p>"+test.testName+"</p>\n" +
         "  </td>\n" +
+        "  <td class=\"truncatable\">\n" +
+        "    <p>"+test.readableSubject+"</p>\n" +
+        "  </td>" +
         "  <td class=\"truncatable\">\n" +
         "    <p>"+test.numberOfQuestion+"</p>\n" +
         "  </td>\n" +
@@ -118,21 +122,27 @@ $(document).ready(function () {
 
     // lấy từ khóa
     const keyword = $('#txtKeyword').val();
+    if (keyword.length == 0) {
+      $inputs.prop("disabled", false);
+      return ;
+    }
+
     // Xóa bảng
     $('#tblTestOnline tbody').empty();
     // Gửi request
     $.ajax({
-      url: "/api/tests/search?query=" + keyword +"&type=TEST_ONLINE",
+      url: "/api/tests/search?query=" + keyword + "&type=TEST_ONLINE",
       type: "get",
       contentType: "application/json; charset=utf-8",
-      success: function (matchedCourses) {
+      success: function (matchedTests) {
         $inputs.prop("disabled", false);
-        renderTableBody(matchedCourses);
+        renderTableBody(matchedTests);
       },
       error: function (msg) {
         $inputs.prop("disabled", false);
         alert("Không tìm thấy: \n", msg);
       }
     });
+
   });
 });

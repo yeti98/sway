@@ -1,6 +1,7 @@
-function renderTableBody(matchedCourses){
+
+function renderTableBody(matchedLessons){
   var tbody = "";
-  matchedCourses.forEach(function (lesson){
+  matchedLessons.forEach(function (lesson){
     tbody +=
         "<tr>\n" +
         "  <td>\n" +
@@ -84,6 +85,10 @@ $(document).ready(function () {
 
     // lấy từ khóa
     const keyword = $('#txtKeyword').val();
+    if (keyword.length == 0) {
+      $inputs.prop("disabled", false);
+      return ;
+    }
     // Xóa bảng
     $('#tblLesson tbody').empty();
     // Gửi request
@@ -91,9 +96,9 @@ $(document).ready(function () {
       url: "/api/lessons/search?query=" + keyword,
       type: "get",
       contentType: "application/json; charset=utf-8",
-      success: function (matchedCourses) {
+      success: function (matchedLessons) {
         $inputs.prop("disabled", false);
-        renderTableBody(matchedCourses);
+        renderTableBody(matchedLessons);
       },
       error: function (msg) {
         $inputs.prop("disabled", false);

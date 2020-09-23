@@ -12,9 +12,9 @@ function onCopy() {
 
 }
 
-function renderTableBody(matchedCourses){
+function renderTableBody(matchedUsers){
   let tbody ="";
-  matchedCourses.forEach(function (user){
+  matchedUsers.forEach(function (user){
 
     if (user.status == true) {
       user.status = "Hoạt động";
@@ -118,6 +118,10 @@ $(document).ready(function () {
 
     // lấy từ khóa
     const keyword = $('#txtKeyword').val();
+    if (keyword.length == 0) {
+      $inputs.prop("disabled", false);
+      return ;
+    }
     // Xóa bảng
     $('#tblUser tbody').empty();
     // Gửi request
@@ -125,9 +129,9 @@ $(document).ready(function () {
       url: "/api/users/search/byKey?query=" + keyword,
       type: "get",
       contentType: "application/json; charset=utf-8",
-      success: function (matchedCourses) {
+      success: function (matchedUsers) {
         $inputs.prop("disabled", false);
-        renderTableBody(matchedCourses);
+        renderTableBody(matchedUsers);
       },
       error: function (msg) {
         $inputs.prop("disabled", false);
