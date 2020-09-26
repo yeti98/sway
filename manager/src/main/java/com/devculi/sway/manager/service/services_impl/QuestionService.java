@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -63,7 +64,9 @@ public class QuestionService implements IQuestionService {
   @Transactional(rollbackFor = Exception.class)
   public Long deleteQuestion(Long questionID) {
     Question question = getQuestionById(questionID);
+
     questionRepository.delete(question);
+
     return question.getId();
   }
 

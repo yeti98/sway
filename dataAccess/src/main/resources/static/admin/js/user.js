@@ -22,7 +22,7 @@ function renderTableBody(matchedUsers){
     else{
       user.status = "Khoá";
     }
-    user.jsonString = user.jsonString.replaceAll(' ','###DEV_CULI###');
+    user.jsonString = user.jsonString.replace(/ /g,'###DEV_CULI###');
     tbody +=
         " <tr>\n" +
         "   <td>\n" +
@@ -96,7 +96,7 @@ $(document).ready(function () {
     $("#editRole").val('STUDENT');
 
     const id = selectedUser.id;
-    const name = selectedUser.name.replaceAll('###DEV_CULI###',' ');
+    const name = selectedUser.name.replace(/###DEV_CULI###/g,' ');
     const username = selectedUser.username;
     const status = selectedUser.status;
     const role = selectedUser.role;
@@ -207,7 +207,7 @@ $(document).ready(function () {
     const $inputs = $form.find("input, select, button, textarea");
 
     const id = selectedUser.id;
-    const name = $("#editName").val().replaceAll('###DEV_CULI###',' ');
+    const name = $("#editName").val().replace(/###DEV_CULI###/g,' ');
     const username = $("#editEmail").val();
     const avatar = selectedUser.avatar;
     const description = selectedUser.description;

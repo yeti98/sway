@@ -18,7 +18,8 @@ function isAllBlank(...strs) {
 function renderTableBody(matchedQuestion){
   var tbody = "";
   matchedQuestion.forEach(function (question){
-    question.jsonString = question.jsonString.replaceAll(' ','###DEV_CULI###');
+    question.jsonString = question.jsonString.replace(/ /g,'###DEV_CULI###');
+    console.log(question.jsonString);
     tbody+=
         "<tr>\n" +
         "  <td>\n" +
@@ -196,7 +197,7 @@ $(document).ready(function () {
     }
   });
 
-  $("#formAddUserModal").submit(function (event) {
+  $("#formAddQuestionModal").submit(function (event) {
     console.log("SUBMIT");
     event.preventDefault();
 
@@ -262,7 +263,7 @@ $(document).ready(function () {
     }
   });
 
-  $("#formDeleteUserModal").submit(function (event) {
+  $("#formDeleteQuestionModal").submit(function (event) {
     event.preventDefault();
 
     const $form = $(this);
@@ -280,9 +281,11 @@ $(document).ready(function () {
         window.location.reload();
       },
       error: function (msg) {
+        console.log(msg.data);
+        console.log(Object.keys(msg));
         $inputs.prop("disabled", false);
-        alert("Xóa thất bại: \n", msg);
-        window.location.reload();
+        alert("Xóa thất bại: \n", msg.data);
+        //window.location.reload();
       }
     });
   })
