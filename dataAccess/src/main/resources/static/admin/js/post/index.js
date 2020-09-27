@@ -1,7 +1,13 @@
 function renderTableBody(matchedPosts){
     var tbody = "";
+<<<<<<< HEAD
     matchedPosts.forEach(function (post){
         post.jsonString = post.jsonString.replace(/ /g,'###DEV_CULI###');
+=======
+    console.log(matchedCourses.length)
+    matchedCourses.forEach(function (post){
+        post.jsonString = post.jsonString.replaceAll(' ','###DEV_CULI###');
+>>>>>>> 856855d91686dfd9cb492767675ded6c6b9365d9
         tbody+="" +
             "<tr>\n" +
             "  <td>\n" +
@@ -54,8 +60,6 @@ $(document).ready(function () {
         document.getElementById('delete_title').innerHTML= "Tiêu đề: " + selectedPost.title;
     });
 
-
-
     $(document).on("click","#confirmDelete", function () {
         console.log("/api/posts/" + selectedPost.id);
         $.ajax({
@@ -74,7 +78,6 @@ $(document).ready(function () {
                 window.location.reload();
             }
         });
-
     });
 
     $(document).on("click","#createPost", function () {
