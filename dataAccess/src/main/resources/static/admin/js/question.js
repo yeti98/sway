@@ -14,10 +14,12 @@ function isAllBlank(...strs) {
   }
   return true;
 }
-function renderTableBody(matchedCoursed){
+
+function renderTableBody(matchedQuestion){
   var tbody = "";
-  matchedCoursed.forEach(function (question){
-    question.jsonString = question.jsonString.replaceAll(' ','###DEV_CULI###');
+  matchedQuestion.forEach(function (question){
+    question.jsonString = question.jsonString.replace(/ /g,'###DEV_CULI###');
+    console.log(question.jsonString);
     tbody+=
         "<tr>\n" +
         "  <td>\n" +
@@ -195,7 +197,7 @@ $(document).ready(function () {
     }
   });
 
-  $("#formAddUserModal").submit(function (event) {
+  $("#formAddQuestionModal").submit(function (event) {
     console.log("SUBMIT");
     event.preventDefault();
 
@@ -261,7 +263,7 @@ $(document).ready(function () {
     }
   });
 
-  $("#formDeleteUserModal").submit(function (event) {
+  $("#formDeleteQuestionModal").submit(function (event) {
     event.preventDefault();
 
     const $form = $(this);
@@ -279,9 +281,11 @@ $(document).ready(function () {
         window.location.reload();
       },
       error: function (msg) {
+        console.log(msg.data);
+        console.log(Object.keys(msg));
         $inputs.prop("disabled", false);
-        alert("Xóa thất bại: \n", msg);
-        window.location.reload();
+        alert("Xóa thất bại: \n", msg.data);
+        //window.location.reload();
       }
     });
   })
@@ -295,6 +299,10 @@ $(document).ready(function () {
 
     // lấy từ khóa
     const keyword = $('#txtKeyword').val();
+    if (keyword.length == 0) {
+      $inputs.prop("disabled", false);
+      return ;
+    }
     // Xóa bảng
     $('#tblQuestion tbody').empty();
     // Gửi request
@@ -302,9 +310,9 @@ $(document).ready(function () {
       url: "/api/questions/search?query=" + keyword,
       type: "get",
       contentType: "application/json; charset=utf-8",
-      success: function (matchedCourses) {
+      success: function (matchedQuestion) {
         $inputs.prop("disabled", false);
-        renderTableBody(matchedCourses);
+        renderTableBody(matchedQuestion);
       },
       error: function (msg) {
         $inputs.prop("disabled", false);

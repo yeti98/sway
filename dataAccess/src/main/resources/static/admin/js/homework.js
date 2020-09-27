@@ -15,9 +15,10 @@ function isAllBlank(...strs) {
   return true;
 }
 
-function renderTableBody(matchedCoursed){
+
+function renderTableBody(matchedHomeworks){
   var tbody = "";
-  matchedCoursed.forEach(function (test){
+  matchedHomeworks.forEach(function (test){
     tbody +=
         "<tr>\n" +
         "  <td class=\"truncatable\">\n" +
@@ -97,6 +98,10 @@ $(document).ready(function () {
 
     // lấy từ khóa
     const keyword = $('#txtKeyword').val();
+    if (keyword.length == 0) {
+      $inputs.prop("disabled", false);
+      return ;
+    }
     // Xóa bảng
     $('#tblBaiTapLop tbody').empty();
     // Gửi request
@@ -104,9 +109,9 @@ $(document).ready(function () {
       url: "/api/tests/search?query=" + keyword +"&type=HOMEWORK",
       type: "get",
       contentType: "application/json; charset=utf-8",
-      success: function (matchedCourses) {
+      success: function (matchedHomeworks) {
         $inputs.prop("disabled", false);
-        renderTableBody(matchedCourses)
+        renderTableBody(matchedHomeworks)
       },
       error: function (msg) {
         $inputs.prop("disabled", false);

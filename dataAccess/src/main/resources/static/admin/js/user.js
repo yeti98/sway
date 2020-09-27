@@ -12,9 +12,9 @@ function onCopy() {
 
 }
 
-function renderTableBody(matchedCourses){
+function renderTableBody(matchedUsers){
   let tbody ="";
-  matchedCourses.forEach(function (user){
+  matchedUsers.forEach(function (user){
 
     if (user.status == true) {
       user.status = "Hoạt động";
@@ -22,7 +22,7 @@ function renderTableBody(matchedCourses){
     else{
       user.status = "Khoá";
     }
-    user.jsonString = user.jsonString.replaceAll(' ','###DEV_CULI###');
+    user.jsonString = user.jsonString.replace(/ /g,'###DEV_CULI###');
     tbody +=
         " <tr>\n" +
         "   <td>\n" +
@@ -96,7 +96,7 @@ $(document).ready(function () {
     $("#editRole").val('STUDENT');
 
     const id = selectedUser.id;
-    const name = selectedUser.name.replaceAll('###DEV_CULI###',' ');
+    const name = selectedUser.name.replace(/###DEV_CULI###/g,' ');
     const username = selectedUser.username;
     const status = selectedUser.status;
     const role = selectedUser.role;
@@ -118,6 +118,10 @@ $(document).ready(function () {
 
     // lấy từ khóa
     const keyword = $('#txtKeyword').val();
+    if (keyword.length == 0) {
+      $inputs.prop("disabled", false);
+      return ;
+    }
     // Xóa bảng
     $('#tblUser tbody').empty();
     // Gửi request
@@ -125,9 +129,9 @@ $(document).ready(function () {
       url: "/api/users/search/byKey?query=" + keyword,
       type: "get",
       contentType: "application/json; charset=utf-8",
-      success: function (matchedCourses) {
+      success: function (matchedUsers) {
         $inputs.prop("disabled", false);
-        renderTableBody(matchedCourses);
+        renderTableBody(matchedUsers);
       },
       error: function (msg) {
         $inputs.prop("disabled", false);
@@ -203,7 +207,7 @@ $(document).ready(function () {
     const $inputs = $form.find("input, select, button, textarea");
 
     const id = selectedUser.id;
-    const name = $("#editName").val().replaceAll('###DEV_CULI###',' ');
+    const name = $("#editName").val().replace(/###DEV_CULI###/g,' ');
     const username = $("#editEmail").val();
     const avatar = selectedUser.avatar;
     const description = selectedUser.description;

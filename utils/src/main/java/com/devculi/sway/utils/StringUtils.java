@@ -20,10 +20,10 @@ public class StringUtils {
 
   public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
       Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-  public static String Empty = "";
-  static CharsetEncoder asciiEncoder = StandardCharsets.US_ASCII.newEncoder();
   public static final Pattern NONLATIN = Pattern.compile("[^\\w-]");
   public static final Pattern WHITESPACE = Pattern.compile("\\s+");
+  public static String Empty = "";
+  static CharsetEncoder asciiEncoder = StandardCharsets.US_ASCII.newEncoder();
 
   public static String putArrayStringIntoParameter(String input) {
 

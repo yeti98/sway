@@ -222,7 +222,7 @@
     var selectedUser = undefined;
 
     function setSelectedObject(json_str) {
-      //var str = json_str.replace('UserModel', '');
+      json_str = json_str.replace(/###DEV_CULI###/g,' ');
       console.log(json_str);
       selectedUser = JSON.parse(json_str);
     }

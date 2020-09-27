@@ -63,7 +63,9 @@ public class QuestionService implements IQuestionService {
   @Transactional(rollbackFor = Exception.class)
   public Long deleteQuestion(Long questionID) {
     Question question = getQuestionById(questionID);
+
     questionRepository.delete(question);
+
     return question.getId();
   }
 

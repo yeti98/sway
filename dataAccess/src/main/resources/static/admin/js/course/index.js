@@ -87,6 +87,10 @@ $(document).ready(function () {
 
     // lấy từ khóa
     const keyword = $('#txtKeyword').val();
+    if (keyword.length == 0) {
+      $inputs.prop("disabled", false);
+      return ;
+    }
     // Xóa bảng
     $('#tblCourse tbody').empty();
     // Gửi request
