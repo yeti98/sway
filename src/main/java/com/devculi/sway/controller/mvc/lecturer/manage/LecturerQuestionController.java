@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.LinkedList;
 
 import static org.springframework.http.ResponseEntity.ok;
@@ -58,7 +57,7 @@ public class LecturerQuestionController {
     if (beRemovedIndex != -1) {
       recentAddedQuestion.remove(beRemovedIndex);
       recentAddedQuestion.add(beRemovedIndex, Entity2DTO.question2DTO(question));
-    }else {
+    } else {
       recentAddedQuestion.add(Entity2DTO.question2DTO(question));
     }
     model.addAttribute("questions", recentAddedQuestion);
@@ -71,7 +70,7 @@ public class LecturerQuestionController {
   public ResponseEntity deleteQuestion(Model model, @PathVariable(name = "id") Long id) {
     try {
       questionController.deleteQuestion(id);
-    }catch (Exception e){
+    } catch (Exception e) {
       return ResponseEntity.badRequest().body("inTest");
     }
     int index = getModelIndex(id);
