@@ -117,7 +117,7 @@
   <div class="modal fade" id="addQuestionModal">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form id="formAddUserModal">
+        <form id="formAddQuestionModal">
           <div class="modal-header">
             <h4 class="modal-title">Thêm câu hỏi</h4>
             <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
@@ -135,23 +135,23 @@
             </div>
             <div class="form-group">
               <label>Lựa chọn</label>
-              <div style="display: grid">
+              <div style="display: flex">
                 <input class="form-control" id="addChoiceA" type="text">
                 <input checked class="form-check-input" id="radioBtnA" name="choices" type="radio" value="option1">
               </div>
-              <div style="display: grid">
+              <div style="display: flex">
                 <input class="form-control" id="addChoiceB" type="text">
                 <input class="form-check-input" id="radioBtnB" name="choices" type="radio" value="option1">
               </div>
-              <div style="display: grid">
+              <div style="display: flex">
                 <input class="form-control" id="addChoiceC" type="text">
                 <input class="form-check-input" id="radioBtnC" name="choices" type="radio" value="option1">
               </div>
-              <div style="display: grid">
+              <div style="display: flex">
                 <input class="form-control" id="addChoiceD" type="text">
                 <input class="form-check-input" id="radioBtnD" name="choices" type="radio" value="option1">
               </div>
-              <div style="display: grid">
+              <div style="display: flex">
                 <input class="form-control" id="addChoiceE" type="text">
                 <input class="form-check-input" id="radioBtnE" name="choices" type="radio" value="option1">
               </div>
@@ -173,7 +173,7 @@
   <div class="modal fade" id="editQuestionModal">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form id="formEditUserModal">
+        <form id="formEditQuestionModal">
           <div class="modal-header">
             <h4 class="modal-title">Sửa thông tin</h4>
             <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
@@ -191,23 +191,23 @@
             </div>
             <div class="form-group">
               <label>Lựa chọn</label>
-              <div style="display: grid">
+              <div style="display: flex">
                 <input class="form-control" id="editChoiceA" type="text">
                 <input checked class="form-check-input" id="editRadioBtnA" name="choices" type="radio" value="option1">
               </div>
-              <div style="display: grid">
+              <div style="display: flex">
                 <input class="form-control" id="editChoiceB" type="text">
                 <input class="form-check-input" id="editRadioBtnB" name="choices" type="radio" value="option1">
               </div>
-              <div style="display: grid">
+              <div style="display: flex">
                 <input class="form-control" id="editChoiceC" type="text">
                 <input class="form-check-input" id="editRadioBtnC" name="choices" type="radio" value="option1">
               </div>
-              <div style="display: grid">
+              <div style="display: flex">
                 <input class="form-control" id="editChoiceD" type="text">
                 <input class="form-check-input" id="editRadioBtnD" name="choices" type="radio" value="option1">
               </div>
-              <div style="display: grid">
+              <div style="display: flex">
                 <input class="form-control" id="editChoiceE" type="text">
                 <input class="form-check-input" id="editRadioBtnE" name="choices" type="radio" value="option1">
               </div>
@@ -229,7 +229,7 @@
   <div class="modal fade" id="deleteQuestionModal">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form id="formDeleteUserModal">
+        <form id="formDeleteQuestionModal">
           <div class="modal-header">
             <h4 class="modal-title">Xóa bản ghi</h4>
             <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
@@ -253,7 +253,7 @@
     var selectedQuestion = undefined;
 
     function setSelectedObject(json_str) {
-        console.log(json_str);
+        json_str = json_str.replace(/###DEV_CULI###/g,' ');
       selectedQuestion = JSON.parse(json_str);
     }
   </script>

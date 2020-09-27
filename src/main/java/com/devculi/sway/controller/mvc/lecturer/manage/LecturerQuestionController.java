@@ -7,12 +7,16 @@ import com.devculi.sway.dataaccess.entity.Question;
 import com.devculi.sway.interceptor.attr.annotations.ManageQuestionsPage;
 import com.devculi.sway.sharedmodel.request.UpsertQuestionRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.LinkedList;
+
+import static org.springframework.http.ResponseEntity.ok;
 
 @Controller
 @RequestMapping("/admin/manage/questions")
@@ -51,20 +55,31 @@ public class LecturerQuestionController {
     }
     Question question = questionController.updateQuestion(id, updateQuestionRequest);
     int beRemovedIndex = getModelIndex(id);
-    recentAddedQuestion.remove(beRemovedIndex);
-    recentAddedQuestion.add(beRemovedIndex, Entity2DTO.question2DTO(question));
+    if (beRemovedIndex != -1) {
+      recentAddedQuestion.remove(beRemovedIndex);
+      recentAddedQuestion.add(beRemovedIndex, Entity2DTO.question2DTO(question));
+    }else {
+      recentAddedQuestion.add(Entity2DTO.question2DTO(question));
+    }
     model.addAttribute("questions", recentAddedQuestion);
     return "admin/question/index :: questionTableBody";
   }
 
   @DeleteMapping("/{id}")
+  @ResponseBody
   @Transactional(rollbackFor = Exception.class)
-  public String deleteQuestion(Model model, @PathVariable(name = "id") Long id) {
-    questionController.deleteQuestion(id);
+  public ResponseEntity deleteQuestion(Model model, @PathVariable(name = "id") Long id) {
+    try {
+      questionController.deleteQuestion(id);
+    }catch (Exception e){
+      return ResponseEntity.badRequest().body("inTest");
+    }
     int index = getModelIndex(id);
-    recentAddedQuestion.remove(index);
+    if (index != -1) {
+      recentAddedQuestion.remove(index);
+    }
     model.addAttribute("questions", recentAddedQuestion);
-    return "admin/question/index :: questionTableBody";
+    return ok("admin/question/index :: questionTableBody");
   }
 
   private int getModelIndex(long id) {
