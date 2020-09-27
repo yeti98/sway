@@ -38,7 +38,7 @@
                 <th>Cập nhật</th>
               </tr>
               </thead>
-              <tbody>
+              <tbody id="tblbodyUser">
               <th:block th:each="user,stats: ${users}">
                 <tr>
 <!--                  <td th:text="${stats.index}"></td>-->
@@ -222,7 +222,7 @@
     var selectedUser = undefined;
 
     function setSelectedObject(json_str) {
-      //var str = json_str.replace('UserModel', '');
+      json_str = json_str.replace(/###DEV_CULI###/g,' ');
       console.log(json_str);
       selectedUser = JSON.parse(json_str);
     }

@@ -251,6 +251,10 @@ $(document).ready(function () {
     $inputs.prop("disabled", true);
 
     const keyword = $('#txtKeyword').val();
+    if (keyword.length == 0) {
+      $inputs.prop("disabled", false);
+      return ;
+    }
     $('#slCourseResult').empty();
     $.ajax({
       url: "/api/courses/search?query=" + keyword,
