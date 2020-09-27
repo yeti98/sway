@@ -61,7 +61,7 @@
                           <td><p th:text="${lesson.name}"></p></td>
                           <td><p th:text="${lesson.getNumberOfTest()}"></p></td>
                           <td>
-                            <div style="display: ruby">
+                            <div style="display: flex">
                               <div id="editAnUser">
                                 <a class="edit" th:href="@{'manage/lessons/'+${lesson.id}}">
                                   <i class="material-icons"

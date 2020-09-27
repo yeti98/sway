@@ -1,5 +1,6 @@
 function renderTableBody(matchedCourses){
     var tbody = "";
+    console.log(matchedCourses.length)
     matchedCourses.forEach(function (post){
         post.jsonString = post.jsonString.replaceAll(' ','###DEV_CULI###');
         tbody+="" +
@@ -54,8 +55,6 @@ $(document).ready(function () {
         document.getElementById('delete_title').innerHTML= "Tiêu đề: " + selectedPost.title;
     });
 
-
-
     $(document).on("click","#confirmDelete", function () {
         console.log("/api/posts/" + selectedPost.id);
         $.ajax({
@@ -74,7 +73,6 @@ $(document).ready(function () {
                 window.location.reload();
             }
         });
-
     });
 
     $(document).on("click","#createPost", function () {
