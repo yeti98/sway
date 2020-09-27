@@ -84,12 +84,16 @@ public class PostModel {
 
     public String getReadableMenu() {
         switch (this.menu) {
-            case "Homepage":
-                return "Trang chủ";
-            case "Homework":
-                return "Bài tập";
-            case "abc":
-                return "Đối tác";
+            case "English":
+                return "Bài viết Tiếng Anh";
+            case "Japanese":
+                return "Bài viết Tiếng Nhật";
+            case "Chinese":
+                return "Bài viết Tiếng Trung";
+            case "Korean":
+                return "Bài viết Tiếng Hàn";
+            case "Recruitment":
+                return "Cơ hội việc làm";
             default:
         }
         return "Chưa phân loại";

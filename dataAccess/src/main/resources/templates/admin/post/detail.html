@@ -30,13 +30,15 @@
             <input style="margin-top: 10px;"  id="title" class="form-control form-control-lg" placeholder="Tiêu đề" type="text">
             <div class="form-group" style="margin-top: 10px;">
               <select class="form-control" id="menu">
-                <option value="Homepage">Trang chủ</option>
-                <option value="Homework">Bài tập</option>
-                <option value="abc">Đối tác</option>
+                <option value="English">Bài viết Tiếng Anh</option>
+                <option value="Japanese">Bài viết Tiếng Nhật</option>
+                <option value="Chinese">Bài viết Tiếng Trung</option>
+                <option value="Korean">Bài viết Tiếng Hàn</option>
+                <option value="Recruitment">Cơ hội việc làm</option>
               </select>
             </div>
-            <div class="mb-3" style="height: 350px">
-              <div id="inputContent" class="inputContent"></div>
+            <div class="mb-3" style="height: 45vh">
+              <textarea style="height: 45vh" id="inputContent" class="inputContent"></textarea>
             </div>
 
           </div>
@@ -65,9 +67,9 @@
       $(function () {
           // Summernote
           $('.inputContent').summernote({
-              height: 300,
-              maxHeight: 300,
-              minHeight: 300,
+              // height: '45vh',
+              // maxHeight: '45vh',
+              // minHeight: '45vh',
           });
       })
   </script>

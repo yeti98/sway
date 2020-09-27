@@ -1,7 +1,7 @@
-function renderTableBody(matchedCourses){
+function renderTableBody(matchedPosts){
     var tbody = "";
-    matchedCourses.forEach(function (post){
-        post.jsonString = post.jsonString.replaceAll(' ','###DEV_CULI###');
+    matchedPosts.forEach(function (post){
+        post.jsonString = post.jsonString.replace(/ /g,'###DEV_CULI###');
         tbody+="" +
             "<tr>\n" +
             "  <td>\n" +
@@ -97,10 +97,9 @@ $(document).ready(function () {
             url: "/api/posts/search?query=" + keyword,
             type: "get",
             contentType: "application/json; charset=utf-8",
-            success: function (matchedCourses) {
+            success: function (matchedPosts) {
                 $inputs.prop("disabled", false);
-                console.log(matchedCourses);
-                renderTableBody(matchedCourses);
+                renderTableBody(matchedPosts);
             },
             error: function (msg) {
                 $inputs.prop("disabled", false);

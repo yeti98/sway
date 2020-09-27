@@ -134,7 +134,7 @@
       var selectedPost = undefined;
 
       function setSelectedObject(json_str) {
-          json_str = json_str.replaceAll('###DEV_CULI###',' ');
+          json_str = json_str.replace(/###DEV_CULI###/g,' ');
           selectedPost = JSON.parse(json_str);
       }
   </script>
