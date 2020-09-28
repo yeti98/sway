@@ -48,13 +48,6 @@ public class MainController {
     return "gdmoi/trang-chu";
   }
 
-  @GetMapping("/giaodienmoi/noi-dung")
-  public String newContent(Model model) {
-
-    model.addAttribute("pageTitle", "Nội dung");
-    return "gdmoi/noi-dung";
-  }
-
   @GetMapping("/giaodienmoi/khct")
   public String khoaHocChiTiet(Model model) {
 

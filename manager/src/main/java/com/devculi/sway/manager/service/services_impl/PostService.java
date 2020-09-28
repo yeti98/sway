@@ -10,6 +10,7 @@ import com.devculi.sway.sharedmodel.exceptions.RecordNotFoundException;
 import com.devculi.sway.sharedmodel.response.common.PagingResponse;
 import com.devculi.sway.utils.PropertyUtils;
 import com.devculi.sway.utils.StringUtils;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +21,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -44,19 +46,11 @@ public class PostService implements IPostService {
 
   @Override
   @Transactional
-  public Post createPost(UpsertPostRequest upsertPostRequest) {
+  public Post createPost() {
     Post post = new Post();
-
-    String title = upsertPostRequest.getTitle();
-    post.setTitle(title);
-    post.setCoverPhoto(upsertPostRequest.getCoverPhoto());
-    post.setContents(upsertPostRequest.getContents());
-    postRepository.save(post);
-
-    String slug = StringUtils.makeSlug(title);
-    post.setSlug(slug);
-    post.setMenu(upsertPostRequest.getMenu());
-
+    post.setTitle("");
+    post.setContents("");
+    post.setMenu("NULL");
     try {
       post.setAuthor(userService.getCurrentUser());
     } catch (Exception e) {
@@ -74,6 +68,12 @@ public class PostService implements IPostService {
   }
 
   @Override
+  public Post getPostBySlug(String slug) {
+    Optional<Post> bySlug = postRepository.findBySlug(slug);
+    return bySlug.orElseThrow(() -> new RecordNotFoundException(Post.class, "slug", slug));
+  }
+
+  @Override
   public Long deletePostById(Long id) {
     postRepository.deleteById(id);
     return id;
@@ -84,7 +84,22 @@ public class PostService implements IPostService {
     Post post = postRepository.findById(idPost).orElse(null);
     String[] nullPropertiesString = PropertyUtils.getNullPropertiesString(upsertPostRequest);
     BeanUtils.copyProperties(upsertPostRequest, post, nullPropertiesString);
+    if (post.getSlug() == null) {
+      String slug = StringUtils.makeSlug(post.getTitle());
+      post.setSlug(slug);
+    }
     postRepository.save(post);
     return post;
+  }
+
+  @Override
+  public List<Post> searchByTitle(String keyword, boolean isIgnoreCase) {
+    if (isIgnoreCase) {
+      keyword = "%" + keyword.toLowerCase() + "%";
+    } else {
+      keyword = "%" + keyword + "%";
+    }
+
+    return postRepository.findPostsByTitleLike(keyword);
   }
 }
