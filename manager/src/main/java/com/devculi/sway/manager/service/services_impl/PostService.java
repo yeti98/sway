@@ -10,6 +10,7 @@ import com.devculi.sway.sharedmodel.exceptions.RecordNotFoundException;
 import com.devculi.sway.sharedmodel.response.common.PagingResponse;
 import com.devculi.sway.utils.PropertyUtils;
 import com.devculi.sway.utils.StringUtils;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,7 +50,7 @@ public class PostService implements IPostService {
     Post post = new Post();
     post.setTitle("");
     post.setContents("");
-    post.setMenu("Homepage");
+    post.setMenu("NULL");
     try {
       post.setAuthor(userService.getCurrentUser());
     } catch (Exception e) {
@@ -64,6 +65,12 @@ public class PostService implements IPostService {
   public Post getPostById(Long id) {
     Optional<Post> byId = postRepository.findById(id);
     return byId.orElseThrow(() -> new RecordNotFoundException(Post.class, "id", id.toString()));
+  }
+
+  @Override
+  public Post getPostBySlug(String slug) {
+    Optional<Post> bySlug = postRepository.findBySlug(slug);
+    return bySlug.orElseThrow(() -> new RecordNotFoundException(Post.class, "slug", slug));
   }
 
   @Override

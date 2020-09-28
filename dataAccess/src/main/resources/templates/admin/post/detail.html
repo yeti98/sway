@@ -16,7 +16,7 @@
   <section class="content">
     <div class="row">
       <div class="col-md-12">
-        <div class="card card-outline card-info">
+        <div class="card card-outline card-info" style="min-height: 90vh">
           <div class="card-header pad">
             <h3 class="card-title">Soạn bài viết</h3>
 
@@ -37,8 +37,8 @@
                 <option value="Recruitment">Cơ hội việc làm</option>
               </select>
             </div>
-            <div class="mb-3" style="height: 45vh">
-              <textarea style="height: 45vh" id="inputContent" class="inputContent"></textarea>
+            <div class="mb-3" >
+              <textarea id="inputContent" class="inputContent"></textarea>
             </div>
 
           </div>
@@ -67,9 +67,8 @@
       $(function () {
           // Summernote
           $('.inputContent').summernote({
-              // height: '45vh',
-              // maxHeight: '45vh',
-              // minHeight: '45vh',
+              height: '50vh',
+              minHeight: '50vh',
           });
       })
   </script>

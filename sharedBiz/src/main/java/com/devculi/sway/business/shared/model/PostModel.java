@@ -99,6 +99,42 @@ public class PostModel {
         return "Chưa phân loại";
     }
 
+    public String getReadableCreateDay(){
+        String createDay = this.getCreateDay();
+        String[] res = createDay.split("/");
+        String readableCreateDay = "";
+        readableCreateDay += res[0];
+        switch (res[1]){
+            case "01":
+                return readableCreateDay += " Tháng Một " + res[2];
+            case "02":
+                return readableCreateDay += " Tháng Hai " + res[2];
+            case "03":
+                return readableCreateDay += " Tháng Ba " + res[2];
+            case "04":
+                return readableCreateDay += " Tháng Tư " + res[2];
+            case "05":
+                return readableCreateDay += " Tháng Năm " + res[2];
+            case "06":
+                return readableCreateDay += " Tháng Sáu " + res[2];
+            case "07":
+                return readableCreateDay += " Tháng Bảy " + res[2];
+            case "08":
+                return readableCreateDay += " Tháng Tám " + res[2];
+            case "09":
+                return readableCreateDay += " Tháng Chín " + res[2];
+            case "10":
+                return readableCreateDay += " Tháng Mười " + res[2];
+            case "11":
+                return readableCreateDay += " Tháng Mười Một " + res[2];
+            case "12":
+                return readableCreateDay += " Tháng Mười Hai " + res[2];
+            default:
+        }
+
+        return readableCreateDay;
+    }
+
     public long getId() {
         return id;
     }

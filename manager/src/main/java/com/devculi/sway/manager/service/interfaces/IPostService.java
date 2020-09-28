@@ -17,6 +17,8 @@ public interface IPostService {
 
   Post getPostById(Long id);
 
+  Post getPostBySlug(String slug);
+
   Long deletePostById(Long id);
 
   Post updatePost(UpsertPostRequest upsertPostRequest, Long idPost);

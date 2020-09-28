@@ -1,13 +1,7 @@
 function renderTableBody(matchedPosts){
     var tbody = "";
-<<<<<<< HEAD
     matchedPosts.forEach(function (post){
         post.jsonString = post.jsonString.replace(/ /g,'###DEV_CULI###');
-=======
-    console.log(matchedCourses.length)
-    matchedCourses.forEach(function (post){
-        post.jsonString = post.jsonString.replaceAll(' ','###DEV_CULI###');
->>>>>>> 856855d91686dfd9cb492767675ded6c6b9365d9
         tbody+="" +
             "<tr>\n" +
             "  <td>\n" +
@@ -38,7 +32,7 @@ function renderTableBody(matchedPosts){
             "      </a>\n" +
             "    </div>\n" +
             "    <div id=\"viewPost\">\n" +
-            "      <a class=\"view\" href=\"#\">\n" +
+            "      <a class=\"view\" href=\"/bai-viet/" + post.slug + "\">\n" +
             "        <i class=\"material-icons\"\n" +
             "           data-toggle=\"tooltip\"\n" +
             "           title=\"Xem\">arrow_forward\n" +
