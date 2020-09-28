@@ -35,10 +35,9 @@
                 <h1 class="text-xxxl@lg text-xl@sm" th:utext="${post.title}"></h1>
                 <i style="color: darkgrey;" th:utext="${post.getReadableCreateDay()}"></i>
               </div>
-              <div id="content" th:utext="${post.contents}">
-
+              <div class="bootstrap__scope bg-white">
+                <th:block id="content" th:utext="${post.contents}"></th:block>
               </div>
-
               <div class="col-12">
                 <footer class="border-top border-contrast-higher border-opacity-10% padding-top-sm">
                   <p class="text-sm text-right">Page One.</p>
@@ -48,18 +47,18 @@
           </div>
         </div>
 
-        <div aria-hidden="true" class="grid-bg-fx z-index-1">
-          <div class="container height-100% max-width-lg">
-            <div class="grid-bg-fx__grid grid gap-sm color-contrast-higher color-opacity-10%">
-              <div class="col-2"></div>
-              <div class="col-2"></div>
-              <div class="col-2"></div>
-              <div class="col-2"></div>
-              <div class="col-2"></div>
-              <div class="col-2"></div>
-            </div>
-          </div>
-        </div>
+<!--        <div aria-hidden="true" class="grid-bg-fx z-index-1">-->
+<!--          <div class="container height-100% max-width-lg">-->
+<!--            <div class="grid-bg-fx__grid grid gap-sm color-contrast-higher color-opacity-10%">-->
+<!--              <div class="col-2"></div>-->
+<!--              <div class="col-2"></div>-->
+<!--              <div class="col-2"></div>-->
+<!--              <div class="col-2"></div>-->
+<!--              <div class="col-2"></div>-->
+<!--              <div class="col-2"></div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
       </section>
     </div>
     <div class="col-3@lg col-12@sm">
