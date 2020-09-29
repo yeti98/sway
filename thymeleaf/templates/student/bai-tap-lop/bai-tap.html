@@ -39,7 +39,7 @@
                 <input th:field="*{questions[__${stats.index}__].id}" th:value="${question.id}" type="text"/>
               </div>
               <fieldset class="margin-top-sm">
-                <legend class="form-legend text-bold" th:text="${question.content}"></legend>
+                <legend class="form-legend text-bold" th:text="${stats.index + 1} +'. '+ ${question.content}"></legend>
 
                 <div class="choice-btns gap-xxs js-choice-btns">
 

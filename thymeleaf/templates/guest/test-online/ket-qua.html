@@ -33,8 +33,8 @@
           <div class="text-component padding-md text-sm">
             <th:block th:each="question, stats : *{questions}">
               <fieldset class="margin-top-sm">
-                <legend class="form-legend text-bold" th:text="${question.content}"></legend>
-
+                <legend class="form-legend text-bold" th:text="${stats.index + 1} +'. '+ ${question.content}"></legend>
+                <legend class="margin-bottom-sm" th:text="${question.explanation}"></legend>
                 <div class="choice-btns gap-xxs js-choice-btns">
                   <th:block th:each="choice, choiceStats : ${question.getChoicesList()}">
                     <div class="choice-btn padding-x-xs js-choice-btn"
@@ -66,11 +66,11 @@
                           <th:block
                               th:if="${(!question.isWrong() && choice == question.selected) || (choice == question.answer)}">
                             <img
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flat_tick_icon.svg/1024px-Flat_tick_icon.svg.png"
+                                src="/gdmoi/assets/img/bai-test/correct.png"
                                 style="width: 30px; object-fit: cover; position:absolute; right: 10px; top: 50%; transform: translateY(-50%)"/>
                           </th:block>
                           <th:block th:if="${question.isWrong() && choice == question.selected}">
-                            <img src="https://icon-library.com/images/wrong-icon/wrong-icon-8.jpg"
+                            <img src="/gdmoi/assets/img/bai-test/wrong.png"
                                  style="width: 30px; object-fit: cover; position:absolute; right: 10px; top: 50%; transform: translateY(-50%)"/>
                           </th:block>
                         </div>

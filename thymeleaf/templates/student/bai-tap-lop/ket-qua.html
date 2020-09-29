@@ -33,7 +33,8 @@
           <div class="text-component padding-md text-sm">
             <th:block th:each="question, stats : *{questions}">
               <fieldset class="margin-top-sm">
-                <legend class="form-legend text-bold" th:text="${question.content}"></legend>
+                <legend class="form-legend text-bold" th:text="${stats.index + 1} + '. '+ ${question.content}"></legend>
+                <legend class="margin-bottom-sm" th:text="${question.explanation}"></legend>
 
                 <div class="choice-btns gap-xxs js-choice-btns">
                   <th:block th:each="choice, choiceStats : ${question.getChoicesList()}">

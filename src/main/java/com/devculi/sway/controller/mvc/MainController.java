@@ -32,7 +32,7 @@ public class MainController {
 
   @GetMapping("/co-hoi-viec-lam")
   public String aboutUs(Model model) {
-    model.addAttribute("pageTitle", "About us");
+    model.addAttribute("pageTitle", "Cơ hội việc làm");
     return "gdmoi/tuyen-dung";
   }
 

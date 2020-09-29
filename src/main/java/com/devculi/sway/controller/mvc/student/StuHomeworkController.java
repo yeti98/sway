@@ -30,6 +30,7 @@ public class StuHomeworkController {
     List<SwayClass> joinedClasses = userService.getJoinedClasses();
     model.addAttribute(
         "classes", joinedClasses.stream().map(Entity2DTO::class2DTO).collect(Collectors.toList()));
+    model.addAttribute("pageTitle", "Bài tập lớp");
     return "student/bai-tap-lop/index";
   }
 
@@ -41,6 +42,7 @@ public class StuHomeworkController {
     model.addAttribute("class", classBySlug);
     model.addAttribute(
         "lessons", lessonList.stream().map(Entity2DTO::lesson2DTO).collect(Collectors.toList()));
+    model.addAttribute("pageTitle", String.format("Bài tập: %s", classBySlug.getName()));
     return "student/bai-tap-lop/lop-hoc/index";
   }
 
@@ -89,6 +91,7 @@ public class StuHomeworkController {
     model.addAttribute("swayTest", testModel);
     model.addAttribute("swayClass", Entity2DTO.class2DTO(classBySlug));
     model.addAttribute("lesson", Entity2DTO.lesson2DTO(lessonBySlug));
+    model.addAttribute("pageTitle", String.format("Bài tập: %s", lessonBySlug.getName()));
     return "student/bai-tap-lop/bai-tap";
   }
 
@@ -160,6 +163,7 @@ public class StuHomeworkController {
                 ? "Chúc mừng bạn đã hoàn thành bài tập"
                 : "Vui lòng làm bài tập nghiêm túc hơn");
         model.addAttribute("swayTest", submittedTestModel);
+        model.addAttribute("pageTitle", "Kết quả làm bài");
       }
     }
     return "student/bai-tap-lop/ket-qua";

@@ -31,7 +31,7 @@
     <div class="col-6@lg shadow-xl">
       <form class="login-form padding-y-xxl" action="/login" method="post">
         <div class="text-component text-center margin-bottom-sm">
-          <h3>Hệ thống đào tạo Sway</h3>
+          <h3 th:text="${webTitle}"></h3>
           <div th:if="${param.error}" style="color: red">
             Sai tên đăng nhập hoặc mật khẩu
           </div>
@@ -67,7 +67,7 @@
           <div class="margin-bottom-sm">
             <div class="flex justify-between margin-bottom-xxxs">
               <label class="form-label required" for="input-password">Mật khẩu</label>
-              <span class="text-sm"><a href="#0">Quên mật khẩu?</a></span>
+<!--              <span class="text-sm"><a href="#0">Quên mật khẩu?</a></span>-->
             </div>
 
             <input class="form-control width-100%" id="input-password" name="password" placeholder="********"
