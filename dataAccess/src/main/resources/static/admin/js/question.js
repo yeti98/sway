@@ -131,7 +131,7 @@ $(document).ready(function () {
     }
   });
 
-  $("#formEditUserModal").submit(function (event) {
+  $("#formEditQuestionModal").submit(function (event) {
     event.preventDefault();
 
     const $form = $(this);
