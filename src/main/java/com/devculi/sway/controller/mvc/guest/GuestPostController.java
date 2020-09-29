@@ -22,6 +22,6 @@ public class GuestPostController {
         model.addAttribute("pageTitle", post.getTitle());
         model.addAttribute("post", Entity2DTO.post2DTO(post));
 
-        return "guess/bai-viet";
+        return "guest/bai-viet";
     }
 }
