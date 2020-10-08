@@ -1,4 +1,5 @@
-#sway 
+#sway
+
 Demo education website
 http://swayvn.herokuapp.com/
 
@@ -10,14 +11,14 @@ Admin Account: admin.trangnh@sway.vn/12344321
 
 
 #### Features:
-+ Submit test online for guess
++ Submit test online for guest
 + Submit test for student
 + Create class/course/question for lecturer
 + Manage user for admin
 
-##### Tech: Spring Boot, Thymeleaf, HTML/CSS
+#### Tech: Spring Boot, Thymeleaf, HTML/CSS
 
-##### Demo
+#### Demo
 Home page
 ![alt text](demo.png "Title")
 
