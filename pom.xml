@@ -88,6 +88,12 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/thymeleaf</directory>
+                <targetPath>thymeleaf</targetPath>
+            </resource>
+        </resources>
     </build>
 
 </project>
