@@ -1,7 +1,7 @@
 // Utility function
 function Util () {};
 
-/* 
+/*
 	class manipulation functions
 */
 Util.hasClass = function(el, className) {
@@ -18,7 +18,7 @@ Util.addClass = function(el, className) {
 
 Util.removeClass = function(el, className) {
 	var classList = className.split(' ');
-	if (el.classList) el.classList.remove(classList[0]);	
+	if (el.classList) el.classList.remove(classList[0]);
 	else if(Util.hasClass(el, classList[0])) {
 		var reg = new RegExp('(\\s|^)' + classList[0] + '(\\s|$)');
 		el.className=el.className.replace(reg, ' ');
@@ -37,7 +37,7 @@ Util.setAttributes = function(el, attrs) {
   }
 };
 
-/* 
+/*
   DOM manipulation
 */
 Util.getChildrenByClassName = function(el, className) {
@@ -67,15 +67,15 @@ Util.is = function(elem, selector) {
   return false;
 };
 
-/* 
+/*
 	Animate height of an element
 */
 Util.setHeight = function(start, to, element, duration, cb) {
 	var change = to - start,
 	    currentTime = null;
 
-  var animateHeight = function(timestamp){  
-    if (!currentTime) currentTime = timestamp;         
+  var animateHeight = function(timestamp){
+    if (!currentTime) currentTime = timestamp;
     var progress = timestamp - currentTime;
     var val = parseInt((progress/duration)*change + start);
     element.style.height = val+"px";
@@ -85,13 +85,13 @@ Util.setHeight = function(start, to, element, duration, cb) {
     	cb();
     }
   };
-  
+
   //set the height of the element before starting animation -> fix bug on Safari
   element.style.height = start+"px";
   window.requestAnimationFrame(animateHeight);
 };
 
-/* 
+/*
 	Smooth Scroll
 */
 
@@ -101,9 +101,9 @@ Util.scrollTo = function(final, duration, cb, scrollEl) {
     currentTime = null;
 
   if(!scrollEl) start = window.scrollY || document.documentElement.scrollTop;
-      
+
   var animateScroll = function(timestamp){
-  	if (!currentTime) currentTime = timestamp;        
+  	if (!currentTime) currentTime = timestamp;
     var progress = timestamp - currentTime;
     if(progress > duration) progress = duration;
     var val = Math.easeInOutQuad(progress, start, final-start, duration);
@@ -118,7 +118,7 @@ Util.scrollTo = function(final, duration, cb, scrollEl) {
   window.requestAnimationFrame(animateScroll);
 };
 
-/* 
+/*
   Focus utility classes
 */
 
@@ -132,7 +132,7 @@ Util.moveFocus = function (element) {
   }
 };
 
-/* 
+/*
   Misc
 */
 
@@ -193,9 +193,9 @@ Util.osHasReducedMotion = function() {
   var matchMediaObj = window.matchMedia('(prefers-reduced-motion: reduce)');
   if(matchMediaObj) return matchMediaObj.matches;
   return false; // return false if not supported
-}; 
+};
 
-/* 
+/*
 	Polyfills
 */
 //Closest() method
@@ -210,7 +210,7 @@ if (!Element.prototype.closest) {
 		do {
 			if (el.matches(s)) return el;
 			el = el.parentElement || el.parentNode;
-		} while (el !== null && el.nodeType === 1); 
+		} while (el !== null && el.nodeType === 1);
 		return null;
 	};
 }
@@ -230,7 +230,7 @@ if ( typeof window.CustomEvent !== "function" ) {
   window.CustomEvent = CustomEvent;
 }
 
-/* 
+/*
 	Animation curves
 */
 Math.easeInOutQuad = function (t, b, c, d) {
@@ -245,7 +245,7 @@ Math.easeInQuart = function (t, b, c, d) {
 	return c*t*t*t*t + b;
 };
 
-Math.easeOutQuart = function (t, b, c, d) { 
+Math.easeOutQuart = function (t, b, c, d) {
   t /= d;
 	t--;
 	return -c * (t*t*t*t - 1) + b;
@@ -269,7 +269,7 @@ Math.easeOutElastic = function (t, b, c, d) {
 
 /* JS Utility Classes */
 (function() {
-  // make focus ring visible only for keyboard navigation (i.e., tab key) 
+  // make focus ring visible only for keyboard navigation (i.e., tab key)
   var focusTab = document.getElementsByClassName('js-tab-focus');
   function detectClick() {
     if(focusTab.length > 0) {
@@ -294,8 +294,7 @@ Math.easeOutElastic = function (t, b, c, d) {
   };
   window.addEventListener('mousedown', detectClick);
 }());
-// File#: _1_accordion
-// Usage: codyhouse.co/license
+
 (function () {
   var Accordion = function (element) {
     this.element = element;
@@ -398,8 +397,7 @@ Math.easeOutElastic = function (t, b, c, d) {
   }
 }());
 
-// File#: _1_anim-menu-btn
-// Usage: codyhouse.co/license
+
 (function() {
   var menuBtns = document.getElementsByClassName('js-anim-menu-btn');
   if( menuBtns.length > 0 ) {
@@ -420,8 +418,7 @@ Math.easeOutElastic = function (t, b, c, d) {
   }
 }());
 
-// File#: _1_choice-buttons
-// Usage: codyhouse.co/license
+
 (function () {
   var ChoiceButton = function (element) {
     this.element = element;
@@ -500,8 +497,7 @@ Math.easeOutElastic = function (t, b, c, d) {
 
 }());
 
-// File#: _1_menu
-// Usage: codyhouse.co/license
+
 (function() {
   var Menu = function(element) {
     this.element = element;
@@ -672,8 +668,6 @@ Math.easeOutElastic = function (t, b, c, d) {
   }
 }());
 
-// File#: _1_modal-window
-// Usage: codyhouse.co/license
 (function() {
   var Modal = function(element) {
     this.element = element;
@@ -878,8 +872,6 @@ Math.easeOutElastic = function (t, b, c, d) {
   }
 }());
 
-// File#: _1_notice
-// Usage: codyhouse.co/license
 (function() {
   function initNoticeEvents(notice) {
     notice.addEventListener('click', function(event){
@@ -898,8 +890,7 @@ Math.easeOutElastic = function (t, b, c, d) {
   }
 }());
 
-// File#: _1_custom-select
-// Usage: codyhouse.co/license
+
 (function() {
   // NOTE: you need the js code only when using the --custom-dropdown variation of the Custom Select component. Default version does nor require JS.
 
@@ -1158,8 +1149,7 @@ Math.easeOutElastic = function (t, b, c, d) {
   }
 }());
 
-// File#: _1_responsive-sidebar
-// Usage: codyhouse.co/license
+
 (function() {
   var Sidebar = function(element) {
     this.element = element;
@@ -1482,8 +1472,7 @@ Math.easeOutElastic = function (t, b, c, d) {
   }
 }());
 
-// File#: _2_flexi-header
-// Usage: codyhouse.co/license
+
 (function () {
   var flexHeader = document.getElementsByClassName('js-f-header');
   if (flexHeader.length > 0) {
@@ -1557,8 +1546,7 @@ Math.easeOutElastic = function (t, b, c, d) {
   }
 }());
 
-// File#: _2_menu-bar
-// Usage: codyhouse.co/license
+
 (function() {
   var MenuBar = function(element) {
     this.element = element;
@@ -1710,8 +1698,7 @@ Math.easeOutElastic = function (t, b, c, d) {
   }
 }());
 
-// File#: _1_back-to-top
-// Usage: codyhouse.co/license
+
 (function() {
   var backTop = document.getElementsByClassName('js-back-to-top')[0];
   if( backTop ) {
@@ -1753,8 +1740,7 @@ Math.easeOutElastic = function (t, b, c, d) {
   }
 }());
 
-// File#: _2_slideshow
-// Usage: codyhouse.co/license
+
 (function() {
   var Slideshow = function(opts) {
     this.options = slideshowAssignOptions(Slideshow.defaults , opts);
